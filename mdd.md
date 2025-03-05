@@ -4,7 +4,7 @@
 
 <div align=center>
 
-![](/imagenes/modelosUML/MdD.dc.svg)
+![](/images/modelosUML/MdD.dc.svg)
 
 </div>
 
@@ -14,7 +14,7 @@
 
 <div align=center>
 
-![](/imagenes/modelosUML/MdD.do.svg)
+![](/images/modelosUML/MdD.do.svg)
 
 </div>
 
@@ -22,7 +22,7 @@
 
 <div align=center>
 
-![](/imagenes/modelosUML/MdD.do.f.svg)
+![](/images/modelosUML/MdD.do.f.svg)
 
 </div>
 
@@ -30,6 +30,6 @@
 
 <div align=center>
 
-![](/imagenes/modelosUML/MdD.de.svg)
+![](/images/modelosUML/MdD.de.svg)
 
 </div>
