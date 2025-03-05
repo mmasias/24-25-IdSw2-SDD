@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="433px" preserveAspectRatio="none" style="width:258px;height:433px;background:#FFFFFF;" version="1.1" viewBox="0 0 258 433" width="258px" zoomAndPan="magnify"><defs/><g><!--MD5=[e6e7f20f5864dd63d07cc96e7d24cb10]
+entity jugador--><g id="elem_jugador"><ellipse cx="30" cy="186" fill="#F1F1F1" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M30,194 L30,221 M17,202 L43,202 M30,221 L17,236 M30,221 L43,236 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="48" x="6" y="250.6318">jugador</text></g><g id="elem_Login"><ellipse cx="183.234" cy="20.3835" fill="#F1F1F1" rx="36.234" ry="14.3835" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="35" x="165.734" y="23.466">Login</text></g><g id="elem_CrearJuego"><ellipse cx="183.2382" cy="85.4476" fill="#F1F1F1" rx="62.7382" ry="14.9476" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="75" x="142.7382" y="89.2636">CrearJuego</text></g><g id="elem_IniciarJuego"><ellipse cx="182.9206" cy="150.5841" fill="#F1F1F1" rx="63.4206" ry="15.0841" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="77" x="141.4206" y="154.4">IniciarJuego</text></g><g id="elem_Atacar"><ellipse cx="182.9767" cy="215.3835" fill="#F1F1F1" rx="40.4767" ry="14.3835" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="41" x="162.4767" y="218.466">Atacar</text></g><g id="elem_GrabarJuego"><ellipse cx="182.8761" cy="280.5752" fill="#F1F1F1" rx="65.8761" ry="15.5752" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="84" x="137.8761" y="284.3911">GrabarJuego</text></g><g id="elem_Logout"><ellipse cx="183.1051" cy="345.3855" fill="#F1F1F1" rx="42.6051" ry="14.3855" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="44" x="160.5752" y="348.6203">Logout</text></g><g id="elem_FinalizarJuego"><ellipse cx="183.2045" cy="411.7409" fill="#F1F1F1" rx="69.2045" ry="16.2409" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="93" x="135.0946" y="415.2434">FinalizarJuego</text></g><!--MD5=[d672a04ece45582a62399c40d69bab6f]
+link jugador to Login--><g id="link_jugador_Login"><path d="M42.34,177.48 C54.8,141.33 77.97,87.42 114,52.5 C125.05,41.78 140.37,34.15 153.66,29.03 " fill="none" id="jugador-Login" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[0604330dc546d72a97a604fe7c5428ae]
+link jugador to CrearJuego--><g id="link_jugador_CrearJuego"><path d="M54.11,181.4 C69.3,160.9 90.64,135.4 114,117.5 C124.25,109.64 136.74,103.08 148.21,97.98 " fill="none" id="jugador-CrearJuego" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[5bcb1d1cefcc3862095c699d559bb31d]
+link jugador to IniciarJuego--><g id="link_jugador_IniciarJuego"><path d="M54.26,205.49 C80.4,194.23 122.94,175.93 151.67,163.56 " fill="none" id="jugador-IniciarJuego" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[0aca6b81a6dd4b69c59948101e066ff0]
+link jugador to Atacar--><g id="link_jugador_Atacar"><path d="M54.26,215.5 C77.67,215.5 114.23,215.5 142.25,215.5 " fill="none" id="jugador-Atacar" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[f1513bbfbc07f66beb5b197a988deb80]
+link jugador to GrabarJuego--><g id="link_jugador_GrabarJuego"><path d="M54.26,225.51 C80.07,236.62 121.86,254.61 150.57,266.97 " fill="none" id="jugador-GrabarJuego" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[ff95b8be7d250f2fe24a033f147a98a4]
+link jugador to Logout--><g id="link_jugador_Logout"><path d="M54.11,249.6 C69.3,270.1 90.64,295.6 114,313.5 C125.7,322.47 140.32,329.75 153,335.1 " fill="none" id="jugador-Logout" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[bd592db1105312511d53eaef0322215b]
+link jugador to FinalizarJuego--><g id="link_jugador_FinalizarJuego"><path d="M42.82,253.78 C55.52,289.57 78.75,342.59 114,377.5 C122.63,386.04 133.84,392.84 144.66,398.04 " fill="none" id="jugador-FinalizarJuego" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[2e56c37803e1a28fc5e783e2249e858e]
+@startuml
+left to right direction
+
+actor jugador
+
+usecase Login
+usecase CrearJuego
+usecase IniciarJuego
+usecase Atacar
+usecase GrabarJuego
+usecase Logout
+usecase FinalizarJuego
+
+jugador - - Login
+jugador - - CrearJuego
+jugador - - IniciarJuego
+jugador - - Atacar
+jugador - - GrabarJuego
+jugador - - Logout
+jugador - - FinalizarJuego
+@enduml
+
+PlantUML version 1.2022.7(Mon Aug 22 19:01:30 CEST 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: es
+Country: ES
+--></g></svg>
