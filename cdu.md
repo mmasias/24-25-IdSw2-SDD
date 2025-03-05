@@ -6,7 +6,7 @@
 
 <div align=center>
 
-![](/imagenes/modelosUML/CdU.DdCdU.svg)
+![](/images/modelosUML/CdU.DdCdU.svg)
 
 </div>
 
@@ -14,7 +14,7 @@
 
 <div align=center>
 
-![](/imagenes/modelosUML/CdU.DdC.svg)
+![](/images/modelosUML/CdU.DdC.svg)
 
 </div>
 
@@ -24,7 +24,7 @@
 
 <div align=center>
 
-![](/imagenes/modelosUML/CdU.login.de.svg)
+![](/images/modelosUML/CdU.login.de.svg)
 
 </div>
 
@@ -32,6 +32,6 @@
 
 <div align=center>
 
-![](/imagenes/modelosUML/CdU.login.de.vV.svg)
+![](/images/modelosUML/CdU.login.de.vV.svg)
 
 </div>
