@@ -1,0 +1,19 @@
+left to right direction
+
+actor jugador
+
+usecase Login
+usecase CrearJuego
+usecase IniciarJuego
+usecase Atacar
+usecase GrabarJuego
+usecase Logout
+usecase FinalizarJuego
+
+jugador -- Login
+jugador -- CrearJuego
+jugador -- IniciarJuego
+jugador -- Atacar
+jugador -- GrabarJuego
+jugador -- Logout
+jugador -- FinalizarJuego

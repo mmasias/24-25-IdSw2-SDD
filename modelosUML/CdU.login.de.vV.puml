@@ -1,0 +1,17 @@
+State Validar <<choice>>
+State ValidarRegistro <<choice>>
+
+[*] -d-> OpenGame
+OpenGame -d-> Login: El sistema permite\ningresar U:P\no registrar un usuario
+Login -l-> Register: El jugador\nsolicita registrarse
+Login -d-> Validar: El jugador ingresa U:P
+Validar -d-> ShowGameSpecification
+ShowGameSpecification -d-> ClosedGame
+Validar ---r-> WrongPassword: [U:P incorrectos]
+WrongPassword --u-> OpenGame: El sistema\nmuestra error
+Register -d-> ValidateRegister: El sistema permite\ningresar U:P\ne invoca el registro\no cancelar
+ValidateRegister -u-> OpenGame: El usuario\nsolicita cancelar
+ValidateRegister -d-> ValidarRegistro: El jugador ingresa U:P\ny solicita registrarse
+ValidarRegistro -r-> ShowGameSpecification
+ValidarRegistro -u-> ShowError: [U repetido]
+ShowError -u-> Register

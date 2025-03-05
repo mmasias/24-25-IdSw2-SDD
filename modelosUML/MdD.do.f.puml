@@ -1,0 +1,26 @@
+object "heman: Guerrero" as heman{
+    energia = 13
+    
+}
+
+object "arma: Arma" as arma {
+    daño = 4
+    porcentajeExito = 50%
+}
+
+object "dracula: Vampiro" as dracula{
+    energia = 0
+}
+
+object "mordida: Mordida" as mordida {
+    daño = 2
+    porcentajeExito = 50%
+}
+
+object batalla
+
+batalla *-d- heman
+batalla *-d- dracula
+
+heman *-- arma
+dracula *-- mordida

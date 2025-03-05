@@ -1,0 +1,16 @@
+state AccionHeroe as " "
+state AccionEnemigo as " "
+
+[*] --> AccionHeroe : inicio
+
+state Turno <<choice>>
+
+AccionHeroe -r-> Turno : Ataca el héroe
+
+Turno -r-> AccionEnemigo : [Está vivo el enemigo]
+
+AccionEnemigo -l-> Turno : Ataca el enemigo
+
+Turno -l-> AccionHeroe : [Está vivo el héroe]
+
+Turno -d-> [*] : [Alguien ha muerto]
