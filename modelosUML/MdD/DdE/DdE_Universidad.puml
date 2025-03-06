@@ -1,0 +1,10 @@
+@startuml DdE_Universidad
+hide empty description
+
+[*] --> Cerrada : fuera de horario
+
+Cerrada --> Abierta : inicio de jornada
+Abierta --> Cerrada : fin de jornada
+
+
+@enduml
