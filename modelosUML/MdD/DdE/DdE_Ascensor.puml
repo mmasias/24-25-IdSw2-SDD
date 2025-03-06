@@ -1,18 +1,26 @@
 @startuml DdE_Ascensor
+
 hide empty description
 
-[*] --> Parado : inicio
+state "Parado" as Reposo
+state "Subiendo" as Subiendo
+state "Bajando" as Bajando
+state "Puerta Abierta" as PuertaAbierta
+state "Puerta Cerrada" as PuertaCerrada
 
-Parado --> Subiendo : botón subir presionado
-Parado --> Bajando : botón bajar presionado
+[*] --> Reposo
+Reposo --> Subiendo : Llamada a piso superior
+Reposo --> Bajando : Llamada a piso inferior
 
-Subiendo --> Parado : llega a la planta destino
-Bajando --> Parado : llega a la planta destino
+Subiendo --> PuertaAbierta : Llegó al piso
+Bajando --> PuertaAbierta : Llegó al piso
 
-Parado --> PuertasAbiertas : llega a planta y abre puertas
-PuertasAbiertas --> Parado : puertas se cierran
+PuertaAbierta --> PuertaCerrada : Cerrar puerta
+PuertaCerrada --> Subiendo : Continuar subiendo
+PuertaCerrada --> Bajando : Continuar bajando
 
-Parado --> Emergencia : falla detectada
-Emergencia --> Parado : falla resuelta
+PuertaAbierta --> Reposo : Sin más solicitudes
+
+PuertaAbierta --> [*] : Apagado por emergencia
 
 @enduml
