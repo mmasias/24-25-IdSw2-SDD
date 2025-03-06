@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="254px" preserveAspectRatio="none" style="width:455px;height:254px;background:#FFFFFF;" version="1.1" viewBox="0 0 455 254" width="455px" zoomAndPan="magnify"><defs/><g><g id="AccionHeroe"><rect fill="#F1F1F1" height="50" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="50" x="7" y="102"/><line style="stroke:#181818;stroke-width:0.5;" x1="7" x2="57" y1="128.0986" y2="128.0986"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="4" x="30" y="120.1318"> </text></g><g id="AccionEnemigo"><rect fill="#F1F1F1" height="50" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="50" x="398" y="102"/><line style="stroke:#181818;stroke-width:0.5;" x1="398" x2="448" y1="128.0986" y2="128.0986"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="4" x="421" y="120.1318"> </text></g><ellipse cx="32" cy="16" fill="#222222" rx="10" ry="10" style="stroke:none;stroke-width:1.0;"/><g id="elem_Turno"><polygon fill="#F1F1F1" points="219,115,231,127,219,139,207,127,219,115" style="stroke:#181818;stroke-width:0.5;"/></g><ellipse cx="219" cy="238" fill="none" rx="10" ry="10" style="stroke:#222222;stroke-width:1.0;"/><ellipse cx="219.5" cy="238.5" fill="#222222" rx="6" ry="6" style="stroke:none;stroke-width:1.0;"/><!--MD5=[8f08989b5edf0dadc46b97d143361c15]
+link *start to AccionHeroe--><g id="link_*start_AccionHeroe"><path d="M32,26.29 C32,41.71 32,73.18 32,96.67 " fill="none" id="*start-to-AccionHeroe" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="32,101.85,36,92.85,32,96.85,28,92.85,32,101.85" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="30" x="33" y="69.1938">inicio</text></g><!--MD5=[4dcb6b311bc33741881331e077ee2101]
+link AccionHeroe to Turno--><g id="link_AccionHeroe_Turno"><path d="M57.1,137.3 C66.88,140.8 78.29,144.26 89,146 C126.73,152.12 137.57,153.74 175,146 C186.07,143.71 197.77,138.5 206.33,134.12 " fill="none" id="AccionHeroe-to-Turno" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="211.21,131.53,201.3842,132.2029,206.7904,133.8681,205.1252,139.2743,211.21,131.53" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="84" x="90" y="143.1938">Ataca el héroe</text></g><!--MD5=[a5eeeb985371a9c02673d15bb87072ee]
+reverse link AccionHeroe to Turno--><g id="link_AccionHeroe_Turno"><path d="M62.41,127 C104.26,127 177.72,127 206.72,127 " fill="none" id="AccionHeroe-backto-Turno" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="57.22,127,66.22,131,62.22,127,66.22,123,57.22,127" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="113" x="75.5" y="121.1938">[Está vivo el héroe]</text></g><!--MD5=[f85695c82584bb48ed7fe82caddbe697]
+link Turno to AccionEnemigo--><g id="link_Turno_AccionEnemigo"><path d="M231.15,127 C262.54,127 347.04,127 392.72,127 " fill="none" id="Turno-to-AccionEnemigo" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="397.82,127,388.82,123,392.82,127,388.82,131,397.82,127" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="130" x="249.5" y="121.1938">[Está vivo el enemigo]</text></g><!--MD5=[f86e988a70774cb6106b492f1200ed03]
+reverse link Turno to AccionEnemigo--><g id="link_Turno_AccionEnemigo"><path d="M231.67,134.12 C240.23,138.5 251.93,143.71 263,146 C285.42,150.63 343.41,149.67 366,146 C376.71,144.26 388.12,140.8 397.9,137.3 " fill="none" id="Turno-backto-AccionEnemigo" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="226.79,131.53,232.8748,139.2743,231.2096,133.8681,236.6158,132.2029,226.79,131.53" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="101" x="264" y="143.1938">Ataca el enemigo</text></g><!--MD5=[514126838d954675e52b40f6fcc55840]
+link Turno to *end--><g id="link_Turno_*end"><path d="M219,139.25 C219,159.21 219,200.76 219,222.71 " fill="none" id="Turno-to-*end" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="219,227.84,223,218.84,219,222.84,215,218.84,219,227.84" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="113" x="220" y="195.1938">[Alguien ha muerto]</text></g><!--MD5=[a82214d885ff031bf6e621f46ff0cf83]
+@startuml
+state AccionHeroe as " "
+state AccionEnemigo as " "
+
+[*] - -> AccionHeroe : inicio
+
+state Turno <<choice>>
+
+AccionHeroe -r-> Turno : Ataca el héroe
+
+Turno -r-> AccionEnemigo : [Está vivo el enemigo]
+
+AccionEnemigo -l-> Turno : Ataca el enemigo
+
+Turno -l-> AccionHeroe : [Está vivo el héroe]
+
+Turno -d-> [*] : [Alguien ha muerto]
+@enduml
+
+PlantUML version 1.2022.7(Mon Aug 22 19:01:30 CEST 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: es
+Country: ES
+--></g></svg>
