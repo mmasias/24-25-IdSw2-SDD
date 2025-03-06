@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="300px" preserveAspectRatio="none" style="width:336px;height:300px;background:#FFFFFF;" version="1.1" viewBox="0 0 336 300" width="336px" zoomAndPan="magnify"><defs/><g><!--MD5=[b073f7cef310c2a69878a3c345b948fe]
+class Batalla--><g id="elem_Batalla"><rect codeLine="13" fill="#F1F1F1" height="50.1973" id="Batalla" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="49" x="85" y="7"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="43" x="88" y="25.1318">Batalla</text><line style="stroke:#181818;stroke-width:0.5;" x1="86" x2="133" y1="33.0986" y2="33.0986"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="33" x="91" y="50.2305">turno</text></g><!--MD5=[9ff09514c7b69d84c52abde76a04c842]
+class Guerrero--><g id="elem_Guerrero"><rect fill="#F1F1F1" height="26.0986" id="Guerrero" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="64" x="246.5" y="137"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="58" x="249.5" y="155.1318">Guerrero</text></g><!--MD5=[37b789258b34cfb148f33692f2c81702]
+class Vampiro--><g id="elem_Vampiro"><rect fill="#F1F1F1" height="26.0986" id="Vampiro" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="59" x="7" y="137"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="53" x="10" y="155.1318">Vampiro</text></g><!--MD5=[92cee0884bd92c8c692cfc68b7dbbeb3]
+class Personaje--><g id="elem_Personaje"><rect codeLine="32" fill="#F1F1F1" height="50.1973" id="Personaje" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="70" x="206.5" y="7"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="64" x="209.5" y="25.1318">Personaje</text><line style="stroke:#181818;stroke-width:0.5;" x1="207.5" x2="275.5" y1="33.0986" y2="33.0986"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="48" x="212.5" y="50.2305">energia</text></g><!--MD5=[b1982db06aa5c1dbc98a1613a34a95b2]
+class Arma--><g id="elem_Arma"><rect codeLine="17" fill="#F1F1F1" height="26.0986" id="Arma" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="40" x="144.5" y="255"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="34" x="147.5" y="273.1318">Arma</text></g><!--MD5=[9e645b06c1c7d72a079a07e84ecf08cb]
+class Poción--><g id="elem_Poción"><rect codeLine="23" fill="#F1F1F1" height="50.1973" id="Poción" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="102" x="227.5" y="243"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="43" x="257" y="261.1318">Poción</text><line style="stroke:#181818;stroke-width:0.5;" x1="228.5" x2="328.5" y1="269.0986" y2="269.0986"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="90" x="233.5" y="286.2305">poderCurativo</text></g><!--MD5=[98740f02d8fa718685c384d6d81c5420]
+class Mordida--><g id="elem_Mordida"><rect codeLine="20" fill="#F1F1F1" height="26.0986" id="Mordida" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="58" x="33.5" y="255"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="52" x="36.5" y="273.1318">Mordida</text></g><!--MD5=[789fb70e4bd73845e4cd38fdf86ee459]
+class Ataque--><g id="elem_Ataque"><rect codeLine="27" fill="#F1F1F1" height="66.2959" id="Ataque" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="110" x="101.5" y="117"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="45" x="134" y="135.1318">Ataque</text><line style="stroke:#181818;stroke-width:0.5;" x1="102.5" x2="210.5" y1="143.0986" y2="143.0986"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="32" x="107.5" y="160.2305">daño</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="98" x="107.5" y="176.3291">porcentajeExito</text></g><!--MD5=[5a36c4c15190ae6a1ed55631af1f4444]
+reverse link Batalla to Guerrero--><g id="link_Batalla_Guerrero"><path codeLine="5" d="M144.89,57.29 C180.26,81.57 233.22,117.92 260.63,136.73 " fill="none" id="Batalla-backto-Guerrero" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="134.07,49.87,136.7561,56.5622,143.9666,56.6566,141.2805,49.9644,134.07,49.87" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[7e04ae8087e3618b15678f6fd46f4ee0]
+reverse link Batalla to Vampiro--><g id="link_Batalla_Vampiro"><path codeLine="6" d="M87.32,68.25 C72.67,91.52 54.37,120.61 44.21,136.76 " fill="none" id="Batalla-backto-Vampiro" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="94.37,57.04,87.7877,59.985,87.9745,67.1937,94.5568,64.2487,94.37,57.04" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[412e55e6245272be2e00fdb7900530e5]
+reverse link Personaje to Guerrero--><g id="link_Personaje_Guerrero"><path codeLine="7" d="M255.35,76.42 C262.23,97.99 270.03,122.45 274.59,136.76 " fill="none" id="Personaje-backto-Guerrero" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="248.58,78.22,249.17,57.04,261.91,73.96,248.58,78.22" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[b627d12572d74ddd02851ec29ba6fdf5]
+reverse link Personaje to Vampiro--><g id="link_Personaje_Vampiro"><path codeLine="8" d="M188.29,59.45 C157.26,75.33 117.64,96.39 83.5,117 C73.19,123.22 62.03,130.78 53.18,136.99 " fill="none" id="Personaje-backto-Vampiro" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="185.37,53.08,206.37,50.29,191.7,65.57,185.37,53.08" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[3379a6030865668983be542a4b3c1edf]
+reverse link Guerrero to Arma--><g id="link_Guerrero_Arma"><path codeLine="9" d="M257.04,172.83 C233.27,197.03 195.76,235.2 176.61,254.68 " fill="none" id="Guerrero-backto-Arma" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="266.3,163.41,259.2413,164.8846,257.8875,171.9675,264.9463,170.4929,266.3,163.41" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[d3aa6db13f173d04df585d6f55b0951a]
+reverse link Guerrero to Poción--><g id="link_Guerrero_Poción"><path codeLine="10" d="M278.5,176.49 C278.5,196.15 278.5,223.18 278.5,242.57 " fill="none" id="Guerrero-backto-Poción" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="278.5,163.41,274.5,169.41,278.5,175.41,282.5,169.41,278.5,163.41" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[0e0d8e8d8f91ecef1de271629f09307e]
+reverse link Vampiro to Mordida--><g id="link_Vampiro_Mordida"><path codeLine="11" d="M42.14,176.15 C47.57,200.4 55.57,236.07 59.74,254.68 " fill="none" id="Vampiro-backto-Mordida" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="39.28,163.41,36.6889,170.1395,41.9041,175.1196,44.4952,168.3901,39.28,163.41" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[1366dd4a747c8db7d7548f95001d6aab]
+reverse link Ataque to Arma--><g id="link_Ataque_Arma"><path codeLine="36" d="M160.09,203.07 C161.41,222.25 162.8,242.3 163.65,254.72 " fill="none" id="Ataque-backto-Arma" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="153.1,203.44,158.71,183,167.07,202.48,153.1,203.44" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[b8deaa19f328278587ef1d94056bc2b1]
+reverse link Ataque to Mordida--><g id="link_Ataque_Mordida"><path codeLine="37" d="M117.76,198.8 C101.22,219.22 83.26,241.38 72.45,254.72 " fill="none" id="Ataque-backto-Mordida" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="112.54,194.14,130.57,183,123.41,202.95,112.54,194.14" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[8a88a6445a4d5803b9e663633a0c571f]
+@startuml
+hide circle
+hide stereotype
+hide empty members
+
+Batalla *- - Guerrero
+Batalla *- - Vampiro
+Personaje <|- - Guerrero
+Personaje <|- - Vampiro
+Guerrero *- - Arma
+Guerrero *- - Poción
+Vampiro *- - Mordida
+
+class Batalla {
+    turno
+}
+
+class Arma {
+}
+
+class Mordida{
+}
+
+class Poción {
+    poderCurativo
+}
+
+class Ataque {
+    daño
+    porcentajeExito
+}
+
+class Personaje {
+    energia
+}
+
+Arma -u-|> Ataque
+Mordida -u-|> Ataque
+@enduml
+
+PlantUML version 1.2022.7(Mon Aug 22 19:01:30 CEST 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: es
+Country: ES
+--></g></svg>
