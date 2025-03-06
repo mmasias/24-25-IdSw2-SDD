@@ -1,0 +1,24 @@
+@startuml diagramaDeClases
+hide empty members
+hide circles
+
+class Maquina
+class FormaDePago
+class Pago
+class Usuario
+class Productos
+class Celdas
+class Compra
+class Empleado
+
+Maquina --> FormaDePago : maneja
+Maquina --> Celdas : tiene 
+Maquina --> Compra : inicia 
+Celdas --> Productos : contiene 
+Usuario -U-> Celdas : selecciona 
+Usuario --> Pago : realiza 
+Pago --> FormaDePago 
+Compra --> Pago : requiere 
+Empleado -U--> Maquina : rellena
+
+@enduml
