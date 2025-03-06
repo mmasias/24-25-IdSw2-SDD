@@ -4,7 +4,7 @@
 
 <div align=center>
 
-![](/images/modelosUML/MdD.dc.svg)
+![](/images/modelosUML/Material%20Base/MdD.dc.svg)
 
 </div>
 
@@ -14,7 +14,7 @@
 
 <div align=center>
 
-![](/images/modelosUML/MdD.do.svg)
+![](/images/modelosUML/Material%20Base/MdD.do.svg)
 
 </div>
 
@@ -22,7 +22,7 @@
 
 <div align=center>
 
-![](/images/modelosUML/MdD.do.f.svg)
+![](/images/modelosUML/Material%20Base/MdD.do.f.svg)
 
 </div>
 
@@ -30,6 +30,6 @@
 
 <div align=center>
 
-![](/images/modelosUML/MdD.de.svg)
+![](/images/modelosUML/Material%20Base/MdD.de.svg)
 
 </div>
