@@ -1,5 +1,7 @@
 @startuml
 
+' Diagrama de Estados
+
 state "Reserva" as Reserva {
     [*] --> Pendiente
     Pendiente --> Confirmada : confirmación del cliente
