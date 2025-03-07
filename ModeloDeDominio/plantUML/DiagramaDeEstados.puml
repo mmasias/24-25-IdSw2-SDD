@@ -1,0 +1,23 @@
+@startuml
+
+state "Reserva" as Reserva {
+    [*] --> Pendiente
+    Pendiente --> Confirmada : confirmación del cliente
+    Confirmada --> Cancelada : cancelación del cliente
+    Confirmada --> Completada : cliente atendido
+    Cancelada --> [*]
+    Completada --> [*]
+}
+
+state "Mesa" as Mesa {
+    [*] --> Libre
+    Libre --> Reservada : reserva confirmada
+    Reservada --> Ocupada : clientes llegan
+    Ocupada --> EnPreparacion : clientes se van, limpieza
+    EnPreparacion --> Libre : mesa lista
+}
+
+Reserva --> Mesa : asignación de reserva a mesa
+Mesa --> Reserva : cliente ocupa su mesa
+
+@enduml

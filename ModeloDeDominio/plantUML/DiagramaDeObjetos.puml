@@ -1,0 +1,76 @@
+@startuml
+
+' Diagrama de Objetos
+
+object mesa1 {
+    numero = 1
+    capacidad = 4
+    ubicacion = SALON_PRINCIPAL
+    estado = LIBRE
+}
+
+object reserva1 {
+    cliente = cliente1
+    fecha = "2025-03-10"
+    hora = "20:00"
+    num_comensales = 4
+    preferencias = "Cerca de la ventana"
+    estado = PENDIENTE
+}
+
+object pedido1 {
+    mesa = mesa1
+    platos = [plato1, plato2]
+    tiempo_pedido = "2025-03-10 20:05"
+    tiempo_preparacion = "2025-03-10 20:15"
+    tiempo_servicio = "2025-03-10 20:30"
+    importe_total = 45.50
+}
+
+object plato1 {
+    nombre = "Risotto de trufa"
+    precio = 22.50
+    tiempo_preparacion = 20
+}
+
+object plato2 {
+    nombre = "Solomillo al foie"
+    precio = 23.00
+    tiempo_preparacion = 25
+}
+
+object empleado1 {
+    nombre = "Carlos"
+    rol = CAMARERO
+    mesas_asignadas = [mesa1]
+    horario_trabajo = [horario1]
+    descansos = [horario2]
+}
+
+object cliente1 {
+    nombre = "Luis Pérez"
+    contacto = "luis@example.com"
+    historial_reservas = [reserva1]
+}
+
+object horario1 {
+    inicio = "13:00"
+    fin = "16:00"
+}
+
+object horario2 {
+    inicio = "17:00"
+    fin = "17:30"
+}
+
+mesa1 -- reserva1 : asignada
+mesa1 -- pedido1 : sirve
+reserva1 -- cliente1 : realizada_por
+pedido1 -- plato1 : contiene
+pedido1 -- plato2 : contiene
+empleado1 -- mesa1 : asignada_a
+cliente1 -- reserva1 : realiza
+empleado1 -- horario1 : tiene
+empleado1 -- horario2 : descanso
+
+@enduml

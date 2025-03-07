@@ -1,0 +1,95 @@
+@startuml
+
+' Diagrama de Clases
+
+class Mesa {
+    +numero: int
+    +capacidad: int
+    +ubicacion: Zona
+    +estado: EstadoMesa
+}
+
+class Reserva {
+    +cliente: Cliente
+    +fecha: Date
+    +hora: Time
+    +num_comensales: int
+    +preferencias: String
+    +estado: EstadoReserva
+}
+
+class Pedido {
+    +mesa: Mesa
+    +platos: List<Plato>
+    +tiempo_pedido: DateTime
+    +tiempo_preparacion: DateTime
+    +tiempo_servicio: DateTime
+    +importe_total: float
+}
+
+class Plato {
+    +nombre: String
+    +precio: float
+    +tiempo_preparacion: int
+}
+
+class Empleado {
+    +nombre: String
+    +rol: RolEmpleado
+    +mesas_asignadas: List<Mesa>
+    +horario_trabajo: List<Horario>
+    +descansos: List<Horario>
+}
+
+class Cliente {
+    +nombre: String
+    +contacto: String
+    +historial_reservas: List<Reserva>
+}
+
+class Horario {
+    +inicio: Time
+    +fin: Time
+}
+
+enum EstadoMesa {
+    LIBRE
+    RESERVADA
+    OCUPADA
+    EN_PREPARACION
+}
+
+enum EstadoReserva {
+    PENDIENTE
+    CONFIRMADA
+    CANCELADA
+    COMPLETADA
+}
+
+enum RolEmpleado {
+    CAMARERO
+    AYUDANTE
+    SUMILLER
+    CHEF
+    AYUDANTE_COCINA
+}
+
+enum Zona {
+    TERRAZA
+    SALON_PRINCIPAL
+    SALON_PRIVADO
+}
+
+Mesa -- Reserva : asignada
+Mesa -- Pedido : sirve
+Reserva -- Cliente : realizada_por
+Pedido -- Plato : contiene
+Empleado -- Mesa : asignada_a
+Cliente -- Reserva : realiza
+Empleado -- Horario : tiene
+Mesa -- EstadoMesa
+Reserva -- EstadoReserva
+Empleado -- RolEmpleado
+Mesa -- Zona
+
+@enduml
