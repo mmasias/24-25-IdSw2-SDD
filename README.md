@@ -1,43 +1,51 @@
-# Sesiones de diseño
 
-Repositorio de las sesiones de diseño de la asignatura de Ingeniería del Software II de UNEATLANTICO.
+# 🍽️ pyRestaurante - Grupo 7
 
-Se desarrolla, en un caso controlado, la disciplina de diseño, con el objetivo de capacitarnos para la descomposición del trabajo de implementación en piezas manejables, las que serán gestionadas por diferentes equipos de desarrollo, posiblemente al mismo tiempo.
+<p align="center">
+  <img src="/imagenRestaurante/restaurante.png" alt="Imagen Restaurante" width="300"/>
+</p>
 
-<div align=center>
+Sistema de gestión para un restaurante de alta cocina que administra reservas, mesas, pedidos y personal. 
+Optimiza la asignación de mesas, gestiona tiempos de preparación y coordina la interacción entre cocina y sala.
 
-| |Proyecto|👁️|Grupo|[D](/documentos/entregas.d.md)|[DM](/documentos/entregas.dM.md)|[DOO](/documentos/entregas.dOO.md)|Final
-|-|-|:-:|:-:|:-:|:-:|:-:|:-:|
-| ||||12/3|12/4|12/5|31/5
-|1|[pyCCCF](https://github.com/puntoReflex/pyCCCF/blob/main/enunciado.md)||G5
-|2|[pyMundo](https://github.com/puntoReflex/pyMundo/blob/main/enunciado.md)
-|3|[pyHojaDeCalculo](https://github.com/puntoReflex/pyHojaDeCalculo/blob/main/enunciado.md)||G2
-|4|[pyAspiradora](https://github.com/puntoReflex/pyAspiradora/blob/main/enunciado.md)||G3
-|5|[pyBatalla](https://github.com/puntoReflex/pyBatalla/blob/main/enunciado.md)||G6
-|6|[pyAscensores](https://github.com/puntoReflex/pyAscensores/blob/main/enunciado.md)||G1
-|7|[pyExpendedoras](https://github.com/puntoReflex/pyExpendedoras/blob/main/enunciado.md)||G4
-|8|[pyBibliotecas](https://github.com/puntoReflex/pyBiblioteca/blob/main/enunciado.md)||G8
-|9|[pyRestaurante](https://github.com/puntoReflex/pyRestaurante/blob/main/enunciado.md)||G7
+## 📌 Características Principales
 
-</div>
+### 🏷️ Gestión de Mesas
+- Registro de mesas con número, capacidad y ubicación.
+- Control del estado de cada mesa: **libre, reservada, ocupada, en preparación**.
+- Administración del tiempo promedio de ocupación según el tamaño de la mesa:
+  - 🪑 **2 personas:** 60-90 min
+  - 🪑 **4 personas:** 90-120 min
+  - 🪑 **6+ personas:** 120-150 min
 
-<div align=center>
+### 📆 Sistema de Reservas
+- Registro de reservas con datos del cliente, fecha, hora, número de comensales y preferencias.
+- Verificación automática de disponibilidad.
+- Lista de espera para momentos de alta demanda.
+- Envío de recordatorios automáticos **24 horas antes** de la reserva.
 
-||
-|-|
-![](/images/modelosUML/trabajoRepos.svg)
+### 🍽️ Gestión de Pedidos
+- Cada pedido está asociado a una mesa específica.
+- Registro de platos solicitados por comensal.
+- Control de tiempos: **pedido, preparación y servicio**.
+- Cálculo del importe total y desglose por comensal si se solicita.
 
-</div>
+### 👨‍🍳 Gestión de Personal
+- Administración de roles: **Camareros, Ayudantes, Sumiller, Chef, Ayudantes de cocina**.
+- Asignación de responsabilidades por mesas o zonas.
+- Registro de horarios de trabajo y descansos.
+- Cálculo de carga de trabajo por empleado.
 
-## Algunas reglas
+## 📊 Diagramas del Sistema
 
-- Reuniones oficiales (en horas de clase)
-  - A estas debe asistir el 100% de los integrantes de los grupos.
-  - Si a las reuniones asiste menos del 80% del grupo, la reunión se cancela y el grupo se da por cerrado. La evaluación se realiza de la forma tradicional (examen parcial, examen final).
-- Se debe utilizar el repo del coordinador del grupo y las herramientas de GitHub para gestionar las reuniones y comunicaciones entre el grupo, haciendo racional uso de la trazabilidad.
-- Las imágenes, en la medida de lo posible en formato plantUML.
-  - Todas las fuentes en la carpeta modelosUML y las imágenes exportadas, en formato svg.
- 
-### Muy importante
+- 🔄 **Diagrama de Estados**: [Diagrama de Estados](/ModeloDeDominio/imagenes/DiagramaDeEstados.svg)
+- 🖼️ **Diagrama de Clases**: [Diagrama de Clases](/ModeloDeDominio/imagenes/DiagramaDeClases.svg)
+- 🧩 **Diagrama de Objetos**: [Diagrama de Objetos](/ModeloDeDominio/imagenes/DiagramaDeObjetos.svg)
 
-- Para optar a ser calificado en los trabajos grupales, se tendrá en cuenta la asistencia a clases.
+---
+
+## 👥 **Miembros del Proyecto**
+
+- **Adrián Garcia Arranz**
+- **Sergio Moreno Vega**
+- **Iker Celaya Buezo**
