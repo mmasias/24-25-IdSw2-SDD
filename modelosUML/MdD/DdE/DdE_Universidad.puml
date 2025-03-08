@@ -6,5 +6,6 @@ hide empty description
 Cerrada --> Abierta : inicio de jornada
 Abierta --> Cerrada : fin de jornada
 
+Cerrada --> [*] : fin del proceso
 
 @enduml
