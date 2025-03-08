@@ -19,8 +19,8 @@ public class Universidad {
             plantas.add(new Planta(i));
         }
 
-        ascensores.add(new Ascensor(6));
-        ascensores.add(new Ascensor(6));
+        ascensores.add(new Ascensor(6, plantas));
+        ascensores.add(new Ascensor(6, plantas));
     }
 
     public boolean estaAbierta(int hora) {

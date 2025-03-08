@@ -22,6 +22,7 @@ public class Mundo {
 
         // Solo genera personas si la universidad está abierta
         if (universidad.estaAbierta(hora)) {
+            System.out.println("Hora: " + hora + ":" + minuto + " - Llega una persona");
             generarPersonaAleatoria();
         }
 
