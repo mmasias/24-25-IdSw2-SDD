@@ -20,4 +20,9 @@ public class Persona {
     public int getplantaDestino() {
         return plantaDestino;
     }
+
+    public int getPlantaActual() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getPlantaActual'");
+    }
 }

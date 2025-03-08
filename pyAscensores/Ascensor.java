@@ -16,12 +16,12 @@ public class Ascensor {
         this.estado = 0;
     }
 
-    public boolean puedeRecogerPersona() {
+    public boolean puedeRecogerPersona(Persona p) {
         return personas.size() < capacidadMaxima;
     }
 
     public void recogerPersona(Persona persona) {
-        if(puedeRecogerPersona()) {
+        if(puedeRecogerPersona(persona)) {
             personas.add(persona);
         }
     }
