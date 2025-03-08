@@ -57,13 +57,16 @@ public class Ascensor {
 
     // Mover el ascensor hacia arriba o hacia abajo
     public void mover() {
-        if (estado == 1) {
-            plantaActual++;
-        } else if (estado == -1) {
-            plantaActual--;
+        // Validar si el ascensor puede moverse sin exceder los límites de plantas
+        if (estado == 1 && plantaActual < 3) {
+            plantaActual++; // Subir
+        } else if (estado == -1 && plantaActual > -3) {
+            plantaActual--; // Bajar
         }
+        // Llamar a llevar personas para dejar a las personas en la planta correcta
         llevarPersonas();
     }
+    
 
     // Dejar a las personas en la planta destino
     public void llevarPersonas() {
