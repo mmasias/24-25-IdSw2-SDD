@@ -33,12 +33,17 @@ public class Mundo {
         Random random = new Random();
         int plantaDestino = random.nextInt(7) - 3; // Entre -3 y 3
         int tiempoEnPlanta = random.nextInt(10) + 1; // Entre 1 y 10 minutos
-        universidad.acogerPersona(new Persona(plantaDestino, tiempoEnPlanta));
+        
+        // Creamos la persona
+        Persona persona = new Persona(plantaDestino, tiempoEnPlanta);
+        
+        // Determinamos la planta de espera (planta 0 siempre)
+        universidad.acogerPersona(persona);
     }
+    
 
     public void imprimirEstado() {
-        System.out.println("Hora: " + hora + ":" + (minuto < 10 ? "0" + minuto : minuto));
-        universidad.imprimirEstado();
+        universidad.imprimirEstado(hora, minuto);
     }
 
     public static void main(String[] args) {

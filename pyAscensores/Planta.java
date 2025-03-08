@@ -15,11 +15,11 @@ public class Planta {
     }
 
     public String getPersonasEsperando() {
-        return esperando.isEmpty() ? "_____" : "_" + esperando.size() + "_";
+        return String.valueOf(esperando.size());  // Muestra el número de personas esperando
     }
 
     public String getPersonasEnPlanta() {
-        return enPlanta.isEmpty() ? "__0__" : "__" + enPlanta.size() + "__";
+        return String.valueOf(enPlanta.size());  // Muestra el número de personas en la planta
     }
 
     public List<Persona> getEsperando() {

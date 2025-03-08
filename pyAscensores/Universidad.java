@@ -2,7 +2,6 @@ package pyAscensores;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class Universidad {
     private List<Planta> plantas;
@@ -29,8 +28,13 @@ public class Universidad {
     }
 
     public void acogerPersona(Persona persona) {
+        // Asegurarse de que la persona esté en la lista de esperando de la planta 0
+        plantas.get(3).getEsperando().add(persona);  // Planta 0 está en el índice 3
+    
+        // Llamamos al ascensor para recoger a la persona
         this.llamarAscensor(persona);
     }
+    
 
     private void llamarAscensor(Persona persona) {
         // Buscar el ascensor más cercano
@@ -63,10 +67,10 @@ public class Universidad {
     public void moverPersona(Persona persona, int plantaDestino) {
         Planta plantaOrigen = plantas.get(persona.getPlantaActual() + 3);
         plantaOrigen.getEsperando().remove(persona);
-        plantaOrigen.getEnPlanta().add(persona);
+        plantaOrigen.getEnPlanta().add(persona); // Asegurarse de agregarla a la planta de destino
         persona.setPlantaActual(plantaDestino);
         Planta plantaNueva = plantas.get(plantaDestino + 3);
-        plantaNueva.getEnPlanta().remove(persona);
+        plantaNueva.getEnPlanta().remove(persona); // Eliminar de la planta de origen
     }
 
     private void actualizarAscensores() {
@@ -75,20 +79,39 @@ public class Universidad {
         }
     }
 
-    public void imprimirEstado() {
-        System.out.println("Personas esperando y en planta:");
+    public void imprimirEstado(int hora, int minuto) {
+        // Contar el número total de personas en la universidad
+        int totalPersonas = 0;
+        for (Planta planta : plantas) {
+            totalPersonas += planta.getEsperando().size();  // Personas esperando
+            totalPersonas += planta.getEnPlanta().size();  // Personas en la planta
+        }
+    
+        // Imprimir la hora
+        System.out.printf("Hora: %2d:%02d\n", hora, minuto);
+        System.out.println("Total personas en la universidad: " + totalPersonas); // Mostramos el total
+    
+        System.out.println("           Personas                                           Personas");
+        System.out.println("           esperando                                          en la planta");
+        
+        // Imprimir las plantas y el estado de los ascensores
         for (int i = 3; i >= -3; i--) {
             Planta planta = plantas.get(i + 3);
+            
+            // Obtener los valores de personas esperando y personas en planta
             String esperando = planta.getPersonasEsperando();
             String ascensor1 = ascensores.get(0).representacion(i);
             String ascensor2 = ascensores.get(1).representacion(i);
             String enPlanta = planta.getPersonasEnPlanta();
-
-            System.out.printf("Planta %2d    %-5s      | |    %-5s    | |    %-5s    | |    %-5s\n", i, esperando, ascensor1, ascensor2, enPlanta);
+            
+            // Imprimir el estado de la planta
+            System.out.printf("Planta %2d    %-5s esperando | |    %-5s    | |    %-5s    | |    %-5s\n", 
+                i, esperando, ascensor1, ascensor2, enPlanta);
         }
         System.out.println("                       /--------- Ascensores ------/");
     }
-
+    
+    
     public List<Persona> getPersonas() {
         return personas;
     }

@@ -33,10 +33,10 @@ public class Ascensor {
             estado = 0; // El ascensor se detiene si no hay personas
         } else {
             // Si el ascensor tiene personas, se dirige hacia la planta destino más cercana
-            int plantaDestinoMásCercana = obtenerPlantaDestinoMasCercana();
-            if (plantaDestinoMásCercana > plantaActual) {
+            int plantaDestinoMasCercana = obtenerPlantaDestinoMasCercana();
+            if (plantaDestinoMasCercana > plantaActual) {
                 estado = 1; // Subir
-            } else if (plantaDestinoMásCercana < plantaActual) {
+            } else if (plantaDestinoMasCercana < plantaActual) {
                 estado = -1; // Bajar
             } else {
                 estado = 0; // El ascensor está en la planta destino de la persona
