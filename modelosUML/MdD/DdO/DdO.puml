@@ -3,6 +3,8 @@
 hide circle
 hide empty members
 
+left to right direction
+
 class Mundo {
     + horario: "12:40"
 }
@@ -33,7 +35,7 @@ class Ascensor1 {
 }
 
 class Ascensor2 {
-    + capacidad: "4"
+    + capacidad: "2"
     + plantaActual: "0"
     + movimiento: "descendente"
 }
@@ -54,10 +56,10 @@ class Planta3 {
     + numero: "3"
 }
 
+Mundo *-- Universidad : crea
 Mundo *-- Persona1 : genera
 Mundo *-- Persona2 : genera
 Mundo *-- Persona3 : genera
-Mundo *-- Universidad : crea
 
 Universidad *-- Planta0 : contiene
 Universidad *-- Planta1 : contiene
@@ -68,10 +70,6 @@ Universidad o-- Persona2 : acoge
 Universidad o-- Persona3 : acoge
 Universidad *-- Ascensor1 : posee
 Universidad *-- Ascensor2 : posee
-
-Persona1 o-- Ascensor1 : utiliza
-Persona2 o-- Ascensor2 : utiliza
-Persona3 o-- Ascensor1 : utiliza
 
 Ascensor1 -- Planta0 : comunica
 Ascensor1 -- Planta1 : comunica
@@ -86,5 +84,9 @@ Ascensor2 -- Planta3 : comunica
 Persona1 o-- Planta0 : está en
 Persona2 o-- Planta1 : está en
 Persona3 o-- Planta2 : está en
+
+Persona1 o-- Ascensor1 : utiliza
+Persona2 o-- Ascensor2 : utiliza
+Persona3 o-- Ascensor1 : utiliza
 
 @enduml
