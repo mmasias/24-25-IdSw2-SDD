@@ -1,31 +1,58 @@
 package pyAscensores;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Random;
 
 public class Mundo {
-     private Universidad universidad;
-    private List<Persona> personas;
+    private Universidad universidad;
+    private int hora; // Hora actual
+    private int minuto; // Minuto actual
 
     public Mundo() {
         this.universidad = new Universidad();
-        this.personas = new ArrayList<>();
+        this.hora = 8; // Inicia a las 8:00 AM
+        this.minuto = 0;
     }
 
-    public void generarPersona(String nombre, int plantaDestino, int tiempoEnPlanta) {
-        Persona p = new Persona(nombre, plantaDestino, tiempoEnPlanta);
-        personas.add(p);
-        universidad.acogerPersona(p);
+    public void avanzarTiempo() {
+        minuto++;
+        if (minuto == 60) {
+            minuto = 0;
+            hora++;
+        }
+
+        // Solo genera personas si la universidad está abierta
+        if (universidad.estaAbierta(hora)) {
+            generarPersonaAleatoria();
+        }
+
+        // Actualiza el estado de las personas y los ascensores
+        universidad.actualizarEstado();
+    }
+
+    private void generarPersonaAleatoria() {
+        Random random = new Random();
+        int plantaDestino = random.nextInt(7) - 3; // Entre -3 y 3
+        int tiempoEnPlanta = random.nextInt(10) + 1; // Entre 1 y 10 minutos
+        universidad.acogerPersona(new Persona(plantaDestino, tiempoEnPlanta));
     }
 
     public void imprimirEstado() {
+        System.out.println("Hora: " + hora + ":" + (minuto < 10 ? "0" + minuto : minuto));
         universidad.imprimirEstado();
     }
+
     public static void main(String[] args) {
         Mundo mundo = new Mundo();
-        mundo.generarPersona("Paco", 2, 5);
-        mundo.generarPersona("Laura", 1, 3);
-        mundo.generarPersona("Carlos", 3, 4);
-        mundo.imprimirEstado();
+
+        // Simulamos el paso del tiempo
+        for (int i = 0; i < 60 * 10; i++) { // Simulamos 10 horas (600 minutos)
+            mundo.imprimirEstado();
+            mundo.avanzarTiempo();
+            try {
+                Thread.sleep(500); // Esperamos medio segundo entre cada minuto para visualizar el estado
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

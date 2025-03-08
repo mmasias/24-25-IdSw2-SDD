@@ -1,13 +1,11 @@
 package pyAscensores;
 
 public class Persona {
-    private String nombre;
     private int plantaActual;
     private int plantaDestino;
     private int tiempoEnPlanta;
 
-    public Persona(String nombre, int plantaDestino, int tiempoEnPlanta) {
-        this.nombre = nombre;
+    public Persona(int plantaDestino, int tiempoEnPlanta) {
         this.plantaActual = 0;
         this.plantaDestino = plantaDestino;
         this.tiempoEnPlanta = tiempoEnPlanta;
@@ -23,5 +21,15 @@ public class Persona {
 
     public int getTiempoEnPlanta() {
         return tiempoEnPlanta;
+    }
+
+    public void reducirTiempoEnPlanta() {
+        if (tiempoEnPlanta > 0) {
+            tiempoEnPlanta--;
+        }
+    }
+
+    public void setPlantaActual(int planta) {
+        this.plantaActual = planta;
     }
 }
