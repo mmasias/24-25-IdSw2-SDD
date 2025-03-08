@@ -13,9 +13,10 @@ public class Universidad {
         ascensores = new ArrayList<Ascensor>();
         personas = new ArrayList<Persona>();
 
-        for(int i = 1; i < 4; i++){
+        for(int i = -3; i <= 3; i++){
             plantas.add(new Planta(i));
         }
+        
 
         ascensores.add(new Ascensor(6));
         ascensores.add(new Ascensor(6));
@@ -41,5 +42,21 @@ public class Universidad {
         if (mejor != null) {
             mejor.recogerPersona(p);
         }
+    }
+
+    public void imprimirEstado() {
+        System.out.println("Personas                                    Personas");
+        System.out.println("          esperando                                    en la planta\n");
+        
+        for (int i = 3; i >= -3; i--) {
+            Planta planta = plantas.get(i + 3);
+            String esperando = planta.getPersonasEsperando();
+            String ascensor1 = ascensores.get(0).representacion(i);
+            String ascensor2 = ascensores.get(1).representacion(i);
+            String enPlanta = planta.getPersonasEnPlanta();
+            
+            System.out.printf("Planta %2d    %-5s      | |    %-5s    | |    %-5s    | |    %-5s\n", i, esperando, ascensor1, ascensor2, enPlanta);
+        }
+        System.out.println("                       /--------- Ascensores ------/");
     }
 }

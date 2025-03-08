@@ -13,16 +13,15 @@ public class Persona {
         this.tiempoEnPlanta = tiempoEnPlanta;
     }
 
-    public int getplantaActual() {
+    public int getPlantaActual() {
         return plantaActual;
     }
 
-    public int getplantaDestino() {
+    public int getPlantaDestino() {
         return plantaDestino;
     }
 
-    public int getPlantaActual() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getPlantaActual'");
+    public int getTiempoEnPlanta() {
+        return tiempoEnPlanta;
     }
 }

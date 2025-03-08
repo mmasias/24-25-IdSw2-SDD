@@ -5,13 +5,13 @@ import java.util.List;
 
 public class Ascensor {
     private int capacidadMaxima;
-    private int pisoActual;
+    private int plantaActual;
     private List<Persona> personas;
     private int estado; // 0: detenido, 1: subiendo, -1: bajando
 
     public Ascensor(int capacidadMaxima) {
         this.capacidadMaxima = capacidadMaxima;
-        this.pisoActual = 0;
+        this.plantaActual = 0;
         this.personas = new ArrayList<Persona>();
         this.estado = 0;
     }
@@ -27,6 +27,15 @@ public class Ascensor {
     }
 
     public int getPlantaActual() {
-        return pisoActual;
+        return plantaActual;
     }
+
+    public String representacion(int planta) {
+        if (planta == plantaActual) {
+            return estado == 1 ? "[^" + personas.size() + "^]" : "[v" + personas.size() + "v]";
+        } else {
+            return "| |";
+        }
+    }
+    
 }
