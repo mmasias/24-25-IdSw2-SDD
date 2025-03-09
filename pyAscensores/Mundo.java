@@ -1,15 +1,22 @@
+
 package pyAscensores;
 
 import java.util.Random;
 
 public class Mundo {
+    private static final int HORA_INICIO = 8;
+    private static final int PLANTA_MIN = -3;
+    private static final int PLANTA_MAX = 3;
+    private static final int TIEMPO_MAX = 10;
+    private static final int MINUTOS_SIMULACION = 600;
+
     private Universidad universidad;
-    private int hora; // Hora actual
-    private int minuto; // Minuto actual
+    private int hora;
+    private int minuto;
 
     public Mundo() {
         this.universidad = new Universidad();
-        this.hora = 8; // Inicia a las 8:00 AM
+        this.hora = HORA_INICIO;
         this.minuto = 0;
     }
 
@@ -20,45 +27,43 @@ public class Mundo {
             hora++;
         }
 
-        // Solo genera personas si la universidad está abierta
         if (universidad.estaAbierta(hora)) {
-            System.out.println("Hora: " + hora + ":" + minuto + " - Llega una persona");
-            generarPersonaAleatoria();
+            Persona nuevaPersona = generarPersonaAleatoria();
+            System.out.println("Hora: " + String.format("%02d:%02d", hora, minuto) + " - Llega una persona a la planta 0 con destino " + nuevaPersona.getPlantaDestino());
+            universidad.acogerPersona(nuevaPersona);
         }
 
-        // Actualiza el estado de las personas y los ascensores
         universidad.actualizarEstado();
     }
 
-    private void generarPersonaAleatoria() {
+    private Persona generarPersonaAleatoria() {
         Random random = new Random();
-        int plantaDestino = random.nextInt(7) - 3; // Entre -3 y 3
-        int tiempoEnPlanta = random.nextInt(10) + 1; // Entre 1 y 10 minutos
-        
-        // Creamos la persona
-        Persona persona = new Persona(plantaDestino, tiempoEnPlanta);
-        
-        // Determinamos la planta de espera (planta 0 siempre)
-        universidad.acogerPersona(persona);
+        int plantaDestino = random.nextInt(PLANTA_MAX - PLANTA_MIN + 1) + PLANTA_MIN;
+        int tiempoEnPlanta = random.nextInt(TIEMPO_MAX) + 1;
+        return new Persona(plantaDestino, tiempoEnPlanta);
     }
-    
 
     public void imprimirEstado() {
         universidad.imprimirEstado(hora, minuto);
     }
 
-    public static void main(String[] args) {
-        Mundo mundo = new Mundo();
-
-        // Simulamos el paso del tiempo
-        for (int i = 0; i < 60 * 10; i++) { // Simulamos 10 horas (600 minutos)
-            mundo.imprimirEstado();
-            mundo.avanzarTiempo();
-            try {
-                Thread.sleep(500); // Esperamos medio segundo entre cada minuto para visualizar el estado
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+    public void simular() {
+        for (int i = 0; i < MINUTOS_SIMULACION; i++) {
+            imprimirEstado();
+            avanzarTiempo();
+            esperar(500);
         }
+    }
+
+    private void esperar(int milisegundos) {
+        try {
+            Thread.sleep(milisegundos);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+
+    public static void main(String[] args) {
+        new Mundo().simular();
     }
 }

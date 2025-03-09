@@ -4,101 +4,78 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Ascensor {
+    private static final int PLANTA_MIN = -3;
+    private static final int PLANTA_MAX = 3;
+
     private int capacidadMaxima;
     private int plantaActual;
     private List<Persona> personas;
     private int estado; // 0: detenido, 1: subiendo, -1: bajando
-    private List<Planta> plantas;  // Lista de todas las plantas en el edificio
+    private List<Planta> plantas;
 
     public Ascensor(int capacidadMaxima, List<Planta> plantas) {
         this.capacidadMaxima = capacidadMaxima;
         this.plantaActual = 0;
-        this.personas = new ArrayList<Persona>();
-        this.estado = 0; // El ascensor comienza detenido
-        this.plantas = plantas; // Inicializar la lista de plantas
+        this.personas = new ArrayList<>();
+        this.estado = 0;
+        this.plantas = plantas;
     }
 
-    public boolean puedeRecogerPersona(Persona p) {
+    public boolean puedeRecogerPersona() {
         return personas.size() < capacidadMaxima;
     }
-
+    public boolean puedeRecogerPersona(Persona persona) {
+        return personas.size() < capacidadMaxima;
+    }
     public void recogerPersona(Persona persona) {
-        if (puedeRecogerPersona(persona)) {
-            // Agregar la persona al ascensor
+        if (puedeRecogerPersona()) {
             personas.add(persona);
-            
-            // Quitar la persona de la lista de esperando de la planta correspondiente
-            Planta plantaOrigen = obtenerPlantaOrigen(persona);
-            plantaOrigen.getEsperando().remove(persona);
-            
-            cambiarEstado(); // Cambiar el estado del ascensor al recoger a una persona
+            obtenerPlanta(persona.getPlantaActual()).removerPersonaEsperando(persona);
+            actualizarEstado();
         }
     }
 
-    // Método auxiliar para obtener la planta de origen de una persona
-    private Planta obtenerPlantaOrigen(Persona persona) {
-        return plantas.get(persona.getPlantaActual() + 3);  // +3 porque el índice de las plantas va de -3 a 3
+    private Planta obtenerPlanta(int numero) {
+        return plantas.get(numero + 3); // Ajuste para índices
     }
 
-    public void cambiarEstado() {
+    public void actualizarEstado() {
         if (personas.isEmpty()) {
-            estado = 0; // El ascensor se detiene si no hay personas
+            estado = 0;
         } else {
-            // Si el ascensor tiene personas, se dirige hacia la planta destino más cercana
-            int plantaDestinoMasCercana = obtenerPlantaDestinoMasCercana();
-            if (plantaDestinoMasCercana > plantaActual) {
-                estado = 1; // Subir
-            } else if (plantaDestinoMasCercana < plantaActual) {
-                estado = -1; // Bajar
-            } else {
-                estado = 0; // El ascensor está en la planta destino de la persona
-            }
-        }
-    }
+            int destinoMasCercano = personas.stream()
+                    .mapToInt(Persona::getPlantaDestino)
+                    .min().orElse(plantaActual);
 
-    private int obtenerPlantaDestinoMasCercana() {
-        int plantaDestinoMasCercana = Integer.MAX_VALUE;
-        for (Persona persona : personas) {
-            if (persona.getPlantaDestino() != plantaActual) {
-                plantaDestinoMasCercana = Math.min(plantaDestinoMasCercana, persona.getPlantaDestino());
-            }
+            estado = Integer.compare(destinoMasCercano, plantaActual);
         }
-        return plantaDestinoMasCercana;
     }
 
     public void mover() {
-        // Validar si el ascensor puede moverse sin exceder los límites de plantas
-        if (estado == 1 && plantaActual < 3) {
-            plantaActual++; // Subir
-        } else if (estado == -1 && plantaActual > -3) {
-            plantaActual--; // Bajar
+        if ((estado == 1 && plantaActual < PLANTA_MAX) || (estado == -1 && plantaActual > PLANTA_MIN)) {
+            plantaActual += estado;
         }
-        // Llamar a llevar personas para dejar a las personas en la planta correcta
-        llevarPersonas();
+        dejarPersonas();
     }
 
-    public void llevarPersonas() {
-        List<Persona> personasABajar = new ArrayList<>();
-        
+    private void dejarPersonas() {
+        List<Persona> aBajar = new ArrayList<>();
+        Planta plantaDestino = obtenerPlanta(plantaActual);
+
         for (Persona persona : personas) {
             if (persona.getPlantaDestino() == plantaActual) {
-                // Si la persona ha llegado a su planta destino, agregarla a la planta
-                Planta plantaDestino = plantas.get(persona.getPlantaDestino() + 3); // +3 para obtener el índice correcto
-                plantaDestino.getEnPlanta().add(persona);
-                personasABajar.add(persona);
+                plantaDestino.agregarPersonaEnPlanta(persona);
+                aBajar.add(persona);
             }
         }
-        
-        // Eliminar personas que deben bajarse del ascensor
-        personas.removeAll(personasABajar);
+        personas.removeAll(aBajar);
     }
 
     public String representacion(int planta) {
         if (planta == plantaActual) {
             return estado == 1 ? "[^" + personas.size() + "^]" : estado == -1 ? "[v" + personas.size() + "v]" : "[o]";
-        } else {
-            return "| |";
         }
+        return "| |";
     }
 
     public int getPlantaActual() {

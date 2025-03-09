@@ -2,6 +2,7 @@ package pyAscensores;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Planta {
     private int numero;
@@ -15,18 +16,34 @@ public class Planta {
     }
 
     public String getPersonasEsperando() {
-        return String.valueOf(esperando.size());  // Muestra el número de personas esperando
+        return String.valueOf(esperando.size());
     }
 
     public String getPersonasEnPlanta() {
-        return String.valueOf(enPlanta.size());  // Muestra el número de personas en la planta
+        return String.valueOf(enPlanta.size());
     }
 
     public List<Persona> getEsperando() {
-        return esperando;
+        return new ArrayList<>(esperando);
     }
 
     public List<Persona> getEnPlanta() {
-        return enPlanta;
+        return new ArrayList<>(enPlanta);
+    }
+
+    public void agregarPersonaEsperando(Persona persona) {
+        esperando.add(persona);
+    }
+
+    public void removerPersonaEsperando(Persona persona) {
+        esperando.remove(persona);
+    }
+
+    public void agregarPersonaEnPlanta(Persona persona) {
+        enPlanta.add(persona);
+    }
+
+    public void removerPersonaEnPlanta(Persona persona) {
+        enPlanta.remove(persona);
     }
 }
