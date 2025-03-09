@@ -2,6 +2,8 @@ package pyAscensores;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.Comparator;
 
 public class Ascensor {
     private static final int PLANTA_MIN = -3;
@@ -15,7 +17,7 @@ public class Ascensor {
 
     public Ascensor(int capacidadMaxima, List<Planta> plantas) {
         this.capacidadMaxima = capacidadMaxima;
-        this.plantaActual = 0;
+        this.plantaActual = 0; // Siempre inicia en planta 0
         this.personas = new ArrayList<>();
         this.estado = 0;
         this.plantas = plantas;
@@ -24,11 +26,14 @@ public class Ascensor {
     public boolean puedeRecogerPersona() {
         return personas.size() < capacidadMaxima;
     }
+    
     public boolean puedeRecogerPersona(Persona persona) {
         return personas.size() < capacidadMaxima;
     }
+    
     public void recogerPersona(Persona persona) {
         if (puedeRecogerPersona()) {
+            persona.incrementarTiempoEnAscensor(); // Registrar el tiempo en el ascensor
             personas.add(persona);
             obtenerPlanta(persona.getPlantaActual()).removerPersonaEsperando(persona);
             actualizarEstado();
@@ -43,11 +48,13 @@ public class Ascensor {
         if (personas.isEmpty()) {
             estado = 0;
         } else {
-            int destinoMasCercano = personas.stream()
-                    .mapToInt(Persona::getPlantaDestino)
-                    .min().orElse(plantaActual);
+            // Dar preferencia a los que más tiempo llevan en el ascensor
+            int destinoPrioritario = personas.stream()
+                    .max(Comparator.comparingInt(Persona::getTiempoEnAscensor))
+                    .map(Persona::getPlantaDestino)
+                    .orElse(plantaActual);
 
-            estado = Integer.compare(destinoMasCercano, plantaActual);
+            estado = Integer.compare(destinoPrioritario, plantaActual);
         }
     }
 
@@ -69,6 +76,14 @@ public class Ascensor {
             }
         }
         personas.removeAll(aBajar);
+    }
+
+    public void permitirSolicitarAscensor(Persona persona, int nuevaPlantaDestino) {
+        if (persona.getPlantaActual() != nuevaPlantaDestino && nuevaPlantaDestino >= PLANTA_MIN && nuevaPlantaDestino <= PLANTA_MAX) {
+            System.out.println("1 persona en la planta " + persona.getPlantaActual() + " quiere ir a planta " + nuevaPlantaDestino);
+            persona.setPlantaDestino(nuevaPlantaDestino);
+            recogerPersona(persona);
+        }
     }
 
     public String representacion(int planta) {
