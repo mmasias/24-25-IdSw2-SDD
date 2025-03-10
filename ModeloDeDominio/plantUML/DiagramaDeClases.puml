@@ -1,95 +1,80 @@
 @startuml
 
-' Diagrama de Clases
-
 class Mesa {
-    +numero: int
-    +capacidad: int
-    +ubicacion: Zona
-    +estado: EstadoMesa
+    - numero: int
+    - capacidad: int
+    - ubicacion: String
+    - estado: String
+    + getNumero(): int
+    + getCapacidad(): int
+    + getUbicacion(): String
+    + getEstado(): String
+    + setEstado(estado: String): void
 }
 
 class Reserva {
-    +cliente: Cliente
-    +fecha: Date
-    +hora: Time
-    +num_comensales: int
-    +preferencias: String
-    +estado: EstadoReserva
+    - cliente: String
+    - fecha: Date
+    - numeroComensales: int
+    - preferencias: String
+    - mesaAsignada: Mesa
+    + getCliente(): String
+    + getFecha(): Date
+    + getNumeroComensales(): int
+    + getPreferencias(): String
+    + getMesaAsignada(): Mesa
+    + asignarMesa(mesa: Mesa): void
 }
 
 class Pedido {
-    +mesa: Mesa
-    +platos: List<Plato>
-    +tiempo_pedido: DateTime
-    +tiempo_preparacion: DateTime
-    +tiempo_servicio: DateTime
-    +importe_total: float
+    - mesa: Mesa
+    - platos: List<Plato>
+    - servido: boolean
+    + agregarPlato(plato: Plato): void
+    + calcularTotal(): double
+    + marcarComoServido(): void
+    + isServido(): boolean
 }
 
 class Plato {
-    +nombre: String
-    +precio: float
-    +tiempo_preparacion: int
+    - nombre: String
+    - precio: double
+    - tiempoPreparacion: int
+    + getNombre(): String
+    + getPrecio(): double
+    + getTiempoPreparacion(): int
 }
 
-class Empleado {
-    +nombre: String
-    +rol: RolEmpleado
-    +mesas_asignadas: List<Mesa>
-    +horario_trabajo: List<Horario>
-    +descansos: List<Horario>
+class Personal {
+    - nombre: String
+    - rol: String
+    - horasTrabajo: int
+    + getNombre(): String
+    + getRol(): String
+    + getHorasTrabajo(): int
 }
 
-class Cliente {
-    +nombre: String
-    +contacto: String
-    +historial_reservas: List<Reserva>
+class Restaurante {
+    - mesas: List<Mesa>
+    - reservas: List<Reserva>
+    - pedidos: List<Pedido>
+    - empleados: List<Personal>
+    + agregarMesa(mesa: Mesa): void
+    + obtenerMesaPorNumero(numeroMesa: int): Mesa
+    + agregarEmpleado(empleado: Personal): void
+    + registrarReserva(reserva: Reserva): boolean
+    + agregarPedido(pedido: Pedido): void
+    + mostrarMesas(): void
+    + mostrarReservas(): void
+    + mostrarPedidos(): void
 }
 
-class Horario {
-    +inicio: Time
-    +fin: Time
-}
-
-enum EstadoMesa {
-    LIBRE
-    RESERVADA
-    OCUPADA
-    EN_PREPARACION
-}
-
-enum EstadoReserva {
-    PENDIENTE
-    CONFIRMADA
-    CANCELADA
-    COMPLETADA
-}
-
-enum RolEmpleado {
-    CAMARERO
-    AYUDANTE
-    SUMILLER
-    CHEF
-    AYUDANTE_COCINA
-}
-
-enum Zona {
-    TERRAZA
-    SALON_PRINCIPAL
-    SALON_PRIVADO
-}
-
-Mesa -- Reserva : asignada
-Mesa -- Pedido : sirve
-Reserva -- Cliente : realizada_por
-Pedido -- Plato : contiene
-Empleado -- Mesa : asignada_a
-Cliente -- Reserva : realiza
-Empleado -- Horario : tiene
-Mesa -- EstadoMesa
-Reserva -- EstadoReserva
-Empleado -- RolEmpleado
-Mesa -- Zona
+Restaurante "1" -- "*" Mesa
+Restaurante "1" -- "*" Reserva
+Restaurante "1" -- "*" Pedido
+Restaurante "1" -- "*" Personal
+Reserva "1" -- "1" Mesa
+Pedido "1" -- "1" Mesa
+Pedido "1" -- "*" Plato
 
 @enduml
