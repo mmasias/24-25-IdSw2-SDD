@@ -2,4 +2,4 @@
 
 ## Diagrama de clases
 
-[](/documentos/modeloDeDominio/diagramaDeClases/diagramaDeClasesRelaciones.svg)
+![](/documentos/modeloDeDominio/diagramaDeClases/diagramaDeClasesRelaciones.svg)
