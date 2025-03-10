@@ -1,0 +1,67 @@
+@startuml
+hide empty description
+
+[*] --> Usuario
+
+state ProcesoDeCompra {
+Usuario --> IngresandoCodigoCelda : Decidir Producto
+
+IngresandoCodigoCelda --> EligiendoFormaDePago : Mostrar precio del producto
+}
+
+state ProcesandoPago {
+EligiendoFormaDePago -->  PagandoEfectivo : Ingresa Efectivo
+
+EligiendoFormaDePago -->  PagandoMonedero : Acercar el monedero
+
+EligiendoFormaDePago -->  PagandoTarjeta : Acercar la tarjeta
+
+state verificandoFondos <<choice>>
+
+state verificandoEfectivo <<choice>>
+
+PagandoEfectivo --> verificandoEfectivo : Mostrar Saldo
+
+verificandoEfectivo --> PagoExitoso : Saldo suficiente
+
+verificandoEfectivo --> PagandoEfectivo : Saldo insuficiente
+
+
+PagandoMonedero --> verificandoFondos : verificando fondos
+
+PagandoTarjeta --> verificandoFondos : verificando fondos
+
+verificandoFondos --> PagoExitoso : Fondos suficientes
+
+
+verificandoEfectivo --> PreparandoCambio : Saldo excedido
+
+state fork_state <<fork>>
+
+state join_state <<join>>
+
+PreparandoCambio --> fork_state
+
+fork_state --> EntregandoCambio
+
+fork_state --> PagoExitoso
+
+EntregandoCambio --> join_state
+
+PagoExitoso --> join_state
+
+verificandoFondos --> PagoDenegado : Fondos insuficientes
+
+PagoDenegado --> EligiendoFormaDePago : Decidir forma de pago
+
+}
+
+join_state --> ProductoEntregado
+
+EligiendoFormaDePago -->  CancelandoFormaDePago : Decide cancelar
+
+CancelandoFormaDePago --> [*] : Compra cancelada
+
+PagoExitoso --> ProductoEntregado : Despachando producto
+ProductoEntregado --> [*] : Compra finalizada
+@enduml
