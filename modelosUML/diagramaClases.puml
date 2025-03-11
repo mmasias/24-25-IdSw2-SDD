@@ -1,25 +1,18 @@
 @startuml
 
-class Simulacion {
-}
-class Cola {
+class Jornada {
 }
 class Caja {
 }
-class Estadisticas {
+class Cola {
 }
-class GestorCajas {
-}
-class Cliente {
+class Productos {
 }
 
-Simulacion --> Cola : "crea"
-Simulacion --> Caja : "crea"
-Simulacion --> Estadisticas : "permite acceso"
-Simulacion --> GestorCajas : "crea"
-GestorCajas -> Caja : "gestiona estado"
-Cola --> Cliente : "almacena"
-Caja --> Cliente : "atiende"
-Item <-- Caja : "procesa"
-Cliente --> Item : "trae"
+Jornada --> Caja : "Abre"
+Jornada --> Cliente : "Sirve"
+Cliente --> Productos : "Tiene"
+Cliente --> Cola : "Forma"
+Caja .. Cola : "Gestiona dependiendo de"
+
 @enduml
