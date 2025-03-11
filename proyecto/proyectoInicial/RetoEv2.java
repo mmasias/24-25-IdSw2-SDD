@@ -1,4 +1,4 @@
-package proyecto;
+package proyecto.proyectoInicial;
 public class RetoEv2 {
     public static void main(String[] args) {
         int Jornada=12*60;
