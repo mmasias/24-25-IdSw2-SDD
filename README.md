@@ -15,4 +15,4 @@ Este proyecto simula el funcionamiento de un sistema de gestión de colas y caja
 - Simulación del flujo de clientes y ventas.
 
 ## 👨‍💻 Autores
-César García, Anibal Bayas, Pablo Cantero, Javier Salmeón, Mario del Rio y Neco Martinez
+César García, Anibal Bayas, Pablo Cantero, Javier Salmerón, Mario del Rio y Neco Martinez
