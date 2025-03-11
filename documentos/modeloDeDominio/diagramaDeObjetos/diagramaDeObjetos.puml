@@ -1,0 +1,68 @@
+@startuml diagramaDeObjetos
+hide empty members
+hide circle
+abstract "Maquina:Maquina1"{
+    id: 1
+    Ubicacion: Cafetería
+    Estado: "activo"
+}
+
+class "Celdas:Celda12"{
+    id: 12
+    id_maquina : 1
+    Capacidad: 10
+    Cantidad_disponible: 9
+}
+
+class "Productos:Producto1"{
+    id: 3
+    Nombre: Kinder Bueno
+    Fecha_expiración: 12/11/2025
+    Precio: 1.95
+    id_celda: 12
+}
+
+class "FormaDePago:FormaDePago2"{
+    id: 2
+    Tipo: "Tarjeta"
+}
+
+class "Usuario:Usuario1"{
+    id: 1
+    Nombre: "Diego"
+}
+
+class "Compra:Compra1"{
+    id: 1
+    id_usuario: 1
+    id_producto: 3
+    id_forma_pago: 1
+    Fecha_hora: 11/03/2025 00:12:43
+}
+
+class "Pago:Pago1"{
+    id: 1
+    Monto: 1.95
+    id_forma_pago: 1
+    Estado: "Pago Exitoso"
+}
+
+class "Empleado:Empleado1"{
+   id: 1
+   Nombre: "Carlos"
+   Acciones_realizadas: "Abastecer"
+
+}
+   
+
+"Maquina:Maquina1" --> "Celdas:Celda12" : tiene
+"Celdas:Celda12" --> "Productos:Producto1" : contiene
+"Maquina:Maquina1" --> "Compra:Compra1" : procesa
+"Compra:Compra1" --> "Pago:Pago1" : requiere
+"Usuario:Usuario1" -U-> "Celdas:Celda12" : selecciona
+"Usuario:Usuario1" --> "Pago:Pago1" : efectua
+"Pago:Pago1" --> "FormaDePago:FormaDePago2"
+"Empleado:Empleado1" -U-> "Maquina:Maquina1" : abastece
+
+
+@enduml
