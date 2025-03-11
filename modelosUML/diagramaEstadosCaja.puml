@@ -1,0 +1,17 @@
+@startuml
+skinparam StateFontName Arial
+skinparam StateFontSize 14
+
+
+Cerrada --> Abierta : Apertura de caja
+
+state Abierta {
+
+  Libre --> Ocupada : Recibe cliente
+  Ocupada --> Libre : Cliente despachado
+  Abierta--> Cerrada : Cierre de caja
+
+
+}
+
+@enduml
