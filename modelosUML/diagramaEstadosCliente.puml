@@ -1,0 +1,17 @@
+@startuml
+skinparam StateFontName Arial
+skinparam StateFontSize 14
+
+[*] --> Llegada
+note right of Llegada : Nuevo cliente\n(Prob. llegada 60% por minuto)\nCon 5-15 productos
+
+Llegada --> EnCola : Se une a la fila
+note right of EnCola : Esperando una\ncaja disponible
+
+EnCola --> EnDespacho : Asignado a caja vacía
+
+EnDespacho --> Atendido : Todos los productos procesados
+Atendido --> [*]
+
+
+@enduml
