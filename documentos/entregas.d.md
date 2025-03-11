@@ -10,3 +10,13 @@
 ## Diagrama de clases
 
 ![](/documentos/modeloDeDominio/diagramaDeClases/diagramaDeClasesRelaciones.svg)
+
+## Diagrama de estados
+
+### Diagrama de compra
+
+![](/documentos/modeloDeDominio/diagramaDeEstados/diagramaDeEstadosCompra.svg)
+
+### Diagrama de abastecer
+
+![](/documentos/modeloDeDominio/diagramaDeEstados/diagramaDeEstadosAbastecer.svg)

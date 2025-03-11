@@ -1,0 +1,17 @@
+@startuml
+hide empty description
+
+[*] --> Empleado
+
+state RealizandoAbastecimiento {
+Empleado -->  abasteciendoMaquina : Colocar productos en la maquina
+state celdasAbastecidas <<choice>>
+
+abasteciendoMaquina --> celdasAbastecidas : Abaster celdas
+celdasAbastecidas --> abasteciendoMaquina : Celdas no llenas
+}
+
+celdasAbastecidas --> cerrarMaquina : Celdas llenas
+
+cerrarMaquina --> [*]
+@enduml
