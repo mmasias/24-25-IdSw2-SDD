@@ -4,7 +4,7 @@ Este repositorio contiene el diagrama de clases para la simulación de un sistem
 
 ## Diagrama
 
-![Diagrama de Clases](/images/modelosUML/diagramaDeClases.svg)
+![Diagrama de Clases](/images/modelosUML/diagramaClasesRefactorizado.svg)
 
 El diagrama representa la interacción entre las clases principales del sistema, incluyendo la simulación, la gestión de colas y cajas, y las estadísticas recopiladas durante la ejecución.
 
