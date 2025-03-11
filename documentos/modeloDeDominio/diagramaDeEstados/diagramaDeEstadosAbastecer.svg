@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="578px" preserveAspectRatio="none" style="width:364px;height:578px;" version="1.1" viewBox="0 0 364 578" width="364px" zoomAndPan="magnify"><defs><filter height="300%" id="f1vibukqv8lmyp" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[cef2881c32c4cf52f306179fe7154ce6]
+cluster RealizandoAbastecimiento--><rect fill="#FEFECE" filter="url(#f1vibukqv8lmyp)" height="192" rx="12.5" ry="12.5" style="stroke:#A80036;stroke-width:1.5;" width="306" x="7" y="190"/><rect fill="#FFFFFF" height="159.5117" rx="12.5" ry="12.5" style="stroke:#FFFFFF;stroke-width:1.0;" width="300" x="10" y="219.4883"/><line style="stroke:#A80036;stroke-width:1.5;" x1="7" x2="313" y1="216.4883" y2="216.4883"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="182" x="69" y="207.5352">RealizandoAbastecimiento</text><rect fill="#FEFECE" filter="url(#f1vibukqv8lmyp)" height="40" rx="12.5" ry="12.5" style="stroke:#A80036;stroke-width:1.5;" width="160" x="67" y="225"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="150" x="72" y="250.291">abasteciendoMaquina</text><polygon fill="#FEFECE" filter="url(#f1vibukqv8lmyp)" points="125,342,137,354,125,366,113,354,125,342" style="stroke:#A80036;stroke-width:1.5;"/><ellipse cx="147" cy="16" fill="#000000" filter="url(#f1vibukqv8lmyp)" rx="10" ry="10" style="stroke:none;stroke-width:1.0;"/><rect fill="#FEFECE" filter="url(#f1vibukqv8lmyp)" height="40" rx="12.5" ry="12.5" style="stroke:#A80036;stroke-width:1.5;" width="78" x="108" y="87"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="68" x="113" y="112.291">Empleado</text><rect fill="#FEFECE" filter="url(#f1vibukqv8lmyp)" height="40" rx="12.5" ry="12.5" style="stroke:#A80036;stroke-width:1.5;" width="110" x="70" y="445"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="100" x="75" y="470.291">cerrarMaquina</text><ellipse cx="125" cy="556" fill="none" filter="url(#f1vibukqv8lmyp)" rx="10" ry="10" style="stroke:#000000;stroke-width:1.0;"/><ellipse cx="125.5" cy="556.5" fill="#000000" rx="6" ry="6" style="stroke:none;stroke-width:1.0;"/><!--MD5=[5e79f506869a4d01f0af744ddf576d19]
+link *start to Empleado--><path d="M147,26.19 C147,38.85 147,62.14 147,80.31 " fill="none" id="*start-to-Empleado" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="147,85.23,151,76.23,147,80.23,143,76.23,147,85.23" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[758cb2448d2cc7c51ec545d887e57bb8]
+link Empleado to abasteciendoMaquina--><path d="M147,127.49 C147,151.32 147,191.74 147,218.16 " fill="none" id="Empleado-to-abasteciendoMaquina" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="147,223.04,151,214.04,147,218.04,143,214.04,147,223.04" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="208" x="148" y="170.5684">Colocar productos en la maquina</text><!--MD5=[391b877ad6f77501968771e50d45b488]
+link abasteciendoMaquina to celdasAbastecidas--><path d="M88.33,265.25 C75.12,272.44 62.73,282.12 55,295 C39.64,320.59 85.17,340.02 110.01,348.43 " fill="none" id="abasteciendoMaquina-to-celdasAbastecidas" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="114.68,349.95,107.353,343.3686,109.9239,348.4075,104.885,350.9783,114.68,349.95" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="92" x="56" y="308.5684">Abaster celdas</text><!--MD5=[e97b9d19bc4409450e83575972cbc8b1]
+link celdasAbastecidas to abasteciendoMaquina--><path d="M130.65,347.23 C137.49,339.8 148.62,326.17 153,312 C156.99,299.08 156.05,284.12 153.87,271.7 " fill="none" id="celdasAbastecidas-to-abasteciendoMaquina" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="152.93,266.96,150.7566,276.566,153.9023,271.8645,158.6038,275.0103,152.93,266.96" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="103" x="156.64" y="308.5684">Celdas no llenas</text><!--MD5=[40074176bd5e98a09077afb0aa86d847]
+link celdasAbastecidas to cerrarMaquina--><path d="M125,366.66 C125,383.66 125,415.67 125,438.33 " fill="none" id="celdasAbastecidas-to-cerrarMaquina" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="125,443.23,129,434.23,125,438.23,121,434.23,125,443.23" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="83" x="126" y="411.5684">Celdas llenas</text><!--MD5=[eeb468547f81544b93745092d3201b2b]
+link cerrarMaquina to *end--><path d="M125,485.31 C125,501.45 125,524.18 125,539.23 " fill="none" id="cerrarMaquina-to-*end" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="125,544.05,129,535.05,125,539.05,121,535.05,125,544.05" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[03cd9e34345a28ee78592251f8e51058]
+@startuml
+hide empty description
+
+[*] - -> Empleado
+
+state RealizandoAbastecimiento {
+Empleado - ->  abasteciendoMaquina : Colocar productos en la maquina
+state celdasAbastecidas <<choice>>
+
+abasteciendoMaquina - -> celdasAbastecidas : Abaster celdas
+celdasAbastecidas - -> abasteciendoMaquina : Celdas no llenas
+}
+
+celdasAbastecidas - -> cerrarMaquina : Celdas llenas
+
+cerrarMaquina - -> [*]
+@enduml
+
+PlantUML version 1.2021.00(Sun Jan 10 11:25:05 CET 2021)
+(MIT source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: UTF-8
+Language: es
+Country: 419
+--></g></svg>
