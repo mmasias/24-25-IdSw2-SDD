@@ -1,0 +1,34 @@
+@startuml
+
+object Jornada {
+  inicio = "9:00";
+  fin = "21:00";
+}
+
+object Caja {
+  numeroCaja= "1";
+  
+}
+
+object Cliente {
+  nombre = "Juan Pérez";
+  
+}
+
+object Cola {
+  estado = "En espera";
+  longitud = "5 personas";
+}
+
+object Productos {
+  nombre = "Manzana";
+  precio = "1€";
+}
+
+Jornada -> Caja : "Abre"
+Jornada -> Cliente : "Sirve"
+Cliente -> Productos : "Tiene"
+Cliente -> Cola : "Forma"
+Caja ..> Cola : "Gestiona dependiendo de"
+
+@enduml
