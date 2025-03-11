@@ -13,4 +13,5 @@ EnCola --> EnDespacho : Asignado a caja vacía
 EnDespacho --> Atendido : Todos los productos procesados
 Atendido --> [*]
 
+
 @enduml
