@@ -1,0 +1,12 @@
+@startuml
+
+Simulacion --(composición)--> Cola
+Simulacion --(composición)--> GestorCajas
+Simulacion --(composición)--> Estadisticas
+GestorCajas --(agregación)--> Caja
+Cola --(composición)--> Cliente
+Caja --(asociación)--> Cliente
+GestorCajas --(dependencia)--> Estadisticas
+Cliente --(composición)--> Item
+
+@enduml
