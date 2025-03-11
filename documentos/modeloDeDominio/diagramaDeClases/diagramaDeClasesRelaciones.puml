@@ -12,9 +12,9 @@ class Compra
 class Empleado
 
 Maquina --> FormaDePago : maneja
-Maquina --* Celdas
+Maquina *-- Celdas
 Maquina --> Compra : procesa
-Celdas --o Productos
+Celdas o-- Productos
 Usuario -U-> Celdas : selecciona 
 Usuario --> Pago : efectua
 Pago --> FormaDePago 
