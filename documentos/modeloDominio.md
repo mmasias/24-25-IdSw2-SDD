@@ -2,11 +2,17 @@
 
 Este repositorio contiene el diagrama de clases para la simulación de un sistema de gestión de cajas y colas.
 
-## Diagrama
+## Diagramas
 
-![Diagrama de Clases](/images/modelosUML/diagramaClasesRefactorizado.svg)
+![](/images/modelosUML/diagramaClases.svg)
 
-El diagrama representa la interacción entre las clases principales del sistema, incluyendo la simulación, la gestión de colas y cajas, y las estadísticas recopiladas durante la ejecución.
+![](/images/modelosUML/diagramaOnjetos.svg)
+
+![](/images/modelosUML/diagramaEstadosJornada.svg)
+
+![](/images/modelosUML/diagramaEstadosCaja.svg)
+
+![](/images/modelosUML/diagramaEstadosCliente.svg)
 
 ## Descripción de Clases
 

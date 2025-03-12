@@ -6,13 +6,15 @@ class Caja {
 }
 class Cola {
 }
+class Cliente {
+}
 class Productos {
 }
 
 Jornada --> Caja : "Abre"
 Jornada --> Cliente : "Sirve"
-Cliente --> Productos : "Tiene"
-Cliente --> Cola : "Forma"
-Caja .. Cola : "Gestiona dependiendo de"
+Cliente --* Productos : "Tiene"
+Cliente --o Cola : "Forma"
+Caja ..> Cola : "Gestiona dependiendo de"
 
 @enduml
