@@ -1,0 +1,9 @@
+@startuml
+actor Gato
+
+rectangle "Comportamiento del Gato" {
+    usecase "Ensuciar la superficie"
+}
+
+Gato --> "Ensuciar la superficie"
+@enduml
