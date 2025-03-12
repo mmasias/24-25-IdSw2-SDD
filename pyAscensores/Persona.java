@@ -42,4 +42,8 @@ public class Persona {
     public void setPlantaActual(int planta) {
         this.plantaActual = planta;
     }
+
+    public void setPlantaDestino(int nuevaPlantaDestino) {
+        this.plantaDestino = nuevaPlantaDestino;
+    }
 }
