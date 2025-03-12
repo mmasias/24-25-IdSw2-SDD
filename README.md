@@ -1,4 +1,4 @@
-<img src="/images/aspiradora.png" width="40%" align="right"/>
+<img src="/images/aspiradora.svg" width="40%" align="right"/>
 
 # Aspiradora
 
