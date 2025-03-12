@@ -1,0 +1,30 @@
+@startuml
+
+class Superficie {
+}
+
+
+class Zona {
+   
+}
+
+class Aspiradora {
+  
+}
+
+class Mueble {
+}
+
+class Gato {
+}
+Superficie *-- "*" Zona : "está formada por"  
+Zona o--  Gato : " puede contener"
+
+Aspiradora --> Zona : "se mueve en"
+Aspiradora --> Zona : "limpia"
+Aspiradora --> Mueble : "detecta y evita"
+Zona -->  Mueble : "tiene asociado"
+
+Gato --> Celda : "ensucia"
+
+@enduml

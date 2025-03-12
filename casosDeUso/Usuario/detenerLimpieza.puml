@@ -1,0 +1,9 @@
+@startuml
+actor Usuario
+
+rectangle "Interacción del Usuario" {
+    usecase "Detener limpieza"
+}
+
+Usuario --> "Detener limpieza"
+@enduml

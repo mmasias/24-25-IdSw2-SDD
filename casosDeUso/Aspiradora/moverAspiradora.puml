@@ -1,0 +1,9 @@
+@startuml
+actor Aspiradora
+
+rectangle "Sistema de Aspiradora" {
+    usecase "Limpiar zona"
+}
+
+Aspiradora --> "Limpiar zona"
+@enduml

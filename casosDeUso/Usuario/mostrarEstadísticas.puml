@@ -1,0 +1,21 @@
+@startuml
+actor "Usuario" as Usuario
+actor "Aspiradora" as Aspiradora
+
+usecase "Mostrar estadísticas de limpieza" as C11
+
+rectangle "Estadísticas" {
+    usecase "Contar pasos realizados" as C11_1
+    usecase "Calcular nivel total de suciedad restante" as C11_2
+    usecase "Medir tiempo transcurrido" as C11_3
+    usecase "Actualizar y mostrar estadísticas" as C11_4
+}
+
+Aspiradora --> C11 : "Recopila datos de limpieza"
+Usuario --> C11 : "Consulta el progreso"
+
+C11 --> C11_1 : "Cuenta los pasos realizados"
+C11 --> C11_2 : "Calcula suciedad restante"
+C11 --> C11_3 : "Mide el tiempo de limpieza"
+C11 --> C11_4 : "Muestra la información en pantalla"
+@enduml
