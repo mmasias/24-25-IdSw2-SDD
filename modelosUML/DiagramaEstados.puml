@@ -1,34 +1,16 @@
-state Aspiradora {
+@startuml
+[*] --> Apagada
 
-  [*] --> Inactiva
+Apagada --> EnEspera : "Encender botón"
+EnEspera --> Moviendose : "Iniciar movimiento"
+Moviendose --> Limpiando : "Detecta suciedad"
+Limpiando --> Moviendose : "Limpieza completada"
+Moviendose --> EvitandoObstaculo : "Detecta obstáculo"
+EvitandoObstaculo --> Moviendose : "Obstáculo evitado"
+Moviendose --> EnEspera : "Pausa manual"
+EnEspera --> Apagada : "Apagar"
+Apagada --> [*] : "Fin de sesión"
 
-  Inactiva --> Explorando : Inicia limpieza
-  Explorando --> Limpiando : Detecta suciedad
-  Limpiando --> Explorando : Zona limpia
+@enduml
 
-  Explorando --> Detectar_Suciedad : Analiza suciedad total
-  Detectar_Suciedad --> Dirigirse_Zona_Mas_Sucia : Encuentra zona más sucia
-  Dirigirse_Zona_Mas_Sucia --> Limpiando : Llega a la zona más sucia
-
-  Explorando --> Bloqueada : Encuentra mueble o pared
-  Bloqueada --> Guiada : Usuario la dirige a otra zona
-  Guiada --> Explorando : Se mueve manualmente
-
-  Explorando --> Bolsa_Llena : Bolsa de basura llena
-  Bolsa_Llena --> Descargando : Necesita vaciado de bolsa
-  Descargando --> Explorando : Bolsa vaciada
-
-  Explorando --> Bateria_Baja : Batería por debajo del 10%
-  Bateria_Baja --> Cargando : Regresa a base de carga
-  Cargando --> Explorando : Batería recargada
-
-  Explorando --> Fuera_de_Bateria : Batería agotada
-  Fuera_de_Bateria --> Cargando : Se necesita recarga
-
-  Explorando --> Detectar_Gato : Aparece un gato
-  Detectar_Gato --> Gato_Ensucia : El gato ensucia la zona
-  Gato_Ensucia --> Explorando : La aspiradora detecta el cambio y ajusta limpieza
-
-  Explorando --> Finalizado : Todas las zonas están limpias y batería disponible
-}
 
