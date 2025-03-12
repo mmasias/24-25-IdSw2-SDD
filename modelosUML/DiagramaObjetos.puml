@@ -1,0 +1,77 @@
+object Superficie1 {
+  ancho = 25
+  alto = 10
+  zonas = {Zona1, Zona2, Zona3, Zona4, Zona5}
+  muebles = {Mueble1, Mueble2}
+  aspiradora = Aspiradora1
+  gato = Gato1
+}
+
+object Zona1 {
+  x = 2
+  y = 3
+  nivel_suciedad = 3
+}
+
+object Zona2 {
+  x = 5
+  y = 7
+  nivel_suciedad = 2
+}
+
+object Zona3 {
+  x = 6
+  y = 4
+  nivel_suciedad = 4
+}
+
+object Zona4 {
+  x = 8
+  y = 2
+  nivel_suciedad = 1
+}
+
+object Zona5 {
+  x = 10
+  y = 6
+  nivel_suciedad = 0
+}
+
+object Aspiradora1 {
+  x = 4
+  y = 5
+  bateria = 80
+  bolsa_basura = 20
+}
+
+object Mueble1 {
+  x = 6
+  y = 6
+}
+
+object Mueble2 {
+  x = 9
+  y = 3
+}
+
+object Gato1 {
+  x = 3
+  y = 2
+  pasos_restantes = 15
+}
+
+Superficie1 --* Zona1
+Superficie1 --* Zona2
+Superficie1 --* Zona3
+Superficie1 --* Zona4
+Superficie1 --* Zona5
+
+Superficie1 --* Mueble1
+Superficie1 --* Mueble2
+
+Superficie1 -- Aspiradora1
+Superficie1 -- Gato1
+
+Zona3 -- Aspiradora1 : "puede ser limpiada por"
+Zona4 -- Gato1 : "puede ser ensuciada por"
+
