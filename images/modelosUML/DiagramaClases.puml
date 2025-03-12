@@ -1,0 +1,50 @@
+@startuml
+class Superficie {
+  + int ancho
+  + int alto
+  + List<Zona> zonas
+  + List<Mueble> muebles
+  + void detectar_suciedad()
+  + void agregar_muebles(Mueble mueble)
+}
+
+class Zona {
+  + int x
+  + int y
+  + int nivel_suciedad
+  + void limpiar()
+  + void ensuciar()
+}
+
+class Aspiradora {
+  + int x
+  + int y
+  + int bateria
+  + int bolsa_basura
+  + void mover()
+  + void limpiar()
+  + void detectar_suciedad()
+  + void cargar_bateria()
+  + void vaciar_bolsa()
+}
+
+class Mueble {
+  + int x
+  + int y
+}
+
+class Gato {
+  + int x
+  + int y
+  + int pasos_restantes
+  + void mover()
+  + void ensuciar()
+}
+
+Superficie "1" -- "many" Zona
+Superficie "1" -- "many" Mueble
+Superficie "1" -- "1" Aspiradora
+Superficie "1" -- "0..1" Gato
+Zona "1" -- "1" Aspiradora : puede ser limpiada por >
+Zona "1" -- "1" Gato : puede ser ensuciada por >
+@enduml
