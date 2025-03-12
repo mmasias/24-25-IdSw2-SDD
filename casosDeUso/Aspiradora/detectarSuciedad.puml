@@ -1,0 +1,9 @@
+@startuml
+actor Aspiradora
+
+rectangle "Sistema de Aspiradora" {
+    usecase "Detectar suciedad total"
+}
+
+Aspiradora --> "Detectar suciedad total"
+@enduml
