@@ -1,0 +1,26 @@
+@startuml
+
+state "Matriz" as Matriz {
+    [*] --> Inactivo
+    
+    state Libre {
+        [*] --> CargaVerificada
+    }
+    
+    state EnProceso {
+        [*] --> Modificando
+        Modificando --> Modificado : Modificación completada
+        Modificado --> Buscando : buscarCelda
+        Buscando --> Modificado : búsqueda finalizada
+        Modificado --> Eliminando : eliminarCelda
+        Eliminando --> Modificado : eliminación completada
+    }
+    
+    Inactivo --> Libre : inicializar
+    CargaVerificada --> EnProceso : No está llena
+    EnProceso --> Libre : Cancelar modificaciones
+    Modificado --> Lleno : Asignación completa
+    Lleno --> [*] : Carga máxima alcanzada
+}
+
+@enduml
