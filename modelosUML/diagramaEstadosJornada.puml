@@ -1,0 +1,30 @@
+@startuml
+skinparam StateFontName Arial
+skinparam StateFontSize 14
+
+[*] --> Preparación
+note right of Preparación : Antes de abrir\n(9:00 AM)
+
+Preparación --> Abierto : Apertura
+note right of Abierto : Horario comercial\n(9:00 AM - 9:00 PM)\nDuración: 12 horas (720 minutos)
+
+state Abierto {
+
+
+  state "Operación Normal" as Normal
+
+  state "Apertura de cajas adicionales" as CajaAdicional
+
+  CajaAdicional --> Normal : Menos de 15 personas en cola\ny atendidas mínimo 5 personas
+  Normal --> CajaAdicional : Más de 15 personas en cola
+
+
+  note bottom of CajaAdicional : 5 cajas operando
+}
+
+Abierto --> Cierre : 9:00 PM
+note right of Cierre : Generando estadísticas:\n- Minutos con cola vacía\n- Personas en cola al cierre\n- Personas atendidas\n- Items vendidos
+
+Cierre --> [*]
+
+@enduml
