@@ -1,0 +1,137 @@
+@startuml
+
+LibraryManager o-- Elements
+LibraryManager --o User
+Elements <.right. User : uses
+Elements *-- Book
+Elements *-- Magazine
+Elements *-- Material
+Elements *-- Classroom
+Elements *-- Audiovisual
+Service <|-up- Classroom
+Service <|-up- Material
+Document <|-up- Book
+Document <|-up- Magazine
+Document <|-up- Audiovisual
+
+class Material {
+    +String description
+    +String getDescription()
+    +void setDescription(String description)
+}
+
+class Elements {
+    +int id
+    +magazines: List<Magazine> 
+    +books: List<Book> 
+    +alaudiovisual: List<Audiovisual>
+    +material: List<Material>
+    +classroom: List<Classroom>
+    +void addBook()
+    +void addMagazine()
+    +void addAudiovisual()
+    +void addClassroom()
+    +void addMaterial()
+    +void eraseBook(int id)
+    +void eraseMegazine(int id)
+    +void eraseAudiovisual(int id)
+    +void eraseClassroom(int id)
+    +void eraseMaterial(int id)
+    +void searchBook(int id)
+    +void searchMegazine(int id)
+    +void searchAudiovisual(int id)
+    +void searchClassroom(int id)
+    +void searchMaterial(int id)
+}
+
+abstract class Document {
+    +int id
+    +String title
+    +String author
+    +int publicationYear
+    +boolean available
+    +String getId()
+    +void setId(String id)
+    +String getTitle()
+    +void setTitle(String id)
+    +String getAuthor()
+    +void setAuthor(String id)
+    
+}
+
+class User {
+    +int id
+    +String name
+    +String email
+    +String type
+    +int maxItems
+    +int maxDays
+    +void borrowElement (Elements element)
+    +void returnElement (Elements element)
+    +void searchElement (String type)
+    +String getId()
+    +void setId(String id)
+    +String getName()
+    +void setName(String name)
+    +String getEmail()
+    +void setEmail(String email)
+}
+
+class Book {
+    +String isbn
+    +int numPages
+    +String getIsbn()
+    +void setIsbn(String isbn)
+    +int getNumPages()
+    +void setNumPages(int numPages)
+}
+
+class Classroom {
+    +int capacity
+    +int getCapacity()
+    +void setCapacity(int capacity)
+}
+
+abstract class Service {
+    +int id
+    +String name
+    +boolean available
+    +String getId()
+    +void setId(String id)
+    +String getName()
+    +void setName(String id)
+}
+
+class Magazine {
+    +String issn
+    +int numberPages
+    +String getIssn()
+    +void setIssn(String issn)
+    +int getNumberPages()
+    +void setNumberPages(int number)
+}
+
+class Audiovisual {
+    +String format
+    +int duration
+    +String getFormat()
+    +void setFormat(String format)
+    +int getDuration()
+    +void setDuration(int duration)
+}
+
+class LibraryManager {
+    +String name
+    +String direction
+    +void addElement(Elements element)
+    +void deleteElement(Elements element)
+    +void searchElement(String type)
+    +void registerUser(User user)
+    +void deleteUser(User user)
+    +String getName()
+    +void setName(String name)
+    +String getDirection()
+    +void setDirection(String direction)
+}
+
+@enduml
