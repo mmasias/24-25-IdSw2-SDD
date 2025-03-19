@@ -11,6 +11,10 @@
 
 ![](/documentos/modeloDeDominio/diagramaDeClases/diagramaDeClasesRelaciones.svg)
 
+## Diagrama de objetos
+
+![](/documentos/modeloDeDominio/diagramaDeObjetos/diagramaDeObjetos.svg)
+
 ## Diagrama de estados
 
 ### Diagrama de compra
