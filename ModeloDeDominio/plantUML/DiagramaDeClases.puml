@@ -1,0 +1,80 @@
+@startuml
+
+class Mesa {
+    - numero: int
+    - capacidad: int
+    - ubicacion: String
+    - estado: String
+    + getNumero(): int
+    + getCapacidad(): int
+    + getUbicacion(): String
+    + getEstado(): String
+    + setEstado(estado: String): void
+}
+
+class Reserva {
+    - cliente: String
+    - fecha: Date
+    - numeroComensales: int
+    - preferencias: String
+    - mesaAsignada: Mesa
+    + getCliente(): String
+    + getFecha(): Date
+    + getNumeroComensales(): int
+    + getPreferencias(): String
+    + getMesaAsignada(): Mesa
+    + asignarMesa(mesa: Mesa): void
+}
+
+class Pedido {
+    - mesa: Mesa
+    - platos: List<Plato>
+    - servido: boolean
+    + agregarPlato(plato: Plato): void
+    + calcularTotal(): double
+    + marcarComoServido(): void
+    + isServido(): boolean
+}
+
+class Plato {
+    - nombre: String
+    - precio: double
+    - tiempoPreparacion: int
+    + getNombre(): String
+    + getPrecio(): double
+    + getTiempoPreparacion(): int
+}
+
+class Personal {
+    - nombre: String
+    - rol: String
+    - horasTrabajo: int
+    + getNombre(): String
+    + getRol(): String
+    + getHorasTrabajo(): int
+}
+
+class Restaurante {
+    - mesas: List<Mesa>
+    - reservas: List<Reserva>
+    - pedidos: List<Pedido>
+    - empleados: List<Personal>
+    + agregarMesa(mesa: Mesa): void
+    + obtenerMesaPorNumero(numeroMesa: int): Mesa
+    + agregarEmpleado(empleado: Personal): void
+    + registrarReserva(reserva: Reserva): boolean
+    + agregarPedido(pedido: Pedido): void
+    + mostrarMesas(): void
+    + mostrarReservas(): void
+    + mostrarPedidos(): void
+}
+
+Restaurante "1" -- "*" Mesa
+Restaurante "1" -- "*" Reserva
+Restaurante "1" -- "*" Pedido
+Restaurante "1" -- "*" Personal
+Reserva "1" -- "1" Mesa
+Pedido "1" -- "1" Mesa
+Pedido "1" -- "*" Plato
+
+@enduml

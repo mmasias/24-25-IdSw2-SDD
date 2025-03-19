@@ -1,0 +1,36 @@
+@startuml
+
+state "Estado de Mesa" as MesaState {
+    [*] --> Libre
+    Libre --> Reservada : reserva realizada
+    Reservada --> Ocupada : cliente llega
+    Ocupada --> Libre : cliente se va y mesa es limpiada
+}
+
+state "Estado de Reserva" as ReservaState {
+    [*] --> Pendiente
+    Pendiente --> Confirmada : cliente confirma
+    Confirmada --> Cancelada : cliente cancela
+    Confirmada --> Completada : cliente llega y usa la mesa
+}
+
+state "Estado de Pedido" as PedidoState {
+    [*] --> EnEspera
+    EnEspera --> EnPreparación : cocinero inicia preparación
+    EnPreparación --> ListoParaServir : pedido completado
+    ListoParaServir --> Servido : camarero entrega al cliente
+    Servido --> Cerrado : cliente paga
+}
+
+state "Estado del Restaurante" as RestauranteState {
+    [*] --> Abierto
+    Abierto --> Cerrado : fin de jornada
+    Cerrado --> Abierto : inicio de jornada
+}
+
+MesaState --> ReservaState : Mesa reservada
+ReservaState --> MesaState : Reserva completada
+PedidoState --> MesaState : Pedido vinculado a mesa ocupada
+PedidoState --> RestauranteState : Pedido realizado durante apertura
+
+@enduml

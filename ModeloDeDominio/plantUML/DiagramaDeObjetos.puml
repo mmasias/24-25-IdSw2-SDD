@@ -1,0 +1,68 @@
+@startuml
+
+object mesa1 {
+    numero = 1
+    capacidad = 4
+    ubicacion = "Terraza"
+    estado = "Libre"
+}
+
+object mesa2 {
+    numero = 2
+    capacidad = 6
+    ubicacion = "Salón Principal"
+    estado = "Reservada"
+}
+
+object reserva1 {
+    cliente = "Juan Pérez"
+    fecha = "2025-03-10"
+    numeroComensales = 4
+    preferencias = "Cerca de la ventana"
+    mesaAsignada = mesa2
+}
+
+object pedido1 {
+    mesa = mesa2
+    servido = false
+}
+
+object plato1 {
+    nombre = "Pasta Carbonara"
+    precio = 12.50
+    tiempoPreparacion = 15
+}
+
+object plato2 {
+    nombre = "Ensalada César"
+    precio = 8.00
+    tiempoPreparacion = 10
+}
+
+pedido1 : agregarPlato(plato1)
+pedido1 : agregarPlato(plato2)
+
+object personal1 {
+    nombre = "Ana López"
+    rol = "Camarera"
+    horasTrabajo = 8
+}
+
+object restaurante {
+    mesas = [mesa1, mesa2]
+    reservas = [reserva1]
+    pedidos = [pedido1]
+    empleados = [personal1]
+}
+
+restaurante -- mesa1
+restaurante -- mesa2
+restaurante -- reserva1
+restaurante -- pedido1
+restaurante -- personal1
+
+pedido1 -- plato1
+pedido1 -- plato2
+reserva1 -- mesa2
+
+@enduml
