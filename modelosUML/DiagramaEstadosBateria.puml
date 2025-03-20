@@ -1,0 +1,17 @@
+@startuml
+[*] --> Carga_Completa
+
+Carga_Completa --> Alta : "Aspiradora en uso"
+Alta --> Media : "Aspiradora en uso"
+Media --> Baja : "Aspiradora en uso"
+Baja --> Critica : "Aspiradora en uso"
+
+Critica --> Sin_Bateria : "Aspiradora en uso"
+
+Sin_Bateria --> Buscando_Recarga : "Modo ahorro de energía"
+Buscando_Recarga --> Zona_Recarga : "Llega a zona de recarga"
+Zona_Recarga --> Cargando : "Recargando batería"
+
+Cargando --> Carga_Completa : "Carga finalizada"
+
+@enduml

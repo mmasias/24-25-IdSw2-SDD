@@ -1,0 +1,31 @@
+@startuml
+
+actor "Aspiradora" as Aspiradora
+
+usecase "Explorar la superficie" as UC1
+usecase "Detectar suciedad" as UC2
+usecase "Limpiar zona" as UC3
+usecase "Detectar obstáculo" as UC4
+usecase "Evitar obstáculo" as UC5
+usecase "Detectar batería baja" as UC6
+usecase "Moverse a zona de recarga" as UC7
+usecase "Recargar batería" as UC8
+usecase "Detectar bolsa llena" as UC9
+usecase "Esperar vaciado de bolsa" as UC10
+usecase "Detectar zona mas sucia" as UC11
+
+
+Aspiradora --> UC1
+Aspiradora --> UC2
+Aspiradora --> UC4
+Aspiradora --> UC6
+Aspiradora --> UC9
+Aspiradora --> UC11
+
+UC2 --> UC3 : "Si hay suciedad"
+UC4 --> UC5 : "Si hay obstáculo"
+UC6 --> UC7 : "Si batería baja"
+UC7 --> UC8 : "Al llegar a zona de recarga"
+UC9 --> UC10 : "Si bolsa llena"
+
+@enduml

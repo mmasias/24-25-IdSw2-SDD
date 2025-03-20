@@ -1,0 +1,18 @@
+@startuml
+[*] --> Inactivo
+
+Inactivo --> Explorando : "Encendido"
+Explorando --> Limpiando : "Detecta suciedad"
+Limpiando --> Explorando : "Zona limpia"
+
+Explorando --> Evadiendo : "Detecta obstáculo"
+Evadiendo --> Explorando : "Nuevo camino"
+
+Explorando --> EsperandoVaciado : "Bolsa llena"
+EsperandoVaciado --> Explorando : "Bolsa vacía"
+
+Explorando --> MoviéndoseARecarga : "Batería baja"
+MoviéndoseARecarga --> Cargando : "Llega a zona de recarga"
+Cargando --> Explorando : "Batería cargada"
+
+@enduml
