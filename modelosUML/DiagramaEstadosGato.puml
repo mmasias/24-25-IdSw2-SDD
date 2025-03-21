@@ -1,0 +1,12 @@
+@startuml
+[*] --> No_Existe
+
+No_Existe --> Apareciendo : "Tiempo transcurrido"
+Apareciendo --> Caminando : "Gato entra en la superficie"
+Caminando --> Ensuciando : "Pisa zona limpia"
+Ensuciando --> Caminando : "Se mueve a otra zona"
+
+Caminando --> Desapareciendo : "Camina 25 pasos"
+Desapareciendo --> No_Existe : "Sale de la superficie"
+
+@enduml

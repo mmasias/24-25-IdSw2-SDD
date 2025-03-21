@@ -1,0 +1,16 @@
+@startuml
+
+actor "Gato" as Gato
+
+usecase "Moverse por la superficie" as UC1
+usecase "Ensuciar zona" as UC2
+usecase "Aparecer en la superficie" as UC3
+usecase "Desaparecer de la superficie" as UC4
+
+Gato --> UC1
+Gato --> UC2
+Gato --> UC3
+
+UC1 --> UC4 : "Si camina 25 pasos"
+
+@enduml
