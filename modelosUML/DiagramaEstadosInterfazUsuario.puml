@@ -1,0 +1,21 @@
+@startuml
+!define TOPBOTTOM
+
+state "InterfazUsuario" as InterfazUsuario {
+    [*] --> Inactivo 
+    Inactivo --> Iniciando : Iniciar
+    Iniciando --> MostrandoHoja : Mostrar Hoja
+    
+    state MostrandoHoja {
+        [*] --> Visualizando
+        Visualizando --> Editando : Editar Celda
+        Editando --> Visualizando : Edición Completada
+    }
+    
+    MostrandoHoja --> EsperandoComando : Leer Comando
+    EsperandoComando --> ProcesandoComando : Procesar Comando
+    ProcesandoComando --> MostrandoHoja : Comando Ejecutado
+    ProcesandoComando --> Inactivo : Cerrar
+}
+
+@enduml

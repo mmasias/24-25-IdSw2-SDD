@@ -1,0 +1,24 @@
+@startuml
+hide circles
+hide empty members
+
+package "Hoja de Cálculo" {
+    abstract class ComponenteHoja
+    class Matriz
+    class Celda
+    class Posicion
+    class InterfazUsuario
+    class Teclado
+    class HojaCalculo
+
+    ComponenteHoja <|-- Matriz
+    HojaCalculo "1" *-- "1" Matriz : contiene
+    HojaCalculo "1" *-- "1" Posicion : tiene
+    HojaCalculo "1" *-- "1" InterfazUsuario : utiliza
+    Matriz "1" *-- "0..*" Celda : compuesta de
+    InterfazUsuario "1" *-- "1" Teclado : usa
+    InterfazUsuario "1" ..> "0..*" Celda : visualiza
+    InterfazUsuario "1" ..> "1" Posicion : muestra
+    Teclado "1" ..> "1" Celda : modifica
+}
+@enduml

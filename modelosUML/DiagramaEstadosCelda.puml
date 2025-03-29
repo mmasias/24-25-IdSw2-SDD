@@ -1,0 +1,18 @@
+@startuml
+
+state "Celda" as Celda {
+    [*] --> Vacía
+    
+    state Edición {
+        [*] --> Modificando
+        Modificando --> Modificada : Confirmar cambios
+        Modificada --> Modificando : Editar nuevamente
+    }
+    
+    Vacía --> Edición : Colocar Contenido
+    Edición --> Llena : Contenido asignado
+    Llena --> Edición : Modificar contenido
+    Llena --> Vacía : Eliminar contenido
+}
+
+@enduml

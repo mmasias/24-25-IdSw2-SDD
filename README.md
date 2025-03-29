@@ -1,43 +1,35 @@
-# Sesiones de diseño
+[![](https://img.shields.io/badge/-Inicio-FFF?style=flat&logo=Emlakjet&logoColor=black)](/README.md) [![](https://img.shields.io/badge/-Entrega_1-FFF?style=flat&logo=openstreetmap&logoColor=black)](/documentos/entregas.d.md) [![](https://img.shields.io/badge/-Entrega_2-FFF?style=flat&logo=openstreetmap&logoColor=black)](/documentos/entregas.dM.md)  [![](https://img.shields.io/badge/-Entrega_3-FFF?style=flat&logo=openstreetmap&logoColor=black)](/documentos/entregas.dOO.md)  [![](https://img.shields.io/badge/-Entrega_4-FFF?style=flat&logo=openstreetmap&logoColor=black)]()
 
-Repositorio de las sesiones de diseño de la asignatura de Ingeniería del Software II de UNEATLANTICO.
 
-Se desarrolla, en un caso controlado, la disciplina de diseño, con el objetivo de capacitarnos para la descomposición del trabajo de implementación en piezas manejables, las que serán gestionadas por diferentes equipos de desarrollo, posiblemente al mismo tiempo.
+# Sesiones de Diseño - Ingeniería del Software II  
 
-<div align=center>
+### Universidad Europea del Atlántico (UNEATLANTICO)  
 
-| |Proyecto|👁️|Grupo|[D](/documentos/entregas.d.md)|[DM](/documentos/entregas.dM.md)|[DOO](/documentos/entregas.dOO.md)|Final
-|-|-|:-:|:-:|:-:|:-:|:-:|:-:|
-| ||||12/3|12/4|12/5|31/5
-|1|[pyCCCF](https://github.com/puntoReflex/pyCCCF/blob/main/enunciado.md)||G5
-|2|[pyMundo](https://github.com/puntoReflex/pyMundo/blob/main/enunciado.md)
-|3|[pyHojaDeCalculo](https://github.com/puntoReflex/pyHojaDeCalculo/blob/main/enunciado.md)||G2
-|4|[pyAspiradora](https://github.com/puntoReflex/pyAspiradora/blob/main/enunciado.md)||G3
-|5|[pyBatalla](https://github.com/puntoReflex/pyBatalla/blob/main/enunciado.md)||G6
-|6|[pyAscensores](https://github.com/puntoReflex/pyAscensores/blob/main/enunciado.md)||G1
-|7|[pyExpendedoras](https://github.com/puntoReflex/pyExpendedoras/blob/main/enunciado.md)||G4
-|8|[pyBibliotecas](https://github.com/puntoReflex/pyBiblioteca/blob/main/enunciado.md)||G8
-|9|[pyRestaurante](https://github.com/puntoReflex/pyRestaurante/blob/main/enunciado.md)||G7
+Este repositorio contiene las sesiones de diseño de la asignatura **Ingeniería del Software II**, enfocadas en la disciplina de diseño y su aplicación en proyectos de software.  
 
-</div>
+## 📌 Objetivo  
+El propósito de estas sesiones es desarrollar la capacidad de **descomponer el trabajo de implementación** en piezas manejables, permitiendo su gestión por diferentes equipos de desarrollo de manera simultánea y eficiente.  
 
-<div align=center>
+El **proyecto principal** que se abordará es la implementación de una **hoja de cálculo en consola**.
 
-||
-|-|
-![](/images/modelosUML/trabajoRepos.svg)
+## 📂 Documentación y Entregas  
 
-</div>
+A continuación, se presentan las fechas y enlaces a los documentos entregables relacionados con el proyecto.  
 
-## Algunas reglas
+<div align="center">
 
-- Reuniones oficiales (en horas de clase)
-  - A estas debe asistir el 100% de los integrantes de los grupos.
-  - Si a las reuniones asiste menos del 80% del grupo, la reunión se cancela y el grupo se da por cerrado. La evaluación se realiza de la forma tradicional (examen parcial, examen final).
-- Se debe utilizar el repo del coordinador del grupo y las herramientas de GitHub para gestionar las reuniones y comunicaciones entre el grupo, haciendo racional uso de la trazabilidad.
-- Las imágenes, en la medida de lo posible en formato plantUML.
-  - Todas las fuentes en la carpeta modelosUML y las imágenes exportadas, en formato svg.
- 
-### Muy importante
+| # | Proyecto | Diseño (D) | Modelo de Dominio (DM) | Diseño Orientado a Objetos (DOO) | Entrega Final |
+|---|----------|------------|-------------------------|----------------------------------|--------------|
+| | | **12/03** | **14/04** | **12/05** | **31/05** |
+| 3 | [pyHojaDeCalculo](https://github.com/puntoReflex/pyHojaDeCalculo/blob/main/enunciado.md) | [Entrega 1](/documentos/entregas.d.md) | [Entrega 2](/documentos/entregas.dM.md) | [Entrega 3](/documentos/entregas.dOO.md) | [Entrega Final]() |
 
-- Para optar a ser calificado en los trabajos grupales, se tendrá en cuenta la asistencia a clases.
+</div>  
+
+## 🚀 Desarrollo del Proyecto  
+
+El proyecto se basa en los principios de **diseño estructurado**, asegurando:  
+- **Asociación**: Relación entre distintos componentes del sistema para garantizar la interoperabilidad.  
+- **Agregación**: Permite añadir nuevas funcionalidades sin afectar la estructura principal del código.  
+- **Uso**: Implementación de código claro, reutilizable y bien documentado.  
+- **Composición**: Integración de múltiples módulos para facilitar el trabajo colaborativo y la escalabilidad del sistema.  
+
