@@ -1,0 +1,152 @@
+@startuml
+Main --> LibraryManager : "instancia y ejecuta"
+LibraryManager o-- Storage
+LibraryManager o-- User
+LibraryManager o-- Loan
+Storage -right-* Loan
+Loan *-right- User
+Storage *-- Book
+Storage *-- Magazine
+Storage *-- Material
+Storage *-- Classroom
+Storage *-- Audiovisual
+Service <|-up- Classroom
+Service <|-up- Material
+Document <|-up- Book
+Document <|-up- Magazine
+Document <|-up- Audiovisual
+
+class Material {
+    -String description
+    +String getDescription()
+    +void setDescription(String description)
+}
+
+class Storage {
+    - int id
+    - magazines: List<Magazine> 
+    - books: List<Book> 
+    - audiovisuals: List<Audiovisual>
+    - materials: List<Material>
+    - classrooms: List<Classroom>
+    + void addBook(Book book)
+    + void addMagazine(Magazine magazine)
+    + void addAudiovisual(Audiovisual audiovisual)
+    + void addClassroom(Classroom classroom)
+    + void addMaterial(Material material)
+    + void eraseBook(int id)
+    + void eraseMagazine(int id)
+    + void eraseAudiovisual(int id)
+    + void eraseClassroom(int id)
+    + void eraseMaterial(int id)
+    + Book getBookById(int id)
+    + Magazine getMagazineById(int id)
+    + Audiovisual getAudiovisualById(int id)
+    + Classroom getClassroomById(int id)
+    + Material getMaterialById(int id)
+}
+
+abstract class Document {
+    -int id
+    -String title
+    -String author
+    -int publicationYear
+    -boolean available
+    +String getId()
+    +void setId(String id)
+    +String getTitle()
+    +void setTitle(String id)
+    +String getAuthor()
+    +void setAuthor(String id)
+    
+}
+
+class User {
+    -int id
+    -String name
+    -String email
+    -String type
+    -int maxItems
+
+    +String getId()
+    +void setId(String id)
+    +String getName()
+    +void setName(String name)
+    +String getEmail()
+    +void setEmail(String email)
+    +String getType()
+    +void setType(String type)
+}
+
+class Book {
+    -String isbn
+    -int numPages
+    +String getIsbn()
+    +void setIsbn(String isbn)
+    +int getNumPages()
+    +void setNumPages(int numPages)
+}
+
+class Classroom {
+    -int capacity
+    +int getCapacity()
+    +void setCapacity(int capacity)
+}
+
+abstract class Service {
+    -int id
+    -String name
+    -boolean available
+    +String getId()
+    +void setId(String id)
+    +String getName()
+    +void setName(String id)
+}
+
+class Magazine {
+    -String issn
+    -int numberPages
+    +String getIssn()
+    +void setIssn(String issn)
+    +int getNumberPages()
+    +void setNumberPages(int number)
+}
+
+class Audiovisual {
+    -String format
+    -int duration
+    +String getFormat()
+    +void setFormat(String format)
+    +int getDuration()
+    +void setDuration(int duration)
+}
+
+class LibraryManager {
+    -String name
+    -Storage storage
+    -users: List<User>
+    -loans: List<Loan>
+    +void addUser(String name, String email, String type)
+    +void addLoan(User user, Loan loan)
+    +String getUsers()
+    +String getLoans
+    +void addElementToStorage()
+    +Storage getStorage()
+}
+
+class Main {
+    -LibraryManager libraryManager
+    +static void main(String[] args)
+    +void startSimulation()
+}
+
+class Loan {
+  -int maxDays
+  -User user
+  -Storage storage
+  +void setMaxDays()
+  +int getMaxDays()
+  +void createLoan(User user, Storage storage)
+}
+
+@enduml

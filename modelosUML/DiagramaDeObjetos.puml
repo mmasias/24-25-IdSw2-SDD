@@ -1,0 +1,97 @@
+@startuml
+hide circle
+hide empty members
+
+Main --> LibraryManager : "instantiates and executes"
+LibraryManager o-- Storage
+LibraryManager --o User 
+LibraryManager -- Loan
+Storage -right- Loan  
+Loan -right- User 
+Storage *-- Book
+Storage *-- Magazine
+Storage *-- Material
+Storage *-- Classroom
+Storage *-- Audiovisual
+
+
+class Material {
+    id = 6
+    name = canon sx740
+    available = true
+    description = "Canon digital camera"
+}
+
+class Storage {
+    id = 101
+    books = [book1]
+    magazines = [magazine1]
+    audiovisuals = [audiovisual1]
+    materials = [material1]
+    classrooms = [classroom1]
+}
+
+class User {
+    id = 10
+    name = "Anna Torres"
+    email = "anna.torres@example.com"
+    type = "Student"
+    maxItems = 3
+}
+
+class Book {
+    id = 1
+    title = "1984"
+    author = "George Orwell"
+    publicationYear = 1949
+    available = true
+    isbn = "978-0451524935"
+    numPages = 328
+}
+
+class Classroom {
+    id = 4
+    name = "Room 204"
+    available = true
+    capacity = 10
+}
+
+
+class Magazine {
+    id = 2
+    title = "Popular Science"
+    author = "Editorial Team"
+    publicationYear = 2023
+    available = true
+    issn = "0161-7370"
+    numberPages = 96
+}
+
+class Audiovisual {
+    id = 3
+    title = "Nature Documentary"
+    author = "BBC"
+    publicationYear = 2020
+    available = true
+    format = "MP4"
+    duration = 90
+}
+
+class LibraryManager {
+    name = "Library"
+    storage = storage1
+    users = [user1]
+    loans = [loan1]
+}
+
+class Main {
+    libraryManager = library
+}
+
+class Loan {
+  maxDays = 14
+    User = user1
+    storage = book1
+}
+
+@enduml
