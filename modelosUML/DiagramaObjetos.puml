@@ -1,0 +1,54 @@
+@startuml
+object Superficie
+
+object Zona1 {
+  nivelSuciedad = 3
+}
+
+object Zona2 {
+  nivelSuciedad = 0
+}
+
+object Zona3 {
+  nivelSuciedad = 0
+}
+
+object ZonaRecarga {
+  nivelSuciedad = 0
+}
+
+object Aspiradora {
+  bateria = 10%
+  bolsa = 5/10
+}
+
+object Bateria {
+  carga = 10%
+}
+
+object Mueble {
+  tamaño = 2 // Sofá ocupa 2 zonas
+}
+
+object Gato
+
+Superficie *-- Zona1
+Superficie *-- Zona2
+Superficie *-- Zona3
+Superficie *-- ZonaRecarga
+
+Zona3 --> Mueble : "contiene"
+
+Aspiradora --> Zona1 : "se mueve en"
+Aspiradora --> Zona1 : "limpia"
+Aspiradora --> ZonaRecarga : "se mueve en"
+Aspiradora --> ZonaRecarga : "recarga en"
+Aspiradora -[#red]-> Zona3 : "detecta y evita mueble"
+
+Aspiradora *-- Bateria : "tiene una"
+Bateria --> ZonaRecarga : "se recarga en"
+
+Zona2 o-- Gato : "contiene"
+Gato --> Zona2 : "ensucia"
+
+@enduml

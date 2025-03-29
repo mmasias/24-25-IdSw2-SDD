@@ -1,0 +1,16 @@
+@startuml
+[*] --> Limpia
+
+Limpia --> LigeraSuciedad : "Gato ensucia"
+LigeraSuciedad --> ModeradaSuciedad : "Más suciedad"
+ModeradaSuciedad --> AltaSuciedad : "Más suciedad"
+AltaSuciedad --> MuySucia : "Más suciedad"
+
+MuySucia --> AltaSuciedad : "Aspiradora limpia"
+AltaSuciedad --> ModeradaSuciedad : "Aspiradora limpia"
+ModeradaSuciedad --> LigeraSuciedad : "Aspiradora limpia"
+LigeraSuciedad --> Limpia : "Aspiradora limpia"
+
+ZonaRecarga : "Nunca se ensucia"
+
+@enduml

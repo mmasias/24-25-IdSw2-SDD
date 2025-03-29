@@ -1,0 +1,16 @@
+@startuml
+[*] --> Apagada
+
+Apagada --> EnEspera : "Encender botón"
+EnEspera --> Moviendose : "Iniciar movimiento"
+Moviendose --> Limpiando : "Detecta suciedad"
+Limpiando --> Moviendose : "Limpieza completada"
+Moviendose --> EvitandoObstaculo : "Detecta obstáculo"
+EvitandoObstaculo --> Moviendose : "Obstáculo evitado"
+Moviendose --> EnEspera : "Pausa manual"
+EnEspera --> Apagada : "Apagar"
+Apagada --> [*] : "Fin de sesión"
+
+@enduml
+
+

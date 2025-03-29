@@ -1,0 +1,11 @@
+@startuml
+actor Usuario
+actor Aspiradora
+
+rectangle "Sistema de Aspiradora" {
+    usecase "Vaciar bolsa de basura"
+}
+
+Usuario --> "Vaciar bolsa de basura"
+Aspiradora --> "Vaciar bolsa de basura"
+@enduml
