@@ -24,10 +24,6 @@ public class Planta {
         return new ArrayList<>(esperando);
     }
 
-    public List<Persona> getEnPlanta() {
-        return new ArrayList<>(enPlanta);
-    }
-
     public void agregarPersonaEsperando(Persona persona) {
         esperando.add(persona);
     }
@@ -42,5 +38,15 @@ public class Planta {
 
     public void removerPersonaEnPlanta(Persona persona) {
         enPlanta.remove(persona);
+    }
+
+    public void imprimirPersonasEnPlanta() {
+        for (Persona persona : enPlanta) {
+            System.out.println(persona);
+        }
+    }
+
+    public int contarPersonasEnPlanta() {
+        return enPlanta.size();
     }
 }

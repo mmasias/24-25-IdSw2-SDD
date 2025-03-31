@@ -25,19 +25,15 @@ public class Ascensor {
     public boolean puedeRecogerPersona() {
         return personas.size() < capacidadMaxima;
     }
-    
-    public boolean puedeRecogerPersona(Persona persona) {
-        return personas.size() < capacidadMaxima;
-    }
-    
-    public void recogerPersona(Persona persona) {
+
+        public void recogerPersona(Persona persona) {
         if (puedeRecogerPersona()) {
-            persona.incrementarTiempoEnAscensor(); // Registrar el tiempo en el ascensor
-            personas.add(persona);
-            obtenerPlanta(persona.getPlantaActual()).removerPersonaEsperando(persona);
-            actualizarEstado();
+            personas.add(persona); // Añadir la persona al ascensor
+            Planta plantaActual = plantas.get(this.plantaActual + 3);
+            plantaActual.removerPersonaEsperando(persona); // Remover de la lista de esperando
         }
     }
+    
 
     private Planta obtenerPlanta(int numero) {
         return plantas.get(numero + 3); // Ajuste para índices
@@ -56,25 +52,36 @@ public class Ascensor {
             estado = Integer.compare(destinoPrioritario, plantaActual);
         }
     }
-
-    public void mover() {
-        if ((estado == 1 && plantaActual < PLANTA_MAX) || (estado == -1 && plantaActual > PLANTA_MIN)) {
-            plantaActual += estado;
+        public void mover() {
+        if (estado == 1 && plantaActual < PLANTA_MAX) {
+            // Subiendo
+            plantaActual++;
+        } else if (estado == -1 && plantaActual > PLANTA_MIN) {
+            // Bajando
+            plantaActual--;
+        } else {
+            // Detenido o en el límite
+            estado = 0;
         }
+    
+        // Dejar personas en la planta actual
         dejarPersonas();
     }
 
-    private void dejarPersonas() {
-        List<Persona> aBajar = new ArrayList<>();
-        Planta plantaDestino = obtenerPlanta(plantaActual);
-
+        private void dejarPersonas() {
+        List<Persona> personasADejar = new ArrayList<>();
         for (Persona persona : personas) {
             if (persona.getPlantaDestino() == plantaActual) {
-                plantaDestino.agregarPersonaEnPlanta(persona);
-                aBajar.add(persona);
+                personasADejar.add(persona);
             }
         }
-        personas.removeAll(aBajar);
+    
+        // Remover las personas del ascensor y añadirlas a la planta actual
+        for (Persona persona : personasADejar) {
+            personas.remove(persona);
+            Planta plantaActual = plantas.get(this.plantaActual + 3);
+            plantaActual.agregarPersonaEnPlanta(persona);
+        }
     }
 
     public void permitirSolicitarAscensor(Persona persona, int nuevaPlantaDestino) {
