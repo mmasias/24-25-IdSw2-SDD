@@ -22,7 +22,7 @@ Recibe `Ascensor`?
 + bajarDelAscensor
 + decidirComoMoverse (moverse en ascensor o por las escaleras)
 ## Ascensor
-Recibe `Planta` y `Persona`?
+Recibe `Persona`?
 + estaLleno
 + atenderLlamadas
 + plantaActual
