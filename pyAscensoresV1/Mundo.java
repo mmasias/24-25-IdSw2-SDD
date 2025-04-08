@@ -11,6 +11,11 @@ public class Mundo {
         tiempo = new Tiempo(HORA_INICIO, 0);
     }
 
+    public static void main(String[] args) {
+        Mundo mundo = new Mundo();
+        mundo.simular();
+    }
+
     private void esperar() {
         System.out.println();
         try {
@@ -38,8 +43,13 @@ public class Mundo {
             }
             universidad.simular();
             this.esperar();
-
         } while (this.estaActivo());
     }
 
+    private boolean estaActivo() {
+        return tiempo.getHora() < 14; // simular hasta las 14:00
+    }
+
+    private void inicializar() {
+    }
 }

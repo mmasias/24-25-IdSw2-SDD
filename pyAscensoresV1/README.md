@@ -101,3 +101,4 @@ Recibe: `Persona`
 ### Universidad:
 - Eventos especiales con alta afluencia
 - Diferencias entre periodo de exámenes y clases normales
+- Pico súbito de demanda (Clases que terminan simultáneamente en varias plantas)
