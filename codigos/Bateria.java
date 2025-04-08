@@ -1,6 +1,6 @@
 public class Bateria {
     private int carga;
-    private final int MAX_CARGA;
+    private int MAX_CARGA;
 
     public Bateria(int maxCarga) {
         this.MAX_CARGA = maxCarga;
@@ -8,7 +8,7 @@ public class Bateria {
     }
 
     public Bateria() {
-        this(5);
+        this(50);
     }
 
     public void consumir() {

@@ -24,12 +24,12 @@ public class Superficie {
         for (int i = 0; i < alto; i++) {
             for (int j = 0; j < ancho; j++) {
                 if (i == posY && j == posX) {
-                    System.out.print("(O) ");
+                    System.out.print(" ( O )  ");
                 } else {
                     int nivel = zonas[i][j].getNivelSuciedad();
                     switch (nivel) {
                         case 0:
-                            System.out.print("[ · ] ");
+                            System.out.print("[  .  ] ");
                             break;
                         case 1:
                             System.out.print("[ ... ] ");
