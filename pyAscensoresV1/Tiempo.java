@@ -2,6 +2,8 @@ package pyAscensoresV1;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
 
 public class Tiempo {
     private int hora;
@@ -11,7 +13,7 @@ public class Tiempo {
     public Tiempo(int hora, int minuto) {
         this.hora = hora;
         this.minuto = minuto;
-        this.fecha = LocalDate.now(); // Se puede ajustar si la simulación necesita una fecha específica
+        this.fecha = LocalDate.now(); 
     }
 
     public void avanzarMinuto() {
@@ -45,11 +47,17 @@ public class Tiempo {
     }
 
     public boolean esFestivo() {
-        //Informa sobre días especiales o no laborables.
-        return false;
-    }
+   
+    List<LocalDate> diasFestivos = Arrays.asList(
+        LocalDate.of(fecha.getYear(), 1, 1),  // Año Nuevo
+        LocalDate.of(fecha.getYear(), 12, 25), // Navidad
+        LocalDate.of(fecha.getYear(), 11, 1)  // Todos los Santos 
+    );
 
-    // Getters para hora, minuto y fecha si los necesitas
+    return diasFestivos.contains(fecha);
+}
+
+ 
     public int getHora() {
         return hora;
     }
