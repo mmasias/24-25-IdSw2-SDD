@@ -1,6 +1,7 @@
 package pyAscensoresV1.src;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Universidad {
     private Tiempo tiempo;
@@ -36,9 +37,6 @@ public class Universidad {
         if (estaAbierta()) {
             personas.add(persona);
             persona.llamarAlAscensor(control);
-            System.out.println("Ha llegado una persona a la universidad.");
-        } else {
-            System.out.println("La universidad está cerrada. No se puede acoger a la persona.");
         }
     }
 

@@ -6,7 +6,7 @@ public class Persona {
     private boolean atendido;
 
     public Persona(int plantaDestino) {
-        this.plantaOrigen = 0;  // Asumimos que siempre empiezan en la planta baja
+        this.plantaOrigen = 0;
         this.plantaDestino = plantaDestino;
         this.atendido = false;
     }

@@ -46,9 +46,9 @@ public class Tiempo {
 
     public boolean esFestivo() {
         List<LocalDate> diasFestivos = Arrays.asList(
-            LocalDate.of(fecha.getYear(), 1, 1), // Año Nuevo
-            LocalDate.of(fecha.getYear(), 12, 25), // Navidad
-            LocalDate.of(fecha.getYear(), 11, 1)  // Todos los Santos
+            LocalDate.of(fecha.getYear(), 1, 1),
+            LocalDate.of(fecha.getYear(), 12, 25),
+            LocalDate.of(fecha.getYear(), 11, 1)
         );
         return diasFestivos.contains(fecha);
     }

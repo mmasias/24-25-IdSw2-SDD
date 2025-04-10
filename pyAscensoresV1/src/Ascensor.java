@@ -22,17 +22,26 @@ public class Ascensor {
 
     public void mover() {
         if (!llamadas.isEmpty()) {
-            Llamada llamada = llamadas.peek(); // No la quitamos todavía
+            Llamada llamada = llamadas.peek();
             if (plantaActual != llamada.plantaOrigen) {
                 plantaActual += Integer.compare(llamada.plantaOrigen, plantaActual);
             } else {
                 if (personas.size() < CAPACIDAD) {
                     personas.add(llamada.persona);
                     llamada.persona.marcarAtendido();
-                    llamadas.poll(); // Ahora sí la quitamos
-                    System.out.println("Ascensor " + id + " recoge persona en planta " + plantaActual);
+                    llamadas.poll();
                 }
             }
+        }
+
+        if (!personas.isEmpty()) {
+            List<Persona> personasADejar = new ArrayList<>();
+            for (Persona persona : personas) {
+                if (persona.getPlantaDestino() == plantaActual) {
+                    personasADejar.add(persona);
+                }
+            }
+            personas.removeAll(personasADejar);
         }
     }
 
@@ -43,7 +52,7 @@ public class Ascensor {
     private class Llamada {
         int plantaOrigen;
         Persona persona;
-        
+
         Llamada(int planta, Persona persona) {
             this.plantaOrigen = planta;
             this.persona = persona;
