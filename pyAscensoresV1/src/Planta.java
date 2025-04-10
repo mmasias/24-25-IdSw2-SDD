@@ -22,4 +22,8 @@ public class Planta {
     public void imprimirEstado() {
         System.out.println("Planta " + numero + " con " + personasPresentes.size() + " personas.");
     }
+
+    public int getNumero() {
+        return numero;
+    }
 }

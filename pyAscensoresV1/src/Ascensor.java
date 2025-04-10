@@ -8,6 +8,7 @@ public class Ascensor {
     private List<Persona> personas;
     private Queue<Llamada> llamadas;
     private static final int CAPACIDAD = 6;
+    private List<Planta> plantas;
 
     public Ascensor(String id) {
         this.id = id;
@@ -16,31 +17,49 @@ public class Ascensor {
         this.llamadas = new LinkedList<>();
     }
 
+    public void asignarPlantas(List<Planta> plantas) {
+        this.plantas = plantas;
+    }
+
     public void atenderLlamada(int plantaOrigen, Persona persona) {
         llamadas.add(new Llamada(plantaOrigen, persona));
     }
 
     public void mover() {
+        if (!personas.isEmpty()) {
+            Persona destinoPersona = personas.get(0);
+            int destino = destinoPersona.getPlantaDestino();
+            if (plantaActual != destino) {
+                plantaActual += Integer.compare(destino, plantaActual);
+                return;
+            }
+            personas.remove(destinoPersona);
+            Planta planta = buscarPlanta(plantaActual);
+            if (planta != null) {
+                planta.personaLlega(destinoPersona);
+            }
+            return;
+        }
+
         if (!llamadas.isEmpty()) {
             Llamada llamada = llamadas.peek();
             if (plantaActual != llamada.plantaOrigen) {
                 plantaActual += Integer.compare(llamada.plantaOrigen, plantaActual);
-            } else {
-                if (personas.size() < CAPACIDAD) {
-                    personas.add(llamada.persona);
-                    llamada.persona.marcarAtendido();
-                    llamadas.poll();
-                }
+                return;
+            }
+            if (personas.size() < CAPACIDAD) {
+                personas.add(llamada.persona);
+                llamada.persona.marcarAtendido();
+                llamadas.poll();
             }
         }
+    }
 
-        List<Persona> personasADejar = new ArrayList<>();
-        for (Persona persona : personas) {
-            if (persona.getPlantaDestino() == plantaActual) {
-                personasADejar.add(persona);
-            }
+    private Planta buscarPlanta(int numero) {
+        for (Planta p : plantas) {
+            if (p.getNumero() == numero) return p;
         }
-        personas.removeAll(personasADejar);
+        return null;
     }
 
     public void imprimirEstado() {
@@ -55,5 +74,13 @@ public class Ascensor {
             this.plantaOrigen = planta;
             this.persona = persona;
         }
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getPlantaActual() {
+        return String.valueOf(plantaActual);
     }
 }

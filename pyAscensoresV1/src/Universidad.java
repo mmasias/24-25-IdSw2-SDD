@@ -15,8 +15,9 @@ public class Universidad {
         this.ascensores = new ArrayList<>();
         this.personas = new ArrayList<>();
         this.tiempo = tiempo;
-        this.control = new ControlAscensor(ascensores);
         inicializarEdificio();
+        this.control = new ControlAscensor(ascensores);
+        control.asignarPlantas(plantas);
     }
 
     private void inicializarEdificio() {

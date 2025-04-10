@@ -31,8 +31,11 @@ public class Mundo {
     private void simular() {
         do {
             avanzarMinuto();
-            Persona nueva = generarPersona();
-            universidad.acogerPersona(nueva);
+            int numeroAleatorio = (int) (Math.random() * 100);
+            if (numeroAleatorio < 70) {
+                Persona nueva = generarPersona();
+                universidad.acogerPersona(nueva);
+            }
             universidad.simular();
             esperar();
         } while (tiempo.getHora() < 14);
