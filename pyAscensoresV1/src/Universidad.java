@@ -39,6 +39,13 @@ public class Universidad {
     public void acogerPersona(Persona persona) {
         if (estaAbierta()) {
             personas.add(persona);
+            for (Planta planta : plantas) {
+                if (planta.getNumero() == persona.getPlantaOrigen()) {
+                    planta.personaLlega(persona);
+                    break;
+                }
+            }
+
             persona.llamarAlAscensor(control); 
         }
     }

@@ -4,15 +4,17 @@ import java.util.*;
 public class ControlAscensor {
     private List<Ascensor> ascensores;
 
-    public void procesarLlamada(Persona persona, int origen, int destino) {
-        Llamada llamada = new Llamada(origen, persona);
-        Ascensor mejor = seleccionarAscensor(origen);
-        mejor.atenderLlamada(llamada);
+    public ControlAscensor(List<Ascensor> ascensores) {
+        this.ascensores = ascensores;
     }
+
+
 
     public void procesarLlamada(Persona persona, int origen, int destino) {
         Ascensor mejor = seleccionarAscensor(origen);
-        mejor.atenderLlamada(origen, persona);
+        Llamada llamada= new Llamada(origen,destino,persona);
+        mejor.atenderLlamada(llamada);
+
     }
 
     private Ascensor seleccionarAscensor(int planta) {

@@ -28,6 +28,7 @@ public class Ascensor {
     public void mover() {
         if (!personas.isEmpty()) {
             moverHaciaDestinoPersona();
+            bajarPersonasEnPlantaActual();
             return;
         }
     
@@ -52,13 +53,13 @@ public class Ascensor {
     
     private void atenderLlamadaPendiente() {
         Llamada llamada = llamadas.peek();
-        if (plantaActual != llamada.plantaOrigen) {
-            plantaActual += Integer.compare(llamada.plantaOrigen, plantaActual);
+        if (plantaActual != llamada.getPlantaOrigen()) {
+            plantaActual += Integer.compare(llamada.getPlantaOrigen(), plantaActual);
             return;
         }
         if (personas.size() < CAPACIDAD) {
-            personas.add(llamada.persona);
-            llamada.persona.marcarAtendido();
+            personas.add(llamada.getPersona());
+            llamada.getPersona().marcarAtendido();
             llamadas.poll();
         }
     }   
@@ -82,4 +83,57 @@ public class Ascensor {
         public int getPlantaActualAsInt() {
         return plantaActual;
     }
+
+    public void subirPersona(Persona p, int plantaOrigen) {
+        personas.add(p);
+
+        if (plantas != null) {
+            for (Planta planta : plantas) {
+                if (planta.getNumero() == plantaOrigen) {
+                    planta.personaSale(p); // 👈 Aquí restamos la persona
+                    break;
+                }
+            }
+        }
+    }
+
+
+    public void bajarPersona(Persona p, int plantaDestino) {
+        personas.remove(p);
+
+        if (plantas != null) {
+            for (Planta planta : plantas) {
+                if (planta.getNumero() == plantaDestino) {
+                    planta.personaLlega(p); // 👈 Aquí se suma a la planta destino
+                    break;
+                }
+            }
+        }
+
+        p.marcarAtendido();
+    }
+    public void bajarPersonasEnPlantaActual() {
+        List<Persona> bajan = new ArrayList<>();
+        for (Persona p : personas) {
+            if (p.getPlantaDestino() == plantaActual) {
+                bajan.add(p);
+            }
+        }
+
+        for (Persona p : bajan) {
+            personas.remove(p);
+            p.marcarAtendido();
+
+            if (plantas != null) {
+                for (Planta planta : plantas) {
+                    if (planta.getNumero() == plantaActual) {
+                        planta.personaLlega(p); // 👈 se suma a la planta de destino
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+
 }
