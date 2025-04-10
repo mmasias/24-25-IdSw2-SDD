@@ -39,23 +39,21 @@ public class Universidad {
     public void acogerPersona(Persona persona) {
         if (estaAbierta()) {
             personas.add(persona);
-            persona.llamarAlAscensor(control);
+            persona.llamarAlAscensor(control); 
         }
     }
 
     public void evolucionDeLaUniversidad() {
-        for (Ascensor ascensor : ascensores) {
-            System.out.println("Ascensor " + ascensor.getId() + " en planta " + ascensor.getPlantaActual());
-            ascensor.mover();
-        }
+        
+        control.moverAscensores();
     }
 
     public void imprimirEstado() {
         System.out.println(tiempo.darLaHora());
         System.out.println("Personas en la universidad: " + personas.size());
-        for (Ascensor ascensor : ascensores) {
-            ascensor.imprimirEstado();
-        }
+
+    
+        control.imprimirEstadoAscensores();
 
         for (Planta planta : plantas) {
             planta.imprimirEstado();

@@ -27,33 +27,41 @@ public class Ascensor {
 
     public void mover() {
         if (!personas.isEmpty()) {
-            Persona destinoPersona = personas.get(0);
-            int destino = destinoPersona.getPlantaDestino();
-            if (plantaActual != destino) {
-                plantaActual += Integer.compare(destino, plantaActual);
-                return;
-            }
-            personas.remove(destinoPersona);
-            Planta planta = buscarPlanta(plantaActual);
-            if (planta != null) {
-                planta.personaLlega(destinoPersona);
-            }
+            moverHaciaDestinoPersona();
             return;
         }
-
+    
         if (!llamadas.isEmpty()) {
-            Llamada llamada = llamadas.peek();
-            if (plantaActual != llamada.plantaOrigen) {
-                plantaActual += Integer.compare(llamada.plantaOrigen, plantaActual);
-                return;
-            }
-            if (personas.size() < CAPACIDAD) {
-                personas.add(llamada.persona);
-                llamada.persona.marcarAtendido();
-                llamadas.poll();
-            }
+            atenderLlamadaPendiente();
         }
     }
+    
+    private void moverHaciaDestinoPersona() {
+        Persona destinoPersona = personas.get(0);
+        int destino = destinoPersona.getPlantaDestino();
+        if (plantaActual != destino) {
+            plantaActual += Integer.compare(destino, plantaActual);
+            return;
+        }
+        personas.remove(destinoPersona);
+        Planta planta = buscarPlanta(plantaActual);
+        if (planta != null) {
+            planta.personaLlega(destinoPersona);
+        }
+    }
+    
+    private void atenderLlamadaPendiente() {
+        Llamada llamada = llamadas.peek();
+        if (plantaActual != llamada.plantaOrigen) {
+            plantaActual += Integer.compare(llamada.plantaOrigen, plantaActual);
+            return;
+        }
+        if (personas.size() < CAPACIDAD) {
+            personas.add(llamada.persona);
+            llamada.persona.marcarAtendido();
+            llamadas.poll();
+        }
+    }   
 
     private Planta buscarPlanta(int numero) {
         for (Planta p : plantas) {
@@ -80,7 +88,7 @@ public class Ascensor {
         return id;
     }
 
-    public String getPlantaActual() {
-        return String.valueOf(plantaActual);
+        public int getPlantaActualAsInt() {
+        return plantaActual;
     }
 }

@@ -1,5 +1,4 @@
 package pyAscensoresV1.src;
-
 import java.util.*;
 
 public class ControlAscensor {
@@ -15,6 +14,29 @@ public class ControlAscensor {
     }
 
     private Ascensor seleccionarAscensor(int planta) {
-        return ascensores.get(0);
+        Ascensor ascensorMasCercano = null;
+        int distanciaMinima = Integer.MAX_VALUE;
+
+        for (Ascensor ascensor : ascensores) {
+            int distancia = Math.abs(ascensor.getPlantaActualAsInt() - planta);
+            if (distancia < distanciaMinima) {
+                distanciaMinima = distancia;
+                ascensorMasCercano = ascensor;
+            }
+        }
+
+        return ascensorMasCercano;
+    }
+
+    public void moverAscensores() {
+        for (Ascensor ascensor : ascensores) {
+            ascensor.mover();
+        }
+    }
+
+    public void imprimirEstadoAscensores() {
+        for (Ascensor ascensor : ascensores) {
+            ascensor.imprimirEstado();
+        }
     }
 }
