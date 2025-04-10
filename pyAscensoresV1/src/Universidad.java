@@ -17,7 +17,9 @@ public class Universidad {
         this.tiempo = tiempo;
         inicializarEdificio();
         this.control = new ControlAscensor(ascensores);
-        control.asignarPlantas(plantas);
+        for (Ascensor ascensor : ascensores) {
+            ascensor.asignarPlantas(plantas);
+        }
     }
 
     private void inicializarEdificio() {
@@ -43,6 +45,7 @@ public class Universidad {
 
     public void evolucionDeLaUniversidad() {
         for (Ascensor ascensor : ascensores) {
+            System.out.println("Ascensor " + ascensor.getId() + " en planta " + ascensor.getPlantaActual());
             ascensor.mover();
         }
     }

@@ -21,6 +21,7 @@ public class Mundo {
 
     private Persona generarPersona() {
         int destino = (int) (Math.random() * 7) - 3;
+        System.out.println("Persona generada con destino a planta " + destino);
         return new Persona(destino);
     }
 
