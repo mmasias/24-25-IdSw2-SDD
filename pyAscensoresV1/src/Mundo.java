@@ -11,7 +11,7 @@ public class Mundo {
     }
 
     private void esperar() {
-        System.out.println();
+        System.out.println("Presione 'Enter' para avanzar un minuto...");
         try {
             System.in.read();
         } catch (Exception e) {
@@ -31,19 +31,19 @@ public class Mundo {
 
     private void simular() {
         do {
-            avanzarMinuto();
             int numeroAleatorio = (int) (Math.random() * 100);
-            if (numeroAleatorio < 70) {
+            if (numeroAleatorio < 40) {
                 Persona nueva = generarPersona();
                 universidad.acogerPersona(nueva);
             }
             universidad.simular();
             esperar();
+            avanzarMinuto();
         } while (tiempo.getHora() < 14);
     }
 
     public static void main(String[] args) {
         Mundo mundo = new Mundo();
-        mundo.simular();
+        mundo.simular(); 
     }
 }
