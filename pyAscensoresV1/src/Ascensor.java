@@ -21,8 +21,8 @@ public class Ascensor {
         this.plantas = plantas;
     }
 
-    public void atenderLlamada(int plantaOrigen, Persona persona) {
-        llamadas.add(new Llamada(plantaOrigen, persona));
+    public void atenderLlamada(Llamada llamada) {
+        llamadas.add(llamada);
     }
 
     public void mover() {
@@ -74,15 +74,6 @@ public class Ascensor {
         System.out.println("Ascensor " + id + " en planta " + plantaActual + ", personas: " + personas.size());
     }
 
-    private class Llamada {
-        int plantaOrigen;
-        Persona persona;
-
-        Llamada(int planta, Persona persona) {
-            this.plantaOrigen = planta;
-            this.persona = persona;
-        }
-    }
 
     public String getId() {
         return id;

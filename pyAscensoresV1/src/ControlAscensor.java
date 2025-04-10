@@ -4,8 +4,10 @@ import java.util.*;
 public class ControlAscensor {
     private List<Ascensor> ascensores;
 
-    public ControlAscensor(List<Ascensor> ascensores) {
-        this.ascensores = ascensores;
+    public void procesarLlamada(Persona persona, int origen, int destino) {
+        Llamada llamada = new Llamada(origen, persona);
+        Ascensor mejor = seleccionarAscensor(origen);
+        mejor.atenderLlamada(llamada);
     }
 
     public void procesarLlamada(Persona persona, int origen, int destino) {
