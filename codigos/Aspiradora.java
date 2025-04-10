@@ -6,9 +6,11 @@ public class Aspiradora {
     private final int capacidadMaximaBolsa = 100;
     private Bateria bateriaObj;
     private int posX, posY;
+    private VistaConsola vista;
 
-    public Aspiradora(Bateria bateria) {
+    public Aspiradora(Bateria bateria, VistaConsola vista) {
         this.bateriaObj = bateria;
+        this.vista = vista;
         this.bolsa = 0;
         this.posX = 0;
         this.posY = 0;
@@ -17,10 +19,9 @@ public class Aspiradora {
     public void actuar(Superficie superficie) {
         if (bateriaObj.getCarga() <= 1 || bolsa >= capacidadMaximaBolsa) {
             if (bolsa >= capacidadMaximaBolsa) {
-                System.out.println(
-                        "La bolsa está llena. Dirigiéndose a zona de recarga para vaciarse y recargarse si es necesario.");
+                vista.mostrarBolsaLlena();
             } else {
-                System.out.println("Batería baja. Buscando zona de recarga...");
+                vista.mostrarBateriaBaja();
             }
             buscarYRecargar(superficie);
             return;
@@ -57,7 +58,7 @@ public class Aspiradora {
             posX = siguientePaso[0];
             posY = siguientePaso[1];
         } else {
-            System.out.println("No se encontró ruta hacia la zona sucia.");
+            vista.mostrarZonaSuciaInaccesible();
         }
     }
 
@@ -126,7 +127,7 @@ public class Aspiradora {
         }
 
         if (destinoX == -1) {
-            System.out.println("No se encontró una zona de recarga en la superficie.");
+            vista.mostrarZonaRecargaNoEncontrada();
             return;
         }
 
@@ -144,12 +145,12 @@ public class Aspiradora {
                 }
             }
         } else {
-            System.out.println("No se puede llegar a la zona de recarga.");
+            vista.mostrarZonaRecargaInaccesible();
         }
     }
 
     public void vaciarBolsa() {
-        System.out.println("Vaciar la bolsa de basura...");
+        vista.mostrarVaciadoBolsa();
         bolsa = 0;
     }
 
@@ -165,13 +166,13 @@ public class Aspiradora {
                 consumirBateria();
 
                 if (bolsa == capacidadMaximaBolsa) {
-                    System.out.println("La bolsa está llena. Dirigiéndose a la zona de recarga para vaciarse.");
+                    vista.mostrarBolsaLlenaDuranteLimpieza();
                 }
             } else {
-                System.out.println("La aspiradora se quedó sin batería. Necesita recargarse.");
+                vista.mostrarBateriaAgotada();
             }
         } else {
-            System.out.println("La zona ya está limpia, no se ha realizado ninguna acción.");
+            vista.mostrarZonaLimpia();
         }
     }
 

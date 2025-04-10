@@ -1,8 +1,10 @@
 public class Main {
     public static void main(String[] args) {
-        Superficie superficie = new Superficie();
-        Bateria bateria = new Bateria(50);
-        Aspiradora aspiradora = new Aspiradora(bateria);
+
+        VistaConsola vista = new VistaConsola();
+        Bateria bateria = new Bateria(50, vista);
+        Superficie superficie = new Superficie(vista);
+        Aspiradora aspiradora = new Aspiradora(bateria, vista);
 
         superficie.obtenerZona(5, 5).ensuciar();
         superficie.obtenerZona(10, 3).ensuciar();
@@ -18,14 +20,12 @@ public class Main {
         superficie.obtenerZona(12, 9).ensuciar();
 
         for (int i = 0; i < 500; i++) {
-            System.out.println("\nPaso #" + (i + 1));
-
+            vista.mostrarPaso(i + 1);
             aspiradora.actuar(superficie);
 
-            System.out.println("Aspiradora en (" + aspiradora.getPosX() + ", " + aspiradora.getPosY() + ") - Bolsa: " 
-                + aspiradora.obtenerBolsa() + "/100 - Batería: " + aspiradora.obtenerCargaBateria() + "/" + bateria.getMAX_CARGA());
+            vista.mostrarEstadoAspiradora(aspiradora, bateria);
 
-            superficie.mostrarSuperficie(aspiradora.getPosX(), aspiradora.getPosY());
+            vista.mostrarSuperficie(superficie, aspiradora.getPosX(), aspiradora.getPosY());
 
             try {
                 Thread.sleep(500);

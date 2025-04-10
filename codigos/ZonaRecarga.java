@@ -1,7 +1,10 @@
 public class ZonaRecarga extends Zona {
 
-    public ZonaRecarga() {
+    private VistaConsola vista;
+
+    public ZonaRecarga(VistaConsola vista) {
         super();
+        this.vista = vista;
     }
 
     @Override
@@ -14,7 +17,7 @@ public class ZonaRecarga extends Zona {
     }
 
     public void recargar(Aspiradora aspiradora) {
-        System.out.println("Recargando la aspiradora...");
+        vista.mostrarRecargandoBateria();
         aspiradora.recargarBateria();
     }
 }

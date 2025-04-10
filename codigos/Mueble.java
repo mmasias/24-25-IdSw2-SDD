@@ -12,9 +12,4 @@ public class Mueble {
     public void setTamaño(int tamaño) {
         this.tamaño = tamaño;
     }
-
-    @Override
-    public String toString() {
-        return "Mueble de tamaño: " + tamaño;
-    }
 }
