@@ -9,25 +9,19 @@ public class Universidad {
     private List<Ascensor> ascensores;
     private List<Persona> personas;
 
-    public Universidad() {
+    public Universidad(Tiempo tiempo) {
         this.plantas = new ArrayList<>();
         this.ascensores = new ArrayList<>();
         this.personas = new ArrayList<>();
+        this.tiempo = tiempo;
         this.inicializarEdificio();
     }
 
-    public Universidad(Tiempo tiempo) {
-        this();
-        this.tiempo = tiempo;
-    }
-
     private void inicializarEdificio() {
-        // Inicializa plantas (-3 a 3)
         for (int i = -3; i <= 3; i++) {
             plantas.add(new Planta(i));
         }
 
-        // Inicializa ascensores (puedes ajustar cantidad)
         ascensores.add(new Ascensor("A"));
         ascensores.add(new Ascensor("B"));
     }
@@ -38,17 +32,20 @@ public class Universidad {
     }
 
     public void acogerPersona(Persona persona) {
-
+        if (estaAbierta()) {
+            personas.add(persona);
+            System.out.println("Ha llegado una persona a la universidad");
+        } else {
+            System.out.println("La universidad está cerrada. No se puede acoger a la persona.");
+        }
     }
 
-    public void actualizarEstado() {
-        // Simular comportamiento de ascensores, personas moviéndose, etc.
-
-
+    public void evolucionDeLaUniversidad() {
+        
     }
 
     public void imprimirEstado() {
-        System.out.println("Hora actual: " + tiempo.darLaHora());
+        System.out.println(tiempo.darLaHora());
         System.out.println("Personas en la universidad: " + personas.size());
         for (Ascensor ascensor : ascensores) {
             ascensor.imprimirEstado();
@@ -59,24 +56,9 @@ public class Universidad {
         }
     }
 
-    public void gestionarEmergencias() {
-
-    }
-
-    public void programarMantenimiento() {
-        System.out.println("Planificando mantenimiento...");
-        for (Ascensor ascensor : ascensores) {
-            ascensor.revisarMantenimiento();
-        }
-    }
-
-    public void controlarAccesos() {
-        System.out.println("Control de accesos activado.");
-    }
-
-    public void simular() { // invoca desde Mundo en cada iteración
+    public void simular() {
         if (estaAbierta()) {
-            actualizarEstado();
+            evolucionDeLaUniversidad();
             imprimirEstado();
         } else {
             System.out.println("La universidad está cerrada.");

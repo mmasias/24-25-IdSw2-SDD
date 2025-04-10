@@ -9,11 +9,10 @@ Recibe: `Universidad`, `Tiempo`
 
 #### Responsabilidades:
 - `simular()`: Inicia y coordina la simulación general.
-- `esperar()`: Controla el paso del tiempo dentro de la simulación.
+- `esperar()`: Pide un intro para continuar
 - `generarPersona()`: Crea nuevas personas en la simulación.
 - `avanzarMinuto()`: Avanza el reloj y actualiza el sistema.
 - `guardarEstadísticas()`: Registra datos para análisis posterior.
-- `iniciarSimulación()` / `detenerSimulación()`: Controla el ciclo de vida de la simulación.
 - `manejarEventosAleatorios()`: Introduce incidentes como averías, cortes, etc.
 
 ---
@@ -23,7 +22,6 @@ Recibe: `Universidad`, `Tiempo`
 #### Responsabilidades:
 - `darFormato()`: Devuelve una representación legible de la hora.
 - `darLaHora()`: Proporciona la hora actual.
-- `esHoraPunta()`: Identifica si es un periodo de alta afluencia.
 - `esFestivo()` / `esFinDeSemana()`: Informa sobre días especiales o no laborables.
 
 ---
@@ -34,11 +32,8 @@ Recibe: `Tiempo`, `Planta`, `Ascensor`, `Persona`
 #### Responsabilidades:
 - `estaAbierta()`: Verifica si la universidad está en horario de funcionamiento.
 - `acogerPersona()`: Permite el ingreso y movimiento de personas.
-- `actualizarEstado()`: Gestiona el estado del edificio y sus componentes.
+- `evolucionDeLaEvolucion()`: Gestiona el estado del edificio y sus componentes.
 - `imprimirEstado()`: Imprime el estado actual para monitoreo o depuración.
-- `gestionarEmergencias()`: Coordina evacuaciones o respuestas ante incidentes.
-- `programarMantenimiento()`: Planifica mantenimientos de ascensores y servicios.
-- `controlarAccesos()`: Aplica restricciones a zonas específicas.
 
 ---
 

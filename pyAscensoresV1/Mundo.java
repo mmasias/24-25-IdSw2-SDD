@@ -2,18 +2,12 @@ package pyAscensoresV1;
 
 public class Mundo {
     private static final int HORA_INICIO = 8;
-
     private Universidad universidad;
     private Tiempo tiempo;
 
     public Mundo() {
-        universidad = new Universidad();
         tiempo = new Tiempo(HORA_INICIO, 0);
-    }
-
-    public static void main(String[] args) {
-        Mundo mundo = new Mundo();
-        mundo.simular();
+        universidad = new Universidad(tiempo);
     }
 
     private void esperar() {
@@ -26,8 +20,8 @@ public class Mundo {
     }
 
     private Persona generarPersona() {
-        int plantaDestino = (int) (Math.random() * 7) - 3; // Genera un número entre -3 y 3
-        return new Persona(plantaDestino);
+        int destino = (int) (Math.random() * 7) - 3;
+        return new Persona(destino);
     }
 
     private void avanzarMinuto() {
@@ -36,20 +30,16 @@ public class Mundo {
 
     private void simular() {
         do {
-            this.avanzarMinuto();
-            Persona nuevaPersona = this.generarPersona();
-            if (nuevaPersona != null) {
-                universidad.acogerPersona(nuevaPersona);
-            }
+            avanzarMinuto();
+            Persona nueva = generarPersona();
+            universidad.acogerPersona(nueva);
             universidad.simular();
-            this.esperar();
-        } while (this.estaActivo());
+            esperar();
+        } while (tiempo.getHora() < 14);
     }
 
-    private boolean estaActivo() {
-        return tiempo.getHora() < 14; // simular hasta las 14:00
-    }
-
-    private void inicializar() {
+    public static void main(String[] args) {
+        Mundo mundo = new Mundo();
+        mundo.simular();
     }
 }

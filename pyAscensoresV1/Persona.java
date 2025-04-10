@@ -2,105 +2,69 @@ package pyAscensoresV1;
 
 public class Persona {
     private int plantaDestino;
-    private Ascensor ascensor;
-    private int tiempoEspera; 
+    private int plantaActual;
+    private int tiempoEnPlanta;
+    private boolean enUniversidad;
+    private boolean quiereBajar;
+    private boolean dentroDeAscensor;
 
     public Persona(int plantaDestino) {
         this.plantaDestino = plantaDestino;
-        this.tiempoEspera = 0; 
+        this.plantaActual = 0;
+        this.tiempoEnPlanta = (int) (Math.random() * 15) + 5;
+        this.enUniversidad = false;
+        this.quiereBajar = false;
+        this.dentroDeAscensor = false;
     }
 
-    public void llamarAlAscensor() {
-        if (ascensor != null) {
-            System.out.println("Llamando al ascensor...");
-            ascensor.llamar();
-        } else {
-            System.out.println("No hay ascensor asignado.");
+    public void simular(Universidad universidad) {
+        if (!enUniversidad) {
+            universidad.llamarAscensor(this, plantaActual, plantaDestino);
+        } else if (!quiereBajar) {
+            if (tiempoEnPlanta > 0) {
+                tiempoEnPlanta--;
+            } else {
+                quiereBajar = true;
+                universidad.llamarAscensor(this, plantaActual, 0);
+            }
         }
     }
 
-    public void subirAlAscensor() {
-        if (ascensor != null && ascensor.estaEnPlantaActual()) {
-            System.out.println("Subiendo al ascensor...");
-            ascensor.subir(this);
+    public void subir() {
+        dentroDeAscensor = true;
+    }
+
+    public void bajarEn(int planta) {
+        plantaActual = planta;
+        dentroDeAscensor = false;
+        if (planta != 0) {
+            enUniversidad = true;
         } else {
-            System.out.println("El ascensor no está disponible en esta planta.");
+            enUniversidad = false; // se va
         }
     }
 
-    public void seleccionarPlantaDestino() {
-        if (ascensor != null) {
-            System.out.println("Seleccionando planta destino: " + plantaDestino);
-            ascensor.seleccionarPlanta(plantaDestino);
-        } else {
-            System.out.println("No hay ascensor asignado.");
-        }
+    public boolean deseaBajarEn(int planta) {
+        return planta == plantaDestino;
     }
 
-    public void bajarDelAscensor() {
-        if (ascensor != null && ascensor.estaEnPlantaDestino(plantaDestino)) {
-            System.out.println("Bajando del ascensor...");
-            ascensor.bajar(this);
-        } else {
-            System.out.println("El ascensor no ha llegado a la planta destino.");
-        }
-    }
-
-    public void decidirComoMoverse() {
-        System.out.println("Decidiendo cómo moverse...");
-        if (ascensor != null) {
-            llamarAlAscensor();
-            subirAlAscensor();
-            seleccionarPlantaDestino();
-        } else {
-            System.out.println("No hay ascensor disponible. Usando las escaleras.");
-        }
-    }
-
-    public void establecerPrioridad() {
-        System.out.println("Estableciendo prioridad para el viaje...");
-        if (ascensor != null) {
-            ascensor.establecerPrioridad(this);
-        } else {
-            System.out.println("No hay ascensor asignado.");
-        }
-    }
-
-    public void cancelarViaje() {
-        System.out.println("Cancelando el viaje...");
-        if (ascensor != null) {
-            ascensor.cancelarViaje(this);
-        } else {
-            System.out.println("No hay ascensor asignado.");
-        }
-    }
-
-    public void reportarProblema() {
-        System.out.println("Reportando un problema con el ascensor...");
-        if (ascensor != null) {
-            ascensor.reportarProblema();
-        } else {
-            System.out.println("No hay ascensor asignado.");
-        }
-    }
-
-    public int getTiempoEspera() {
-        return tiempoEspera;
-    }
-
-    public void setTiempoEspera(int tiempoEspera) {
-        this.tiempoEspera = tiempoEspera;
+    public int getPlantaActual() {
+        return plantaActual;
     }
 
     public int getPlantaDestino() {
         return plantaDestino;
     }
 
-    public void setAscensor(Ascensor ascensor) {
-        this.ascensor = ascensor;
+    public boolean estaEnAscensor() {
+        return dentroDeAscensor;
     }
 
-    public Ascensor getAscensor() {
-        return ascensor;
+    public boolean deseaSalir() {
+        return quiereBajar && plantaDestino == 0;
+    }
+
+    public boolean finalizo() {
+        return plantaDestino == 0 && plantaActual == 0 && !dentroDeAscensor;
     }
 }
