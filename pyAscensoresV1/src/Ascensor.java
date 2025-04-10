@@ -34,15 +34,13 @@ public class Ascensor {
             }
         }
 
-        if (!personas.isEmpty()) {
-            List<Persona> personasADejar = new ArrayList<>();
-            for (Persona persona : personas) {
-                if (persona.getPlantaDestino() == plantaActual) {
-                    personasADejar.add(persona);
-                }
+        List<Persona> personasADejar = new ArrayList<>();
+        for (Persona persona : personas) {
+            if (persona.getPlantaDestino() == plantaActual) {
+                personasADejar.add(persona);
             }
-            personas.removeAll(personasADejar);
         }
+        personas.removeAll(personasADejar);
     }
 
     public void imprimirEstado() {
