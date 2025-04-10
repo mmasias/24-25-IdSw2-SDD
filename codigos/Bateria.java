@@ -14,9 +14,6 @@ public class Bateria {
     public void consumir() {
         if (carga > 0) {
             carga--;
-            System.out.println("Batería consumida. Carga restante: " + carga);
-        } else {
-            System.out.println("¡Batería agotada!");
         }
     }
 
@@ -31,5 +28,9 @@ public class Bateria {
 
     public int getCarga() {
         return carga;
+    }
+
+    public int getMAX_CARGA(){
+        return MAX_CARGA;
     }
 }

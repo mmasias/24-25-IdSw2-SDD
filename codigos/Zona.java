@@ -19,19 +19,19 @@ public class Zona {
         }
     }
 
-    public boolean tieneMueble() {
-        return mueble != null;
-    }
-
     public int getNivelSuciedad() {
         return nivelSuciedad;
+    }
+
+    public boolean tieneMueble() {
+        return mueble != null;
     }
 
     public void colocarMueble(Mueble mueble) {
         this.mueble = mueble;
     }
 
-    public void removerMueble() {
-        this.mueble = null;
+    public Mueble getMueble() {
+        return mueble;
     }
 }

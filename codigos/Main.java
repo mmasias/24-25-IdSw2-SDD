@@ -19,7 +19,12 @@ public class Main {
 
         for (int i = 0; i < 500; i++) {
             System.out.println("\nPaso #" + (i + 1));
+
             aspiradora.actuar(superficie);
+
+            System.out.println("Aspiradora en (" + aspiradora.getPosX() + ", " + aspiradora.getPosY() + ") - Bolsa: " 
+                + aspiradora.obtenerBolsa() + "/100 - Batería: " + aspiradora.obtenerCargaBateria() + "/" + bateria.getMAX_CARGA());
+
             superficie.mostrarSuperficie(aspiradora.getPosX(), aspiradora.getPosY());
 
             try {
