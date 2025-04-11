@@ -3,45 +3,45 @@ import java.util.*;
 public class Aspiradora {
 
     private int bolsa;
-    private final int capacidadMaximaBolsa = 100;
-    private Bateria bateriaObj;
-    private int posX, posY;
+    private final int capacidadMaximaBolsa = 10;
+    private Bateria bateria;
+    private int posicionX, posicionY;
     private VistaConsola vista;
 
     public Aspiradora(Bateria bateria, VistaConsola vista) {
-        this.bateriaObj = bateria;
+        this.bateria = bateria;
         this.vista = vista;
         this.bolsa = 0;
-        this.posX = 0;
-        this.posY = 0;
+        this.posicionX = 0;
+        this.posicionY = 0;
     }
 
-    public void actuar(Superficie superficie) {
-        if (bateriaObj.getCarga() <= 1 || bolsa >= capacidadMaximaBolsa) {
+    public void actuar(Mapa mapa) {
+        if (bateria.getCarga() <= 1 || bolsa >= capacidadMaximaBolsa) {
             if (bolsa >= capacidadMaximaBolsa) {
                 vista.mostrarBolsaLlena();
             } else {
                 vista.mostrarBateriaBaja();
             }
-            buscarYRecargar(superficie);
+            buscarYRecargar(mapa);
             return;
         }
 
-        moverInteligente(superficie);
-        Zona zonaActual = superficie.obtenerZona(posX, posY);
+        movimientoInteligente(mapa);
+        Zona zonaActual = mapa.obtenerZona(posicionX, posicionY);
         limpiar(zonaActual);
     }
 
-    private void moverInteligente(Superficie superficie) {
+    private void movimientoInteligente(Mapa mapa) {
         int maxNivel = -1;
-        int objetivoX = posX;
-        int objetivoY = posY;
+        int objetivoX = posicionX;
+        int objetivoY = posicionY;
 
         for (int y = 0; y < 10; y++) {
             for (int x = 0; x < 25; x++) {
-                Zona zona = superficie.obtenerZona(x, y);
+                Zona zona = mapa.obtenerZona(x, y);
                 if (zona != null && !zona.tieneMueble() && zona.getNivelSuciedad() > maxNivel
-                        && !(zona instanceof ZonaRecarga)) {
+                        && !(zona instanceof ZonaDeRecarga)) {
                     maxNivel = zona.getNivelSuciedad();
                     objetivoX = x;
                     objetivoY = y;
@@ -52,22 +52,22 @@ public class Aspiradora {
         if (maxNivel == 0)
             return;
 
-        List<int[]> ruta = buscarRuta(superficie, objetivoX, objetivoY);
+        List<int[]> ruta = calcularRuta(mapa, objetivoX, objetivoY);
         if (ruta != null && !ruta.isEmpty()) {
             int[] siguientePaso = ruta.get(0);
-            posX = siguientePaso[0];
-            posY = siguientePaso[1];
+            posicionX = siguientePaso[0];
+            posicionY = siguientePaso[1];
         } else {
             vista.mostrarZonaSuciaInaccesible();
         }
     }
 
-    private List<int[]> buscarRuta(Superficie superficie, int destinoX, int destinoY) {
+    private List<int[]> calcularRuta(Mapa mapa, int destinoX, int destinoY) {
         boolean[][] visitado = new boolean[10][25];
         int[][][] padre = new int[10][25][2];
         Queue<int[]> cola = new LinkedList<>();
-        cola.add(new int[] { posX, posY });
-        visitado[posY][posX] = true;
+        cola.add(new int[] { posicionX, posicionY });
+        visitado[posicionY][posicionX] = true;
 
         int[][] direcciones = { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };
 
@@ -82,7 +82,7 @@ public class Aspiradora {
             for (int[] d : direcciones) {
                 int nx = x + d[0];
                 int ny = y + d[1];
-                Zona z = superficie.obtenerZona(nx, ny);
+                Zona z = mapa.obtenerZona(nx, ny);
 
                 if (z != null && !visitado[ny][nx] && !z.tieneMueble()) {
                     visitado[ny][nx] = true;
@@ -97,26 +97,26 @@ public class Aspiradora {
             return null;
 
         LinkedList<int[]> camino = new LinkedList<>();
-        int cx = destinoX;
-        int cy = destinoY;
+        int coordenadaXActual = destinoX;
+        int coordenadaYActual = destinoY;
 
-        while (cx != posX || cy != posY) {
-            camino.addFirst(new int[] { cx, cy });
-            int px = padre[cy][cx][0];
-            int py = padre[cy][cx][1];
-            cx = px;
-            cy = py;
+        while (coordenadaXActual != posicionX || coordenadaYActual != posicionY) {
+            camino.addFirst(new int[] { coordenadaXActual, coordenadaYActual });
+            int px = padre[coordenadaYActual][coordenadaXActual][0];
+            int py = padre[coordenadaYActual][coordenadaXActual][1];
+            coordenadaXActual = px;
+            coordenadaYActual = py;
         }
 
         return camino;
     }
 
-    private void buscarYRecargar(Superficie superficie) {
+    private void buscarYRecargar(Mapa mapa) {
         int destinoX = -1, destinoY = -1;
         for (int y = 0; y < 10; y++) {
             for (int x = 0; x < 25; x++) {
-                Zona zona = superficie.obtenerZona(x, y);
-                if (zona instanceof ZonaRecarga) {
+                Zona zona = mapa.obtenerZona(x, y);
+                if (esZonaDeRecarga(zona)) {
                     destinoX = x;
                     destinoY = y;
                     break;
@@ -127,25 +127,33 @@ public class Aspiradora {
         }
 
         if (destinoX == -1) {
-            vista.mostrarZonaRecargaNoEncontrada();
+            vista.mostrarZonaDeRecargaNoEncontrada();
             return;
         }
 
-        List<int[]> ruta = buscarRuta(superficie, destinoX, destinoY);
+        moverHaciaZona(mapa, destinoX, destinoY);
+    }
+
+    private boolean esZonaDeRecarga(Zona zona) {
+        return zona instanceof ZonaDeRecarga;
+    }
+
+    private void moverHaciaZona(Mapa mapa, int destinoX, int destinoY) {
+        List<int[]> ruta = calcularRuta(mapa, destinoX, destinoY);
         if (ruta != null && !ruta.isEmpty()) {
             int[] siguientePaso = ruta.get(0);
-            posX = siguientePaso[0];
-            posY = siguientePaso[1];
+            posicionX = siguientePaso[0];
+            posicionY = siguientePaso[1];
 
-            Zona zonaActual = superficie.obtenerZona(posX, posY);
-            if (zonaActual instanceof ZonaRecarga) {
-                ((ZonaRecarga) zonaActual).recargar(this);
+            Zona zonaActual = mapa.obtenerZona(posicionX, posicionY);
+            if (zonaActual instanceof ZonaDeRecarga) {
+                ((ZonaDeRecarga) zonaActual).recargar(this);
                 if (bolsa == capacidadMaximaBolsa) {
                     vaciarBolsa();
                 }
             }
         } else {
-            vista.mostrarZonaRecargaInaccesible();
+            vista.mostrarZonaDeRecargaInaccesible();
         }
     }
 
@@ -154,14 +162,14 @@ public class Aspiradora {
         bolsa = 0;
     }
 
-    public void limpiar(Zona x) {
-        if (x == null) {
+    public void limpiar(Zona zona) {
+        if (zona == null) {
             return;
         }
 
-        if (x.getNivelSuciedad() > 0) {
-            if (bateriaObj.getCarga() > 0) {
-                x.limpiar();
+        if (zona.getNivelSuciedad() > 0) {
+            if (bateria.getCarga() > 0) {
+                zona.limpiar();
                 bolsa++;
                 consumirBateria();
 
@@ -177,11 +185,15 @@ public class Aspiradora {
     }
 
     public void consumirBateria() {
-        bateriaObj.consumir();
+        bateria.consumir();
     }
 
     public void recargarBateria() {
-        bateriaObj.recargar();
+        bateria.recargar();
+    }
+
+    public int obtenerCapacidadMaximaBolsa() {
+        return capacidadMaximaBolsa;
     }
 
     public int obtenerBolsa() {
@@ -189,14 +201,14 @@ public class Aspiradora {
     }
 
     public int obtenerCargaBateria() {
-        return bateriaObj.getCarga();
+        return bateria.getCarga();
     }
 
-    public int getPosX() {
-        return posX;
+    public int getPosicionX() {
+        return posicionX;
     }
 
-    public int getPosY() {
-        return posY;
+    public int getPosicionY() {
+        return posicionY;
     }
 }

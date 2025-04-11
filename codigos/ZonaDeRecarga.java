@@ -1,8 +1,8 @@
-public class ZonaRecarga extends Zona {
+public class ZonaDeRecarga extends Zona {
 
     private VistaConsola vista;
 
-    public ZonaRecarga(VistaConsola vista) {
+    public ZonaDeRecarga(VistaConsola vista) {
         super();
         this.vista = vista;
     }

@@ -1,15 +1,15 @@
 public class Mueble {
-    private int tamaño;
+    private int tamañoMueble;
 
-    public Mueble(int tamaño) {
-        this.tamaño = tamaño;
+    public Mueble(int tamañoMueble) {
+        this.tamañoMueble = tamañoMueble;
     }
 
-    public int getTamaño() {
-        return tamaño;
+    public int getTamañoMueble() {
+        return tamañoMueble;
     }
 
-    public void setTamaño(int tamaño) {
-        this.tamaño = tamaño;
+    public void setTamañoMueble(int tamañoMueble) {
+        this.tamañoMueble = tamañoMueble;
     }
 }
