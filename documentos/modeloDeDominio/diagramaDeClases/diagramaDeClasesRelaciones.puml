@@ -3,25 +3,20 @@ hide empty members
 hide circles
 
 class Maquina
-class FormaDePago
 class Pago
+class PagoTarjeta
+class PagoEfectivo
 class Usuario
 class Productos
 class Celdas
-class Compra
 class Empleado
 
-Maquina --> FormaDePago : maneja
 Maquina *-- Celdas
-Maquina --> Compra : procesa
 Celdas o-- Productos
 Usuario -U-> Celdas : selecciona 
-Usuario --> Pago : efectua
-Pago --> FormaDePago 
-Compra --* Pago
+Usuario --> Pago : efectua 
 Empleado .U..> Maquina : abastece
-FormaDePago <|-- Efectivo
-FormaDePago <|-- Tarjeta
-FormaDePago <|-- Monedero
+Pago --> PagoEfectivo : maneja
+Pago --> PagoTarjeta : maneja
 
 @enduml
