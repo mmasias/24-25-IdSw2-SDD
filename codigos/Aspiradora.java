@@ -3,7 +3,7 @@ import java.util.*;
 public class Aspiradora {
 
     private int bolsa;
-    private final int capacidadMaximaBolsa = 10;
+    private final int capacidadMaximaBolsa = 100;
     private Bateria bateria;
     private int posicionX, posicionY;
     private VistaConsola vista;
@@ -16,30 +16,30 @@ public class Aspiradora {
         this.posicionY = 0;
     }
 
-    public void actuar(Mapa mapa) {
+    public void actuar(Habitacion habitacion) {
         if (bateria.getCarga() <= 1 || bolsa >= capacidadMaximaBolsa) {
             if (bolsa >= capacidadMaximaBolsa) {
                 vista.mostrarBolsaLlena();
             } else {
                 vista.mostrarBateriaBaja();
             }
-            buscarYRecargar(mapa);
+            buscarYRecargar(habitacion);
             return;
         }
 
-        movimientoInteligente(mapa);
-        Zona zonaActual = mapa.obtenerZona(posicionX, posicionY);
+        movimientoInteligente(habitacion);
+        Zona zonaActual = habitacion.getZona(posicionX, posicionY);
         limpiar(zonaActual);
     }
 
-    private void movimientoInteligente(Mapa mapa) {
+    private void movimientoInteligente(Habitacion habitacion) {
         int maxNivel = -1;
         int objetivoX = posicionX;
         int objetivoY = posicionY;
 
         for (int y = 0; y < 10; y++) {
             for (int x = 0; x < 25; x++) {
-                Zona zona = mapa.obtenerZona(x, y);
+                Zona zona = habitacion.getZona(x, y);
                 if (zona != null && !zona.tieneMueble() && zona.getNivelSuciedad() > maxNivel
                         && !(zona instanceof ZonaDeRecarga)) {
                     maxNivel = zona.getNivelSuciedad();
@@ -52,7 +52,7 @@ public class Aspiradora {
         if (maxNivel == 0)
             return;
 
-        List<int[]> ruta = calcularRuta(mapa, objetivoX, objetivoY);
+        List<int[]> ruta = calcularRuta(habitacion, objetivoX, objetivoY);
         if (ruta != null && !ruta.isEmpty()) {
             int[] siguientePaso = ruta.get(0);
             posicionX = siguientePaso[0];
@@ -62,7 +62,7 @@ public class Aspiradora {
         }
     }
 
-    private List<int[]> calcularRuta(Mapa mapa, int destinoX, int destinoY) {
+    private List<int[]> calcularRuta(Habitacion habitacion, int destinoX, int destinoY) {
         boolean[][] visitado = new boolean[10][25];
         int[][][] padre = new int[10][25][2];
         Queue<int[]> cola = new LinkedList<>();
@@ -82,7 +82,7 @@ public class Aspiradora {
             for (int[] d : direcciones) {
                 int nx = x + d[0];
                 int ny = y + d[1];
-                Zona z = mapa.obtenerZona(nx, ny);
+                Zona z = habitacion.getZona(nx, ny);
 
                 if (z != null && !visitado[ny][nx] && !z.tieneMueble()) {
                     visitado[ny][nx] = true;
@@ -111,11 +111,11 @@ public class Aspiradora {
         return camino;
     }
 
-    private void buscarYRecargar(Mapa mapa) {
+    private void buscarYRecargar(Habitacion habitacion) {
         int destinoX = -1, destinoY = -1;
         for (int y = 0; y < 10; y++) {
             for (int x = 0; x < 25; x++) {
-                Zona zona = mapa.obtenerZona(x, y);
+                Zona zona = habitacion.getZona(x, y);
                 if (esZonaDeRecarga(zona)) {
                     destinoX = x;
                     destinoY = y;
@@ -131,21 +131,21 @@ public class Aspiradora {
             return;
         }
 
-        moverHaciaZona(mapa, destinoX, destinoY);
+        moverHaciaZona(habitacion, destinoX, destinoY);
     }
 
     private boolean esZonaDeRecarga(Zona zona) {
         return zona instanceof ZonaDeRecarga;
     }
 
-    private void moverHaciaZona(Mapa mapa, int destinoX, int destinoY) {
-        List<int[]> ruta = calcularRuta(mapa, destinoX, destinoY);
+    private void moverHaciaZona(Habitacion habitacion, int destinoX, int destinoY) {
+        List<int[]> ruta = calcularRuta(habitacion, destinoX, destinoY);
         if (ruta != null && !ruta.isEmpty()) {
             int[] siguientePaso = ruta.get(0);
             posicionX = siguientePaso[0];
             posicionY = siguientePaso[1];
 
-            Zona zonaActual = mapa.obtenerZona(posicionX, posicionY);
+            Zona zonaActual = habitacion.getZona(posicionX, posicionY);
             if (zonaActual instanceof ZonaDeRecarga) {
                 ((ZonaDeRecarga) zonaActual).recargar(this);
                 if (bolsa == capacidadMaximaBolsa) {
@@ -192,15 +192,15 @@ public class Aspiradora {
         bateria.recargar();
     }
 
-    public int obtenerCapacidadMaximaBolsa() {
+    public int getCapacidadMaximaBolsa() {
         return capacidadMaximaBolsa;
     }
 
-    public int obtenerBolsa() {
+    public int getBolsa() {
         return bolsa;
     }
 
-    public int obtenerCargaBateria() {
+    public int getCargaBateria() {
         return bateria.getCarga();
     }
 

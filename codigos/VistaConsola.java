@@ -13,7 +13,7 @@ public class VistaConsola {
     }
 
     public void mostrarZonaDeRecargaNoEncontrada() {
-        System.out.println("No se encontró una zona de recarga en el mapa.");
+        System.out.println("No se encontró una zona de recarga en el Habitacion.");
     }
 
     public void mostrarZonaDeRecargaInaccesible() {
@@ -50,25 +50,25 @@ public class VistaConsola {
 
     public void mostrarEstadoAspiradora(Aspiradora aspiradora, Bateria bateria) {
         System.out.println("Aspiradora en (" + aspiradora.getPosicionX() + ", " + aspiradora.getPosicionY() + ") - Bolsa: "
-                + aspiradora.obtenerBolsa() + "/" + aspiradora.obtenerCapacidadMaximaBolsa() + " - Batería: "
-                + aspiradora.obtenerCargaBateria() + "/" + bateria.getcapacidadMaximaBateria());
+                + aspiradora.getBolsa() + "/" + aspiradora.getCapacidadMaximaBolsa() + " - Batería: "
+                + aspiradora.getCargaBateria() + "/" + bateria.getcapacidadMaximaBateria());
     }
 
     public void mostrarPaso(int paso) {
         System.out.println("\nPaso #" + paso);
     }
 
-    public void mostrarMapa(Mapa mapa, int posicionX, int posicionY, Gato gato) {
+    public void mostrarHabitacion(Habitacion habitacion, int posicionX, int posicionY, Gato gato) {
         System.out.print("+");
-        for (int j = 0; j < mapa.getAnchoMapa(); j++) {
+        for (int j = 0; j < habitacion.getAnchoHabitacion(); j++) {
             System.out.print("-----");
         }
         System.out.println("+");
 
-        for (int i = 0; i < mapa.getAltoMapa(); i++) {
+        for (int i = 0; i < habitacion.getAltoHabitacion(); i++) {
             System.out.print("|");
-            for (int j = 0; j < mapa.getAnchoMapa(); j++) {
-                Zona zona = mapa.obtenerZona(j, i);
+            for (int j = 0; j < habitacion.getAnchoHabitacion(); j++) {
+                Zona zona = habitacion.getZona(j, i);
 
                 if (i == posicionY && j == posicionX) {
                     System.out.print(" (O) ");
@@ -101,7 +101,7 @@ public class VistaConsola {
         }
 
         System.out.print("+");
-        for (int j = 0; j < mapa.getAnchoMapa(); j++) {
+        for (int j = 0; j < habitacion.getAnchoHabitacion(); j++) {
             System.out.print("-----");
         }
         System.out.println("+");

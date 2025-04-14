@@ -2,14 +2,14 @@ import java.util.Random;
 
 public class Gato {
     private int posicionX, posicionY;
-    private Mapa mapa;
+    private Habitacion habitacion;
     private Random random;
 
-    public Gato(Mapa mapa) {
-        this.mapa = mapa;
+    public Gato(Habitacion habitacion) {
+        this.habitacion = habitacion;
         this.random = new Random();
-        this.posicionX = random.nextInt(mapa.getAnchoMapa());
-        this.posicionY = random.nextInt(mapa.getAltoMapa());
+        this.posicionX = random.nextInt(habitacion.getAnchoHabitacion());
+        this.posicionY = random.nextInt(habitacion.getAltoHabitacion());
     }
 
     public void moverYEnsuciar() {
@@ -22,14 +22,14 @@ public class Gato {
                 if (posicionY > 0) posicionY--;
                 break;
             case 2:
-                if (posicionX < mapa.getAnchoMapa() - 1) posicionX++;
+                if (posicionX < habitacion.getAnchoHabitacion() - 1) posicionX++;
                 break;
             case 3:
-                if (posicionY < mapa.getAltoMapa() - 1) posicionY++;
+                if (posicionY < habitacion.getAltoHabitacion() - 1) posicionY++;
                 break;
         }
 
-        Zona zona = mapa.obtenerZona(posicionX, posicionY);
+        Zona zona = habitacion.getZona(posicionX, posicionY);
         if (zona != null) {
             if (zona.getNivelSuciedad() < 4) {
                 zona.ensuciar();

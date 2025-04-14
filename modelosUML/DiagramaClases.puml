@@ -1,88 +1,55 @@
 @startuml
 
+class Mundo{
+
+}
+
 class Aspiradora {
-    -int bolsa
-    -final int capacidadMaximaBolsa
-    -Bateria bateria
-    -int posicionX, posicionY
-    -VistaConsola vista
-    +actuar(mapa: Mapa)
-    +limpiar(zona: Zona)
-    +moverYEnsuciar()
-    +consumirBateria()
-    +recargarBateria()
-    +obtenerCapacidadMaximaBolsa(): int
-    +obtenerBolsa(): int
-    +obtenerCargaBateria(): int
-    +getPosicionX(): int
-    +getPosicionY(): int
-}
 
-class Bateria {
-    -int carga
-    -int capacidadMaximaBateria
-    -VistaConsola vista
-    +consumir()
-    +recargar()
-    +getCarga(): int
-    +getcapacidadMaximaBateria(): int
-}
-
-class Mapa {
-    -int anchoMapa
-    -int altoMapa
-    -Zona[][] mapaZonas
-    +obtenerZona(x: int, y: int): Zona
-    +colocarMueble(xInicio: int, y: int, mueble: Mueble): boolean
-    +getAnchoMapa(): int
-    +getAltoMapa(): int
-}
-
-class Zona {
-    -int nivelSuciedad
-    -Mueble mueble
-    +ensuciar()
-    +limpiar()
-    +getNivelSuciedad(): int
-    +tieneMueble(): boolean
-    +colocarMueble(mueble: Mueble)
-}
-
-class Mueble {
-    -int tamañoMueble
-    +getTamañoMueble(): int
-}
-
-class ZonaDeRecarga {
-    +recargar(aspiradora: Aspiradora)
 }
 
 class Gato {
-    -int posicionX
-    -int posicionY
-    -Mapa mapa
-    -Random random
-    +moverYEnsuciar()
-    +getPosicionX(): int
-    +getPosicionY(): int
+
+}
+
+class Habitacion {
+
+}
+
+class Zona {
+
+}
+
+class Mueble {
+
+}
+
+class ZonaDeRecarga {
+
+}
+
+
+class Bateria {
+
 }
 
 class VistaConsola {
-    +mostrarBolsaLlena()
-    +mostrarBateriaBaja()
-    +mostrarZonaSuciaInaccesible()
-    +mostrarZonaDeRecargaNoEncontrada()
-    +mostrarZonaDeRecargaInaccesible()
-    +mostrarVaciadoBolsa()
-    +mostrarBolsaLlenaDuranteLimpieza()
-    +mostrarBateriaAgotada()
-    +mostrarZonaLimpia()
-    +mostrarBateriaRecargada(cargaActual: int)
-    +mostrarBateriaYaLlena()
-    +mostrarRecargandoBateria()
-    +mostrarEstadoAspiradora(aspiradora: Aspiradora, bateria: Bateria)
-    +mostrarPaso(paso: int)
-    +mostrarMapa(mapa: Mapa, posicionX: int, posicionY: int, gato: Gato)
+
 }
 
+Mundo *-- Habitacion : compone
+Aspiradora *-l- Bateria : compone
+Mundo *-- UnidadConMovimiento : compone
+Habitacion *-d- Zona : compone
+Zona o-- Mueble : puede contener
+ZonaDeRecarga -|> Zona
+Aspiradora ..> Zona : limpia
+Gato ..> Zona : ensucia
+VistaConsola ..> Aspiradora
+VistaConsola ..> Bateria
+VistaConsola ..> Habitacion
+VistaConsola ..> Gato
+Mundo *-- VistaConsola : usa
+Aspiradora .u.|> UnidadConMovimiento
+Gato .u.|> UnidadConMovimiento
 @enduml

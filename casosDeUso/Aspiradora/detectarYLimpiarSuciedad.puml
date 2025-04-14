@@ -10,7 +10,7 @@ Habitacion --> C3 : "Contiene zonas sucias"
 rectangle "Proceso de Limpieza" {
     usecase "Detectar nivel de suciedad" as C3_1
     usecase "Reducir nivel de suciedad" as C3_2
-    usecase "Actualizar mapa de suciedad" as C3_3
+    usecase "Actualizar habitacion de suciedad" as C3_3
 }
 
 C3 --> C3_1 : "Verifica la celda actual"
