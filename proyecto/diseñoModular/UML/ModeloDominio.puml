@@ -1,0 +1,69 @@
+@startuml
+package CCCF{
+package "Controlador" {
+    class ControladorSimulacion {
+        +iniciarSimulacion()
+        +coordinarLogica()
+    }
+}
+
+package "Vista" {
+    class VisualizadorSimulacion {
+        +mostrarEstado()
+    }
+}
+
+package "Modelo" {
+    class Cola {
+        +agregarCliente()
+        +obtenerSiguiente()
+        +verificarColaVacia()
+    }
+
+    class Caja {
+        +asignarCliente()
+        +procesarCliente()
+        +estado()
+    }
+
+    class GestorCajas {
+        +procesarCajas()
+        +asignarClientes()
+        +mostrarEstado()
+    }
+
+    class Cliente {
+        +generarCliente()
+    }
+
+    class Estadisticas {
+        +registrarMinuto()
+        +registrarCliente()
+        +mostrarResumen()
+    }
+}
+
+package "Utilidades" {
+    class GeneradorClientes {
+        +generarClientesAleatorios()
+    }
+
+    class Constantes {
+        +tamañoJornada
+        +probabilidadLlegadaCliente
+    }
+}
+}
+' Relaciones
+ControladorSimulacion --> VisualizadorSimulacion : coordina
+ControladorSimulacion --> Cola : maneja
+ControladorSimulacion --> GestorCajas : coordina
+ControladorSimulacion --> Estadisticas : registra
+
+Cola --> Cliente : contiene
+GestorCajas --> Caja : gestiona
+Caja --> Cliente : procesa
+
+ControladorSimulacion --> GeneradorClientes : utiliza
+GestorCajas --> Cola : obtieneClientes
+@enduml
