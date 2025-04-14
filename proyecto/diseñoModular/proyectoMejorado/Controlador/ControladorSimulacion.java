@@ -1,5 +1,5 @@
 package proyecto.diseñoModular.proyectoMejorado.Controlador;
-
+import proyecto.diseñoModular.proyectoMejorado.Modelo.Cliente;
 import proyecto.diseñoModular.proyectoMejorado.Modelo.Cola;
 import proyecto.diseñoModular.proyectoMejorado.Modelo.GestorCajas;
 import proyecto.diseñoModular.proyectoMejorado.Util.GeneradorClientes;
@@ -21,9 +21,15 @@ public class ControladorSimulacion {
     
     public void iniciarSimulacion(int duracionJornada) {
         for (int minuto = 1; minuto <= duracionJornada; minuto++) {
-            // Llegada de clientes (simulación aleatoria)
+            System.out.println("\n--- Minuto " + minuto + " ---");
+            
+            // Llegada de clientes
             if (Math.random() <= GeneradorClientes.PROB_LLEGADA) {
-                cola.agregar(GeneradorClientes.generarCliente());
+                Cliente nuevoCliente = GeneradorClientes.generarCliente();
+                cola.agregar(nuevoCliente);
+                System.out.println("+ Cliente llega (" + nuevoCliente.getItems() + " items)");
+            } else {
+                System.out.println("· No llega nadie");
             }
             
             // Procesar cajas

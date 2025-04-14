@@ -5,7 +5,7 @@ import proyecto.diseñoModular.proyectoMejorado.Modelo.GestorCajas;
 
 public class VisualizadorSimulacion {
     public void mostrarEstado(Cola cola, GestorCajas gestorCajas) {
-        System.out.println("\n> Personas en cola: " + cola.cantidad());
+        System.out.print("Cola: " + cola.cantidad() + " | ");
         gestorCajas.mostrarEstado();
     }
 }
