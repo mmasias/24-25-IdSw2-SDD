@@ -5,7 +5,6 @@ Trata de la mejora de un código antiguo lineal a un código orientado a objetos
 
 ## 🛫 [Diseño](/documentos/diseño.md)
 
-### 🛫 Diseño del Proyecto
 
 En este apartado se describe la estructura y el diseño del sistema mejorado de simulación de cajas y colas.  
 Se detallan los principales componentes, sus responsabilidades, y cómo interactúan entre sí.
@@ -23,7 +22,6 @@ El diseño busca ofrecer una solución modular, flexible y preparada para futura
 
 ## 📋 [Enunciado](/documentos/enunciado.md)
 
-### 📋 Enunciado del Proyecto
 
 Este documento presenta el enunciado original que define los requisitos y objetivos del sistema de simulación de cajas y colas.
 
@@ -39,7 +37,6 @@ Se establecen las condiciones iniciales, las reglas de funcionamiento y las esta
 
 ## 🖥️ [Código antiguo](/proyecto/proyectoInicial/RetoEv2.java)
 
-### 🖥️ Código Antiguo
 
 Este apartado contiene la versión original del proyecto, desarrollada utilizando programación lineal.
 
@@ -55,7 +52,6 @@ Sirve como base para analizar mejoras y transformarlo posteriormente a un enfoqu
 
 ## 🛠️ [Código nuevo](/proyecto/proyectoMejorado/)
 
-### 🛠️ Código Mejorado
 
 Aquí se presenta la versión mejorada del proyecto, implementada utilizando principios de programación orientada a objetos.
 
@@ -71,7 +67,6 @@ El código está organizado en clases bien definidas para mejorar la modularidad
 
 ## 📝 [Modelo del dominio](/documentos/modeloDominio.md)
 
-### 📝 Modelo del Dominio
 
 Este documento describe el modelo del dominio utilizado para estructurar el sistema de simulación.
 
