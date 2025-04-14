@@ -5,7 +5,6 @@ Trata de la mejora de un código antiguo lineal a un código orientado a objetos
 
 ## 🛫 [Diseño](/documentos/diseño.md)
 
-
 En este apartado se describe la estructura y el diseño del sistema mejorado de simulación de cajas y colas.  
 Se detallan los principales componentes, sus responsabilidades, y cómo interactúan entre sí.
 
@@ -22,7 +21,6 @@ El diseño busca ofrecer una solución modular, flexible y preparada para futura
 
 ## 📋 [Enunciado](/documentos/enunciado.md)
 
-
 Este documento presenta el enunciado original que define los requisitos y objetivos del sistema de simulación de cajas y colas.
 
 Se establecen las condiciones iniciales, las reglas de funcionamiento y las estadísticas que deben registrarse durante la simulación.
@@ -36,7 +34,6 @@ Se establecen las condiciones iniciales, las reglas de funcionamiento y las esta
 ---
 
 ## 🖥️ [Código antiguo](/proyecto/proyectoInicial/RetoEv2.java)
-
 
 Este apartado contiene la versión original del proyecto, desarrollada utilizando programación lineal.
 
@@ -52,7 +49,6 @@ Sirve como base para analizar mejoras y transformarlo posteriormente a un enfoqu
 
 ## 🛠️ [Código nuevo](/proyecto/proyectoMejorado/)
 
-
 Aquí se presenta la versión mejorada del proyecto, implementada utilizando principios de programación orientada a objetos.
 
 El código está organizado en clases bien definidas para mejorar la modularidad, la legibilidad y la capacidad de mantenimiento del sistema.
@@ -65,12 +61,18 @@ El código está organizado en clases bien definidas para mejorar la modularidad
 
 ---
 
-## 📝 [Modelo del dominio](/documentos/modeloDominio.md)
+## 🚀 [Codigo V2 - Diseño Modular](/documentos/diseñoModular.md)
 
+Versión mejorada del projecto, aplicando un diseño modular que sigue el patrón MVC.
+
+---
+
+## 📝 [Modelo del dominio](/documentos/modeloDominio.md)
 
 Este documento describe el modelo del dominio utilizado para estructurar el sistema de simulación.
 
 Se identifican las principales entidades, atributos y relaciones que intervienen en la dinámica de colas y cajas.
+
 
 #### Contenidos
 
