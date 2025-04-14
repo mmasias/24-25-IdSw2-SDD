@@ -1,56 +1,88 @@
 @startuml
-class Superficie {
-}
-
-class Zona {
-  - nivelSuciedad: int
-  + ensuciar()
-  + limpiar()
-  + tieneMueble(): boolean
-}
-
-class ZonaRecarga {
-  + recargar(Aspiradora aspiradora)
-}
 
 class Aspiradora {
-  - bateria: int
-  - bolsa: int
-  + mover()
-  + limpiar(Zona x)
-  + buscarRecarga()
-  + detectarZonaMasSucia()
+    -int bolsa
+    -final int capacidadMaximaBolsa
+    -Bateria bateria
+    -int posicionX, posicionY
+    -VistaConsola vista
+    +actuar(mapa: Mapa)
+    +limpiar(zona: Zona)
+    +moverYEnsuciar()
+    +consumirBateria()
+    +recargarBateria()
+    +obtenerCapacidadMaximaBolsa(): int
+    +obtenerBolsa(): int
+    +obtenerCargaBateria(): int
+    +getPosicionX(): int
+    +getPosicionY(): int
 }
 
 class Bateria {
-  - carga: int
-  + consumir()
-  + recargar()
+    -int carga
+    -int capacidadMaximaBateria
+    -VistaConsola vista
+    +consumir()
+    +recargar()
+    +getCarga(): int
+    +getcapacidadMaximaBateria(): int
+}
+
+class Mapa {
+    -int anchoMapa
+    -int altoMapa
+    -Zona[][] mapaZonas
+    +obtenerZona(x: int, y: int): Zona
+    +colocarMueble(xInicio: int, y: int, mueble: Mueble): boolean
+    +getAnchoMapa(): int
+    +getAltoMapa(): int
+}
+
+class Zona {
+    -int nivelSuciedad
+    -Mueble mueble
+    +ensuciar()
+    +limpiar()
+    +getNivelSuciedad(): int
+    +tieneMueble(): boolean
+    +colocarMueble(mueble: Mueble)
 }
 
 class Mueble {
-  - tamaño: int
+    -int tamañoMueble
+    +getTamañoMueble(): int
+}
+
+class ZonaDeRecarga {
+    +recargar(aspiradora: Aspiradora)
 }
 
 class Gato {
-  + mover()
-  + ensuciar(Zona x)
+    -int posicionX
+    -int posicionY
+    -Mapa mapa
+    -Random random
+    +moverYEnsuciar()
+    +getPosicionX(): int
+    +getPosicionY(): int
 }
 
-Superficie *-- "*" Zona : "está formada por"
-Zona o-- Gato : "puede contener"
-Zona <|-- ZonaRecarga : "es una"
-
-Aspiradora --> Zona : "se mueve en"
-Aspiradora --> Zona : "limpia"
-Aspiradora --> Mueble : "detecta y evita"
-Aspiradora --> ZonaRecarga : "recarga en"
-
-Aspiradora *-- Bateria : "tiene una"
-Bateria --> ZonaRecarga : "se recarga en"
-
-Zona --> Mueble : "puede contener"
-
-Gato --> Zona : "ensucia"
+class VistaConsola {
+    +mostrarBolsaLlena()
+    +mostrarBateriaBaja()
+    +mostrarZonaSuciaInaccesible()
+    +mostrarZonaDeRecargaNoEncontrada()
+    +mostrarZonaDeRecargaInaccesible()
+    +mostrarVaciadoBolsa()
+    +mostrarBolsaLlenaDuranteLimpieza()
+    +mostrarBateriaAgotada()
+    +mostrarZonaLimpia()
+    +mostrarBateriaRecargada(cargaActual: int)
+    +mostrarBateriaYaLlena()
+    +mostrarRecargandoBateria()
+    +mostrarEstadoAspiradora(aspiradora: Aspiradora, bateria: Bateria)
+    +mostrarPaso(paso: int)
+    +mostrarMapa(mapa: Mapa, posicionX: int, posicionY: int, gato: Gato)
+}
 
 @enduml
