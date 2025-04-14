@@ -1,5 +1,5 @@
 @startuml
-
+package CCCF{
 package "Controlador" {
     class ControladorSimulacion {
         +iniciarSimulacion()
@@ -53,7 +53,7 @@ package "Utilidades" {
         +probabilidadLlegadaCliente
     }
 }
-
+}
 ' Relaciones
 ControladorSimulacion --> VisualizadorSimulacion : coordina
 ControladorSimulacion --> Cola : maneja
@@ -66,5 +66,4 @@ Caja --> Cliente : procesa
 
 ControladorSimulacion --> GeneradorClientes : utiliza
 GestorCajas --> Cola : obtieneClientes
-
 @enduml
