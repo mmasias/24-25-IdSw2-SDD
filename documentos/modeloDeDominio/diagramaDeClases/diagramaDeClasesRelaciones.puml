@@ -9,12 +9,15 @@ class Usuario
 class Productos
 class Celdas
 class Empleado
+class Caja
 
 Maquina *-- Celdas
+Maquina *-r- Caja
+Caja o-- Efectivo  
 Celdas o-- Productos
 Usuario -U-> Celdas : selecciona 
 Usuario --> Pago : efectua 
 Empleado .U..> Maquina : abastece
-Pago --> Efectivo : maneja
+Pago -r-> Efectivo : maneja
 
 @enduml
