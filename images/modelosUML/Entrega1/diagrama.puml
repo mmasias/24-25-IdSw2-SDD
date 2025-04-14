@@ -1,0 +1,27 @@
+@startuml
+abstract class Personaje
+class Guerrero
+class Vampiro
+class Ataque
+class Arma
+class Mordida
+class Pocion
+class Batalla
+class JuegoVampiros
+
+Personaje <|-- Guerrero
+Personaje <|-- Vampiro
+Ataque <|-- Arma
+Ataque <|-- Mordida
+
+Guerrero "1" o-- "many" Arma
+Guerrero "1" *-- "1" Pocion
+Vampiro "1" o-- "many" Mordida
+
+Batalla "1" *-- "1" Guerrero
+Batalla "1" *-- "1" Vampiro
+
+JuegoVampiros ..> Batalla
+JuegoVampiros ..> Guerrero
+JuegoVampiros ..> Vampiro
+@enduml
