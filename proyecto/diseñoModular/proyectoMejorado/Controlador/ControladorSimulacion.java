@@ -2,8 +2,8 @@ package proyecto.diseñoModular.proyectoMejorado.Controlador;
 
 import proyecto.diseñoModular.proyectoMejorado.Modelo.Cola;
 import proyecto.diseñoModular.proyectoMejorado.Modelo.GestorCajas;
+import proyecto.diseñoModular.proyectoMejorado.Util.GeneradorClientes;
 import proyecto.diseñoModular.proyectoMejorado.Modelo.Estadisticas;
-import proyecto.diseñoModular.proyectoMejorado.Utilidades.GeneradorClientes;
 import proyecto.diseñoModular.proyectoMejorado.Vista.VisualizadorSimulacion;
 
 public class ControladorSimulacion {

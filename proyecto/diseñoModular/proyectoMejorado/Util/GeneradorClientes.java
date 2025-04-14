@@ -1,4 +1,4 @@
-package proyecto.diseñoModular.proyectoMejorado.Utilidades;
+package proyecto.diseñoModular.proyectoMejorado.Util;
 
 import proyecto.diseñoModular.proyectoMejorado.Modelo.Cliente;
 
