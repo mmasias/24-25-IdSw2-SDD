@@ -4,8 +4,7 @@ hide circles
 
 class Maquina
 class Pago
-class PagoTarjeta
-class PagoEfectivo
+class Efectivo
 class Usuario
 class Productos
 class Celdas
@@ -16,7 +15,6 @@ Celdas o-- Productos
 Usuario -U-> Celdas : selecciona 
 Usuario --> Pago : efectua 
 Empleado .U..> Maquina : abastece
-Pago --> PagoEfectivo : maneja
-Pago --> PagoTarjeta : maneja
+Pago --> Efectivo : maneja
 
 @enduml
