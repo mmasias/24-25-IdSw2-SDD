@@ -1,42 +1,42 @@
 # Diseño modular - Juego de Vampiros
 
-<div align=center>
-
-[![Diagrama de Clases](/images/modelosUML/Entrega1/Diagrama_Entrega1.svg)](/images/modelosUML/Entrega1/diagrama.puml)
-
-</div>
-
 ## 1. **Descripción del Proyecto**
 
-El Juego de Vampiros es un proyecto que implementa un sistema de combate por turnos donde el jugador controla a un Guerrero que debe enfrentarse a un Vampiro en una batalla estratégica. El sistema está desarrollado con un enfoque orientado a objetos en Java, aprovechando conceptos como herencia, polimorfismo y encapsulamiento.
-La arquitectura del juego está diseñada para ser modular y extensible, permitiendo añadir fácilmente nuevos tipos de personajes, armas y habilidades en futuras versiones.
+El Juego de Vampiros es un proyecto que implementa un sistema de combate por turnos donde el jugador controla a un Guerrero que debe enfrentarse a un Vampiro en una batalla estratégica. El sistema aprovechanda conceptos como herencia, polimorfismo y encapsulamiento.
 
-### Clases
+La arquitectura del juego está diseñada con un enfoque modular, separando claramente las responsabilidades en tres paquetes principales:
 
-**🧬 Clases Base**
+- **auth**: Maneja la autenticación y gestión de usuarios
+- **core**: Contiene la lógica central del juego
+- **ui**: Gestiona la interfaz de usuario y la interacción con el jugador
+
+### Estructura de Paquetes
+
+**📂 auth - Gestión de Usuarios**
 | Clase | Descripción |
 |-------|-------------|
-| [Personaje](/src/JuegoVampiro/Personaje.java) | Clase abstracta base para todos los personajes del juego |
-| [Ataque](/src/JuegoVampiro/Ataque.java) | Clase base para todos los tipos de ataques disponibles |
+| [GestorUsuarios](/src/JuegoVampiro2/auth/GestorUsuarios.java) | Administra el registro y autenticación de usuarios |
 
-**🧱 Nivel Básico**
-| Clase | Depende de / Usa | Descripción |
-|-------|------------------|-------------|
-| [Arma](/src/JuegoVampiro/Arma.java) | `Ataque` | Implementa los ataques específicos del Guerrero |
-| [Mordida](/src/JuegoVampiro/Mordida.java) | `Ataque` | Implementa los ataques específicos del Vampiro |
-| [Pocion](/src/JuegoVampiro/Pocion.java) | - | Gestiona el estado y efectos de las pociones curativas |
+**📂 core - Lógica del Juego**
+| Clase | Descripción |
+|-------|-------------|
+| [Personaje](/src/JuegoVampiro2/core/Personaje.java) | Clase abstracta base para todos los personajes del juego |
+| [Ataque](/src/JuegoVampiro2/core/Ataque.java) | Clase base para todos los tipos de ataques disponibles |
+| [Arma](/src/JuegoVampiro2/core/Arma.java) | Implementa los ataques específicos del Guerrero |
+| [Mordida](/src/JuegoVampiro2/core/Mordida.java) | Implementa los ataques específicos del Vampiro |
+| [Pocion](/src/JuegoVampiro2/core/Pocion.java) | Gestiona el estado y efectos de las pociones curativas |
+| [Guerrero](/src/JuegoVampiro2/core/Guerrero.java) | Representa al héroe controlado por el jugador |
+| [Vampiro](/src/JuegoVampiro2/core/Vampiro.java) | Representa al enemigo vampiro controlado por la IA |
+| [Batalla](/src/JuegoVampiro2/core/Batalla.java) | Controla la lógica del combate por turnos |
+| [JuegoVampiros](/src/JuegoVampiro2/core/JuegoVampiros.java) | Clase principal que gestiona todo el flujo del juego |
 
-**🧩 Nivel Medio**
-| Clase | Depende de / Usa | Descripción |
-|-------|------------------|-------------|
-| [Guerrero](/src/JuegoVampiro/Guerrero.java) | `Personaje`, `Arma`, `Pocion` | Representa al héroe controlado por el jugador |
-| [Vampiro](/src/JuegoVampiro/Vampiro.java) | `Personaje`, `Mordida` | Representa al enemigo vampiro controlado por la IA |
+**📂 ui - Interfaz de Usuario**
+| Clase | Descripción |
+|-------|-------------|
+| [VistaConsola](/src/JuegoVampiro2/ui/VistaConsola.java) | Maneja toda la interacción con el usuario a través de la consola |
+| [CredencialesUsuario](/src/JuegoVampiro2/ui/CredencialesUsuario.java) | Encapsula los datos de usuario para login/registro |
 
-**🧠 Nivel Alto**
-| Clase | Depende de / Usa | Descripción |
-|-------|------------------|-------------|
-| [Batalla](/src/JuegoVampiro/Batalla.java) | `Guerrero`, `Vampiro` | Controla la lógica del combate por turnos |
-| [JuegoVampiros](/src/JuegoVampiro/JuegoVampiros.java) | `Batalla`, `Guerrero`, `Vampiro` | Clase principal que gestiona todo el flujo del juego |
+
 
 ## 2. **Cambios Realizados**
 
