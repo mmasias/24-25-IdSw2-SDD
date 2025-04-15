@@ -1,0 +1,46 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam classAttributeIconSize 0
+
+package "Restaurante" {
+
+    package Controlador {
+        class Main
+        class Restaurante_
+    }
+
+    package Modelo {
+        class Mesa
+        class Reserva
+        class Pedido
+        class Plato
+        class Personal
+    }
+
+    package Util {
+        class Constantes
+        class Utilidades
+    }
+
+    package Vista {
+        class VistaConsola
+    }
+
+    Main --> Restaurante_ : contiene
+    Main --> VistaConsola : usa
+
+    Restaurante_ --> Mesa : contiene
+    Restaurante_ --> Reserva : contiene
+    Restaurante_ --> Pedido : contiene
+    Restaurante_ --> Personal : contiene
+
+    Reserva --> Mesa : asigna
+    Pedido --> Mesa : para
+    Pedido --> Plato : incluye
+
+    VistaConsola ..> Constantes : usa
+    Restaurante_ ..> Utilidades : usa
+
+}
+
+@enduml
