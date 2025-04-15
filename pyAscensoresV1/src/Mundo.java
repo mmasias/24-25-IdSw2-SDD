@@ -4,6 +4,8 @@ public class Mundo {
     private static final int HORA_INICIO = 8;
     private Universidad universidad;
     private Tiempo tiempo;
+    private final int PROBABILIDAD_DE_LLEGADA = 60;
+    private final int HORA_CIERRE = 14;
 
     public Mundo() {
         tiempo = new Tiempo(HORA_INICIO, 0);
@@ -33,14 +35,14 @@ public class Mundo {
     private void simular() {
         do {
             int numeroAleatorio = (int) (Math.random() * 100);
-            if (numeroAleatorio < 40) {
+            if (numeroAleatorio < PROBABILIDAD_DE_LLEGADA) {
                 Persona nueva = generarPersona();
                 universidad.acogerPersona(nueva);
             }
             universidad.simular();
             esperar();
             avanzarMinuto();
-        } while (tiempo.getHora() < 14);
+        } while (tiempo.getHora() < HORA_CIERRE);
     }
 
     public static void main(String[] args) {
