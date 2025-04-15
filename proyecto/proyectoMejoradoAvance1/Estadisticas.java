@@ -1,13 +1,13 @@
-package proyecto.diseñoModular.proyectoMejorado.Modelo;
+package proyecto.proyectoMejoradoAvance1;
 
-public class Estadisticas {
+class Estadisticas {
     private int minutosColaVacia;
     private int clientesAtendidos;
     private int itemsVendidos;
     private int clientesPendientes;
     
     public void registrarMinuto(Cola cola) {
-        if (cola.estaVacia()) minutosColaVacia++;
+        if(cola.estaVacia()) minutosColaVacia++;
     }
     
     public void clienteAtendido(int items) {

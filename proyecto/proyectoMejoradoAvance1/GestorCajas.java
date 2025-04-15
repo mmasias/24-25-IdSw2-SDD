@@ -1,4 +1,4 @@
-package proyecto.proyectoMejorado;
+package proyecto.proyectoMejoradoAvance1;
 
 class GestorCajas {
     private final Caja[] cajas;

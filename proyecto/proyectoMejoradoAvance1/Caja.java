@@ -1,4 +1,4 @@
-package proyecto.proyectoMejorado;
+package proyecto.proyectoMejoradoAvance1;
 
 class Caja {
     private Cliente clienteActual;
