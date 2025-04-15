@@ -76,7 +76,7 @@ public class Universidad {
 
             for (Ascensor ascensor : ascensores) {
                 if (ascensor.getPlantaActualAsInt() == i) {
-                    linea.append("  [v").append(ascensor.getId()).append("v]");
+                    linea.append("  [v").append(ascensor.personasEnElAscensor()).append("v]");
                 } else {
                     linea.append("   | | ");
                 }

@@ -103,6 +103,10 @@ public class Ascensor {
         return id;
     }
 
+    public int personasEnElAscensor() {
+        return personas.size();
+    }
+
     public int getPlantaActualAsInt() {
         return plantaActual;
     }
