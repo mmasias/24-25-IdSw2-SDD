@@ -33,7 +33,6 @@ public abstract class Personaje {
             energia = 0;
         } else if (energia <= limiteDesmayo && !desmayado) {
             desmayado = true;
-            System.out.println(getNombre() + " se ha desmayado por falta de energía!");
         }
     }
 
@@ -46,7 +45,6 @@ public abstract class Personaje {
         // Si recupera suficiente energía, ya no estará desmayado
         if (desmayado && energia > limiteDesmayo) {
             desmayado = false;
-            System.out.println(getNombre() + " se ha recuperado del desmayo!");
         }
     }
 
@@ -64,4 +62,6 @@ public abstract class Personaje {
     public abstract String getNombre();
     
     public abstract Ataque seleccionarAtaque();
+
+    public abstract Ataque seleccionarAtaque(int indice); 
 } 
