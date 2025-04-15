@@ -12,10 +12,12 @@ public class Planta {
     }
 
     public void personaLlega(Persona p) {
+        this.numero++;
         personasPresentes.add(p);
     }
 
     public void personaSale(Persona p) {
+        this.numero--;
         personasPresentes.remove(p);
     }
 

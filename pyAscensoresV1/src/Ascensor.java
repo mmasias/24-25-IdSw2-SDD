@@ -90,7 +90,7 @@ public class Ascensor {
         if (plantas != null) {
             for (Planta planta : plantas) {
                 if (planta.getNumero() == plantaOrigen) {
-                    planta.personaSale(p); // 👈 Aquí restamos la persona
+                    planta.personaSale(p);
                     break;
                 }
             }
@@ -104,7 +104,7 @@ public class Ascensor {
         if (plantas != null) {
             for (Planta planta : plantas) {
                 if (planta.getNumero() == plantaDestino) {
-                    planta.personaLlega(p); // 👈 Aquí se suma a la planta destino
+                    planta.personaLlega(p);
                     break;
                 }
             }
@@ -127,7 +127,7 @@ public class Ascensor {
             if (plantas != null) {
                 for (Planta planta : plantas) {
                     if (planta.getNumero() == plantaActual) {
-                        planta.personaLlega(p); // 👈 se suma a la planta de destino
+                        planta.personaLlega(p);
                         break;
                     }
                 }

@@ -51,7 +51,6 @@ public class Universidad {
     }
 
     public void evolucionDeLaUniversidad() {
-        
         control.moverAscensores();
     }
 
