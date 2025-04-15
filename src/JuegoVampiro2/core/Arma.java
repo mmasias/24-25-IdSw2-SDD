@@ -1,8 +1,10 @@
+package com.juegovampiro.core;
+
 public class Arma extends Ataque {
     private String nombre;
 
-    public Arma(String nombre, int daño, double porcentajeExito) {
-        super(daño, porcentajeExito);
+    public Arma(String nombre, int dañoBase, int probabilidadExito) {
+        super(dañoBase, probabilidadExito);
         this.nombre = nombre;
     }
 
@@ -12,6 +14,8 @@ public class Arma extends Ataque {
 
     @Override
     public String toString() {
-        return nombre + " (Daño: " + getDaño() + ", Probabilidad: " + getPorcentajeExito() + "%)";
+        // Para mostrar en la lista de armas en VistaConsola
+        return nombre + " (Daño: " + getDaño() + ", Éxito: " + super.probabilidadExito + "%)"; 
+        // Acceder a probabilidadExito directamente o hacerla protected/añadir getter en Ataque
     }
 } 
