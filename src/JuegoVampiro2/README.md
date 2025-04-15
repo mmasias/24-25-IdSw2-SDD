@@ -36,7 +36,14 @@ La arquitectura del juego está diseñada con un enfoque modular, separando clar
 | [VistaConsola](/src/JuegoVampiro2/ui/VistaConsola.java) | Maneja toda la interacción con el usuario a través de la consola |
 | [CredencialesUsuario](/src/JuegoVampiro2/ui/CredencialesUsuario.java) | Encapsula los datos de usuario para login/registro |
 
+### Diagrama de Dependencias
 
+El diseño modular sigue un patrón de dependencia de capas donde:
+- La capa core no depende de ui ni auth (no conoce la interfaz ni la gestión de usuarios)
+- La capa ui utiliza las entidades de core para mostrar información del juego
+- La clase JuegoVampiros actúa como orquestador, coordinando las tres capas
+
+[![Diagrama de Clases](/images/modelosUML/Entrega2/Diagrama_Entrega2.svg)](/images/modelosUML/Entrega2/diagrama.puml)
 
 ## 2. **Cambios Realizados**
 
