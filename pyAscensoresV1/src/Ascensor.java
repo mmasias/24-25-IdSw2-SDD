@@ -26,9 +26,11 @@ public class Ascensor {
     }
 
     public void mover() {
+        bajarPersonasEnPlantaActual();
+        recogerPersonasEnPlantaActual();
+
         if (!personas.isEmpty()) {
             moverHaciaDestinoPersona();
-            bajarPersonasEnPlantaActual();
             return;
         }
 
@@ -42,12 +44,6 @@ public class Ascensor {
         int destino = destinoPersona.getPlantaDestino();
         if (plantaActual != destino) {
             plantaActual += Integer.compare(destino, plantaActual);
-            return;
-        }
-        personas.remove(destinoPersona);
-        Planta planta = buscarPlanta(plantaActual);
-        if (planta != null) {
-            planta.personaLlegaADestino(destinoPersona);
         }
     }
 
@@ -58,17 +54,7 @@ public class Ascensor {
             return;
         }
 
-        if (personas.size() < CAPACIDAD) {
-            Persona persona = llamada.getPersona();
-            personas.add(persona);
-            llamada.getPersona().marcarAtendido();
-            llamadas.poll();
-
-            Planta planta = buscarPlanta(plantaActual);
-            if (planta != null) {
-                planta.personaSubeAlAscensor(persona);
-            }
-        }
+        recogerPersonasEnPlantaActual();
     }
 
     private Planta buscarPlanta(int numero) {
@@ -90,10 +76,25 @@ public class Ascensor {
         for (Persona p : bajan) {
             personas.remove(p);
             p.marcarAtendido();
-
             Planta planta = buscarPlanta(plantaActual);
             if (planta != null) {
                 planta.personaLlegaADestino(p);
+            }
+        }
+    }
+
+    private void recogerPersonasEnPlantaActual() {
+        Planta planta = buscarPlanta(plantaActual);
+        if (planta == null) return;
+
+        List<Persona> esperando = new ArrayList<>(planta.getPersonasEsperando());
+        for (Persona persona : esperando) {
+            if (personas.size() >= CAPACIDAD) break;
+            if (!persona.estaAtendido()) {
+                personas.add(persona);
+                persona.marcarAtendido();
+                planta.personaSubeAlAscensor(persona);
+                llamadas.removeIf(l -> l.getPersona() == persona);
             }
         }
     }
