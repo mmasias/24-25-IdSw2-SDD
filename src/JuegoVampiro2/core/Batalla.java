@@ -1,4 +1,4 @@
-package com.juegovampiro.core;
+package com.JuegoVampiro2.core;
 
 // Eliminar import java.util.Scanner;
 import com.juegovampiro.ui.VistaConsola;
