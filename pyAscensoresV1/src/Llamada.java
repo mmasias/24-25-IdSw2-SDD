@@ -5,7 +5,6 @@ public class Llamada {
     private int plantaDestino;
     private Persona persona;
 
-
     public Llamada(int plantaOrigen, int plantaDestino, Persona persona) {
         this.plantaOrigen = plantaOrigen;
         this.plantaDestino = plantaDestino;

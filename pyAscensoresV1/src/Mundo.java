@@ -45,6 +45,6 @@ public class Mundo {
 
     public static void main(String[] args) {
         Mundo mundo = new Mundo();
-        mundo.simular(); 
+        mundo.simular();
     }
 }

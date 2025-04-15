@@ -1,4 +1,5 @@
 package pyAscensoresV1.src;
+
 import java.util.*;
 
 public class ControlAscensor {
@@ -8,11 +9,9 @@ public class ControlAscensor {
         this.ascensores = ascensores;
     }
 
-
-
     public void procesarLlamada(Persona persona, int origen, int destino) {
         Ascensor mejor = seleccionarAscensor(origen);
-        Llamada llamada= new Llamada(origen,destino,persona);
+        Llamada llamada = new Llamada(origen, destino, persona);
         mejor.atenderLlamada(llamada);
 
     }

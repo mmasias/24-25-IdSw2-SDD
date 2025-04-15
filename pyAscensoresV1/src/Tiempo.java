@@ -46,10 +46,9 @@ public class Tiempo {
 
     public boolean esFestivo() {
         List<LocalDate> diasFestivos = Arrays.asList(
-            LocalDate.of(fecha.getYear(), 1, 1),
-            LocalDate.of(fecha.getYear(), 12, 25),
-            LocalDate.of(fecha.getYear(), 11, 1)
-        );
+                LocalDate.of(fecha.getYear(), 1, 1),
+                LocalDate.of(fecha.getYear(), 12, 25),
+                LocalDate.of(fecha.getYear(), 11, 1));
         return diasFestivos.contains(fecha);
     }
 }
