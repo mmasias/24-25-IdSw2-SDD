@@ -8,7 +8,7 @@ public class Guerrero extends Personaje {
     private Pocion pocion;
     private boolean defendiendo;
     private static final int LIMITE_DESMAYO = 30;
-    private int accionActual = 0; // 0: Nada, 1: Atacar, 2: Defender, 3: Pocion
+    private int accionActual = 0;
 
     public Guerrero(int energia) {
         super(energia, LIMITE_DESMAYO);
@@ -85,8 +85,6 @@ public class Guerrero extends Personaje {
 
     @Override
     public Ataque seleccionarAtaque() {
-         /* Este método ya no se usa directamente para la selección del jugador
-         Podría usarse para una IA básica si fuera necesario, pero por ahora lo dejamos vacío o lanzamos excepción. */
          throw new UnsupportedOperationException("Usar seleccionarAtaque(int indiceArma) para el jugador.");
     }
 
