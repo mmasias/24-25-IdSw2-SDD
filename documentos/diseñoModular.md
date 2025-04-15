@@ -48,7 +48,7 @@
 | Clase                                                     | Depende de / Usa                              | Descripción                                                                   |
 |------------------------------------------------------------|-----------------------------------------------|-------------------------------------------------------------------------------|
 | [`Main`](/src-v002/controlador/Main.java)                   | `VistaConsola`, `Restaurante_`               | Clase principal, inicia la aplicación e invoca el controlador general        |
-| [`Restaurante_`](/src-v002/controlador/Restaurante_.java)   | `Mesa`, `Reserva`, `Pedido`, `Personal`, `Utilidades` | Gestiona la lógica del sistema y coordina los datos                        |
+| [`Restaurante_`](/src-v002/controlador/Restaurante.java)   | `Mesa`, `Reserva`, `Pedido`, `Personal`, `Utilidades` | Gestiona la lógica del sistema y coordina los datos                        |
 
 ---
 
