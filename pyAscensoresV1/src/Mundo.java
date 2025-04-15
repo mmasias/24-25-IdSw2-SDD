@@ -11,11 +11,12 @@ public class Mundo {
     }
 
     private void esperar() {
-        System.out.println("Presione 'Enter' para avanzar un minuto...");
-        try {
-            System.in.read();
-        } catch (Exception e) {
-            System.out.println("Error al esperar: " + e.getMessage());
+        System.out.println("Quiere coninuar? (s/n)");
+        String respuesta = new java.util.Scanner(System.in).nextLine();
+        if (respuesta.equalsIgnoreCase("s")) {
+            return;
+        } else {
+            System.exit(0);
         }
     }
 
