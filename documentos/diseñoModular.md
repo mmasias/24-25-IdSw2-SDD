@@ -6,7 +6,7 @@
 
 | Diagrama de Clases |
 |--------------------|
-|![Diagrama](/images/modelosUML/DiagramaClasesSrc2.svg)|
+|![Diagrama](/ModeloDeDominio/imagenes/DiagramaDeClasesV002.svg)|
 
 </div>
 
