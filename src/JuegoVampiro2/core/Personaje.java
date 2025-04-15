@@ -1,3 +1,5 @@
+package JuegoVampiro2.core
+
 public abstract class Personaje {
     private int energia;
     private int energiaMaxima;
