@@ -13,9 +13,9 @@ public class Vampiro extends Personaje {
         this.ataques = new ArrayList<>();
         
         // Inicializar los ataques según el enunciado
-        ataques.add(new Mordida("Mordisco Rápido", 5, 90));
-        ataques.add(new Mordida("Mordisco Profundo", 10, 60));
-        ataques.add(new Mordida("Mordisco Letal", 20, 40));
+        ataques.add(new Mordida(5, 90));
+        ataques.add(new Mordida(10, 60));
+        ataques.add(new Mordida(20, 40));
     }
 
     @Override
