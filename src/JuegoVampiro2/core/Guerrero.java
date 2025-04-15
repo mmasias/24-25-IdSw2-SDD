@@ -1,20 +1,21 @@
+package com.juegovampiro.core;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Guerrero extends Personaje {
     private List<Arma> armas;
     private Pocion pocion;
     private boolean defendiendo;
     private static final int LIMITE_DESMAYO = 30;
+    private int accionActual = 0; // 0: Nada, 1: Atacar, 2: Defender, 3: Pocion
 
     public Guerrero(int energia) {
         super(energia, LIMITE_DESMAYO);
         this.armas = new ArrayList<>();
-        this.pocion = new Pocion(energia); // Poción que recupera toda la energía
+        this.pocion = new Pocion(this.getEnergiaMaxima()); 
         this.defendiendo = false;
         
-        // Inicializar las armas según el enunciado
         armas.add(new Arma("Espada", 7, 50));
         armas.add(new Arma("Hacha", 15, 25));
         armas.add(new Arma("Martillo", 30, 12));
@@ -33,31 +34,29 @@ public class Guerrero extends Personaje {
         return defendiendo;
     }
 
-    public void setDefendiendo(boolean defendiendo) {
-        this.defendiendo = defendiendo;
-    }
 
     public boolean tienePocionActiva() {
         return pocion.estaEnUso();
     }
 
+    public Pocion getPocion() {
+        return pocion;
+    }
+
     public void beberPocion() {
         pocion.beber();
-        System.out.println(getNombre() + " está bebiendo una poción. Tardará 3 turnos en hacer efecto.");
     }
 
     public boolean avanzarTurnoPocion() {
         boolean pocionCompletada = pocion.avanzarTurno();
         if (pocionCompletada) {
             recuperarTodoEnergia();
-            System.out.println("¡La poción ha hecho efecto! " + getNombre() + " ha recuperado toda su energía.");
         }
         return pocionCompletada;
     }
 
     public void defender() {
         this.defendiendo = true;
-        System.out.println(getNombre() + " se prepara para defenderse del próximo ataque.");
     }
 
     public void finalizarDefensa() {
@@ -66,93 +65,58 @@ public class Guerrero extends Personaje {
 
     public int reducirDañoRecibido(int daño) {
         if (defendiendo) {
-            // 80% de probabilidad de defensa exitosa
             if (Math.random() < 0.8) {
                 int dañoReducido = Math.max(0, daño - 5);
-                System.out.println("¡Defensa exitosa! Daño reducido en 5 puntos.");
                 return dañoReducido;
             } else {
-                System.out.println("¡La defensa ha fallado!");
             }
         }
         return daño;
     }
 
     @Override
-    public Ataque seleccionarAtaque() {
-        if (estaDesmayado() || tienePocionActiva()) {
-            return null; // No puede atacar si está desmayado o bebiendo poción
+    public Ataque seleccionarAtaque(int indiceArma) {
+        if (estaDesmayado() || tienePocionActiva() || indiceArma < 0 || indiceArma >= armas.size()) {
+            return null;
         }
-        
-        Scanner scanner = new Scanner(System.in);
-        int opcion;
-        
-        do {
-            System.out.println("\nSelecciona un arma para atacar:");
-            for (int i = 0; i < armas.size(); i++) {
-                System.out.println((i + 1) + ". " + armas.get(i));
-            }
-            System.out.print("Opción: ");
-            
-            try {
-                opcion = Integer.parseInt(scanner.nextLine());
-                if (opcion < 1 || opcion > armas.size()) {
-                    System.out.println("Opción inválida. Intenta de nuevo.");
-                    opcion = -1;
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Entrada inválida. Introduce un número.");
-                opcion = -1;
-            }
-        } while (opcion == -1);
-        
-        return armas.get(opcion - 1);
+        return armas.get(indiceArma);
+    }
+    
+
+    @Override
+    public Ataque seleccionarAtaque() {
+         /* Este método ya no se usa directamente para la selección del jugador
+         Podría usarse para una IA básica si fuera necesario, pero por ahora lo dejamos vacío o lanzamos excepción. */
+         throw new UnsupportedOperationException("Usar seleccionarAtaque(int indiceArma) para el jugador.");
     }
 
-    public void elegirAccion() {
-        if (estaDesmayado()) {
-            System.out.println(getNombre() + " está desmayado y recupera 2 puntos de energía.");
-            return;
+    public void setAccionActual(int accion) {
+        if (!estaDesmayado() && !tienePocionActiva()) {
+            this.accionActual = accion;
         }
-        
-        if (tienePocionActiva()) {
-            System.out.println(getNombre() + " está bajo el efecto de la poción. Turnos restantes: " + 
-                              pocion.getTurnosRestantes());
-            return;
+    }
+
+    public void resetAccionActual() {
+        this.accionActual = 0;
+        if (!quiereDefenderse()) {
+             finalizarDefensa();
         }
-        
-        Scanner scanner = new Scanner(System.in);
-        int opcion;
-        
-        do {
-            System.out.println("\n¿Qué acción deseas realizar?");
-            System.out.println("1. Atacar");
-            System.out.println("2. Defenderse");
-            System.out.println("3. Beber poción");
-            System.out.print("Opción: ");
-            
-            try {
-                opcion = Integer.parseInt(scanner.nextLine());
-                if (opcion < 1 || opcion > 3) {
-                    System.out.println("Opción inválida. Intenta de nuevo.");
-                    opcion = -1;
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Entrada inválida. Introduce un número.");
-                opcion = -1;
-            }
-        } while (opcion == -1);
-        
-        switch (opcion) {
-            case 1:
-                // La selección del arma se maneja en seleccionarAtaque()
-                break;
-            case 2:
-                defender();
-                break;
-            case 3:
-                beberPocion();
-                break;
-        }
+    }
+
+    public boolean quiereAtacar() {
+        return accionActual == 1;
+    }
+
+    public boolean quiereDefenderse() {
+        return accionActual == 2;
+    }
+
+    public boolean quiereBeberPocion() {
+        return accionActual == 3;
+    }
+    
+    @Override
+    public void pasarTurno() {
+        super.pasarTurno();
     }
 } 
