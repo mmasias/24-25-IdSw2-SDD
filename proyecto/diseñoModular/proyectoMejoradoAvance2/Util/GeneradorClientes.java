@@ -1,6 +1,6 @@
-package proyecto.diseñoModular.proyectoMejorado.Util;
+package proyecto.diseñoModular.proyectoMejoradoAvance2.Util;
 
-import proyecto.diseñoModular.proyectoMejorado.Modelo.Cliente;
+import proyecto.diseñoModular.proyectoMejoradoAvance2.Modelo.Cliente;
 
 public class GeneradorClientes {
     public static final double PROB_LLEGADA = 0.6;

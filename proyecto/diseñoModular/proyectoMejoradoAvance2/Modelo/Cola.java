@@ -1,4 +1,4 @@
-package proyecto.diseñoModular.proyectoMejorado.Modelo;
+package proyecto.diseñoModular.proyectoMejoradoAvance2.Modelo;
 
 import java.util.LinkedList;
 import java.util.Queue;

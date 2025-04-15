@@ -1,6 +1,6 @@
-package proyecto.proyectoMejorado;
+package proyecto.diseñoModular.proyectoMejoradoAvance2.Modelo;
 
-class Cliente {
+public class Cliente {
     private final int items;
     
     public Cliente() {
