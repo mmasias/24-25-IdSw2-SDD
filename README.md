@@ -1,4 +1,3 @@
-
 # 🍽️ pyRestaurante - Grupo 7
 
 <p align="center">
@@ -40,7 +39,17 @@ Optimiza la asignación de mesas, gestiona tiempos de preparación y coordina la
 
 - 🔄 **Diagrama de Estados**: [Diagrama de Estados](/ModeloDeDominio/imagenes/DiagramaDeEstados.svg)
 - 🖼️ **Diagrama de Clases**: [Diagrama de Clases](/ModeloDeDominio/imagenes/DiagramaDeClases.svg)
+- 🖼️ **Diagrama de Clases V002**: [Diagrama de Clases V002](/ModeloDeDominio/imagenes/DiagramaDeClasesV002.svg)
 - 🧩 **Diagrama de Objetos**: [Diagrama de Objetos](/ModeloDeDominio/imagenes/DiagramaDeObjetos.svg)
+
+---
+
+## 📄 Enlaces Relevantes
+
+- **Código Fuente Versión 1**: [Ver código de la versión 1](/src-v001/src/)
+- **Código Fuente Versión 2**: [Ver código de la versión 2](/src-v002/)
+- **README del Proyecto (Versión 2)**: [Ver README de la versión 2](/src-v002/README.md)
+- **Diseño Modular**: [Ver diseño modular](/documentos/diseñoModular.md)
 
 ---
 
