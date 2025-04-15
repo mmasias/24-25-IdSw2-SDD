@@ -7,11 +7,13 @@ public class Caja {
     private String idMaquina; 
     private Map<Double, Integer> monedasTotales;
     private Map<Double, Integer> billetesTotales; 
+    private double dineroTotal;
 
     public Caja(String idMaquina) {
         this.idMaquina = idMaquina;
         this.monedasTotales = new HashMap<>();
         this.billetesTotales = new HashMap<>();
+        this.dineroTotal = 0.0; 
     }
 
     public void actualizarCaja(Efectivo efectivo) {
@@ -22,6 +24,7 @@ public class Caja {
             billetesTotales.put(efectivo.getDenominacion(),
                 billetesTotales.getOrDefault(efectivo.getDenominacion(), 0) + 1);
         }
+        dineroTotal += efectivo.getDenominacion();
     }
 
     public void mostrarContenidoCaja() {
@@ -34,6 +37,7 @@ public class Caja {
         for (Map.Entry<Double, Integer> entry : billetesTotales.entrySet()) {
             System.out.println("Denominación: " + entry.getKey() + " - Cantidad: " + entry.getValue());
         }
+        System.out.println("Dinero total en la caja: " + calcularDineroTotal());
     }
 
     public Map<Double, Integer> devolverCambio(double cambio) {
@@ -45,6 +49,7 @@ public class Caja {
                 cambio = Math.round(cambio * 100.0) / 100.0; 
                 monedasTotales.put(denominacion, monedasTotales.get(denominacion) - 1);
                 cambioEntregado.put(denominacion, cambioEntregado.getOrDefault(denominacion, 0) + 1);
+                dineroTotal -= denominacion; 
             }
         }
 
@@ -54,6 +59,7 @@ public class Caja {
                 cambio = Math.round(cambio * 100.0) / 100.0; 
                 billetesTotales.put(denominacion, billetesTotales.get(denominacion) - 1);
                 cambioEntregado.put(denominacion, cambioEntregado.getOrDefault(denominacion, 0) + 1);
+                dineroTotal -= denominacion; 
             }
         }
 
@@ -62,5 +68,19 @@ public class Caja {
         }
 
         return cambioEntregado;
+    }
+
+    public double calcularDineroTotal() {
+        double total = 0.0;
+
+        for (Map.Entry<Double, Integer> entry : monedasTotales.entrySet()) {
+            total += entry.getKey() * entry.getValue();
+        }
+
+        for (Map.Entry<Double, Integer> entry : billetesTotales.entrySet()) {
+            total += entry.getKey() * entry.getValue();
+        }
+
+        return total;
     }
 }
