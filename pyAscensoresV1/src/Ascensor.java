@@ -31,12 +31,12 @@ public class Ascensor {
             bajarPersonasEnPlantaActual();
             return;
         }
-    
+
         if (!llamadas.isEmpty()) {
             atenderLlamadaPendiente();
         }
     }
-    
+
     private void moverHaciaDestinoPersona() {
         Persona destinoPersona = personas.get(0);
         int destino = destinoPersona.getPlantaDestino();
@@ -47,71 +47,38 @@ public class Ascensor {
         personas.remove(destinoPersona);
         Planta planta = buscarPlanta(plantaActual);
         if (planta != null) {
-            planta.personaLlega(destinoPersona);
+            planta.personaLlegaADestino(destinoPersona);
         }
     }
-    
+
     private void atenderLlamadaPendiente() {
         Llamada llamada = llamadas.peek();
         if (plantaActual != llamada.getPlantaOrigen()) {
             plantaActual += Integer.compare(llamada.getPlantaOrigen(), plantaActual);
             return;
         }
+
         if (personas.size() < CAPACIDAD) {
-            personas.add(llamada.getPersona());
+            Persona persona = llamada.getPersona();
+            personas.add(persona);
             llamada.getPersona().marcarAtendido();
             llamadas.poll();
+
+            Planta planta = buscarPlanta(plantaActual);
+            if (planta != null) {
+                planta.personaSubeAlAscensor(persona);
+            }
         }
-    }   
+    }
 
     private Planta buscarPlanta(int numero) {
         for (Planta p : plantas) {
-            if (p.getNumero() == numero) return p;
+            if (p.getNumero() == numero)
+                return p;
         }
         return null;
     }
 
-    public void imprimirEstado() {
-        System.out.println("Ascensor " + id + " en planta " + plantaActual + ", personas: " + personas.size());
-    }
-
-
-    public String getId() {
-        return id;
-    }
-
-        public int getPlantaActualAsInt() {
-        return plantaActual;
-    }
-
-    public void subirPersona(Persona p, int plantaOrigen) {
-        personas.add(p);
-
-        if (plantas != null) {
-            for (Planta planta : plantas) {
-                if (planta.getNumero() == plantaOrigen) {
-                    planta.personaSale(p);
-                    break;
-                }
-            }
-        }
-    }
-
-
-    public void bajarPersona(Persona p, int plantaDestino) {
-        personas.remove(p);
-
-        if (plantas != null) {
-            for (Planta planta : plantas) {
-                if (planta.getNumero() == plantaDestino) {
-                    planta.personaLlega(p);
-                    break;
-                }
-            }
-        }
-
-        p.marcarAtendido();
-    }
     public void bajarPersonasEnPlantaActual() {
         List<Persona> bajan = new ArrayList<>();
         for (Persona p : personas) {
@@ -124,16 +91,22 @@ public class Ascensor {
             personas.remove(p);
             p.marcarAtendido();
 
-            if (plantas != null) {
-                for (Planta planta : plantas) {
-                    if (planta.getNumero() == plantaActual) {
-                        planta.personaLlega(p);
-                        break;
-                    }
-                }
+            Planta planta = buscarPlanta(plantaActual);
+            if (planta != null) {
+                planta.personaLlegaADestino(p);
             }
         }
     }
 
+    public String getId() {
+        return id;
+    }
 
+    public int getPlantaActualAsInt() {
+        return plantaActual;
+    }
+
+    public void imprimirEstado() {
+        System.out.println("Ascensor " + id + " en planta " + plantaActual + ", personas: " + personas.size());
+    }
 }

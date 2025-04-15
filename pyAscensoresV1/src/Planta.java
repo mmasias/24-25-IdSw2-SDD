@@ -1,31 +1,49 @@
 package pyAscensoresV1.src;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Planta {
     private int numero;
-    private List<Persona> personasPresentes;
+    private List<Persona> personasEnPlanta;
+    private List<Persona> personasEsperando;
 
     public Planta(int numero) {
         this.numero = numero;
-        this.personasPresentes = new ArrayList<>();
-    }
-
-    public void personaLlega(Persona p) {
-        this.numero++;
-        personasPresentes.add(p);
-    }
-
-    public void personaSale(Persona p) {
-        this.numero--;
-        personasPresentes.remove(p);
-    }
-
-    public void imprimirEstado() {
-        System.out.println("Planta " + numero + " con " + personasPresentes.size() + " personas.");
+        this.personasEnPlanta = new ArrayList<>();
+        this.personasEsperando = new ArrayList<>();
     }
 
     public int getNumero() {
         return numero;
+    }
+
+    public void personaLlega(Persona persona) {
+        personasEsperando.add(persona);
+    }
+
+    public void personaEsperaAscensor(Persona persona) {
+        personasEsperando.add(persona);
+    }
+
+    public void personaSubeAlAscensor(Persona persona) {
+        personasEsperando.remove(persona);
+        personasEnPlanta.remove(persona);
+    }
+
+    public void personaLlegaADestino(Persona persona) {
+        personasEnPlanta.add(persona);
+    }
+
+    public int getCantidadEsperando() {
+        return personasEsperando.size();
+    }
+
+    public int getCantidadEnPlanta() {
+        return personasEnPlanta.size();
+    }
+
+    public List<Persona> getPersonasEsperando() {
+        return personasEsperando;
     }
 }

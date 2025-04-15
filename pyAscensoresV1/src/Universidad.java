@@ -26,7 +26,6 @@ public class Universidad {
         for (int i = -3; i <= 3; i++) {
             plantas.add(new Planta(i));
         }
-
         ascensores.add(new Ascensor("A"));
         ascensores.add(new Ascensor("B"));
     }
@@ -41,12 +40,11 @@ public class Universidad {
             personas.add(persona);
             for (Planta planta : plantas) {
                 if (planta.getNumero() == persona.getPlantaOrigen()) {
-                    planta.personaLlega(persona);
+                    planta.personaEsperaAscensor(persona);
                     break;
                 }
             }
-
-            persona.llamarAlAscensor(control); 
+            persona.llamarAlAscensor(control);
         }
     }
 
@@ -56,14 +54,40 @@ public class Universidad {
 
     public void imprimirEstado() {
         System.out.println(tiempo.darLaHora());
-        System.out.println("Personas en la universidad: " + personas.size());
+        System.out.println("     Personas                              Personas");
+        System.out.println("     esperando                              en la planta\n");
 
-    
-        control.imprimirEstadoAscensores();
+        for (int i = 3; i >= -3; i--) {
+            StringBuilder linea = new StringBuilder();
 
-        for (Planta planta : plantas) {
-            planta.imprimirEstado();
+            int esperando = 0;
+            int enPlanta = 0;
+
+            for (Planta planta : plantas) {
+                if (planta.getNumero() == i) {
+                    esperando = planta.getCantidadEsperando();
+                    enPlanta = planta.getCantidadEnPlanta();
+                    break;
+                }
+            }
+
+            String esperaTexto = String.format("   ___%d_ ", esperando);
+            linea.append("Planta ").append(String.format("%2d", i)).append(esperaTexto);
+
+            for (Ascensor ascensor : ascensores) {
+                if (ascensor.getPlantaActualAsInt() == i) {
+                    linea.append("  [v").append(ascensor.getId()).append("v]");
+                } else {
+                    linea.append("   | | ");
+                }
+            }
+
+            linea.append("     __").append(enPlanta).append("__");
+
+            System.out.println(linea.toString());
         }
+
+        System.out.println("                     /--------- Ascensores ------/");
     }
 
     public void simular() {
