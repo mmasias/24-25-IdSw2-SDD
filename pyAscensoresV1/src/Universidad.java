@@ -54,8 +54,8 @@ public class Universidad {
 
     public void imprimirEstado() {
         System.out.println(tiempo.darLaHora());
-        System.out.println("     Personas                              Personas");
-        System.out.println("     esperando                              en la planta\n");
+        System.out.println("     Personas                     Personas");
+        System.out.println("     esperando                    en la planta\n");
 
         for (int i = 3; i >= -3; i--) {
             StringBuilder linea = new StringBuilder();
@@ -87,7 +87,7 @@ public class Universidad {
             System.out.println(linea.toString());
         }
 
-        System.out.println("                     /--------- Ascensores ------/");
+        System.out.println("       /--------- Ascensores ------/");
     }
 
     public void simular() {
