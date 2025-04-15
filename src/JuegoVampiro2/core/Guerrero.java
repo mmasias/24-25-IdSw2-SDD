@@ -1,4 +1,4 @@
-package com.juegovampiro.core;
+package com.JuegoVampiro2.core;
 
 import java.util.ArrayList;
 import java.util.List;
