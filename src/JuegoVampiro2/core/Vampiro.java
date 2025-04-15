@@ -1,3 +1,5 @@
+package JuegoVampiro2.core;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -28,16 +30,22 @@ public class Vampiro extends Personaje {
     @Override
     public Ataque seleccionarAtaque() {
         if (estaDesmayado()) {
-            return null; // No puede atacar si está desmayado
+            return null;
         }
-        
-        // El vampiro elige un ataque aleatoriamente
+
         Random random = new Random();
         int indice = random.nextInt(ataques.size());
         Mordida ataqueElegido = ataques.get(indice);
         
-        System.out.println(getNombre() + " elige el ataque: " + ataqueElegido.getNombre());
-        
         return ataqueElegido;
     }
+
+    @Override
+    public Ataque seleccionarAtaque(int indice) {
+       return seleccionarAtaque();
+    }
+
+     @Override
+    public void pasarTurno() {
+        super.pasarTurno();
 } 
