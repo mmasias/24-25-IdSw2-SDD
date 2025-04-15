@@ -103,7 +103,7 @@
 
 | Aspecto              | Versión 1 (src-v001)     | Versión 2 (src-v002)         |
 |----------------------|--------------------------|-------------------------------|
-| Arquitectura         | Estructura sin capas claras | Patrón MVC bien definido       |
+| Arquitectura         | Estructura monolítica sin capas claras | Patrón MVC bien definido       |
 | Cohesión             | Media                    | Alta                          |
 | Acoplamiento         | Alto                     | Bajo                          |
 | Mantenibilidad       | Baja                     | Alta                          |
@@ -114,10 +114,10 @@
 
 ## Mejoras `src-v002`
 
-1. **Separación clara de responsabilidades**: MVC bien aplicado.
-2. **Modularización en paquetes**: mejora la organización general.
-3. **Reducción del acoplamiento**: dependencias mejor estructuradas.
-4. **Centralización de utilidades**: evita duplicación de código.
-5. **Especialización de clases**: responsabilidades bien delimitadas.
-6. **Mayor cohesión y limpieza**: facilita mantenimiento y futuras ampliaciones.
+1. **Separación explícita de responsabilidades** mediante una arquitectura basada en MVC.
+2. **Organización modular en paquetes**: facilita la navegación, entendimiento y pruebas.
+3. **Reducción significativa del acoplamiento** entre clases y capas del sistema.
+4. **Centralización de funciones utilitarias y constantes**: mejora la reutilización y evita duplicidades.
+5. **Mayor especialización de clases**: cada componente tiene una responsabilidad única.
+6. **Incremento de la cohesión**: código más limpio, mantenible y preparado para futuras extensiones.
 
