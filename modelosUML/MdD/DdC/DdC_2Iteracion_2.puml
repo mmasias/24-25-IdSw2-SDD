@@ -1,0 +1,28 @@
+@startuml DdC_2Iteracion_2
+
+hide circle
+hide empty members
+
+class Mundo{}
+class Universidad{}
+class Persona{}
+class Ascensor{}
+class Planta{}
+class ControlAscensor{}
+class Llamada{}
+
+Mundo *-- Persona : genera
+Mundo *-- Universidad : crea
+
+Universidad *-- Planta : contiene
+Universidad o-- Persona : acoge
+Universidad *-- Ascensor : posee
+
+Persona o-- Ascensor : utiliza
+Ascensor -- Planta : comunica
+Persona o-- Planta : está en
+
+ControlAscensor o-- Llamada : gestiona
+Llamada o-- Ascensor : invoca
+
+@enduml
