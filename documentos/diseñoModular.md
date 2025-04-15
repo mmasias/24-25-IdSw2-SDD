@@ -27,11 +27,11 @@
 
 | Clase                                      | Depende de / Usa | Descripción                                                                 |
 |-------------------------------------------|------------------|-----------------------------------------------------------------------------|
-| [`Mesa`](src-v002/modelo/Mesa.java)       | -                | Representa una mesa del restaurante con número, ocupación, etc.             |
-| [`Reserva`](src-v002/modelo/Reserva.java) | `Mesa`           | Encapsula los datos de una reserva y asocia una mesa                       |
-| [`Pedido`](src-v002/modelo/Pedido.java)   | `Mesa`, `Plato`  | Representa un pedido asociado a una mesa, incluye platos                    |
-| [`Plato`](src-v002/modelo/Plato.java)     | -                | Define los datos de un plato: nombre, precio, categoría, etc.              |
-| [`Personal`](src-v002/modelo/Personal.java)| -               | Representa al personal del restaurante, como camareros o cocineros         |
+| [`Mesa`](/src-v002/modelo/Mesa.java)       | -                | Representa una mesa del restaurante con número, ocupación, etc.             |
+| [`Reserva`](/src-v002/modelo/Reserva.java) | `Mesa`           | Encapsula los datos de una reserva y asocia una mesa                       |
+| [`Pedido`](/src-v002/modelo/Pedido.java)   | `Mesa`, `Plato`  | Representa un pedido asociado a una mesa, incluye platos                    |
+| [`Plato`](/src-v002/modelo/Plato.java)     | -                | Define los datos de un plato: nombre, precio, categoría, etc.              |
+| [`Personal`](/src-v002/modelo/Personal.java)| -               | Representa al personal del restaurante, como camareros o cocineros         |
 
 ---
 
@@ -39,7 +39,7 @@
 
 | Clase                                                       | Depende de / Usa      | Descripción                                                             |
 |--------------------------------------------------------------|------------------------|-------------------------------------------------------------------------|
-| [`VistaConsola`](src-v002/vista/VistaConsola.java)           | `Constantes`          | Muestra menús y opciones por consola, interactúa con el usuario         |
+| [`VistaConsola`](/src-v002/vista/VistaConsola.java)           | `Constantes`          | Muestra menús y opciones por consola, interactúa con el usuario         |
 
 ---
 
@@ -47,8 +47,8 @@
 
 | Clase                                                     | Depende de / Usa                              | Descripción                                                                   |
 |------------------------------------------------------------|-----------------------------------------------|-------------------------------------------------------------------------------|
-| [`Main`](src-v002/controlador/Main.java)                   | `VistaConsola`, `Restaurante_`               | Clase principal, inicia la aplicación e invoca el controlador general        |
-| [`Restaurante_`](src-v002/controlador/Restaurante_.java)   | `Mesa`, `Reserva`, `Pedido`, `Personal`, `Utilidades` | Gestiona la lógica del sistema y coordina los datos                        |
+| [`Main`](/src-v002/controlador/Main.java)                   | `VistaConsola`, `Restaurante_`               | Clase principal, inicia la aplicación e invoca el controlador general        |
+| [`Restaurante_`](/src-v002/controlador/Restaurante_.java)   | `Mesa`, `Reserva`, `Pedido`, `Personal`, `Utilidades` | Gestiona la lógica del sistema y coordina los datos                        |
 
 ---
 
@@ -56,8 +56,8 @@
 
 | Clase                                            | Depende de / Usa | Descripción                                                                   |
 |--------------------------------------------------|------------------|-------------------------------------------------------------------------------|
-| [`Constantes`](src-v002/util/Constantes.java)    | -                | Almacena textos y valores constantes del sistema                              |
-| [`Utilidades`](src-v002/util/Utilidades.java)    | -                | Métodos reutilizables como entrada segura, impresión de listas, etc.          |
+| [`Constantes`](/src-v002/util/Constantes.java)    | -                | Almacena textos y valores constantes del sistema                              |
+| [`Utilidades`](/src-v002/util/Utilidades.java)    | -                | Métodos reutilizables como entrada segura, impresión de listas, etc.          |
 
 ---
 
@@ -65,7 +65,7 @@
 
 | Clase                                   | Depende de / Usa                          | Descripción                                                                 |
 |----------------------------------------|-------------------------------------------|-----------------------------------------------------------------------------|
-| [`Main`](src-v002/controlador/Main.java) | `VistaConsola`, `Restaurante_`           | Ejecuta el programa y sirve como punto de entrada al flujo de control      |
+| [`Main`](/src-v002/controlador/Main.java) | `VistaConsola`, `Restaurante_`           | Ejecuta el programa y sirve como punto de entrada al flujo de control      |
 
 ---
 
