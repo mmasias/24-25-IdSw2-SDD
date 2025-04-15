@@ -1,56 +1,55 @@
 @startuml
-class Superficie {
-}
 
-class Zona {
-  - nivelSuciedad: int
-  + ensuciar()
-  + limpiar()
-  + tieneMueble(): boolean
-}
+class Mundo{
 
-class ZonaRecarga {
-  + recargar(Aspiradora aspiradora)
 }
 
 class Aspiradora {
-  - bateria: int
-  - bolsa: int
-  + mover()
-  + limpiar(Zona x)
-  + buscarRecarga()
-  + detectarZonaMasSucia()
-}
 
-class Bateria {
-  - carga: int
-  + consumir()
-  + recargar()
-}
-
-class Mueble {
-  - tamaño: int
 }
 
 class Gato {
-  + mover()
-  + ensuciar(Zona x)
+
 }
 
-Superficie *-- "*" Zona : "está formada por"
-Zona o-- Gato : "puede contener"
-Zona <|-- ZonaRecarga : "es una"
+class Habitacion {
 
-Aspiradora --> Zona : "se mueve en"
-Aspiradora --> Zona : "limpia"
-Aspiradora --> Mueble : "detecta y evita"
-Aspiradora --> ZonaRecarga : "recarga en"
+}
 
-Aspiradora *-- Bateria : "tiene una"
-Bateria --> ZonaRecarga : "se recarga en"
+class Zona {
 
-Zona --> Mueble : "puede contener"
+}
 
-Gato --> Zona : "ensucia"
+class Mueble {
 
+}
+
+class ZonaDeRecarga {
+
+}
+
+
+class Bateria {
+
+}
+
+class VistaConsola {
+
+}
+
+Mundo *-- Habitacion : compone
+Aspiradora *-l- Bateria : compone
+Mundo *-- UnidadConMovimiento : compone
+Habitacion *-d- Zona : compone
+Zona o-- Mueble : puede contener
+ZonaDeRecarga -|> Zona
+Aspiradora ..> Zona : limpia
+Gato ..> Zona : ensucia
+VistaConsola ..> Aspiradora
+VistaConsola ..> Bateria
+VistaConsola ..> Habitacion
+VistaConsola ..> Gato
+Mundo *-- VistaConsola : usa
+Aspiradora .u.|> UnidadConMovimiento
+Gato .u.|> UnidadConMovimiento
 @enduml

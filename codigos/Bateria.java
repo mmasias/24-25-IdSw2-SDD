@@ -1,10 +1,10 @@
 public class Bateria {
     private int carga;
-    private int MAX_CARGA;
+    private int capacidadMaximaBateria;
     private VistaConsola vista;
 
     public Bateria(int maxCarga, VistaConsola vista) {
-        this.MAX_CARGA = maxCarga;
+        this.capacidadMaximaBateria = maxCarga;
         this.vista = vista;
         this.carga = maxCarga;
     }
@@ -20,8 +20,8 @@ public class Bateria {
     }
 
     public void recargar() {
-        if (carga < MAX_CARGA) {
-            carga = MAX_CARGA;
+        if (carga < capacidadMaximaBateria) {
+            carga = capacidadMaximaBateria;
             vista.mostrarBateriaRecargada(carga);
         } else {
             vista.mostrarBateriaYaLlena();
@@ -32,7 +32,7 @@ public class Bateria {
         return carga;
     }
 
-    public int getMAX_CARGA() {
-        return MAX_CARGA;
+    public int getcapacidadMaximaBateria() {
+        return capacidadMaximaBateria;
     }
 }
