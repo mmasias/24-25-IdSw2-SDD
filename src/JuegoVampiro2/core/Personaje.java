@@ -1,4 +1,4 @@
-package JuegoVampiro2.core
+package JuegoVampiro2.core;
 
 public abstract class Personaje {
     private int energia;

@@ -49,3 +49,4 @@ public class Vampiro extends Personaje {
     public void pasarTurno() {
         super.pasarTurno();
 } 
+}

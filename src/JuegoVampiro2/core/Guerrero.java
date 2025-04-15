@@ -1,4 +1,4 @@
-package com.JuegoVampiro2.core;
+package JuegoVampiro2.core;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +36,7 @@ public class Guerrero extends Personaje {
 
 
     public boolean tienePocionActiva() {
-        return pocion.estaEnUso();
+        return pocion.EstaEnUso();
     }
 
     public Pocion getPocion() {

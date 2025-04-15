@@ -1,8 +1,8 @@
-package com.JuegoVampiro2.core;
+package JuegoVampiro2.core;
 
-import com.JuegoVampiro2.auth.GestorUsuarios;
-import com.JuegoVampiro2.ui.VistaConsola;
-import com.JuegoVampiro2.ui.CredencialesUsuario;
+import JuegoVampiro2.auth.GestorUsuarios;
+import JuegoVampiro2.ui.VistaConsola;
+import JuegoVampiro2.ui.CredencialesUsuario;
 
 public class JuegoVampiros {
 

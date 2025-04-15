@@ -1,7 +1,7 @@
 package JuegoVampiro2.ui;
 import java.util.Scanner;
-import JuegoVampiro2.core.*; // Importar clases del core para mostrar info
-import java.util.List; // Para listar armas
+import JuegoVampiro2.core.*; 
+import java.util.List; 
 
 
 public class VistaConsola {
@@ -18,13 +18,11 @@ public class VistaConsola {
 
     public void mostrarTitulo() {
         System.out.println("================================");
-        System.out.println("  JUEGO DE VAMPIROS v1.0 Modular"); // Versión actualizada
+        System.out.println("  JUEGO DE VAMPIROS v1.0 Modular"); 
         System.out.println("================================");
     }
 
-    // Métodos para mostrar menús, pedir entradas, mostrar estado batalla, etc.
-    // se añadirán después
-    // TODO: Implementar mostrarMenuInicial
+    
     public void mostrarMenuInicial() {
         System.out.println("\n--- Menú Principal ---");
         System.out.println("1. Iniciar sesión");
@@ -32,7 +30,7 @@ public class VistaConsola {
         System.out.println("3. Salir");
     }
 
-    // TODO: Implementar leerOpcion
+    
     public int leerOpcion() {
         int opcion = -1;
         while (opcion == -1) {
@@ -41,13 +39,13 @@ public class VistaConsola {
                 opcion = Integer.parseInt(scanner.nextLine());
             } catch (NumberFormatException e) {
                 System.out.println("Entrada inválida. Introduce un número.");
-                opcion = -1; // Asegurar que siga en el bucle
+                opcion = -1; 
             }
         }
         return opcion;
     }
 
-    // TODO: Implementar mostrarMenuJuego
+    
     public void mostrarMenuJuego(String usuario) {
         System.out.println("\n--- Menú de Juego (Usuario: " + usuario + ") ---");
         System.out.println("1. Crear nueva partida");
@@ -56,7 +54,7 @@ public class VistaConsola {
         System.out.println("4. Cerrar sesión");
     }
 
-    // TODO: Implementar pedirCredenciales
+    
     public CredencialesUsuario pedirCredenciales(String titulo) {
         System.out.println("\n--- " + titulo + " ---");
         System.out.print("Usuario: ");
@@ -66,7 +64,7 @@ public class VistaConsola {
         return new CredencialesUsuario(usuario, password);
     }
 
-    // TODO: Implementar mostrarInformacionJuego
+    
     public void mostrarInformacionJuego() {
         System.out.println("\n--- Información del Juego ---");
         System.out.println("En este juego, controlarás a un héroe que debe enfrentarse a un vampiro.");
@@ -76,7 +74,7 @@ public class VistaConsola {
         System.out.println("\nCrea una nueva partida para comenzar a jugar.");
     }
 
-    // TODO: Implementar mostrarEstadoBatalla
+    
     public void mostrarEstadoBatalla(Guerrero heroe, Vampiro vampiro) {
          System.out.println(heroe.getNombre() + ": " + heroe.getEnergia() + "/" + heroe.getEnergiaMaxima() + " energía" +
                          (heroe.estaDesmayado() ? " (Desmayado)" : "") +
@@ -85,7 +83,7 @@ public class VistaConsola {
                          (vampiro.estaDesmayado() ? " (Desmayado)" : ""));
     }
 
-    // TODO: Implementar pedirAccionGuerrero
+    
     public int pedirAccionGuerrero() {
         int opcion = -1;
         while (opcion < 1 || opcion > 3) {
@@ -101,23 +99,23 @@ public class VistaConsola {
         return opcion;
     }
 
-    // TODO: Implementar pedirSeleccionArma
+    
     public int pedirSeleccionArma(List<Arma> armas) {
         int opcion = -1;
         while (opcion < 1 || opcion > armas.size()) {
             System.out.println("\nSelecciona un arma para atacar:");
             for (int i = 0; i < armas.size(); i++) {
-                System.out.println((i + 1) + ". " + armas.get(i)); // Asume que Arma tiene toString()
+                System.out.println((i + 1) + ". " + armas.get(i)); 
             }
             opcion = leerOpcion();
              if (opcion < 1 || opcion > armas.size()) {
                  System.out.println("Opción inválida. Intenta de nuevo.");
             }
         }
-        return opcion -1; // Devolver índice basado en 0
+        return opcion -1; 
     }
 
-    // TODO: Implementar mostrarResultadoFinal
+    
     public void mostrarResultadoFinal(String mensaje) {
         System.out.println("\n=== FIN DE LA BATALLA ===");
         System.out.println(mensaje);

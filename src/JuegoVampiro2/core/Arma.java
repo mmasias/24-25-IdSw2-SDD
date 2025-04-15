@@ -1,4 +1,4 @@
-package com.JuegoVampiro2.core;
+package JuegoVampiro2.core;
 
 public class Arma extends Ataque {
     private String nombre;
