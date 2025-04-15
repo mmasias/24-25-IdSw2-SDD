@@ -116,8 +116,7 @@ public class Batalla {
         
         if (ataqueElegido != null) {
             // Mostrar qué ataque usa el vampiro
-            String nombreAtaque = (ataqueElegido instanceof Mordida) ? "Mordida" : "Ataque Genérico"; // Ajustar si hay más tipos
-            vista.mostrarMensaje(vampiro.getNombre() + " usa " + nombreAtaque + ".");
+            vista.mostrarMensaje(vampiro.getNombre() + " usa " + ataqueElegido.getNombre() + ".");
 
             if (ataqueElegido.esExitoso()) {
                 int daño = ataqueElegido.getDaño();
