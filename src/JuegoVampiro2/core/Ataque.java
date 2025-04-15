@@ -1,24 +1,24 @@
-public class Ataque {
-    private int daño;
-    private double porcentajeExito;
+package com.juegovampiro.core;
 
-    public Ataque(int daño, double porcentajeExito) {
-        this.daño = daño;
-        this.porcentajeExito = porcentajeExito;
+import java.util.Random;
+
+public abstract class Ataque {
+    private int dañoBase;
+    protected int probabilidadExito; // Porcentaje (0-100)
+    private Random random;
+
+    public Ataque(int dañoBase, int probabilidadExito) {
+        this.dañoBase = dañoBase;
+        this.probabilidadExito = probabilidadExito;
+        this.random = new Random();
     }
 
     public int getDaño() {
-        return daño;
-    }
-
-    public double getPorcentajeExito() {
-        return porcentajeExito;
+        // Podría haber variaciones en el daño aquí en el futuro
+        return dañoBase;
     }
 
     public boolean esExitoso() {
-        // Generamos un número aleatorio entre 0 y 1
-        double random = Math.random();
-        // Si el número es menor que el porcentaje de éxito, el ataque es exitoso
-        return random < (porcentajeExito / 100.0);
+        return random.nextInt(100) < probabilidadExito;
     }
 } 
