@@ -1,19 +1,19 @@
+package JuegoVampiro2.core;
+
 public class Pocion {
-    private int poderCurativo;
-    private int turnosRestantes;
+    private int turnosParaEfecto;
     private boolean enUso;
+    private int turnosRestantes;
+    
+    private static final int TURNOS_TOTALES = 3;
 
-    public Pocion(int poderCurativo) {
-        this.poderCurativo = poderCurativo;
-        this.turnosRestantes = 0;
+    public Pocion(int energiaMaximaPersonaje) {
+        this.turnosParaEfecto = TURNOS_TOTALES;
         this.enUso = false;
+        this.turnosRestantes = 0;
     }
 
-    public int getPoderCurativo() {
-        return poderCurativo;
-    }
-
-    public boolean estaEnUso() {
+    public boolean EstaEnUso() {
         return enUso;
     }
 
@@ -22,8 +22,10 @@ public class Pocion {
     }
 
     public void beber() {
-        this.enUso = true;
-        this.turnosRestantes = 3; // La poción tarda 3 turnos en hacer efecto
+        if (!enUso) {
+            this.enUso = true;
+            this.turnosRestantes = turnosParaEfecto;
+        }
     }
 
     public boolean avanzarTurno() {
@@ -31,10 +33,10 @@ public class Pocion {
             turnosRestantes--;
             if (turnosRestantes <= 0) {
                 enUso = false;
-                return true; // La poción ha hecho efecto
+                return true; // Efecto completado
             }
         }
-        return false; // La poción aún no ha hecho efecto
+        return false; // Aún no completado o no en uso
     }
 
     public void resetear() {
