@@ -13,6 +13,8 @@ public abstract class Ataque {
         this.random = new Random();
     }
 
+    public abstract String getNombre();
+
     public int getDaño() {
         // Podría haber variaciones en el daño aquí en el futuro
         return dañoBase;
