@@ -1,7 +1,7 @@
 package com.JuegoVampiro2.core;
 
 // Eliminar import java.util.Scanner;
-import com.juegovampiro.ui.VistaConsola;
+import com.JuegoVampiro2.ui.VistaConsola;
 
 public class Batalla {
     private Guerrero heroe;
