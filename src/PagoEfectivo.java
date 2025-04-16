@@ -23,9 +23,6 @@ public class PagoEfectivo {
 
     public void ingresarEfectivo(Efectivo efectivo) {
         listaEfectivo.add(efectivo);
-        if (validarEfectivo()) {
-            
-        }
     }
 
     public boolean validarEfectivo() {
