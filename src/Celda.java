@@ -5,16 +5,16 @@ import java.util.List;
 public class Celda {
     private List<Producto> productos;
     private double precio;
-    private int cantidad_disponible;
+    private int cantidadDisponible;
     private int capacidad;
-    private int id_maquina;
+    private int idMaquina;
 
-    public Celda(List<Producto> productos, double precio, int cantidad_disponible, int capacidad, int id_maquina) {
+    public Celda(List<Producto> productos, double precio, int cantidadDisponible, int capacidad, int idMaquina) {
         this.productos = productos;
         this.precio = precio;
-        this.cantidad_disponible = cantidad_disponible;
+        this.cantidadDisponible = cantidadDisponible;
         this.capacidad = capacidad;
-        this.id_maquina = id_maquina;
+        this.idMaquina = idMaquina;
     }
     public List<Producto> getProductos() {
         return productos;
@@ -28,11 +28,11 @@ public class Celda {
     public void setPrecio(double precio) {
         this.precio = precio;
     }
-    public int getCantidad_disponible() {
-        return cantidad_disponible;
+    public int getCantidadDisponible() {
+        return cantidadDisponible;
     }
-    public void setCantidad_disponible(int cantidad_disponible) {
-        this.cantidad_disponible = cantidad_disponible;
+    public void setCantidadDisponible(int cantidadDisponible) {
+        this.cantidadDisponible = cantidadDisponible;
     }
     public int getCapacidad() {
         return capacidad;
@@ -40,10 +40,10 @@ public class Celda {
     public void setCapacidad(int capacidad) {
         this.capacidad = capacidad;
     }
-    public int getId_maquina() {
-        return id_maquina;
+    public int getIdMaquina() {
+        return idMaquina;
     }
-    public void setId_maquina(int id_maquina) {
-        this.id_maquina = id_maquina;
+    public void setIdMaquina(int idMaquina) {
+        this.idMaquina = idMaquina;
     }
 }

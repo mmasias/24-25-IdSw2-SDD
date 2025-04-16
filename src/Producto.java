@@ -2,11 +2,11 @@ package src;
 
 public class Producto {
     private String nombre;
-    private String fecha_expiracion;
+    private String fechaExpiracion;
 
-    public Producto(String nombre, String fecha_expiracion) {
+    public Producto(String nombre, String fechaExpiracion) {
         this.nombre = nombre;
-        this.fecha_expiracion = null;
+        this.fechaExpiracion = null;
     }
 
     public String getNombre() {
@@ -15,10 +15,10 @@ public class Producto {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    public String getFecha_expiracion() {
-        return fecha_expiracion;
+    public String getFechaExpiracion() {
+        return fechaExpiracion;
     }
-    public void setFecha_expiracion(String fecha_expiracion) {
-        this.fecha_expiracion = fecha_expiracion;
+    public void setFechaExpiracion(String fechaExpiracion) {
+        this.fechaExpiracion = fechaExpiracion;
     }
 }

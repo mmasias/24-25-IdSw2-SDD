@@ -29,12 +29,12 @@ public class Empleado {
 
     public void abastecerMaquina(List<Celda> celdas, Producto producto) {
         for (Celda celda : celdas) {
-            int espacioDisponible = celda.getCapacidad() - celda.getCantidad_disponible();
+            int espacioDisponible = celda.getCapacidad() - celda.getCantidadDisponible();
             if (espacioDisponible > 0) {
                 for (int i = 0; i < espacioDisponible; i++) {
                     celda.getProductos().add(producto); 
                 }
-                celda.setCantidad_disponible(celda.getCapacidad()); 
+                celda.setCantidadDisponible(celda.getCapacidad()); 
             }
         }
     }
