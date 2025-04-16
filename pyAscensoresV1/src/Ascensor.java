@@ -3,16 +3,18 @@ package pyAscensoresV1.src;
 import java.util.*;
 
 public class Ascensor {
+    private static final int CAPACIDAD = 6;
+    private static final int PLANTA_INICIAL = 0;
+
     private String id;
     private int plantaActual;
     private List<Persona> personas;
     private Queue<Llamada> llamadas;
-    private static final int CAPACIDAD = 6;
     private List<Planta> plantas;
 
     public Ascensor(String id) {
         this.id = id;
-        this.plantaActual = 0;
+        this.plantaActual = PLANTA_INICIAL;
         this.personas = new ArrayList<>();
         this.llamadas = new LinkedList<>();
     }

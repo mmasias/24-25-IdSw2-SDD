@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Universidad {
+    private static final int PLANTA_MINIMA = -3;
+    private static final int PLANTA_MAXIMA = 3;
+    private static final int HORA_APERTURA = 8;
+    private static final int HORA_CIERRE = 21;
+
     private Tiempo tiempo;
     private List<Planta> plantas;
     private List<Ascensor> ascensores;
@@ -23,7 +28,7 @@ public class Universidad {
     }
 
     private void inicializarEdificio() {
-        for (int i = -3; i <= 3; i++) {
+        for (int i = PLANTA_MINIMA; i <= PLANTA_MAXIMA; i++) {
             plantas.add(new Planta(i));
         }
         ascensores.add(new Ascensor("A"));
@@ -32,7 +37,7 @@ public class Universidad {
 
     public boolean estaAbierta() {
         int hora = tiempo.getHora();
-        return hora >= 8 && hora < 21 && !tiempo.esFinDeSemana() && !tiempo.esFestivo();
+        return hora >= HORA_APERTURA && hora < HORA_CIERRE && !tiempo.esFinDeSemana() && !tiempo.esFestivo();
     }
 
     public void acogerPersona(Persona persona) {
@@ -57,7 +62,7 @@ public class Universidad {
         System.out.println("     Personas                     Personas");
         System.out.println("     esperando                    en la planta\n");
 
-        for (int i = 3; i >= -3; i--) {
+        for (int i = PLANTA_MAXIMA; i >= PLANTA_MINIMA; i--) {
             StringBuilder linea = new StringBuilder();
 
             int esperando = 0;

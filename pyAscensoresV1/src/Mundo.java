@@ -2,10 +2,14 @@ package pyAscensoresV1.src;
 
 public class Mundo {
     private static final int HORA_INICIO = 8;
+    private static final int HORA_CIERRE = 14;
+    private static final int PROBABILIDAD_DE_LLEGADA = 60;
+    private static final int PLANTA_MINIMA = -3;
+    private static final int PLANTA_MAXIMA = 3;
+    private static final int RANGO_ALEATORIO = 100;
+
     private Universidad universidad;
     private Tiempo tiempo;
-    private final int PROBABILIDAD_DE_LLEGADA = 60;
-    private final int HORA_CIERRE = 14;
 
     public Mundo() {
         tiempo = new Tiempo(HORA_INICIO, 0);
@@ -23,7 +27,7 @@ public class Mundo {
     }
 
     private Persona generarPersona() {
-        int destino = (int) (Math.random() * 7) - 3;
+        int destino = (int) (Math.random() * (PLANTA_MAXIMA - PLANTA_MINIMA + 1)) + PLANTA_MINIMA;
         System.out.println("Persona generada con destino a planta " + destino);
         return new Persona(destino);
     }
@@ -34,7 +38,7 @@ public class Mundo {
 
     private void simular() {
         do {
-            int numeroAleatorio = (int) (Math.random() * 100);
+            int numeroAleatorio = (int) (Math.random() * RANGO_ALEATORIO);
             if (numeroAleatorio < PROBABILIDAD_DE_LLEGADA) {
                 Persona nueva = generarPersona();
                 universidad.acogerPersona(nueva);

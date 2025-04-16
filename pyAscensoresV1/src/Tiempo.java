@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Tiempo {
+    private static final int MINUTOS_EN_HORA = 60;
+
     private int hora;
     private int minuto;
     private LocalDate fecha;
@@ -17,7 +19,7 @@ public class Tiempo {
 
     public void avanzarMinuto() {
         minuto++;
-        if (minuto >= 60) {
+        if (minuto >= MINUTOS_EN_HORA) {
             minuto = 0;
             hora++;
         }
@@ -46,9 +48,10 @@ public class Tiempo {
 
     public boolean esFestivo() {
         List<LocalDate> diasFestivos = Arrays.asList(
-                LocalDate.of(fecha.getYear(), 1, 1),
-                LocalDate.of(fecha.getYear(), 12, 25),
-                LocalDate.of(fecha.getYear(), 11, 1));
+                LocalDate.of(fecha.getYear(), 1, 1),  // Año Nuevo
+                LocalDate.of(fecha.getYear(), 12, 25), // Navidad
+                LocalDate.of(fecha.getYear(), 11, 1)  // Todos los Santos
+        );
         return diasFestivos.contains(fecha);
     }
 }
