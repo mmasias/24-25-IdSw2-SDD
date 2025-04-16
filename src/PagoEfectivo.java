@@ -7,6 +7,7 @@ public class PagoEfectivo {
     
     private double monto;
     private List<Efectivo> listaEfectivo;
+    private double cambio;
 
     public PagoEfectivo(double monto) {
         this.monto = monto;
@@ -21,6 +22,10 @@ public class PagoEfectivo {
         return listaEfectivo;
     }
 
+    public double getCambio() {
+        return cambio;
+    }
+
     public void ingresarEfectivo(Efectivo efectivo) {
         listaEfectivo.add(efectivo);
     }
@@ -29,13 +34,14 @@ public class PagoEfectivo {
         double total = 0;
         for (Efectivo efectivo : listaEfectivo) {
             total += efectivo.getDenominacion();
+            cambio = total - monto;
+            if (cambio < 0) {
+                return false;
+            }
         }
         if (total >= monto) {
             return true;
         }
         return false;
     }
-
 }
-// TODO: Crea un metodo que calcule la cantidad de efectivo a devolver si el monto ingresado es mayor al monto a pagar
-// Se debe calcular cuantas monedas de cada denominacion se deben devolver, de manera equitativa
