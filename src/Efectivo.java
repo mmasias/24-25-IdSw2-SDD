@@ -1,11 +1,18 @@
 package src;
 
 public class Efectivo {
-    private double denominacion; 
-    private Tipo tipo; 
+    private double denominacion;
+    private EfectivoAceptado tipoEfectivo;
+    private Tipo tipo;
 
     public enum Tipo {
-        BILLETE, MONEDA
+        BILLETE,
+        MONEDA
+    }
+
+    public Efectivo(EfectivoAceptado tipoEfectivo) {
+        this.denominacion = tipoEfectivo.getValor();
+        this.tipoEfectivo = tipoEfectivo;
     }
 
     public Efectivo(double denominacion, Tipo tipo) {
@@ -13,12 +20,12 @@ public class Efectivo {
         this.tipo = tipo;
     }
 
-    public double getDenominacion() {
-        return denominacion;
-    }
-
     public void setDenominacion(double denominacion) {
         this.denominacion = denominacion;
+    }
+
+    public double getDenominacion() {
+        return denominacion;
     }
 
     public Tipo getTipo() {
@@ -28,5 +35,4 @@ public class Efectivo {
     public void setTipo(Tipo tipo) {
         this.tipo = tipo;
     }
-
 }
