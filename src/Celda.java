@@ -4,12 +4,14 @@ import java.util.List;
 
 public class Celda {
     private List<Producto> productos;
+    private double precio;
     private int cantidad_disponible;
     private int capacidad;
     private int id_maquina;
 
-    public Celda(List<Producto> productos, int cantidad_disponible, int capacidad, int id_maquina) {
+    public Celda(List<Producto> productos, double precio, int cantidad_disponible, int capacidad, int id_maquina) {
         this.productos = productos;
+        this.precio = precio;
         this.cantidad_disponible = cantidad_disponible;
         this.capacidad = capacidad;
         this.id_maquina = id_maquina;
@@ -19,6 +21,12 @@ public class Celda {
     }
     public void setProductos(List<Producto> productos) {
         this.productos = productos;
+    }
+    public double getPrecio() {
+        return precio;
+    }
+    public void setPrecio(double precio) {
+        this.precio = precio;
     }
     public int getCantidad_disponible() {
         return cantidad_disponible;
