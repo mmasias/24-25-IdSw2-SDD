@@ -22,17 +22,29 @@ public class Universidad {
         this.tiempo = tiempo;
         inicializarEdificio();
         this.control = new ControlAscensor(ascensores);
-        for (Ascensor ascensor : ascensores) {
-            ascensor.asignarPlantas(plantas);
-        }
+        asignarPlantasAAscensores();
     }
 
     private void inicializarEdificio() {
+        inicializarPlantas();
+        inicializarAscensores();
+    }
+
+    private void inicializarPlantas() {
         for (int i = PLANTA_MINIMA; i <= PLANTA_MAXIMA; i++) {
             plantas.add(new Planta(i));
         }
+    }
+
+    private void inicializarAscensores() {
         ascensores.add(new Ascensor("A"));
         ascensores.add(new Ascensor("B"));
+    }
+
+    private void asignarPlantasAAscensores() {
+        for (Ascensor ascensor : ascensores) {
+            ascensor.asignarPlantas(plantas);
+        }
     }
 
     public boolean estaAbierta() {
@@ -43,13 +55,17 @@ public class Universidad {
     public void acogerPersona(Persona persona) {
         if (estaAbierta()) {
             personas.add(persona);
-            for (Planta planta : plantas) {
-                if (planta.getNumero() == persona.getPlantaOrigen()) {
-                    planta.personaEsperaAscensor(persona);
-                    break;
-                }
-            }
+            asignarPersonaAPlanta(persona);
             persona.llamarAlAscensor(control);
+        }
+    }
+
+    private void asignarPersonaAPlanta(Persona persona) {
+        for (Planta planta : plantas) {
+            if (planta.getNumero() == persona.getPlantaOrigen()) {
+                planta.personaEsperaAscensor(persona);
+                break;
+            }
         }
     }
 
@@ -58,40 +74,68 @@ public class Universidad {
     }
 
     public void imprimirEstado() {
+        imprimirCabeceraEstado();
+        imprimirEstadoPlantas();
+        imprimirPieEstado();
+    }
+
+    private void imprimirCabeceraEstado() {
         System.out.println(tiempo.darLaHora());
         System.out.println("     Personas                     Personas");
         System.out.println("     esperando                    en la planta\n");
+    }
 
+    private void imprimirEstadoPlantas() {
         for (int i = PLANTA_MAXIMA; i >= PLANTA_MINIMA; i--) {
-            StringBuilder linea = new StringBuilder();
-
-            int esperando = 0;
-            int enPlanta = 0;
-
-            for (Planta planta : plantas) {
-                if (planta.getNumero() == i) {
-                    esperando = planta.getCantidadEsperando();
-                    enPlanta = planta.getCantidadEnPlanta();
-                    break;
-                }
-            }
-
-            String esperaTexto = String.format("   ___%d_ ", esperando);
-            linea.append("Planta ").append(String.format("%2d", i)).append(esperaTexto);
-
-            for (Ascensor ascensor : ascensores) {
-                if (ascensor.getPlantaActualAsInt() == i) {
-                    linea.append("  [v").append(ascensor.personasEnElAscensor()).append("v]");
-                } else {
-                    linea.append("   | | ");
-                }
-            }
-
-            linea.append("     __").append(enPlanta).append("__");
-
-            System.out.println(linea.toString());
+            imprimirEstadoPlanta(i);
         }
+    }
 
+    private void imprimirEstadoPlanta(int plantaNumero) {
+        StringBuilder linea = new StringBuilder();
+
+        int esperando = obtenerCantidadEsperando(plantaNumero);
+        int enPlanta = obtenerCantidadEnPlanta(plantaNumero);
+
+        String esperaTexto = String.format("   ___%d_ ", esperando);
+        linea.append("Planta ").append(String.format("%2d", plantaNumero)).append(esperaTexto);
+
+        agregarEstadoAscensores(linea, plantaNumero);
+
+        linea.append("     __").append(enPlanta).append("__");
+
+        System.out.println(linea.toString());
+    }
+
+    private int obtenerCantidadEsperando(int plantaNumero) {
+        for (Planta planta : plantas) {
+            if (planta.getNumero() == plantaNumero) {
+                return planta.getCantidadEsperando();
+            }
+        }
+        return 0;
+    }
+
+    private int obtenerCantidadEnPlanta(int plantaNumero) {
+        for (Planta planta : plantas) {
+            if (planta.getNumero() == plantaNumero) {
+                return planta.getCantidadEnPlanta();
+            }
+        }
+        return 0;
+    }
+
+    private void agregarEstadoAscensores(StringBuilder linea, int plantaNumero) {
+        for (Ascensor ascensor : ascensores) {
+            if (ascensor.getPlantaActualAsInt() == plantaNumero) {
+                linea.append("  [v").append(ascensor.personasEnElAscensor()).append("v]");
+            } else {
+                linea.append("   | | ");
+            }
+        }
+    }
+
+    private void imprimirPieEstado() {
         System.out.println("       /--------- Ascensores ------/");
     }
 
