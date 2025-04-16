@@ -4,6 +4,7 @@ public class ControladorPago {
 
     PagoEfectivo pagoEfectivo;
     PagoTarjeta pagoTarjeta;
+    public boolean pagoRealizado = false;
 
     public ControladorPago() {
         this.pagoEfectivo = null;
@@ -15,16 +16,18 @@ public class ControladorPago {
     }
 
     public void agregarEfectivo(Efectivo efectivo) {
-            if (pagoEfectivo == null) {
-                System.out.println("Inicie el pago en efectivo primero.");
-                return;
-            }
-            pagoEfectivo.ingresarEfectivo(efectivo);
-            if (pagoEfectivo.validarEfectivo()) {
-                System.out.println("Pago en efectivo validado.");
-            } else {
-                System.out.println("Monto insuficiente.");
-            }
+        if (pagoEfectivo == null) {
+            System.out.println("Inicie el pago en efectivo primero.");
+            return;
+        }
+        pagoEfectivo.ingresarEfectivo(efectivo);
+        if (pagoEfectivo.validarEfectivo()) {
+            pagoRealizado = true;
+            System.out.println("Pago en efectivo validado.");
+        } else {
+            pagoRealizado = false;
+            System.out.println("Monto insuficiente.");
+        }
     }
 
     public void realizarPagoTarjeta(Tarjeta tarjeta, double monto) {
