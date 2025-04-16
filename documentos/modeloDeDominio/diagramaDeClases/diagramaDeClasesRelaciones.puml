@@ -1,10 +1,11 @@
-@startuml diagramaDeClases
+@startuml diagramaDeClasesRelaciones
 hide empty members
 hide circles
 
 class Maquina
 class Pago
 class Efectivo
+class Tarjeta
 class Usuario
 class Productos
 class Celdas
@@ -19,5 +20,6 @@ Usuario -U-> Celdas : selecciona
 Usuario --> Pago : efectua 
 Empleado .U..> Maquina : abastece
 Pago -r-> Efectivo : maneja
+Pago -d-> Tarjeta : maneja
 
 @enduml
