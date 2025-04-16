@@ -11,6 +11,18 @@ public class ControladorPago {
         this.pagoTarjeta = null;
     }
 
+    public PagoEfectivo getPagoEfectivo() {
+        return pagoEfectivo;
+    }
+    
+    public PagoTarjeta getPagoTarjeta() {
+        return pagoTarjeta;
+    }
+
+    public boolean isPagoRealizado() {
+        return pagoRealizado;
+    }
+
     public void iniciarPagoEfectivo(double monto) {
         this.pagoEfectivo = new PagoEfectivo(monto);
     }
