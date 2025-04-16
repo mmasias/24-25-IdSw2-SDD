@@ -42,7 +42,6 @@ class "Pago:Pago1"{
 class "Empleado:Empleado1"{
    id: 1
    Nombre: "Carlos"
-   Acciones_realizadas: "Abastecer"
 
 }
 
