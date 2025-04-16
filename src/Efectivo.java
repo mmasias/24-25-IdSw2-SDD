@@ -1,11 +1,13 @@
 package src;
 
+
 public class Efectivo {
-    private double denominacion; 
-    private Tipo tipo; 
+    private double denominacion;
+    private Tipo tipo;
 
     public enum Tipo {
-        BILLETE, MONEDA
+        BILLETE,
+        MONEDA
     }
 
     public Efectivo(double denominacion, Tipo tipo) {
