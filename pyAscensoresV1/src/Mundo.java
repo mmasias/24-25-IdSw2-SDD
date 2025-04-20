@@ -1,5 +1,7 @@
 package pyAscensoresV1.src;
 
+import java.util.Scanner;
+
 public class Mundo {
     private static final int HORA_INICIO = 8;
     private static final int HORA_CIERRE = 14;
@@ -16,13 +18,21 @@ public class Mundo {
         universidad = new Universidad(tiempo);
     }
 
+
     private void esperar() {
-        System.out.println("Quiere coninuar? (s/n)");
-        String respuesta = new java.util.Scanner(System.in).nextLine();
-        if (respuesta.equalsIgnoreCase("s")) {
-            return;
-        } else {
-            System.exit(0);
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            System.out.println("¿Quiere continuar? (s/n)");
+            String respuesta = scanner.nextLine().trim();
+
+            if (respuesta.equalsIgnoreCase("s")) {
+                return;
+            } else if (respuesta.equalsIgnoreCase("n")) {
+                System.out.println("Simulación detenida por el usuario.");
+                System.exit(0);
+            } else {
+                System.out.println("Entrada no válida. Por favor, ingrese 's' para sí o 'n' para no.");
+            }
         }
     }
 
@@ -31,6 +41,7 @@ public class Mundo {
         System.out.println("Persona generada con destino a planta " + destino);
         return new Persona(destino);
     }
+
 
     private void avanzarMinuto() {
         tiempo.avanzarMinuto();
@@ -43,10 +54,16 @@ public class Mundo {
                 Persona nueva = generarPersona();
                 universidad.acogerPersona(nueva);
             }
+
             universidad.simular();
+
             esperar();
+
             avanzarMinuto();
         } while (tiempo.getHora() < HORA_CIERRE);
+
+
+        System.out.println("La universidad ha cerrado.");
     }
 
     public static void main(String[] args) {
