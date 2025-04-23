@@ -107,7 +107,7 @@ public class Universidad {
         System.out.println(linea.toString());
     }
 
-    private int obtenerCantidadEsperando(int plantaNumero) {
+    protected int obtenerCantidadEsperando(int plantaNumero) {
         for (Planta planta : plantas) {
             if (planta.getNumero() == plantaNumero) {
                 return planta.getCantidadEsperando();
@@ -116,7 +116,7 @@ public class Universidad {
         return 0;
     }
 
-    private int obtenerCantidadEnPlanta(int plantaNumero) {
+    protected int obtenerCantidadEnPlanta(int plantaNumero) {
         for (Planta planta : plantas) {
             if (planta.getNumero() == plantaNumero) {
                 return planta.getCantidadEnPlanta();
@@ -133,6 +133,22 @@ public class Universidad {
                 linea.append("   | | ");
             }
         }
+    }
+
+    public Tiempo getTiempo() {
+        return tiempo;
+    }
+
+    public List<Planta> getPlantas() {
+        return plantas;
+    }
+
+    public List<Ascensor> getAscensores() {
+        return ascensores;
+    }
+
+    public List<Persona> getPersonas() {
+        return personas;
     }
 
     private void imprimirPieEstado() {
