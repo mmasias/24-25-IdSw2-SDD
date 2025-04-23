@@ -91,7 +91,12 @@ public class AscensorSimuladorGUI {
         StringBuilder sb = new StringBuilder();
         for (var asc : universidad.getAscensores()) {
             if (asc.getPlantaActualAsInt() == planta) {
-                sb.append("[").append(asc.getId()).append("] ");
+                sb.append("[")
+                        .append(asc.getId())
+                        .append(":")
+                        .append(asc.personasEnElAscensor())
+                        .append("] ");
+
             }
         }
         return sb.toString();
