@@ -12,6 +12,7 @@ public class AscensorSimuladorGUI {
     private JPanel[] panelesPlantas;
     private JLabel[][] infoPlantas;
     private JComboBox<Integer> destinoSelector;
+    private JComboBox<Integer> origenSelector;
 
     public AscensorSimuladorGUI() {
         universidad = new Universidad(new Tiempo(8, 0));
@@ -50,8 +51,14 @@ public class AscensorSimuladorGUI {
         lblAgregar.setAlignmentX(Component.LEFT_ALIGNMENT);
         panelLateral.add(lblAgregar);
 
+        origenSelector = new JComboBox<>(new Integer[]{-3, -2, -1, 0, 1, 2, 3});
+        origenSelector.setMaximumSize(new Dimension(200, 30));
+        panelLateral.add(new JLabel("Origen:"));
+        panelLateral.add(origenSelector);
+
         destinoSelector = new JComboBox<>(new Integer[]{-3, -2, -1, 0, 1, 2, 3});
         destinoSelector.setMaximumSize(new Dimension(200, 30));
+        panelLateral.add(new JLabel("Destino:"));
         panelLateral.add(destinoSelector);
 
         JButton agregarManualBtn = new JButton("Agregar Manualmente");
@@ -145,14 +152,27 @@ public class AscensorSimuladorGUI {
     }
 
     private void agregarPersonaEjemplo() {
-        int destino = (int) (Math.random() * 7) - 3;
-        universidad.acogerPersona(new Persona(destino));
+        int destino;
+        int origen = 0;
+        do {
+            destino = (int) (Math.random() * 7) - 3;
+        } while (destino == origen);
+
+        Persona persona = new Persona(destino);
+        universidad.acogerPersona(persona);
         actualizarVista();
     }
 
     private void agregarPersonaManual() {
+        int origen = (int) origenSelector.getSelectedItem();
         int destino = (int) destinoSelector.getSelectedItem();
-        universidad.acogerPersona(new Persona(destino));
+
+        if (origen == destino) {
+            JOptionPane.showMessageDialog(null, "El origen y destino no pueden ser iguales.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        universidad.acogerPersona(origen, destino);
         actualizarVista();
     }
 

@@ -59,6 +59,16 @@ public class Universidad {
             persona.llamarAlAscensor(control);
         }
     }
+    public void acogerPersona(int origen, int destino) {
+        Persona persona = new Persona(destino) {
+            @Override
+            public int getPlantaOrigen() {
+                return origen;
+            }
+        };
+        acogerPersona(persona);
+    }
+
 
     private void asignarPersonaAPlanta(Persona persona) {
         for (Planta planta : plantas) {
