@@ -11,11 +11,26 @@
 
 #### Responsabilidades:
 
-- `simular()`: Inicia y coordina el ciclo principal de la simulación, generando personas, invocando la lógica de la universidad y controlando el tiempo.
+- `simular()`: Inicia y coordina el ciclo principal de la simulación, preguntando si se desea continuar, si se quiere agregar una persona manualmente y avanzando el tiempo.
 - `esperar()`: Pausa la simulación y espera interacción del usuario para continuar o finalizar.
-- `generarPersona()`: Crea una nueva instancia de `Persona` con un destino aleatorio dentro del rango de plantas.
+- `preguntarAgregarPersona()`: Pregunta si el usuario quiere agregar manualmente una persona o generar una aleatoria.
+- `generarPersona()`: Crea una nueva instancia de `Persona` con un destino aleatorio y origen fijo en 0.
 - `avanzarMinuto()`: Avanza el tiempo de la simulación en un minuto.
 - `main(String[] args)`: Punto de entrada del programa. Inicializa `Mundo` y comienza la simulación con `simular()`.
+
+---
+
+### AscensorSimuladorGUI (Interfaz Gráfica Swing)
+**Recibe:** `Universidad`
+
+---
+
+#### Responsabilidades:
+
+- Visualiza el estado de cada planta, ascensores y personas.
+- Permite avanzar manualmente el tiempo minuto a minuto.
+- Permite agregar personas automáticamente (aleatorio) o manualmente (origen y destino seleccionados).
+- `actualizarVista()`: Refresca todos los componentes visuales de la interfaz con el estado más reciente.
 
 ---
 
@@ -44,12 +59,12 @@
 - `Universidad(Tiempo)`: Constructor que inicializa las plantas, ascensores, y el sistema de control, vinculando todo con el tiempo actual.
 - `estaAbierta()`: Verifica si la universidad está en horario de funcionamiento, considerando hora, fines de semana y festivos.
 - `acogerPersona(Persona)`: Registra una nueva persona si la universidad está abierta, la asigna a su planta de origen y le permite llamar al ascensor.
+- `acogerPersona(int origen, int destino)`: Sobrecarga para agregar una persona manual desde cualquier planta.
 - `evolucionDeLaUniversidad()`: Gestiona el movimiento de los ascensores a través del controlador central.
 - `imprimirEstado()`: Imprime el estado actual del edificio, mostrando personas esperando y en cada planta, así como la posición de los ascensores.
 - `simular()`: Ejecuta una iteración completa de simulación, verificando si está abierta y luego llamando a `evolucionDeLaUniversidad()` y `imprimirEstado()`.
 
 ---
-
 
 ### Persona
 **Recibe:** `Ascensor` (a través de `ControlAscensor`)
