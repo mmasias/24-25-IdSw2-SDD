@@ -3,6 +3,25 @@ import java.util.List;
 
 public class VistaConsola {
 
+    private static final String reset = "\u001B[0m";
+
+    private static final String negro = "\u001B[30m";
+    private static final String rojo = "\u001B[31m";
+    private static final String amarillo = "\u001B[33m";
+    private static final String azul = "\u001B[34m";
+    private static final String morado = "\u001B[35m";
+    private static final String negroClaro = "\u001B[90m";
+    private static final String rojoClaro = "\u001B[91m";
+    private static final String cyanClaro = "\u001B[96m";
+    private static final String blanco = "\u001B[97m";
+    private static final String fondoVerde = "\u001B[42m";
+    private static final String fondoBlanco = "\u001B[47m";
+    private static final String fondoNegroClaro = "\u001B[100m";
+    private static final String fondoRojoClaro = "\u001B[101m";
+    private static final String fondoAmarilloClaro = "\u001B[103m";
+    private static final String fondoAzulClaro = "\u001B[104m";
+    private static final String fondoMoradoClaro = "\u001B[105m";
+
     private List<String> mensajes = new ArrayList<>();
     private String mensajePasosGato = "";
 
@@ -53,31 +72,31 @@ public class VistaConsola {
                 Zona zona = habitacion.getZona(j, i);
 
                 if (i == posicionY && j == posicionX) {
-                    System.out.print(" (O) ");
+                    System.out.print(fondoBlanco + negro + " (O) " + reset);
                 } else if (gato != null && !gato.haTerminado() && i == gato.getPosicionY()
                         && j == gato.getPosicionX()) {
-                    System.out.print(" >^< ");
+                    System.out.print(fondoAmarilloClaro + rojoClaro + " >^< " + reset);
                 } else if (zona != null && zona.tieneMueble()) {
-                    System.out.print("  #  ");
+                    System.out.print(fondoNegroClaro + blanco + "[###]" + reset);
                 } else if (zona instanceof ZonaDeRecarga) {
-                    System.out.print(" [+] ");
+                    System.out.print(fondoVerde + cyanClaro + " [+] " + reset);
                 } else {
                     int nivel = zona != null ? zona.getNivelSuciedad() : 0;
                     switch (nivel) {
                         case 0:
-                            System.out.print("  .  ");
+                            System.out.print(fondoBlanco + negroClaro + "  .  " + reset);
                             break;
                         case 1:
-                            System.out.print(" ... ");
+                            System.out.print(fondoAmarilloClaro + amarillo + " ... " + reset);
                             break;
                         case 2:
-                            System.out.print(" ooo ");
+                            System.out.print(fondoAzulClaro + azul + " ooo " + reset);
                             break;
                         case 3:
-                            System.out.print(" OOO ");
+                            System.out.print(fondoRojoClaro + rojo + " OOO " + reset);
                             break;
                         case 4:
-                            System.out.print(" *** ");
+                            System.out.print(fondoMoradoClaro + morado + " *** " + reset);
                             break;
                     }
                 }
@@ -92,8 +111,10 @@ public class VistaConsola {
         System.out.println("+");
 
         int anchoTotal = habitacion.getAnchoHabitacion() * 5 + 2;
-        imprimirLineaDentroDelMarco("Batería: " + bateria.getCarga() + "/" + bateria.getcapacidadMaximaBateria(), anchoTotal);
-        imprimirLineaDentroDelMarco("Bolsa: " + aspiradora.getBolsa() + "/" + aspiradora.getCapacidadMaximaBolsa(), anchoTotal);
+        imprimirLineaDentroDelMarco("Batería: " + bateria.getCarga() + "/" + bateria.getcapacidadMaximaBateria(),
+                anchoTotal);
+        imprimirLineaDentroDelMarco("Bolsa: " + aspiradora.getBolsa() + "/" + aspiradora.getCapacidadMaximaBolsa(),
+                anchoTotal);
 
         for (String m : mensajes) {
             imprimirLineaDentroDelMarco(m, anchoTotal);

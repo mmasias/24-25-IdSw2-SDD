@@ -14,10 +14,13 @@ public class Gato implements UnidadConMovimiento {
         this.aspiradora = aspiradora;
         this.vista = vista;
         this.random = new Random();
-        this.posicionX = random.nextInt(habitacion.getAnchoHabitacion());
-        this.posicionY = random.nextInt(habitacion.getAltoHabitacion());
         this.pasos = 0;
         this.gatoActivo = true;
+
+        do {
+            this.posicionX = random.nextInt(habitacion.getAnchoHabitacion());
+            this.posicionY = random.nextInt(habitacion.getAltoHabitacion());
+        } while (habitacion.getZona(posicionX, posicionY).tieneMueble());
 
         vista.mostrarMensajeGatoAparece(posicionX, posicionY);
     }
@@ -25,7 +28,7 @@ public class Gato implements UnidadConMovimiento {
     @Override
     public void calcularMovimiento(Habitacion habitacion) {
         if (pasos < 25) {
-            int direccion = random.nextInt(4);
+            int direccion = random.nextInt(8);
             int nuevaX = posicionX;
             int nuevaY = posicionY;
 
@@ -34,20 +37,18 @@ public class Gato implements UnidadConMovimiento {
                 case 1: if (posicionY > 0) nuevaY--; break;
                 case 2: if (posicionX < habitacion.getAnchoHabitacion() - 1) nuevaX++; break;
                 case 3: if (posicionY < habitacion.getAltoHabitacion() - 1) nuevaY++; break;
+                case 4: if (posicionX > 0 && posicionY > 0) { nuevaX--; nuevaY--; } break;
+                case 5: if (posicionX < habitacion.getAnchoHabitacion() - 1 && posicionY > 0) { nuevaX++; nuevaY--; } break;
+                case 6: if (posicionX > 0 && posicionY < habitacion.getAltoHabitacion() - 1) { nuevaX--; nuevaY++; } break;
+                case 7: if (posicionX < habitacion.getAnchoHabitacion() - 1 && posicionY < habitacion.getAltoHabitacion() - 1) { nuevaX++; nuevaY++; } break;
             }
 
             Zona zona = habitacion.getZona(nuevaX, nuevaY);
 
-            if (zona != null && zona.getNivelSuciedad() < 3) {
-                
+            if (zona != null && !zona.tieneMueble()) {
                 if (nuevaX != aspiradora.getPosicionX() || nuevaY != aspiradora.getPosicionY()) {
-                    
-                    if (!zona.tieneMueble()) {
-                        mover(nuevaX, nuevaY);
-                        if (zona.getNivelSuciedad() < 4) {
-                            zona.ensuciar();
-                        }
-                    }
+                    mover(nuevaX, nuevaY);
+                    zona.ensuciar();
                 }
             }
 
@@ -76,5 +77,17 @@ public class Gato implements UnidadConMovimiento {
 
     public boolean haTerminado() {
         return !gatoActivo;
+    }
+
+    public void reiniciarGato() {
+        this.pasos = 0;
+        this.gatoActivo = true;
+
+        do {
+            this.posicionX = random.nextInt(habitacion.getAnchoHabitacion());
+            this.posicionY = random.nextInt(habitacion.getAltoHabitacion());
+        } while (habitacion.getZona(posicionX, posicionY).tieneMueble());
+
+        vista.mostrarMensajeGatoAparece(posicionX, posicionY);
     }
 }
