@@ -42,14 +42,11 @@ public class Universidad {
     }
 
     private void asignarPlantasAAscensores() {
-        for (Ascensor ascensor : ascensores) {
-            ascensor.asignarPlantas(plantas);
-        }
+        ascensores.forEach(ascensor -> ascensor.asignarPlantas(plantas));
     }
 
     public boolean estaAbierta() {
-        int hora = tiempo.getHora();
-        return hora >= HORA_APERTURA && hora < HORA_CIERRE && !tiempo.esFinDeSemana() && !tiempo.esFestivo();
+        return tiempo.getHora() >= HORA_APERTURA && tiempo.getHora() < HORA_CIERRE && !tiempo.esFinDeSemana() && !tiempo.esFestivo();
     }
 
     public void acogerPersona(Persona persona) {
@@ -59,64 +56,6 @@ public class Universidad {
             persona.llamarAlAscensor(control);
         }
     }
-    public void acogerPersona(int origen, int destino) {
-        Persona persona = new Persona(destino) {
-            @Override
-            public int getPlantaOrigen() {
-                return origen;
-            }
-        };
-        acogerPersona(persona);
-    }
-
-
-    private void asignarPersonaAPlanta(Persona persona) {
-        for (Planta planta : plantas) {
-            if (planta.getNumero() == persona.getPlantaOrigen()) {
-                planta.personaEsperaAscensor(persona);
-                break;
-            }
-        }
-    }
-
-    public void evolucionDeLaUniversidad() {
-        control.moverAscensores();
-    }
-
-    public void imprimirEstado() {
-        imprimirCabeceraEstado();
-        imprimirEstadoPlantas();
-        imprimirPieEstado();
-    }
-
-    private void imprimirCabeceraEstado() {
-        System.out.println(tiempo.darLaHora());
-        System.out.println("     Personas                     Personas");
-        System.out.println("     esperando                    en la planta\n");
-    }
-
-    private void imprimirEstadoPlantas() {
-        for (int i = PLANTA_MAXIMA; i >= PLANTA_MINIMA; i--) {
-            imprimirEstadoPlanta(i);
-        }
-    }
-
-    private void imprimirEstadoPlanta(int plantaNumero) {
-        StringBuilder linea = new StringBuilder();
-
-        int esperando = obtenerCantidadEsperando(plantaNumero);
-        int enPlanta = obtenerCantidadEnPlanta(plantaNumero);
-
-        String esperaTexto = String.format("   ___%d_ ", esperando);
-        linea.append("Planta ").append(String.format("%2d", plantaNumero)).append(esperaTexto);
-
-        agregarEstadoAscensores(linea, plantaNumero);
-
-        linea.append("     __").append(enPlanta).append("__");
-
-        System.out.println(linea.toString());
-    }
-
     protected int obtenerCantidadEsperando(int plantaNumero) {
         for (Planta planta : plantas) {
             if (planta.getNumero() == plantaNumero) {
@@ -134,36 +73,40 @@ public class Universidad {
         }
         return 0;
     }
-
-    private void agregarEstadoAscensores(StringBuilder linea, int plantaNumero) {
-        for (Ascensor ascensor : ascensores) {
-            if (ascensor.getPlantaActualAsInt() == plantaNumero) {
-                linea.append("  [v").append(ascensor.personasEnElAscensor()).append("v]");
-            } else {
-                linea.append("   | | ");
-            }
-        }
+    public void acogerPersona(int origen, int destino) {
+        Persona persona = new Persona(destino) {
+            @Override
+            public int getPlantaOrigen() { return origen; }
+        };
+        acogerPersona(persona);
     }
 
-    public Tiempo getTiempo() {
-        return tiempo;
+    private void asignarPersonaAPlanta(Persona persona) {
+        plantas.stream().filter(p -> p.getNumero() == persona.getPlantaOrigen()).findFirst().ifPresent(p -> p.personaEsperaAscensor(persona));
     }
 
-    public List<Planta> getPlantas() {
-        return plantas;
+    public void evolucionDeLaUniversidad() {
+        control.moverAscensores();
     }
 
-    public List<Ascensor> getAscensores() {
-        return ascensores;
-    }
-
-    public List<Persona> getPersonas() {
-        return personas;
-    }
-
-    private void imprimirPieEstado() {
+    public void imprimirEstado() {
+        System.out.println(tiempo.darLaHora());
+        plantas.stream().sorted((p1, p2) -> Integer.compare(p2.getNumero(), p1.getNumero())).forEach(this::imprimirEstadoPlanta);
         System.out.println("       /--------- Ascensores ------/");
     }
+
+    private void imprimirEstadoPlanta(Planta planta) {
+        StringBuilder linea = new StringBuilder();
+        linea.append("Planta ").append(String.format("%2d", planta.getNumero())).append("   ___").append(planta.getCantidadEsperando()).append("_ ");
+        ascensores.stream().filter(a -> a.getPlantaActualAsInt() == planta.getNumero()).forEach(a -> linea.append("  [v").append(a.personasEnElAscensor()).append("v]"));
+        linea.append("     __").append(planta.getCantidadEnPlanta()).append("__");
+        System.out.println(linea);
+    }
+
+    public Tiempo getTiempo() { return tiempo; }
+    public List<Planta> getPlantas() { return plantas; }
+    public List<Ascensor> getAscensores() { return ascensores; }
+    public List<Persona> getPersonas() { return personas; }
 
     public void simular() {
         if (estaAbierta()) {

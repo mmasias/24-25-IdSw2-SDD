@@ -14,36 +14,22 @@ public class Planta {
         this.personasEsperando = new ArrayList<>();
     }
 
-    public int getNumero() {
-        return numero;
-    }
+    public int getNumero() { return numero; }
 
-    public void personaLlega(Persona persona) {
-        personasEsperando.add(persona);
-    }
+    public void personaLlega(Persona persona) { personasEsperando.add(persona); }
 
-    public void personaEsperaAscensor(Persona persona) {
-        personasEsperando.add(persona);
-    }
+    public void personaEsperaAscensor(Persona persona) { personasEsperando.add(persona); }
 
     public void personaSubeAlAscensor(Persona persona) {
         personasEsperando.remove(persona);
         personasEnPlanta.remove(persona);
     }
 
-    public void personaLlegaADestino(Persona persona) {
-        personasEnPlanta.add(persona);
-    }
+    public void personaLlegaADestino(Persona persona) { personasEnPlanta.add(persona); }
 
-    public int getCantidadEsperando() {
-        return personasEsperando.size();
-    }
+    public int getCantidadEsperando() { return personasEsperando.size(); }
 
-    public int getCantidadEnPlanta() {
-        return personasEnPlanta.size();
-    }
+    public int getCantidadEnPlanta() { return personasEnPlanta.size(); }
 
-    public List<Persona> getPersonasEsperando() {
-        return personasEsperando;
-    }
+    public List<Persona> getPersonasEsperando() { return personasEsperando; }
 }

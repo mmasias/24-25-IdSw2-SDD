@@ -34,4 +34,12 @@ public class Llamada {
     public Persona getPersona() {
         return persona;
     }
+
+    public void ejecutar(Runnable accion) {
+        accion.run();
+    }
+
+    public boolean esIgualA(Llamada otra) {
+        return this.plantaOrigen == otra.plantaOrigen && this.plantaDestino == otra.plantaDestino && this.persona.equals(otra.persona);
+    }
 }

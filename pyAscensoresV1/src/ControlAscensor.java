@@ -13,7 +13,6 @@ public class ControlAscensor {
         Ascensor mejor = seleccionarAscensor(origen);
         Llamada llamada = new Llamada(origen, destino, persona);
         mejor.atenderLlamada(llamada);
-
     }
 
     private Ascensor seleccionarAscensor(int planta) {

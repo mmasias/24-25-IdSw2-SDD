@@ -28,17 +28,19 @@ public class Ascensor {
     }
 
     public void mover() {
-        bajarPersonasEnPlantaActual();
-        recogerPersonasEnPlantaActual();
-
+        ejecutarAccion(this::bajarPersonasEnPlantaActual);
+        ejecutarAccion(this::recogerPersonasEnPlantaActual);
         if (!personas.isEmpty()) {
-            moverHaciaDestinoPersona();
+            ejecutarAccion(this::moverHaciaDestinoPersona);
             return;
         }
-
         if (!llamadas.isEmpty()) {
-            atenderLlamadaPendiente();
+            ejecutarAccion(this::atenderLlamadaPendiente);
         }
+    }
+
+    private void ejecutarAccion(Runnable accion) {
+        accion.run();
     }
 
     private void moverHaciaDestinoPersona() {
@@ -55,26 +57,20 @@ public class Ascensor {
             plantaActual += Integer.compare(llamada.getPlantaOrigen(), plantaActual);
             return;
         }
-
         recogerPersonasEnPlantaActual();
     }
 
     private Planta buscarPlanta(int numero) {
-        for (Planta p : plantas) {
-            if (p.getNumero() == numero)
-                return p;
-        }
-        return null;
+        return plantas.stream().filter(p -> p.getNumero() == numero).findFirst().orElse(null);
     }
 
-    public void bajarPersonasEnPlantaActual() {
+    private void bajarPersonasEnPlantaActual() {
         List<Persona> bajan = new ArrayList<>();
         for (Persona p : personas) {
             if (p.getPlantaDestino() == plantaActual) {
                 bajan.add(p);
             }
         }
-
         for (Persona p : bajan) {
             personas.remove(p);
             p.marcarAtendido();
@@ -88,7 +84,6 @@ public class Ascensor {
     private void recogerPersonasEnPlantaActual() {
         Planta planta = buscarPlanta(plantaActual);
         if (planta == null) return;
-
         List<Persona> esperando = new ArrayList<>(planta.getPersonasEsperando());
         for (Persona persona : esperando) {
             if (personas.size() >= CAPACIDAD) break;

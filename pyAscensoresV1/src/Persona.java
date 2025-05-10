@@ -17,19 +17,11 @@ public class Persona {
         control.procesarLlamada(this, plantaOrigen, plantaDestino);
     }
 
-    public int getPlantaOrigen() {
-        return plantaOrigen;
-    }
+    public int getPlantaOrigen() { return plantaOrigen; }
 
-    public int getPlantaDestino() {
-        return plantaDestino;
-    }
+    public int getPlantaDestino() { return plantaDestino; }
 
-    public boolean estaAtendido() {
-        return atendido;
-    }
+    public boolean estaAtendido() { return atendido; }
 
-    public void marcarAtendido() {
-        this.atendido = true;
-    }
+    public void marcarAtendido() { this.atendido = true; }
 }
