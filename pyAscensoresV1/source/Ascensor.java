@@ -2,7 +2,7 @@ package source;
 
 import java.util.*;
 
-public class Ascensor {
+public class Ascensor implements Movible {
     private static final int CAPACIDAD = 6;
     private static final int PLANTA_INICIAL = 0;
 
@@ -11,6 +11,7 @@ public class Ascensor {
     private List<Persona> personas;
     private Queue<Llamada> llamadas;
     private List<Planta> plantas;
+    private EstadoAscensor estrategiaActual;
 
     public Ascensor(String id) {
         this.id = id;
@@ -28,44 +29,21 @@ public class Ascensor {
     }
 
     public void mover() {
-    // 1. Baja personas si están en su planta destino
-    ejecutarAccion(this::bajarPersonasEnPlantaActual);
+        bajarPersonasEnPlantaActual();
+        recogerPersonasEnPlantaActual();
 
-    // 2. Recoge personas si hay esperando en esta planta
-    ejecutarAccion(this::recogerPersonasEnPlantaActual);
-
-    // 3. Si hay personas dentro, moverse hacia el destino más cercano
-    if (!personas.isEmpty()) {
-        ejecutarAccion(this::moverHaciaDestinoPersona);
-        return;
-    }
-
-    // 4. Si está vacío, ir hacia la llamada pendiente más cercana
-    if (!llamadas.isEmpty()) {
-        ejecutarAccion(this::moverHaciaLlamadaMasCercana);
-    }
-}
-private void moverHaciaLlamadaMasCercana() {
-    Llamada masCercana = llamadas.stream()
-        .min(Comparator.comparingInt(l -> Math.abs(l.getPlantaOrigen() - plantaActual)))
-        .orElse(null);
-
-    if (masCercana != null) {
-        int destino = masCercana.getPlantaOrigen();
-        if (plantaActual != destino) {
-            plantaActual += Integer.compare(destino, plantaActual);
+        if (!personas.isEmpty()) {
+            estrategiaActual = new MovimientoHaciaDestino();
+        } else if (!llamadas.isEmpty()) {
+            estrategiaActual = new MovimientoHaciaLlamada();
         } else {
-            recogerPersonasEnPlantaActual();
+            estrategiaActual = null;
         }
-    }
-}
 
-
-    private void ejecutarAccion(Runnable accion) {
-        accion.run();
+        if (estrategiaActual != null) estrategiaActual.ejecutar(this);
     }
 
-    private void moverHaciaDestinoPersona() {
+    public void moverHaciaDestino() {
         Persona destinoPersona = personas.get(0);
         int destino = destinoPersona.getPlantaDestino();
         if (plantaActual != destino) {
@@ -73,13 +51,19 @@ private void moverHaciaLlamadaMasCercana() {
         }
     }
 
-    private void atenderLlamadaPendiente() {
-        Llamada llamada = llamadas.peek();
-        if (plantaActual != llamada.getPlantaOrigen()) {
-            plantaActual += Integer.compare(llamada.getPlantaOrigen(), plantaActual);
-            return;
+    public void moverHaciaLlamadaMasCercana() {
+        Llamada masCercana = llamadas.stream()
+            .min(Comparator.comparingInt(l -> Math.abs(l.getPlantaOrigen() - plantaActual)))
+            .orElse(null);
+
+        if (masCercana != null) {
+            int destino = masCercana.getPlantaOrigen();
+            if (plantaActual != destino) {
+                plantaActual += Integer.compare(destino, plantaActual);
+            } else {
+                recogerPersonasEnPlantaActual();
+            }
         }
-        recogerPersonasEnPlantaActual();
     }
 
     private Planta buscarPlanta(int numero) {
