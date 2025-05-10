@@ -6,7 +6,6 @@
 - Aplicar **buenas prácticas de encapsulamiento, abstracción y modularidad**.
 - Separar claramente responsabilidades entre **modelo, controlador, vista y utilidades**.
 - Mejorar la mantenibilidad, extensibilidad y legibilidad del sistema.
-- Corregir errores de entrada/salida en consola relacionados con `Scanner`.
 
 ---
 
