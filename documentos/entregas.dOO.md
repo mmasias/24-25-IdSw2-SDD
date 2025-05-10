@@ -10,8 +10,8 @@
 
 ## Principios SOLID aplicados
 
-| Principio | Descripción | Cumplimiento |
-|----------|-------------|--------------|
+| Principio | Descripción
+|----------|-------------
 | **S** - Single Responsibility | Cada clase tiene una sola responsabilidad clara.
 | **O** - Open/Closed | Nuevos movimientos del ascensor se pueden agregar sin modificar `Ascensor`.
 | **L** - Liskov Substitution | `TiempoSimulado` puede sustituir a `Tiempo`. 
