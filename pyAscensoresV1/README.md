@@ -33,23 +33,22 @@
 - `actualizarVista()`: Refresca todos los componentes visuales de la interfaz con el estado más reciente.
 
 ---
-
 ### Tiempo
 
 ---
 
 #### Responsabilidades:
 
-- `avanzarMinuto()`: Avanza el tiempo un minuto, ajustando la hora si es necesario.
+- `avanzarMinuto()`: Avanza el tiempo un minuto, ajustando la hora y avanzando de hora si es necesario.
 - `darLaHora()`: Devuelve una representación en formato HH:mm de la hora actual.
 - `getHora()`: Retorna la hora actual como entero.
 - `getMinuto()`: Retorna los minutos actuales como entero.
 - `getFecha()`: Retorna la fecha actual del sistema (`LocalDate`).
 - `esFinDeSemana()`: Indica si la fecha actual corresponde a sábado o domingo.
-- `esFestivo()`: Informa si la fecha actual es un día festivo específico predefinido.
+- `esFestivo()`: Informa si la fecha actual es un día festivo específico predefinido (1 de enero, 25 de diciembre, 1 de noviembre).
 
 ---
-### Universidad  
+### Universidad
 **Recibe:** `Tiempo`, `Planta`, `Ascensor`, `Persona`
 
 ---
@@ -59,7 +58,7 @@
 - `Universidad(Tiempo)`: Constructor que inicializa las plantas, ascensores, y el sistema de control, vinculando todo con el tiempo actual.
 - `estaAbierta()`: Verifica si la universidad está en horario de funcionamiento, considerando hora, fines de semana y festivos.
 - `acogerPersona(Persona)`: Registra una nueva persona si la universidad está abierta, la asigna a su planta de origen y le permite llamar al ascensor.
-- `acogerPersona(int origen, int destino)`: Sobrecarga para agregar una persona manual desde cualquier planta.
+- `acogerPersona(int origen, int destino)`: Permite agregar una persona manualmente, especificando planta de origen y destino.
 - `evolucionDeLaUniversidad()`: Gestiona el movimiento de los ascensores a través del controlador central.
 - `imprimirEstado()`: Imprime el estado actual del edificio, mostrando personas esperando y en cada planta, así como la posición de los ascensores.
 - `simular()`: Ejecuta una iteración completa de simulación, verificando si está abierta y luego llamando a `evolucionDeLaUniversidad()` y `imprimirEstado()`.
@@ -113,7 +112,6 @@
 - `procesarLlamada(Persona, int origen, int destino)`: Genera una nueva llamada a partir de una persona y sus plantas, y la asigna al ascensor más cercano.
 - `seleccionarAscensor(int planta)`: Busca el ascensor más cercano a la planta de origen y lo retorna. (Uso interno).
 - `moverAscensores()`: Ejecuta la función de mover para todos los ascensores registrados en el sistema.
-- `imprimirEstadoAscensores()`: Muestra por consola el estado actual de todos los ascensores del sistema.
 
 ---
 
@@ -127,9 +125,6 @@
 - `getPlantaOrigen()`: Devuelve la planta desde donde se solicitó el ascensor.
 - `getPlantaDestino()`: Devuelve la planta destino deseada por la persona.
 - `getPersona()`: Retorna la persona que hizo la solicitud.
-- `setPlantaOrigen(int)`: Permite modificar la planta de origen.
-- `setPlantaDestino(int)`: Permite modificar la planta destino.
-- `setPersona(Persona)`: Permite cambiar la persona asociada a la llamada.
 
 ---
 
@@ -141,8 +136,7 @@
 #### Responsabilidades:
 
 - `getNumero()`: Devuelve el número que identifica a la planta.
-- `personaLlega(Persona)`: Registra a una persona que llegó a la planta y la agrega a la lista de espera.
-- `personaEsperaAscensor(Persona)`: Agrega a una persona a la lista de espera del ascensor.
+- `personaEsperaAscensor(Persona)`: Registra a una persona que espera el ascensor en la planta.
 - `personaSubeAlAscensor(Persona)`: Elimina a una persona de la lista de espera y de la planta cuando sube al ascensor.
 - `personaLlegaADestino(Persona)`: Registra que una persona ha llegado a su destino agregándola a la planta.
 - `getCantidadEsperando()`: Retorna la cantidad de personas que están esperando el ascensor en esa planta.
