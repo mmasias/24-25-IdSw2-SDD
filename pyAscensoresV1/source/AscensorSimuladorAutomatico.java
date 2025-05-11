@@ -39,17 +39,17 @@ public class AscensorSimuladorAutomatico {
     }
 
     private void generarPersonasAleatorias() {
-    if (random.nextInt(100) < 20) {
-        int origen = 0;  // 👈 Siempre desde planta 0
-        int destino;
+        if (random.nextInt(100) < 20) {
+            int origen = 0;  // 👈 Siempre desde planta 0
+            int destino;
 
-        do {
-            destino = random.nextInt(7) - 3;  // de -3 a 3
-        } while (destino == origen);
+            do {
+                destino = random.nextInt(7) - 3;  // de -3 a 3
+            } while (destino == origen);
 
-        universidad.acogerPersona(origen, destino);
+            universidad.acogerPersona(origen, destino);
+        }
     }
-}
 
 
     private void crearInterfaz() {
@@ -199,23 +199,4 @@ public class AscensorSimuladorAutomatico {
         SwingUtilities.invokeLater(AscensorSimuladorAutomatico::new);
     }
 
-    private static class TiempoSimulado extends Tiempo {
-        public TiempoSimulado(int hora, int minuto) {
-            super(hora, minuto);
-        }
-
-        @Override
-        public boolean esFinDeSemana() {
-            return false;
-        }
-
-        @Override
-        public boolean esFestivo() {
-            return false;
-        }
-
-        public void reiniciar(int hora, int minuto) {
-            // Implementa reinicio si es necesario
-        }
-    }
 }
