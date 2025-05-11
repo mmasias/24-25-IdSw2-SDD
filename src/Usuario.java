@@ -70,4 +70,31 @@ public class Usuario {
         System.out.println("Tarjeta Monedero: €" + tarjetaMonedero);
         System.out.println("Tarjeta Bancaria: €" + tarjetaBancaria);
     }
+
+    public void descontarSaldoMonedero(double monto) {
+        if (monto <= tarjetaMonedero) {
+            tarjetaMonedero -= monto;
+        }
+    }
+    
+    public void descontarSaldoBancario(double monto) {
+        if (monto <= tarjetaBancaria) {
+            tarjetaBancaria -= monto;
+        }
+    }
+    public void actualizarEfectivoConCambio(Map<Double, Integer> efectivoUsado, Map<Double, Integer> cambioRecibido) {
+        for (Map.Entry<Double, Integer> entry : efectivoUsado.entrySet()) {
+            double denominacion = entry.getKey();
+            int cantidad = entry.getValue();
+            if (efectivo.containsKey(denominacion)) {
+                efectivo.put(denominacion, efectivo.get(denominacion) - cantidad);
+            }
+        }
+    
+        for (Map.Entry<Double, Integer> entry : cambioRecibido.entrySet()) {
+            double denominacion = entry.getKey();
+            int cantidad = entry.getValue();
+            efectivo.put(denominacion, efectivo.getOrDefault(denominacion, 0) + cantidad);
+        }
+    }
 }
