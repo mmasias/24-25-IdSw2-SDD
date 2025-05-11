@@ -8,7 +8,7 @@ Se desarrolla, en un caso controlado, la disciplina de diseño, con el objetivo 
 
 | |Proyecto|👁️|Grupo|[D](/documentos/entregas.d.md)|[DM](/documentos/entregas.dM.md)|[DOO](/documentos/entregas.dOO.md)|Final
 |-|-|:-:|:-:|:-:|:-:|:-:|:-:|
-| ||||12/3|16/4|12/5|31/5
+| ||||12/3|16/4|18/5|31/5
 |1|[pyCCCF](https://github.com/puntoReflex/pyCCCF/blob/main/enunciado.md)||G5
 |2|[pyMundo](https://github.com/puntoReflex/pyMundo/blob/main/enunciado.md)
 |3|[pyHojaDeCalculo](https://github.com/puntoReflex/pyHojaDeCalculo/blob/main/enunciado.md)||G2
