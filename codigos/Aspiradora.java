@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Aspiradora {
+public class Aspiradora implements UnidadConMovimiento {
 
     private int bolsa;
     private final int capacidadMaximaBolsa = 100;
@@ -27,12 +27,13 @@ public class Aspiradora {
             return;
         }
 
-        movimientoInteligente(habitacion);
+        calcularMovimiento(habitacion);
         Zona zonaActual = habitacion.getZona(posicionX, posicionY);
         limpiar(zonaActual);
     }
-
-    private void movimientoInteligente(Habitacion habitacion) {
+    
+    @Override
+    public void calcularMovimiento(Habitacion habitacion) {
         int maxNivel = -1;
         int objetivoX = posicionX;
         int objetivoY = posicionY;
@@ -55,11 +56,24 @@ public class Aspiradora {
         List<int[]> ruta = calcularRuta(habitacion, objetivoX, objetivoY);
         if (ruta != null && !ruta.isEmpty()) {
             int[] siguientePaso = ruta.get(0);
-            posicionX = siguientePaso[0];
-            posicionY = siguientePaso[1];
-        } else {
-            vista.mostrarZonaSuciaInaccesible();
+            mover(siguientePaso[0], siguientePaso[1]);
         }
+    }
+
+    @Override
+    public void mover(int nuevaX, int nuevaY) {
+        this.posicionX = nuevaX;
+        this.posicionY = nuevaY;
+    }
+
+    @Override
+    public int getPosicionX() {
+        return posicionX;
+    }
+
+    @Override
+    public int getPosicionY() {
+        return posicionY;
     }
 
     private List<int[]> calcularRuta(Habitacion habitacion, int destinoX, int destinoY) {
@@ -126,11 +140,6 @@ public class Aspiradora {
                 break;
         }
 
-        if (destinoX == -1) {
-            vista.mostrarZonaDeRecargaNoEncontrada();
-            return;
-        }
-
         moverHaciaZona(habitacion, destinoX, destinoY);
     }
 
@@ -142,8 +151,7 @@ public class Aspiradora {
         List<int[]> ruta = calcularRuta(habitacion, destinoX, destinoY);
         if (ruta != null && !ruta.isEmpty()) {
             int[] siguientePaso = ruta.get(0);
-            posicionX = siguientePaso[0];
-            posicionY = siguientePaso[1];
+            mover(siguientePaso[0], siguientePaso[1]);
 
             Zona zonaActual = habitacion.getZona(posicionX, posicionY);
             if (zonaActual instanceof ZonaDeRecarga) {
@@ -152,8 +160,6 @@ public class Aspiradora {
                     vaciarBolsa();
                 }
             }
-        } else {
-            vista.mostrarZonaDeRecargaInaccesible();
         }
     }
 
@@ -174,13 +180,9 @@ public class Aspiradora {
                 consumirBateria();
 
                 if (bolsa == capacidadMaximaBolsa) {
-                    vista.mostrarBolsaLlenaDuranteLimpieza();
+                    vista.mostrarBolsaLlena();
                 }
-            } else {
-                vista.mostrarBateriaAgotada();
             }
-        } else {
-            vista.mostrarZonaLimpia();
         }
     }
 
@@ -202,13 +204,5 @@ public class Aspiradora {
 
     public int getCargaBateria() {
         return bateria.getCarga();
-    }
-
-    public int getPosicionX() {
-        return posicionX;
-    }
-
-    public int getPosicionY() {
-        return posicionY;
     }
 }

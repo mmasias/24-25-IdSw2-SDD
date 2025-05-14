@@ -23,8 +23,6 @@ public class Bateria {
         if (carga < capacidadMaximaBateria) {
             carga = capacidadMaximaBateria;
             vista.mostrarBateriaRecargada(carga);
-        } else {
-            vista.mostrarBateriaYaLlena();
         }
     }
 
