@@ -28,28 +28,91 @@ public class Gato implements UnidadConMovimiento {
     @Override
     public void calcularMovimiento(Habitacion habitacion) {
         if (pasos < 25) {
-            int direccion = random.nextInt(8);
             int nuevaX = posicionX;
             int nuevaY = posicionY;
 
-            switch (direccion) {
-                case 0: if (posicionX > 0) nuevaX--; break;
-                case 1: if (posicionY > 0) nuevaY--; break;
-                case 2: if (posicionX < habitacion.getAnchoHabitacion() - 1) nuevaX++; break;
-                case 3: if (posicionY < habitacion.getAltoHabitacion() - 1) nuevaY++; break;
-                case 4: if (posicionX > 0 && posicionY > 0) { nuevaX--; nuevaY--; } break;
-                case 5: if (posicionX < habitacion.getAnchoHabitacion() - 1 && posicionY > 0) { nuevaX++; nuevaY--; } break;
-                case 6: if (posicionX > 0 && posicionY < habitacion.getAltoHabitacion() - 1) { nuevaX--; nuevaY++; } break;
-                case 7: if (posicionX < habitacion.getAnchoHabitacion() - 1 && posicionY < habitacion.getAltoHabitacion() - 1) { nuevaX++; nuevaY++; } break;
+            if (estaCercaDeAspiradora(posicionX, posicionY, aspiradora)) {
+                int mejorDistancia = -1;
+                int mejorX = posicionX;
+                int mejorY = posicionY;
+
+                int[][] direcciones = {
+                        { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 },
+                        { -1, -1 }, { -1, 1 }, { 1, -1 }, { 1, 1 }
+                };
+
+                for (int[] dir : direcciones) {
+                    int x = posicionX + dir[0];
+                    int y = posicionY + dir[1];
+
+                    if (x >= 0 && y >= 0 && x < habitacion.getAnchoHabitacion() && y < habitacion.getAltoHabitacion()) {
+                        Zona zona = habitacion.getZona(x, y);
+                        if (zona != null && !zona.tieneMueble()) {
+                            int dist = distancia(x, y, aspiradora.getPosicionX(), aspiradora.getPosicionY());
+                            if (dist > mejorDistancia) {
+                                mejorDistancia = dist;
+                                mejorX = x;
+                                mejorY = y;
+                            }
+                        }
+                    }
+                }
+
+                nuevaX = mejorX;
+                nuevaY = mejorY;
+            } else {
+                
+                int direccion = random.nextInt(8);
+                switch (direccion) {
+                    case 0:
+                        if (posicionX > 0)
+                            nuevaX--;
+                        break;
+                    case 1:
+                        if (posicionY > 0)
+                            nuevaY--;
+                        break;
+                    case 2:
+                        if (posicionX < habitacion.getAnchoHabitacion() - 1)
+                            nuevaX++;
+                        break;
+                    case 3:
+                        if (posicionY < habitacion.getAltoHabitacion() - 1)
+                            nuevaY++;
+                        break;
+                    case 4:
+                        if (posicionX > 0 && posicionY > 0) {
+                            nuevaX--;
+                            nuevaY--;
+                        }
+                        break;
+                    case 5:
+                        if (posicionX < habitacion.getAnchoHabitacion() - 1 && posicionY > 0) {
+                            nuevaX++;
+                            nuevaY--;
+                        }
+                        break;
+                    case 6:
+                        if (posicionX > 0 && posicionY < habitacion.getAltoHabitacion() - 1) {
+                            nuevaX--;
+                            nuevaY++;
+                        }
+                        break;
+                    case 7:
+                        if (posicionX < habitacion.getAnchoHabitacion() - 1
+                                && posicionY < habitacion.getAltoHabitacion() - 1) {
+                            nuevaX++;
+                            nuevaY++;
+                        }
+                        break;
+                }
             }
 
             Zona zona = habitacion.getZona(nuevaX, nuevaY);
 
             if (zona != null && !zona.tieneMueble()) {
-                if (nuevaX != aspiradora.getPosicionX() || nuevaY != aspiradora.getPosicionY()) {
-                    mover(nuevaX, nuevaY);
-                    zona.ensuciar();
-                }
+                mover(nuevaX, nuevaY);
+                zona.ensuciar();
             }
 
             pasos++;
@@ -57,6 +120,16 @@ public class Gato implements UnidadConMovimiento {
         } else {
             gatoActivo = false;
         }
+    }
+
+    private boolean estaCercaDeAspiradora(int x, int y, Aspiradora aspiradora) {
+        int dx = Math.abs(x - aspiradora.getPosicionX());
+        int dy = Math.abs(y - aspiradora.getPosicionY());
+        return dx <= 1 && dy <= 1;
+    }
+
+    private int distancia(int x1, int y1, int x2, int y2) {
+        return (int) Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
     }
 
     @Override
