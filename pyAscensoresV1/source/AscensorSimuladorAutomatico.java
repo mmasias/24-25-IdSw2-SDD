@@ -174,7 +174,15 @@ public class AscensorSimuladorAutomatico {
 
     private void actualizarVista() {
         horaLabel.setText(universidad.getTiempo().darLaHora());
-        estadoLabel.setText("Estado: Siempre Abierto");
+        if (!universidad.estaAbierta()) {
+            estadoLabel.setText("Estado: CERRADO");
+            estadoLabel.setForeground(new Color(255, 87, 34));
+        } else {
+            estadoLabel.setText("Estado: ABIERTO");
+            estadoLabel.setForeground(new Color(33, 150, 83));
+
+            
+        }
 
         List<Ascensor> ascensores = universidad.getAscensores();
 
