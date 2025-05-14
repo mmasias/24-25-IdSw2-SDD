@@ -5,11 +5,13 @@ import java.util.Arrays;
 
 public class Tiempo implements ITiempo {
     private static final int MINUTOS_EN_HORA = 60;
+    private int dia;
     private int hora;
     private int minuto;
     private LocalDate fecha;
 
-    public Tiempo(int hora, int minuto) {
+    public Tiempo(int dia,int hora, int minuto) {
+        this.dia = dia;
         this.hora = hora;
         this.minuto = minuto;
         this.fecha = LocalDate.now();
@@ -20,11 +22,19 @@ public class Tiempo implements ITiempo {
         if (minuto >= MINUTOS_EN_HORA) {
             minuto = 0;
             hora++;
+            if (hora >= 24) {
+                hora = 0;
+                dia++;
+                fecha = fecha.plusDays(1);
+            }
         }
     }
 
     public String darLaHora() {
-        return String.format("%02d:%02d", hora, minuto);
+        StringBuilder horaFormateada = new StringBuilder();
+        horaFormateada.append(String.format("DÍA: %02d HORA: %02d:%02d", dia, hora, minuto));
+        return horaFormateada.toString();
+
     }
 
     public int getHora() {

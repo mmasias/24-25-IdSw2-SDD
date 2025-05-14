@@ -2,11 +2,14 @@ package source;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.util.List;
 import java.util.Random;
 
 public class AscensorSimuladorAutomatico {
+
+    private static final int DIA_INICIO = 1;
+    private static final int HORA_INICIO = 8;
+    private static final int MINUTO_INICIO = 0;
     private Universidad universidad;
     private JLabel horaLabel;
     private JLabel estadoLabel;
@@ -20,7 +23,7 @@ public class AscensorSimuladorAutomatico {
     private int velocidadSimulacion = 1000;
 
     public AscensorSimuladorAutomatico() {
-        Tiempo tiempoSimulado = new TiempoSimulado(8, 0);
+        Tiempo tiempoSimulado = new TiempoSimulado(DIA_INICIO, HORA_INICIO, MINUTO_INICIO);
         universidad = new Universidad(tiempoSimulado);
         crearInterfaz();
 
@@ -174,7 +177,7 @@ public class AscensorSimuladorAutomatico {
     }
 
     private void actualizarVista() {
-        horaLabel.setText("Hora: " + universidad.getTiempo().darLaHora());
+        horaLabel.setText(universidad.getTiempo().darLaHora());
         estadoLabel.setText("Estado: Siempre Abierto");
 
         List<Ascensor> ascensores = universidad.getAscensores();
@@ -198,5 +201,4 @@ public class AscensorSimuladorAutomatico {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(AscensorSimuladorAutomatico::new);
     }
-
 }

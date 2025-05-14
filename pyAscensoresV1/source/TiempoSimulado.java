@@ -1,8 +1,8 @@
 package source;
 
 public class TiempoSimulado extends Tiempo {
-    public TiempoSimulado(int hora, int minuto) {
-        super(hora, minuto);
+    public TiempoSimulado(int dia, int hora, int minuto) {
+        super(dia, hora, minuto);
     }
 
     @Override
@@ -13,9 +13,5 @@ public class TiempoSimulado extends Tiempo {
     @Override
     public boolean esFestivo() {
         return false;
-    }
-
-    public void reiniciar(int hora, int minuto) {
-        // Lógica de reinicio si es necesario
     }
 }

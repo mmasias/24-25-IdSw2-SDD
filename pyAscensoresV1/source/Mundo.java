@@ -3,19 +3,19 @@ package source;
 import java.util.Scanner;
 
 public class Mundo {
+    private static final int DIA_INICIO = 1;
     private static final int HORA_INICIO = 8;
+    private static final int MINUTO_INICIO = 0;
     private static final int HORA_CIERRE = 21;
-    private static final int PROBABILIDAD_DE_LLEGADA = 60;
     private static final int PLANTA_MINIMA = -3;
     private static final int PLANTA_MAXIMA = 3;
-    private static final int RANGO_ALEATORIO = 100;
 
     private Universidad universidad;
     private Tiempo tiempo;
     private Scanner scanner;
 
     public Mundo() {
-        tiempo = new Tiempo(HORA_INICIO, 0);
+        tiempo = new Tiempo(DIA_INICIO, HORA_INICIO, MINUTO_INICIO);
         universidad = new Universidad(tiempo);
         scanner = new Scanner(System.in);
     }
