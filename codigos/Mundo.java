@@ -45,7 +45,15 @@ public class Mundo {
                     gato);
 
             System.out.println("Presiona Enter para continuar...");
-            scanner.nextLine();
+            try {
+
+                Thread.sleep(1000);
+
+            } catch (InterruptedException e) {
+
+                e.printStackTrace();
+
+            }
         }
 
         scanner.close();
