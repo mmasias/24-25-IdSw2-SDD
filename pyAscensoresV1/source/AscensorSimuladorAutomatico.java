@@ -35,10 +35,6 @@ public class AscensorSimuladorAutomatico {
         universidad.getTiempo().avanzarMinuto();
         universidad.simular();
         actualizarVista();
-
-        if (universidad.getTiempo().getHora() >= 21) {
-            ((TiempoSimulado) universidad.getTiempo()).reiniciar(8, 0);
-        }
     }
 
     private void generarPersonasAleatorias() {
