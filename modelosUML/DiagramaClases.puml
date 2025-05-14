@@ -1,40 +1,37 @@
 @startuml
 
-class Mundo{
+class Mundo {
+}
 
+class MundoFactory {
+    + crearBateria(): Bateria
+    + crearHabitacion(): Habitacion
+    + crearGato(Habitacion): Gato
+    + crearAspiradora(Bateria): Aspiradora
 }
 
 class Aspiradora {
-
 }
 
 class Gato {
-
 }
 
 class Habitacion {
-
 }
 
 class Zona {
-
 }
 
 class Mueble {
-
 }
 
 class ZonaDeRecarga {
-
 }
 
-
 class Bateria {
-
 }
 
 class VistaConsola {
-
 }
 
 Mundo *-- Habitacion : compone
@@ -52,4 +49,13 @@ VistaConsola ..> Gato
 Mundo *-- VistaConsola : usa
 Aspiradora .u.|> UnidadConMovimiento
 Gato .u.|> UnidadConMovimiento
+
+' Nuevas relaciones para MundoFactory
+Mundo ..> MundoFactory : usa
+MundoFactory ..> Aspiradora : crea
+MundoFactory ..> Bateria : crea
+MundoFactory ..> Habitacion : crea
+MundoFactory ..> Gato : crea
+MundoFactory *-- VistaConsola : compone
+
 @enduml
