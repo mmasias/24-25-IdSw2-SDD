@@ -12,8 +12,8 @@
 
 ## Material Renovado
 
-- [📋 Modelo de Dominio 📋](modelosUML/modelos.md)
+- [📋 Modelo de Dominio 📋](modelosUML/README.md)
 
 - [🔧 Casos de Uso 🔧]()
 
-- [💾 Código 💾]()
+- [💾 Código 💾](https://github.com/lydiaa-gr/24-25-IdSw2-SDD/tree/main/codigo)
