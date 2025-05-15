@@ -1,8 +1,11 @@
-import proyecto.diseñoModular.proyectoMejorado.Controlador.ControladorSimulacion;
-import proyecto.diseñoModular.proyectoMejorado.Modelo.Cola;
-import proyecto.diseñoModular.proyectoMejorado.Modelo.Estadisticas;
-import proyecto.diseñoModular.proyectoMejorado.Modelo.GestorCajas;
-import proyecto.diseñoModular.proyectoMejorado.Vista.VisualizadorSimulacion;
+import Modelo.Cola;
+import Modelo.Cliente;
+import Modelo.GestorCajas;
+import Util.GeneradorClientes;
+import Vista.VisualizadorSimulacion;
+import Controlador.ControladorSimulacion;
+import Modelo.Estadisticas;
+
 
 public class App {
     public static void main(String[] args) {

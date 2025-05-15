@@ -1,6 +1,7 @@
-package Modelo;
+
 import java.util.LinkedList;
 import java.util.Queue;
+
 
 public class Cola {
     private final Queue<Cliente> clientes = new LinkedList<>();

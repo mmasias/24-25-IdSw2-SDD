@@ -4,45 +4,41 @@ import Modelo.Cola;
 import Modelo.GestorCajas;
 import Modelo.Estadisticas;
 import Modelo.Cliente;
-import Vista.VisualizadorSimulacion;
-import Util.GeneradorClientes;
-
+import Interfaces.IVisualizador;
+import Interfaces.IGeneradorClientes;
 
 public class ControladorSimulacion {
     private final Cola cola;
     private final GestorCajas gestorCajas;
     private final Estadisticas estadisticas;
-    private final VisualizadorSimulacion visualizador;
-    
-    public ControladorSimulacion(Cola cola, GestorCajas gestorCajas, Estadisticas estadisticas, VisualizadorSimulacion visualizador) {
+    private final IVisualizador visualizador;
+    private final IGeneradorClientes generador;
+
+    public ControladorSimulacion(Cola cola, GestorCajas gestorCajas, Estadisticas estadisticas,IVisualizador visualizador, IGeneradorClientes generador) {
         this.cola = cola;
         this.gestorCajas = gestorCajas;
         this.estadisticas = estadisticas;
         this.visualizador = visualizador;
+        this.generador = generador;
     }
-    
+
     public void iniciarSimulacion(int duracionJornada) {
         for (int minuto = 1; minuto <= duracionJornada; minuto++) {
             System.out.println("\n--- Minuto " + minuto + " ---");
-            
-            // Llegada de clientes
-            if (Math.random() <= GeneradorClientes.PROB_LLEGADA) {
-                Cliente nuevoCliente = GeneradorClientes.generarCliente();
+
+            if (Math.random() <= generador.probabilidadLlegada()) {
+                Cliente nuevoCliente = generador.generarCliente();
                 cola.agregar(nuevoCliente);
                 System.out.println("+ Cliente llega (" + nuevoCliente.getItems() + " items)");
             } else {
                 System.out.println("· No llega nadie");
             }
-            
-            // Procesar cajas
+
             gestorCajas.procesar(cola, estadisticas);
             estadisticas.registrarMinuto(cola);
-            
-            // Mostrar estado
             visualizador.mostrarEstado(cola, gestorCajas);
         }
-        
-        // Finalizar
+
         estadisticas.setClientesPendientes(cola.cantidad());
         estadisticas.mostrarResumen();
     }
