@@ -1,11 +1,8 @@
 import Modelo.Cola;
-import Modelo.Cliente;
 import Modelo.GestorCajas;
-import Util.GeneradorClientes;
+import Modelo.Estadisticas;
 import Vista.VisualizadorSimulacion;
 import Controlador.ControladorSimulacion;
-import Modelo.Estadisticas;
-
 
 public class App {
     public static void main(String[] args) {

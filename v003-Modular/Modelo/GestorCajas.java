@@ -1,5 +1,4 @@
 package Modelo;
-
 public class GestorCajas {
     private final Caja[] cajas;
     

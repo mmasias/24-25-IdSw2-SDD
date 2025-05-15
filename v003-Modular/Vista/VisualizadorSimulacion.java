@@ -1,5 +1,5 @@
 package Vista;
-import Modelo.Cola;
+import Modelo.Cola; 
 import Modelo.GestorCajas;
 
 public class VisualizadorSimulacion {

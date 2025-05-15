@@ -1,12 +1,10 @@
 package Controlador;
-import Modelo.Caja;
 import Modelo.Cola;
 import Modelo.GestorCajas;
 import Modelo.Estadisticas;
 import Modelo.Cliente;
-import Vista.VisualizadorSimulacion;
 import Util.GeneradorClientes;
-
+import Vista.VisualizadorSimulacion;
 
 public class ControladorSimulacion {
     private final Cola cola;
