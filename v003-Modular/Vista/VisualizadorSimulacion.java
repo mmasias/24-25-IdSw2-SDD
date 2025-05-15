@@ -1,7 +1,6 @@
-package proyecto.diseñoModular.proyectoMejoradoAvance2.Vista;
-
-import proyecto.diseñoModular.proyectoMejoradoAvance2.Modelo.Cola;
-import proyecto.diseñoModular.proyectoMejoradoAvance2.Modelo.GestorCajas;
+package Vista;
+import Modelo.Cola; 
+import Modelo.GestorCajas;
 
 public class VisualizadorSimulacion {
     public void mostrarEstado(Cola cola, GestorCajas gestorCajas) {
@@ -9,4 +8,3 @@ public class VisualizadorSimulacion {
         gestorCajas.mostrarEstado();
     }
 }
-

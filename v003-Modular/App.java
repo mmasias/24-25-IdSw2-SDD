@@ -1,11 +1,8 @@
-package proyecto.diseñoModular.proyectoMejoradoAvance2;
-
-import proyecto.diseñoModular.proyectoMejoradoAvance2.Controlador.ControladorSimulacion;
-import proyecto.diseñoModular.proyectoMejoradoAvance2.Modelo.Cola;
-import proyecto.diseñoModular.proyectoMejoradoAvance2.Modelo.Estadisticas;
-import proyecto.diseñoModular.proyectoMejoradoAvance2.Modelo.GestorCajas;
-import proyecto.diseñoModular.proyectoMejoradoAvance2.Vista.VisualizadorSimulacion;
-
+import Modelo.Cola;
+import Modelo.GestorCajas;
+import Modelo.Estadisticas;
+import Vista.VisualizadorSimulacion;
+import Controlador.ControladorSimulacion;
 
 public class App {
     public static void main(String[] args) {

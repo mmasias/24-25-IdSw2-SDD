@@ -1,5 +1,4 @@
-package proyecto.diseñoModular.proyectoMejoradoAvance2.Modelo;
-
+package Modelo;
 public class Estadisticas {
     private int minutosColaVacia;
     private int clientesAtendidos;
