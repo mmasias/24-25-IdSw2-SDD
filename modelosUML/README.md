@@ -22,7 +22,9 @@
 ### Diagrama de Estados - Gato
 ![Diagrama de Estados Gato](../images/DiagramaEstadosGato.svg)
 
-### Diagrama de Estados - Zona y Batería
+### Diagrama de Estados - Zona
 ![Diagrama de Estados Zona](../images/DiagramaEstadosZona.svg)
+
+### Diagrama de Estados - Batería 
 ![Diagrama de Estados Batería](../images/DiagramaEstadosBateria.svg)
 
