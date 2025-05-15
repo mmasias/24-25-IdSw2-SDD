@@ -1,7 +1,8 @@
-package proyecto.diseñoModular.proyectoMejoradoAvance2.Modelo;
 
 import java.util.LinkedList;
 import java.util.Queue;
+
+import proyecto.diseñoModular.proyectoMejorado.Modelo.Cliente;
 
 public class Cola {
     private final Queue<Cliente> clientes = new LinkedList<>();

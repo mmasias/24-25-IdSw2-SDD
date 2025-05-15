@@ -1,4 +1,4 @@
-package proyecto.diseñoModular.proyectoMejoradoAvance2.Modelo;
+import proyecto.diseñoModular.proyectoMejorado.Modelo.Cola;
 
 public class Estadisticas {
     private int minutosColaVacia;

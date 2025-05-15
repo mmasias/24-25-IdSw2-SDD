@@ -1,4 +1,4 @@
-package proyecto.diseñoModular.proyectoMejoradoAvance2.Modelo;
+import proyecto.diseñoModular.proyectoMejorado.Modelo.Cliente;
 
 public class Caja {
     private Cliente clienteActual;

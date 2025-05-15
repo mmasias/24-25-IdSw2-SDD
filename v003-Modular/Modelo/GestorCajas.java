@@ -1,4 +1,7 @@
-package proyecto.diseñoModular.proyectoMejoradoAvance2.Modelo;
+import proyecto.diseñoModular.proyectoMejorado.Modelo.Caja;
+import proyecto.diseñoModular.proyectoMejorado.Modelo.Cliente;
+import proyecto.diseñoModular.proyectoMejorado.Modelo.Cola;
+import proyecto.diseñoModular.proyectoMejorado.Modelo.Estadisticas;
 
 public class GestorCajas {
     private final Caja[] cajas;

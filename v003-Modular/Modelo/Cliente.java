@@ -1,4 +1,3 @@
-package proyecto.diseñoModular.proyectoMejoradoAvance2.Modelo;
 
 public class Cliente {
     private final int items;

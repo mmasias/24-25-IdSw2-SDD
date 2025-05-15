@@ -1,10 +1,9 @@
-package proyecto.diseñoModular.proyectoMejoradoAvance2.Controlador;
-import proyecto.diseñoModular.proyectoMejoradoAvance2.Modelo.Cliente;
-import proyecto.diseñoModular.proyectoMejoradoAvance2.Modelo.Cola;
-import proyecto.diseñoModular.proyectoMejoradoAvance2.Modelo.Estadisticas;
-import proyecto.diseñoModular.proyectoMejoradoAvance2.Modelo.GestorCajas;
-import proyecto.diseñoModular.proyectoMejoradoAvance2.Util.GeneradorClientes;
-import proyecto.diseñoModular.proyectoMejoradoAvance2.Vista.VisualizadorSimulacion;
+import proyecto.diseñoModular.proyectoMejorado.Modelo.Cliente;
+import proyecto.diseñoModular.proyectoMejorado.Modelo.Cola;
+import proyecto.diseñoModular.proyectoMejorado.Modelo.Estadisticas;
+import proyecto.diseñoModular.proyectoMejorado.Modelo.GestorCajas;
+import proyecto.diseñoModular.proyectoMejorado.Util.GeneradorClientes;
+import proyecto.diseñoModular.proyectoMejorado.Vista.VisualizadorSimulacion;
 
 public class ControladorSimulacion {
     private final Cola cola;
