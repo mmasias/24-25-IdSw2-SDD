@@ -1,3 +1,4 @@
+package v002;
 public class Bateria {
     private int carga;
     private int capacidadMaximaBateria;

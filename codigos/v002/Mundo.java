@@ -1,3 +1,4 @@
+package v002;
 import java.util.Scanner;
 
 public class Mundo {

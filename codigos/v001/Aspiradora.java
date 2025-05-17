@@ -1,3 +1,4 @@
+package v001;
 import java.util.*;
 
 public class Aspiradora implements UnidadConMovimiento {

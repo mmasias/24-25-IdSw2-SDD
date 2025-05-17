@@ -1,3 +1,4 @@
+package v002;
 import java.util.Random;
 
 public class Habitacion {
