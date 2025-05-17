@@ -1,3 +1,4 @@
+package v002;
 public class Zona {
     private int nivelSuciedad;
     private Mueble mueble;

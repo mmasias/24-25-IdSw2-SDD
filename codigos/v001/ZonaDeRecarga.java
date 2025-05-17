@@ -1,3 +1,4 @@
+package v001;
 public class ZonaDeRecarga extends Zona {
 
     private VistaConsola vista;

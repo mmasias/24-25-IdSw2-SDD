@@ -1,3 +1,4 @@
+package v001;
 public class Mueble {
     private int tamañoMueble;
 
