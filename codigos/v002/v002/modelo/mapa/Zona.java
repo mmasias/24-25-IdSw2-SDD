@@ -1,11 +1,10 @@
-package v002;
+package v002.modelo.mapa;
+
 public class Zona {
     private int nivelSuciedad;
-    private Mueble mueble;
 
     public Zona() {
         this.nivelSuciedad = 0;
-        this.mueble = null;
     }
 
     public void ensuciar() {
@@ -25,14 +24,6 @@ public class Zona {
     }
 
     public boolean tieneMueble() {
-        return mueble != null;
-    }
-
-    public void colocarMueble(Mueble mueble) {
-        this.mueble = mueble;
-    }
-
-    public Mueble getMueble() {
-        return mueble;
+        return false;
     }
 }

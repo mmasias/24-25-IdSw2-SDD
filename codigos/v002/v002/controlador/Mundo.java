@@ -1,5 +1,13 @@
-package v002;
+package v002.controlador;
+
+
 import java.util.Scanner;
+
+import v002.modelo.entidades.Aspiradora;
+import v002.modelo.entidades.Bateria;
+import v002.modelo.entidades.Gato;
+import v002.modelo.mapa.Habitacion;
+import v002.vista.VistaConsola;
 
 public class Mundo {
     public static void main(String[] args) {

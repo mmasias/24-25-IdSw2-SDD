@@ -1,5 +1,10 @@
-package v002;
+package v002.modelo.entidades;
 import java.util.Random;
+
+import v002.modelo.interfaces.UnidadConMovimiento;
+import v002.vista.VistaConsola;
+import v002.modelo.mapa.Habitacion;
+import v002.modelo.mapa.Zona;
 
 public class Gato implements UnidadConMovimiento {
     private int posicionX, posicionY;
