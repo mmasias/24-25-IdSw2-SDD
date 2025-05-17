@@ -22,6 +22,7 @@ public class Mundo {
         habitacion.getZona(12, 9).ensuciar();
 
         Scanner scanner = new Scanner(System.in);
+        String input;
 
         for (int i = 0; i < 5000; i++) {
             vista.mostrarPaso(i + 1);
@@ -31,7 +32,30 @@ public class Mundo {
                     gato = new Gato(habitacion, aspiradora, vista);
                 }
             } else {
-                gato.calcularMovimiento(habitacion);
+                System.out.println("Controles del gato:");
+                System.out.println("W - Arriba");
+                System.out.println("S - Abajo");
+                System.out.println("A - Izquierda");
+                System.out.println("D - Derecha");
+                System.out.println("Enter - Saltar turno");
+                
+                input = scanner.nextLine().toUpperCase();
+                if (!input.isEmpty()) {
+                    switch (input.charAt(0)) {
+                        case 'W':
+                            gato.moverManualmente(0);
+                            break;
+                        case 'S':
+                            gato.moverManualmente(1);
+                            break;
+                        case 'A':
+                            gato.moverManualmente(2);
+                            break;
+                        case 'D':
+                            gato.moverManualmente(3);
+                            break;
+                    }
+                }
             }
 
             aspiradora.actuar(habitacion);
@@ -43,17 +67,6 @@ public class Mundo {
                     aspiradora.getPosicionX(),
                     aspiradora.getPosicionY(),
                     gato);
-
-            System.out.println("Presiona Enter para continuar...");
-            try {
-
-                Thread.sleep(1000);
-
-            } catch (InterruptedException e) {
-
-                e.printStackTrace();
-
-            }
         }
 
         scanner.close();
