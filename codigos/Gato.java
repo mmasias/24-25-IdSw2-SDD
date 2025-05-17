@@ -163,4 +163,42 @@ public class Gato implements UnidadConMovimiento {
 
         vista.mostrarMensajeGatoAparece(posicionX, posicionY);
     }
+
+    public void moverManualmente(int direccion) {
+        if (!gatoActivo) return;
+        
+        int nuevaX = posicionX;
+        int nuevaY = posicionY;
+
+        switch (direccion) {
+            case 0: // Arriba
+                if (posicionY > 0)
+                    nuevaY--;
+                break;
+            case 1: // Abajo
+                if (posicionY < habitacion.getAltoHabitacion() - 1)
+                    nuevaY++;
+                break;
+            case 2: // Izquierda
+                if (posicionX > 0)
+                    nuevaX--;
+                break;
+            case 3: // Derecha
+                if (posicionX < habitacion.getAnchoHabitacion() - 1)
+                    nuevaX++;
+                break;
+        }
+
+        Zona nuevaZona = habitacion.getZona(nuevaX, nuevaY);
+        if (nuevaZona != null && !nuevaZona.tieneMueble()) {
+            mover(nuevaX, nuevaY);
+            nuevaZona.ensuciar();
+            pasos++;
+            vista.mostrarContadorPasos(pasos);
+            
+            if (pasos >= 25) {
+                gatoActivo = false;
+            }
+        }
+    }
 }
