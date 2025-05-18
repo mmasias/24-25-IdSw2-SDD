@@ -46,15 +46,16 @@ Optimiza la asignación de mesas, gestiona tiempos de preparación y coordina la
 
 ## 📄 Enlaces Relevantes
 
-- **Código Fuente Versión 1**: [Ver código de la versión 1](/src-v001/src/)
-- **Código Fuente Versión 2**: [Ver código de la versión 2](/src-v002/)
-- **README del Proyecto (Versión 2)**: [Ver README de la versión 2](/src-v002/README.md)
-- **Diseño Modular**: [Ver diseño modular](/documentos/diseñoModular.md)
+- **Código Fuente Versión 1 D**: [Ver código de la versión 1 D](/src-v001/src/)
+- **Código Fuente Versión 2 DM**: [Ver código de la versión 2 DM](/src-v002/)
+- **Código Fuente Versión 3 DOO**: [Ver código de la versión 3 DOO](/src-v003/)
+- **README del Proyecto Diseño Modular (Versión 2)**: [Ver README de la versión 2 Diseño Modular](/src-v002/README.md) y [Ver diseño modular](/documentos/diseñoModular.md)
+- **README del Proyecto Diseño Orientado a Objetos (Versión 3)**: [Ver README de la versión 3 Diseño Orientado a Objetos](/src-v003/readme.md)
 
 ---
 
 ## 👥 **Miembros del Proyecto**
 
-- **Adrián Garcia Arranz**
+- **Adrián García Arranz**
 - **Sergio Moreno Vega**
 - **Iker Celaya Buezo**
