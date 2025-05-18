@@ -24,7 +24,7 @@ public class VistaConsola implements IVista {
     public void mostrarMesas(List<Mesa> mesas) {
         System.out.println("\n--- LISTA DE MESAS ---");
         if (mesas.isEmpty()) {
-            System.out.println("⚠️ No hay mesas registradas.");
+            System.out.println("No hay mesas registradas.");
         } else {
             mesas.forEach(System.out::println);
         }
@@ -34,7 +34,7 @@ public class VistaConsola implements IVista {
     public void mostrarReservas(List<Reserva> reservas) {
         System.out.println("\n--- LISTA DE RESERVAS ---");
         if (reservas.isEmpty()) {
-            System.out.println("⚠️ No hay reservas registradas.");
+            System.out.println("No hay reservas registradas.");
         } else {
             reservas.forEach(System.out::println);
         }
@@ -44,7 +44,7 @@ public class VistaConsola implements IVista {
     public void mostrarPedidos(List<Pedido> pedidos) {
         System.out.println("\n--- LISTA DE PEDIDOS ---");
         if (pedidos.isEmpty()) {
-            System.out.println("⚠️ No hay pedidos registrados.");
+            System.out.println("No hay pedidos registrados.");
         } else {
             pedidos.forEach(System.out::println);
         }
@@ -59,7 +59,7 @@ public class VistaConsola implements IVista {
     public int pedirEntero(String mensaje, Scanner scanner) {
         System.out.print(mensaje);
         while (!scanner.hasNextInt()) {
-            System.out.println("⚠️ Entrada inválida. Intente nuevamente.");
+            System.out.println("Entrada inválida. Intente nuevamente.");
             System.out.print(mensaje);
             scanner.next();
         }
@@ -70,7 +70,7 @@ public class VistaConsola implements IVista {
     public double pedirDecimal(String mensaje, Scanner scanner) {
         System.out.print(mensaje);
         while (!scanner.hasNextDouble()) {
-            System.out.println("⚠️ Entrada inválida. Intente nuevamente.");
+            System.out.println("Entrada inválida. Intente nuevamente.");
             System.out.print(mensaje);
             scanner.next();
         }
