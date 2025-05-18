@@ -1,7 +1,12 @@
 package controlador;
 
-import modelo.*;
-import vista.*;
+import modelo.EstadoMesa;
+import modelo.Mesa;
+import modelo.Pedido;
+import modelo.Plato;
+import modelo.Reserva;
+import vista.IVista;
+import vista.VistaConsola;
 
 import java.util.Date;
 import java.util.Scanner;
@@ -16,7 +21,7 @@ public class Main {
         while (continuar) {
             vista.mostrarMenu();
             int opcion = vista.pedirEntero("", scanner);
-            scanner.nextLine(); // consumir salto después del número
+            scanner.nextLine();
 
             switch (opcion) {
                 case 1 -> agregarMesa(scanner, restaurante, vista);
@@ -26,10 +31,10 @@ public class Main {
                 case 5 -> vista.mostrarReservas(restaurante.getReservas());
                 case 6 -> vista.mostrarPedidos(restaurante.getPedidos());
                 case 7 -> {
-                    vista.mostrarMensaje("👋 Saliendo del sistema...");
+                    vista.mostrarMensaje("Saliendo del sistema...");
                     continuar = false;
                 }
-                default -> vista.mostrarMensaje("⚠️ Opción inválida.");
+                default -> vista.mostrarMensaje("Opción inválida.");
             }
         }
         scanner.close();
@@ -37,40 +42,40 @@ public class Main {
 
     private static void agregarMesa(Scanner scanner, Restaurante restaurante, IVista vista) {
         int numero = vista.pedirEntero("Ingrese número de mesa: ", scanner);
-        scanner.nextLine(); // consumir salto
+        scanner.nextLine();
 
         int capacidad = vista.pedirEntero("Ingrese capacidad de la mesa: ", scanner);
-        scanner.nextLine(); // consumir salto
+        scanner.nextLine();
 
         String ubicacion = vista.pedirTexto("Ingrese ubicación (Terraza/Salón Principal/Salón Privado): ", scanner);
 
         restaurante.agregarMesa(new Mesa(numero, capacidad, ubicacion));
-        vista.mostrarMensaje("✅ Mesa agregada correctamente.");
+        vista.mostrarMensaje("Mesa agregada correctamente.");
     }
 
     private static void registrarReserva(Scanner scanner, Restaurante restaurante, IVista vista) {
         String cliente = vista.pedirTexto("Ingrese nombre del cliente: ", scanner);
 
         int comensales = vista.pedirEntero("Ingrese número de comensales: ", scanner);
-        scanner.nextLine(); // consumir salto
+        scanner.nextLine();
 
         String preferencias = vista.pedirTexto("Ingrese preferencias (opcional): ", scanner);
 
         Reserva reserva = new Reserva(cliente, new Date(), comensales, preferencias);
         if (restaurante.registrarReserva(reserva)) {
-            vista.mostrarMensaje("✅ Reserva registrada con éxito.");
+            vista.mostrarMensaje("Reserva registrada con éxito.");
         } else {
-            vista.mostrarMensaje("⚠️ No hay mesas disponibles para esta reserva.");
+            vista.mostrarMensaje("No hay mesas disponibles para esta reserva.");
         }
     }
 
     private static void realizarPedido(Scanner scanner, Restaurante restaurante, IVista vista) {
         int numeroMesa = vista.pedirEntero("Ingrese el número de mesa para el pedido: ", scanner);
-        scanner.nextLine(); // consumir salto
+        scanner.nextLine();
 
         Mesa mesa = restaurante.obtenerMesaPorNumero(numeroMesa);
         if (mesa == null || mesa.getEstado() == EstadoMesa.LIBRE) {
-            vista.mostrarMensaje("⚠️ No se puede asignar un pedido a esta mesa.");
+            vista.mostrarMensaje("No se puede asignar un pedido a esta mesa.");
             return;
         }
 
@@ -80,15 +85,15 @@ public class Main {
             if (nombre.equalsIgnoreCase("fin")) break;
 
             double precio = vista.pedirDecimal("Ingrese precio del plato: ", scanner);
-            scanner.nextLine(); // consumir salto
+            scanner.nextLine();
 
             int tiempo = vista.pedirEntero("Ingrese tiempo de preparación (minutos): ", scanner);
-            scanner.nextLine(); // consumir salto
+            scanner.nextLine();
 
             pedido.agregarPlato(new Plato(nombre, precio, tiempo));
         }
 
         restaurante.agregarPedido(pedido);
-        vista.mostrarMensaje("✅ Pedido registrado correctamente.");
+        vista.mostrarMensaje("Pedido registrado correctamente.");
     }
 }
