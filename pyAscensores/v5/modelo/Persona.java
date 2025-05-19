@@ -1,6 +1,6 @@
 package modelo;
 
-public class Persona {
+public class Persona implements IPersona {
     private final int origen;
     private final int destino;
 
@@ -9,6 +9,12 @@ public class Persona {
         this.destino = destino;
     }
 
+    @Override
+    public int getOrigen() {
+        return origen;
+    }
+
+    @Override
     public int getDestino() {
         return destino;
     }

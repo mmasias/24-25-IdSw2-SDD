@@ -3,31 +3,41 @@ package modelo;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class Planta {
+public class Planta implements IPlanta {
     private final int nivel;
-    private final Queue<Persona> personasEsperando = new LinkedList<>();
+    private final Queue<IPersona> personasEsperando = new LinkedList<>();
 
     public Planta(int nivel) {
         this.nivel = nivel;
     }
 
-    public void agregarPersona(Persona persona) {
-        personasEsperando.add(persona);
-    }
-
-    public int cantidadEsperando() {
-        return personasEsperando.size();
-    }
-
-    public Queue<Persona> getEsperando() {
-        return personasEsperando;
-    }
-
+    @Override
     public int getNivel() {
         return nivel;
     }
 
-    public void añadirPersonaEsperando(Persona persona) {
-      personasEsperando.add(persona);
+    @Override
+    public void agregarPersonaEsperando(IPersona persona) {
+        personasEsperando.add(persona);
+    }
+    
+    @Override
+    public IPersona sacarPersonaEsperando() {
+        return personasEsperando.poll();
+    }
+    
+    @Override
+    public boolean tienePersonasEsperando() {
+        return !personasEsperando.isEmpty();
+    }
+
+    @Override
+    public int getCantidadEsperando() {
+        return personasEsperando.size();
+    }
+
+    @Override
+    public Queue<IPersona> getPersonasEsperando() {
+        return personasEsperando;
     }
 }

@@ -1,116 +1,157 @@
 package modelo;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Queue;
 
-public class Ascensor {
+public class Ascensor implements ITransporte {
     private final int id;
     private int plantaActual = 0;
     private int direccion = 1; // 1: sube, -1: baja
-    private final Queue<Persona> personas = new LinkedList<>();
+    private final List<IPersona> personas = new ArrayList<>();
     private static final int CAPACIDAD = 4;
+    private static final int PLANTA_MIN = -3;
+    private static final int PLANTA_MAX = 3;
+    private static final double PROB_CAMBIO_DIRECCION = 0.3;
+    private static final double PROB_IR_A_PLANTA_CERO = 0.8;
 
     public Ascensor(int id) {
         this.id = id;
     }
 
-    public int getPlantaActualAsInt() {
-        return plantaActual;
-    }
-
+    @Override
     public int getId() {
         return id;
     }
 
+    @Override
+    public int getUbicacionActual() {
+        return plantaActual;
+    }
+
+    @Override
     public int getDireccion() {
         return direccion;
     }
 
-    public int personasEnElAscensor() {
+    @Override
+    public int getCantidadPersonas() {
         return personas.size();
     }
+    
+    @Override
+    public List<IPersona> getPersonasTransportadas() {
+        return new ArrayList<>(personas);
+    }
+    
+    @Override
+    public int getCapacidadDisponible() {
+        return CAPACIDAD - personas.size();
+    }
+    
+    @Override
+    public boolean tieneEspacio() {
+        return personas.size() < CAPACIDAD;
+    }
 
+    @Override
     public void mover() {
-        // Al final del día, los ascensores priorizan ir a planta 0
-        if (esFinDeJornada()) {
-            // Si estamos por encima de la planta 0, bajamos
-            if (plantaActual > 0) {
-                direccion = -1;
-            } 
-            // Si estamos por debajo de la planta 0, subimos
-            else if (plantaActual < 0) {
-                direccion = 1;
-            }
-            // Si estamos en planta 0, no nos movemos
-            else {
-                return;
-            }
+        
+        if (debeIrAPlantaCero()) {
+            priorizarPlantaCero();
         }
         
-        // Movimiento normal
         plantaActual += direccion;
         
-        // Si llegamos a los límites, cambiamos de dirección
-        if (plantaActual > 3) {
-            plantaActual = 3;
+        
+        if (plantaActual > PLANTA_MAX) {
+            plantaActual = PLANTA_MAX;
+            cambiarDireccion();
+        } else if (plantaActual < PLANTA_MIN) {
+            plantaActual = PLANTA_MIN;
+            cambiarDireccion();
+        }
+    }
+    
+    private boolean debeIrAPlantaCero() {
+       
+        return personas.isEmpty() && Math.random() < PROB_IR_A_PLANTA_CERO;
+    }
+    
+    private void priorizarPlantaCero() {
+       
+        if (plantaActual > 0) {
             direccion = -1;
-        } else if (plantaActual < -3) {
-            plantaActual = -3;
+        } 
+       
+        else if (plantaActual < 0) {
             direccion = 1;
         }
     }
     
-    private boolean esFinDeJornada() {
-        // Esta lógica podría refinarse con información del tiempo
-        // Para simplificar, asumimos que un ascensor vacío al final del día
-        // debería dirigirse a planta 0
-        return personas.isEmpty() && Math.random() < 0.8; // 80% probabilidad para priorizar ir a planta 0
+    private void cambiarDireccion() {
+        direccion *= -1;
     }
 
-    public void dejarSalir() {
+    @Override
+    public int dejarSalir() {
         int cantidadInicial = personas.size();
-        personas.removeIf(p -> p.getDestino() == plantaActual);
+        Iterator<IPersona> it = personas.iterator();
+        while (it.hasNext()) {
+            IPersona persona = it.next();
+            if (persona.getDestino() == plantaActual) {
+                it.remove();
+            }
+        }
         int personasQueSalieron = cantidadInicial - personas.size();
         
-        // Si dejamos salir personas, tal vez queramos quedarnos un poco más en esta planta
-        if (personasQueSalieron > 0 && Math.random() < 0.3) {
-            // 30% de probabilidad de cambiar dirección tras dejar salir gente
-            // (simula comportamiento más realista de ascensor)
-            direccion *= -1;
+        
+        if (personasQueSalieron > 0 && Math.random() < PROB_CAMBIO_DIRECCION) {
+            cambiarDireccion();
         }
+        
+        return personasQueSalieron;
     }
 
-    public void subirPersona(Persona persona) {
-        if (personas.size() < CAPACIDAD) {
+    @Override
+    public void subirPersona(IPersona persona) {
+        if (tieneEspacio()) {
             personas.add(persona);
             
-            // Si subimos personas y el ascensor está vacío, podríamos querer
-            // movernos en la dirección de su destino
+           
             if (personas.size() == 1) {
-                if (persona.getDestino() > plantaActual) {
-                    direccion = 1; // Subir
-                } else if (persona.getDestino() < plantaActual) {
-                    direccion = -1; // Bajar
-                }
+                adaptarDireccionADestino(persona);
             }
         }
     }
-
-    public void evolucionar(List<Planta> plantas) {
-        // Primero dejamos salir a las personas que llegan a su destino
+    
+    private void adaptarDireccionADestino(IPersona persona) {
+        if (persona.getDestino() > plantaActual) {
+            direccion = 1; // Subir
+        } else if (persona.getDestino() < plantaActual) {
+            direccion = -1; // Bajar
+        }
+    }
+    
+    public void evolucionar(List<IPlanta> plantas) {
+       
         dejarSalir();
         
-        // Luego recogemos a personas en la planta actual si hay espacio
-        Planta plantaActual = plantas.get(this.plantaActual + 3);
+      
+        IPlanta plantaActual = plantas.get(this.plantaActual - PLANTA_MIN);
         
-        // Mientras haya personas esperando y espacio en el ascensor
-        while (!plantaActual.getEsperando().isEmpty() && personas.size() < CAPACIDAD) {
-            Persona persona = plantaActual.getEsperando().poll();
+      
+        while (tieneEspacio() && plantaActual.tienePersonasEsperando()) {
+            IPersona persona = plantaActual.sacarPersonaEsperando();
             subirPersona(persona);
         }
         
-        // Finalmente movemos el ascensor
+      
         mover();
+    }
+
+    public String getPlantaActual() {
+       
+        return plantaActual == 0 ? "B" : String.valueOf(plantaActual);
     }
 }

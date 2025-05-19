@@ -1,53 +1,66 @@
 package modelo;
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-public class Universidad {
-    private final Tiempo tiempo;
-    private final List<Ascensor> ascensores = new ArrayList<>();
-    private final List<Planta> plantas = new ArrayList<>();
+public class Universidad implements IEdificio {
+    private final ITiempo tiempo;
+    private final List<ITransporte> ascensores = new ArrayList<>();
+    private final List<IPlanta> plantas = new ArrayList<>();
     private final Map<Integer, Integer> personasEnPlanta = new HashMap<>();
     private final Random random = new Random();
+    
+    private static final int PLANTA_MIN = -3;
+    private static final int PLANTA_MAX = 3;
+    private static final double PROB_MOVIMIENTO_INTERNO = 0.1;
+    private static final double PROB_IR_A_PLANTA_CERO = 0.7;
 
-    public Universidad(Tiempo tiempo) {
+    public Universidad(ITiempo tiempo) {
         this.tiempo = tiempo;
-        for (int i = -3; i <= 3; i++) {
+        
+       
+        for (int i = PLANTA_MIN; i <= PLANTA_MAX; i++) {
             plantas.add(new Planta(i));
-            personasEnPlanta.put(i, 0); // Inicializar contador de personas en cada planta
+            personasEnPlanta.put(i, 0); 
         }
-        // Crear 4 ascensores como en el ejemplo
-        ascensores.add(new Ascensor(0)); // ID 0 para seguir el ejemplo
+        
+        
+        ascensores.add(new Ascensor(0));
         ascensores.add(new Ascensor(1));
         ascensores.add(new Ascensor(2));
-        ascensores.add(new Ascensor(4)); // ID 4 como en el ejemplo
-    }
-
-    public void acogerPersona(int origen, int destino) {
-        Planta planta = obtenerPlanta(origen);
-        planta.agregarPersona(new Persona(origen, destino));
+        ascensores.add(new Ascensor(4)); 
     }
     
-    public void solicitarAscensor(int origen, int destino) {
-        // Crea una nueva persona y la añade a la cola de espera de la planta 'origen'
-        Persona persona = new Persona(origen, destino);
-        plantas.get(origen + 3).añadirPersonaEsperando(persona);
+    @Override
+    public void solicitarTransporte(int origen, int destino) {
+   
+        if (origen < PLANTA_MIN || origen > PLANTA_MAX || 
+            destino < PLANTA_MIN || destino > PLANTA_MAX) {
+            return;
+        }
+        
+      
+        IPersona persona = new Persona(origen, destino);
+        plantas.get(origen - PLANTA_MIN).agregarPersonaEsperando(persona);
     }
     
+    @Override
     public void moverPersonaEntrePlantas(int origen, int destino) {
-        // Verifica si hay personas en la planta de origen
+       
         if (personasEnPlanta.getOrDefault(origen, 0) > 0) {
-            // Reduce el contador de la planta origen
+            
             personasEnPlanta.put(origen, personasEnPlanta.get(origen) - 1);
             
-            // Agrega a la persona a la cola de espera de ascensor en esa planta
-            solicitarAscensor(origen, destino);
+          
+            solicitarTransporte(origen, destino);
         }
     }
     
+    @Override
     public void sacarPersonasDePlanta(int planta, double porcentaje) {
         int cantidadPersonas = personasEnPlanta.getOrDefault(planta, 0);
         int personasASacar = (int) Math.ceil(cantidadPersonas * porcentaje);
@@ -57,82 +70,154 @@ public class Universidad {
         }
     }
 
+    @Override
     public void evolucionar() {
-        // Por cada ascensor, realiza su lógica de movimiento y recogida/descenso de personas
-        for (Ascensor ascensor : ascensores) {
-            // Guarda información sobre personas antes de evolucionar
-            int plantaActual = ascensor.getPlantaActualAsInt();
-            int personasAntes = ascensor.personasEnElAscensor();
+       
+        for (ITransporte transporte : ascensores) {
             
-            // Evoluciona el ascensor (dejará salir personas, subirá nuevas y se moverá)
-            ascensor.evolucionar(plantas);
-            
-            // Calcula cuántas personas bajaron en esta planta
-            int personasDespues = ascensor.personasEnElAscensor();
-            int personasBajadas = personasAntes - personasDespues;
-            
-            if (personasBajadas > 0) {
-                personasEnPlanta.put(plantaActual, personasEnPlanta.get(plantaActual) + personasBajadas);
+            if (transporte instanceof Ascensor) {
+                
+                int plantaActual = transporte.getUbicacionActual();
+                int personasAntes = transporte.getCantidadPersonas();
+                
+               
+                ((Ascensor)transporte).evolucionar(plantas);
+                
+               
+                int personasDespues = transporte.getCantidadPersonas();
+                int personasBajadas = personasAntes - personasDespues;
+                
+                if (personasBajadas > 0) {
+                    personasEnPlanta.put(plantaActual, 
+                                         personasEnPlanta.getOrDefault(plantaActual, 0) + personasBajadas);
+                }
             }
         }
         
-        // Comportamiento aleatorio de personas en plantas (moverse entre plantas)
-        for (int nivel = -3; nivel <= 3; nivel++) {
-            // Las personas tienen probabilidad de decidir ir a otra planta
-            if (personasEnPlanta.getOrDefault(nivel, 0) > 0 && random.nextDouble() < 0.1) {
-                // 10% de probabilidad de que alguien quiera ir a otra planta
-                int personasQueSeMueven = Math.min(random.nextInt(3) + 1, personasEnPlanta.get(nivel));
-                for (int i = 0; i < personasQueSeMueven; i++) {
-                    int destino;
-                    // Las personas tienden a querer salir por planta 0
-                    if (random.nextDouble() < 0.7 && nivel != 0) {
-                        destino = 0; // 70% probabilidad de ir a planta baja
-                    } else {
-                        // 30% probabilidad de ir a otra planta
-                        do {
-                            destino = random.nextInt(7) - 3;
-                        } while (destino == nivel);
+       
+        gestionarMovimientoPersonasEnPlantas();
+    }
+    
+    private void gestionarMovimientoPersonasEnPlantas() {
+      
+        boolean esFinalDelDia = tiempo.getHora() >= 18;
+        
+        
+        for (int nivel = PLANTA_MIN; nivel <= PLANTA_MAX; nivel++) {
+            int personasEnEstePlanta = personasEnPlanta.getOrDefault(nivel, 0);
+            
+           
+            if (personasEnEstePlanta <= 0) continue;
+            
+            if (esFinalDelDia) {
+               
+                if (nivel != 0) { 
+                    int personasQueSeMueven = calcularPersonasAMover(personasEnEstePlanta, 0.6);
+                    
+                    for (int i = 0; i < personasQueSeMueven; i++) {
+                        
+                        personasEnPlanta.put(nivel, personasEnPlanta.get(nivel) - 1);
+                        solicitarTransporte(nivel, 0);
                     }
+                } 
+                else {
+                  
+                    sacarPersonasDePlanta(0, 0.5); 
+                }
+            }
+            else {
+                
+                if (random.nextDouble() < PROB_MOVIMIENTO_INTERNO) {
+                    int personasQueSeMueven = calcularPersonasAMover(personasEnEstePlanta, 0.3);
                     
-                    // Reduce el contador de personas en esta planta
-                    personasEnPlanta.put(nivel, personasEnPlanta.get(nivel) - 1);
-                    
-                    // Solicitan ascensor desde su planta actual
-                    solicitarAscensor(nivel, destino);
+                    for (int i = 0; i < personasQueSeMueven; i++) {
+                        int destino;
+                        
+                        
+                        if (random.nextDouble() < PROB_IR_A_PLANTA_CERO && nivel != 0) {
+                            destino = 0;
+                        } else {
+                           
+                            do {
+                                destino = random.nextInt(PLANTA_MAX - PLANTA_MIN + 1) + PLANTA_MIN;
+                            } while (destino == nivel);
+                        }
+                        
+                       
+                        personasEnPlanta.put(nivel, personasEnPlanta.get(nivel) - 1);
+                        
+                       
+                        solicitarTransporte(nivel, destino);
+                    }
                 }
             }
         }
     }
-
-    public void simular() {
-        evolucionar();
+    
+    private int calcularPersonasAMover(int totalPersonas, double factorMaximo) {
+        
+        int maximo = Math.max(1, (int)(totalPersonas * factorMaximo));
+        return Math.min(random.nextInt(maximo) + 1, totalPersonas);
     }
 
+    @Override
     public int obtenerCantidadEsperando(int planta) {
-        return obtenerPlanta(planta).cantidadEsperando();
+        return obtenerPlanta(planta).getCantidadEsperando();
     }
 
+    @Override
     public int obtenerCantidadEnPlanta(int planta) {
         return personasEnPlanta.getOrDefault(planta, 0);
     }
 
-    public Planta obtenerPlanta(int nivel) {
-        return plantas.get(nivel + 3);
+    @Override
+    public IPlanta obtenerPlanta(int nivel) {
+        int indice = nivel - PLANTA_MIN;
+        if (indice >= 0 && indice < plantas.size()) {
+            return plantas.get(indice);
+        }
+        throw new IllegalArgumentException("Planta fuera de rango: " + nivel);
     }
 
-    public Tiempo getTiempo() {
+    @Override
+    public ITiempo getTiempo() {
         return tiempo;
     }
 
-    public List<Ascensor> getAscensores() {
+    @Override
+    public List<ITransporte> getTransportes() {
         return ascensores;
     }
 
-    public boolean estaAbierta() {
-        return tiempo.getHora() >= 8 && tiempo.getHora() < 20;
+    @Override
+    public boolean estaAbierto() {
+        return tiempo.esHorarioComercial();
+    }
+    
+    @Override
+    public boolean estaVacio() {
+       
+        for (int planta = PLANTA_MIN; planta <= PLANTA_MAX; planta++) {
+            if (obtenerCantidadEnPlanta(planta) > 0 || obtenerCantidadEsperando(planta) > 0) {
+                return false;
+            }
+        }
+        
+
+        for (ITransporte transporte : ascensores) {
+            if (transporte.getCantidadPersonas() > 0) {
+                return false;
+            }
+        }
+        
+        return true;
     }
 
-    public Planta[] getPlantas() {
-        return plantas.toArray(new Planta[0]);
+    public Ascensor[] getAscensores() {
+        Ascensor[] ascensoresArray = new Ascensor[ascensores.size()];
+        for (int i = 0; i < ascensores.size(); i++) {
+            ascensoresArray[i] = (Ascensor) ascensores.get(i);
+        }
+        return ascensoresArray;
     }
 }
