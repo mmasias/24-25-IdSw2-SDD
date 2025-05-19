@@ -1,0 +1,33 @@
+@startuml DdC_2Iteracion
+
+hide circle
+hide empty members
+
+
+
+class Mundo{}
+class Universidad{}
+class Persona{}
+class Ascensor{}
+class Planta{}
+class ControlAscensor{}
+class Llamada{}
+
+Mundo "1" -- "0..*" Persona
+Mundo "1" -- "1" Universidad
+
+Universidad "1" -- "1..*" Planta
+Universidad "1" -- "0..*" Persona
+Universidad "1" ------ "1..*" Ascensor
+
+Persona "0..*" -- "0..1" Ascensor
+Ascensor "1" -- "2..*" Planta
+Ascensor "0" -- "0" ControlAscensor
+
+
+Persona "0..*" -- "1" Planta
+
+ControlAscensor "0" -- "0"Llamada
+
+Llamada "0"-- "0"Ascensor
+@enduml

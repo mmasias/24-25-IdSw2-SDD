@@ -1,0 +1,26 @@
+@startuml DdE_Ascensor
+
+hide empty description
+
+state "Parado" as Reposo
+state "Subiendo" as Subiendo
+state "Bajando" as Bajando
+state "Puerta Abierta" as PuertaAbierta
+state "Puerta Cerrada" as PuertaCerrada
+
+[*] --> Reposo
+Reposo --> Subiendo : Llamada a piso superior
+Reposo --> Bajando : Llamada a piso inferior
+
+Subiendo --> PuertaAbierta : Llegó al piso
+Bajando --> PuertaAbierta : Llegó al piso
+
+PuertaAbierta --> PuertaCerrada : Cerrar puerta
+PuertaCerrada --> Subiendo : Continuar subiendo
+PuertaCerrada --> Bajando : Continuar bajando
+
+PuertaAbierta --> Reposo : Sin más solicitudes
+
+PuertaAbierta --> [*] : Apagado por emergencia
+
+@enduml

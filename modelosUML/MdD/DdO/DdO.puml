@@ -1,0 +1,92 @@
+@startuml DdO
+
+hide circle
+hide empty members
+
+left to right direction
+
+class Mundo {
+    + horario: "12:40"
+}
+
+class Universidad {
+    + capacidad: "30"
+}
+
+class Persona1 {
+    + nombre: "Paco"
+    + deseaIr: "2"
+}
+
+class Persona2 {
+    + nombre: "Laura"
+    + deseaIr: "1"
+}
+
+class Persona3 {
+    + nombre: "Carlos"
+    + deseaIr: "3"
+}
+
+class Ascensor1 {
+    + capacidad: "3"
+    + plantaActual: "-1"
+    + movimiento: "ascendente"
+}
+
+class Ascensor2 {
+    + capacidad: "2"
+    + plantaActual: "0"
+    + movimiento: "descendente"
+}
+
+class Planta0 {
+    + numero: "0"
+}
+
+class Planta1 {
+    + numero: "1"
+}
+
+class Planta2 {
+    + numero: "2"
+}
+
+class Planta3 {
+    + numero: "3"
+}
+
+Mundo *-- Universidad : crea
+Mundo *-- Persona1 : genera
+Mundo *-- Persona2 : genera
+Mundo *-- Persona3 : genera
+
+Universidad *-- Planta0 : contiene
+Universidad *-- Planta1 : contiene
+Universidad *-- Planta2 : contiene
+Universidad *-- Planta3 : contiene
+Universidad o-- Persona1 : acoge
+Universidad o-- Persona2 : acoge
+Universidad o-- Persona3 : acoge
+Universidad *-- Ascensor1 : posee
+Universidad *-- Ascensor2 : posee
+
+Ascensor1 -- Planta0 : comunica
+Ascensor1 -- Planta1 : comunica
+Ascensor1 -- Planta2 : comunica
+Ascensor1 -- Planta3 : comunica
+
+Ascensor2 -- Planta0 : comunica
+Ascensor2 -- Planta1 : comunica
+Ascensor2 -- Planta2 : comunica
+Ascensor2 -- Planta3 : comunica
+
+Persona1 o-- Planta0 : está en
+Persona2 o-- Planta1 : está en
+Persona3 o-- Planta2 : está en
+
+Persona1 o-- Ascensor1 : utiliza
+Persona2 o-- Ascensor2 : utiliza
+Persona3 o-- Ascensor1 : utiliza
+
+@enduml
