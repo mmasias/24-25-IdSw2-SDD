@@ -1,6 +1,6 @@
 package proyecto.proyectoMejoradoAvance1;
 
-public class Jornada {
+public class Mundo {
     private static final int DURACION_JORNADA = 720;
     private static final double PROB_LLEGADA = 0.6;
     

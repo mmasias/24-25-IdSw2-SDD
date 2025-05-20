@@ -3,9 +3,9 @@ package proyecto.proyectoMejoradoAvance1;
 class GestorCajas {
     private final Caja[] cajas;
     
-    public GestorCajas(int cantidad) {
-        cajas = new Caja[cantidad];
-        for(int i = 0; i < cantidad; i++) {
+    public GestorCajas(int productos) {
+        cajas = new Caja[productos];
+        for(int i = 0; i < productos; i++) {
             cajas[i] = new Caja();
         }
     }

@@ -45,7 +45,7 @@ Sirve como base para analizar mejoras y transformarlo posteriormente a un enfoqu
 
 #### Contenidos
 
-- Código fuente original (`RetoEv2.java`)
+- Código fuente original | [RetoOriginal](https://github.com/0xJVR/24-25-IdSw2-SDD/tree/main/v001-Inicial) |
 - Limitaciones detectadas
 - Puntos de mejora identificados
 
@@ -59,7 +59,7 @@ El código está organizado en clases bien definidas para mejorar la modularidad
 
 #### Contenidos
 
-- Código fuente orientado a objetos
+- Código fuente orientado a objetos | [RetoMejora](https://github.com/0xJVR/24-25-IdSw2-SDD/tree/main/v002-Mejorado) |
 - Mejoras aplicadas respecto a la versión original
 - Principios de diseño seguidos
 
@@ -69,6 +69,8 @@ El código está organizado en clases bien definidas para mejorar la modularidad
 
 Versión mejorada del projecto, aplicando un diseño modular que sigue el patrón MVC.
 
+### Contenidos
+- | [RetoModular](http://github.com/0xJVR/24-25-IdSw2-SDD/tree/main/v003-Modular) |
 ---
 
 ## 📝 [Modelo del dominio](/documentos/modeloDominio.md)
@@ -80,6 +82,6 @@ Se identifican las principales entidades, atributos y relaciones que intervienen
 
 #### Contenidos
 
-- Entidades principales
+- Entidades principales | [RetoSOLID](https://github.com/0xJVR/24-25-IdSw2-SDD/tree/main/v004-SOLID) |
 - Relaciones entre objetos
 - Breve descripción de cada componente
