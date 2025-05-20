@@ -1,6 +1,6 @@
 @startuml
 
-class Jornada {
+class Mundo {
 }
 class Caja {
 }
@@ -14,7 +14,7 @@ class Estadisticas {
 }
 
 
-Jornada --> Caja : "Usa varias"
+Mundo --> Caja : "Usa varias"
 Caja --> Cliente : "Atiende"
 Cliente *-- Productos : "Tiene"
 Cliente --o Cola : "Forma"
