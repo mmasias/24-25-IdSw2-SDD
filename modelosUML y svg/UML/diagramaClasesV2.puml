@@ -15,7 +15,7 @@ class Estadisticas {
 class GestorCajas {
 }
 
-class Jornada {
+class Mundo {
 
 }
 
@@ -24,8 +24,8 @@ Cola *-- Cliente : contiene
 GestorCajas *-- Caja : compone
 GestorCajas ..> Cola : usa
 GestorCajas ..> Estadisticas : usa
-Jornada --> Cola : tiene
-Jornada --> GestorCajas : tiene
-Jornada --> Estadisticas : tiene
+Mundo --> Cola : tiene
+Mundo --> GestorCajas : tiene
+Mundo --> Estadisticas : tiene
 
 @enduml

@@ -1,13 +1,13 @@
 package proyecto.proyectoMejoradoAvance1;
 
 class Cliente {
-    private final int items;
+    private int productos;
     
     public Cliente() {
-        this.items = (int)(Math.random() * 11) + 5; 
+        this.productos = (int)(Math.random() * 11) + 5; 
     }
     
-    public int getItems() {
-        return items;
+    public int getproductos() {
+        return productos;
     }
 }

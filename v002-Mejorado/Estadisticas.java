@@ -3,7 +3,7 @@ package proyecto.proyectoMejoradoAvance1;
 class Estadisticas {
     private int minutosColaVacia;
     private int clientesAtendidos;
-    private int itemsVendidos;
+    private int productosVendidos;
     private int clientesPendientes;
     
     public void registrarMinuto(Cola cola) {
@@ -12,7 +12,7 @@ class Estadisticas {
     
     public void clienteAtendido(int items) {
         clientesAtendidos++;
-        itemsVendidos += items;
+        productosVendidos += items;
     }
     
     public void setClientesPendientes(int cantidad) {
@@ -25,7 +25,7 @@ class Estadisticas {
         System.out.println("Minutos con cola en cero   \t: " + minutosColaVacia);
         System.out.println("Personas en la cola al cierre \t: " + clientesPendientes);
         System.out.println("Personas atendidas en el dia \t: " + clientesAtendidos);
-        System.out.println("Artículos vendidos en el dia \t: " + itemsVendidos);
+        System.out.println("Artículos vendidos en el dia \t: " + productosVendidos);
         System.out.println("============================================================");
     }
 }
