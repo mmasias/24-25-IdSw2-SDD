@@ -51,7 +51,7 @@ Sirve como base para analizar mejoras y transformarlo posteriormente a un enfoqu
 
 ---
 
-## 🛠️ [Avance I](/proyecto/proyectoMejorado/)
+## 🛠️ [Versión 2](/proyecto/proyectoMejorado/)
 
 Aquí se presenta la versión mejorada del proyecto, implementada utilizando principios de programación orientada a objetos.
 
@@ -65,12 +65,20 @@ El código está organizado en clases bien definidas para mejorar la modularidad
 
 ---
 
-## 🚀 [Avance II - Diseño Modular](/documentos/diseñoModular.md)
+## 🚀 [Versión 3 - Diseño Modular](/documentos/diseñoModular.md)
 
 Versión mejorada del projecto, aplicando un diseño modular que sigue el patrón MVC.
 
 ### Contenidos
 - | [RetoModular](http://github.com/0xJVR/24-25-IdSw2-SDD/tree/main/v003-Modular) |
+---
+
+## 🚀 [Versión 4 - SOLID](/V004-solid)
+
+Siguiente versión del proyecto, aplicando SOLID.
+
+### Contenidos
+- | [SOLID](http://github.com/0xJVR/24-25-IdSw2-SDD/tree/main/v004-SOLID) |
 ---
 
 ## 📝 [Modelo del dominio](/documentos/modeloDominio.md)
