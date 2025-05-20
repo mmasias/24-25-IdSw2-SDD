@@ -1,0 +1,70 @@
+@startuml
+package implementacion.modelo {
+    
+    class Caja {
+        +estaDisponible() : boolean
+        +atenderCliente(cliente: ICliente) : void
+        +liberarCaja() : void
+        +getClientesAtendidos() : int
+        +getTiempoPromedioAtencion() : double
+        +getId() : int
+        +getTiempoFinAtencion() : long
+    }
+
+    class Cliente {
+        +getId() : int
+        +getTiempoLlegada() : long
+        +getTiempoEspera() : long
+        +getTiempoAtencion() : long
+        +setTiempoAtencion(tiempo: long) : void
+        +setTiempoInicioAtencion(tiempo: long) : void
+        +estaAtendido() : boolean
+    }
+
+    class Cola {
+        +agregarCliente(cliente: ICliente) : void
+        +siguienteCliente() : ICliente
+        +estaVacia() : boolean
+        +getTamanio() : int
+        +getClientes() : List<ICliente>
+    }
+
+    class Estadisticas {
+        +registrarLlegadaCliente(cliente: ICliente) : void
+        +registrarClienteAtendido(cliente: ICliente, caja: ICaja) : void
+        +getTiempoPromedioEspera() : double
+        +getTiempoPromedioAtencion() : double
+        +getClientesAtendidos() : int
+        +getClientesEnCola() : int
+    }
+
+    class GestorCajas {
+        +inicializarCajas(numeroCajas: int) : void
+        +obtenerCajaDisponible() : ICaja
+        +obtenerTodasLasCajas() : List<ICaja>
+        +hayCajasDisponibles() : boolean
+        +actualizarCajas(tiempoActual: long) : void
+    }
+}
+
+package interfaces.modelo {
+    interface ICaja
+    interface ICliente
+    interface ICola
+    interface IEstadisticas
+    interface IGestorCajas
+}
+
+Caja ..|> ICaja
+Cliente ..|> ICliente
+Cola ..|> ICola
+Estadisticas ..|> IEstadisticas
+GestorCajas ..|> IGestorCajas
+
+Caja --> ICliente
+Estadisticas --> ICliente
+Estadisticas --> ICaja
+Cola --> ICliente
+GestorCajas --> ICaja
+
+@enduml

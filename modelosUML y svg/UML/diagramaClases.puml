@@ -11,8 +11,9 @@ class Cliente {
 class Productos {
 }
 
-Jornada --> Caja : "Abre"
-Jornada --> Cliente : "Sirve"
+
+Jornada --> Caja : "Usa varias"
+Caja --> Cliente : "Atiende"
 Cliente *-- Productos : "Tiene"
 Cliente --o Cola : "Forma"
 Caja ..> Cola : "Gestiona dependiendo de"
