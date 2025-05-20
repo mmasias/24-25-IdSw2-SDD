@@ -18,3 +18,4 @@ Cliente --o Cola : "Forma"
 Caja ..> Cola : "Gestiona dependiendo de"
 
 @enduml
+

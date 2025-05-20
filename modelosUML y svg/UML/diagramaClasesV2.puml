@@ -1,0 +1,30 @@
+@startuml diagramaClasesModular
+
+class Cliente { 
+}
+
+class Caja {
+}
+
+class Cola {
+}
+
+class Estadisticas {
+}
+
+class GestorCajas {
+}
+
+class Jornada {
+}
+
+Caja --> Cliente : usa
+Cola *-- Cliente : contiene
+GestorCajas *-- Caja : compone
+GestorCajas ..> Cola : usa
+GestorCajas ..> Estadisticas : usa
+Jornada --> Cola : tiene
+Jornada --> GestorCajas : tiene
+Jornada --> Estadisticas : tiene
+
+@enduml
