@@ -73,7 +73,7 @@ Versión mejorada del projecto, aplicando un diseño modular que sigue el patró
 - | [RetoModular](http://github.com/0xJVR/24-25-IdSw2-SDD/tree/main/v003-Modular) |
 ---
 
-## 🚀 [Versión 4 - SOLID](/V004-solid)
+## 🖥️ [Versión 4 - SOLID](/V004-solid)
 
 Siguiente versión del proyecto, aplicando SOLID.
 
