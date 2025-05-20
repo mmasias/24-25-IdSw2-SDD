@@ -10,6 +10,8 @@ class Cliente {
 }
 class Productos {
 }
+class Estadisticas {
+}
 
 
 Jornada --> Caja : "Usa varias"
@@ -17,6 +19,7 @@ Caja --> Cliente : "Atiende"
 Cliente *-- Productos : "Tiene"
 Cliente --o Cola : "Forma"
 Caja ..> Cola : "Gestiona dependiendo de"
+Estadisticas --o Cliente : "Registra varios"
 
 @enduml
 
