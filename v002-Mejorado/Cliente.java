@@ -1,7 +1,7 @@
 package proyecto.proyectoMejoradoAvance1;
 
 class Cliente {
-    private final int items;
+    private int items;
     
     public Cliente() {
         this.items = (int)(Math.random() * 11) + 5; 
