@@ -19,7 +19,6 @@ class Mundo {
 
 }
 
-' Relaciones con tipo específico
 Caja --> Cliente : usa
 Cola *-- Cliente : contiene
 GestorCajas *-- Caja : compone
