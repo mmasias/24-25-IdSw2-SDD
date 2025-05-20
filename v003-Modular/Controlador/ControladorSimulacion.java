@@ -23,7 +23,6 @@ public class ControladorSimulacion {
         for (int minuto = 1; minuto <= duracionJornada; minuto++) {
             System.out.println("\n--- Minuto " + minuto + " ---");
             
-            // Llegada de clientes
             if (Math.random() <= GeneradorClientes.PROB_LLEGADA) {
                 Cliente nuevoCliente = GeneradorClientes.generarCliente();
                 cola.agregar(nuevoCliente);
@@ -32,15 +31,12 @@ public class ControladorSimulacion {
                 System.out.println("· No llega nadie");
             }
             
-            // Procesar cajas
             gestorCajas.procesar(cola, estadisticas);
             estadisticas.registrarMinuto(cola);
             
-            // Mostrar estado
             visualizador.mostrarEstado(cola, gestorCajas);
         }
         
-        // Finalizar
         estadisticas.setClientesPendientes(cola.cantidad());
         estadisticas.mostrarResumen();
     }

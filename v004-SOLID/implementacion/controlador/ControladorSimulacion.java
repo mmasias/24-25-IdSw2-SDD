@@ -24,7 +24,6 @@ public class ControladorSimulacion implements IControladorSimulacion {
     private int maxClientes;
     private double tasaLlegada;
 
-    // Constructor con inyección de dependencias
     public ControladorSimulacion(
             ICola cola,
             IGestorCajas gestorCajas,
@@ -53,10 +52,8 @@ public class ControladorSimulacion implements IControladorSimulacion {
             return;
         }
 
-        // Inicializar componentes
         gestorCajas.inicializarCajas(numCajas);
 
-        // Iniciar timer para simulación
         enEjecucion = true;
         timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
@@ -84,12 +81,9 @@ public class ControladorSimulacion implements IControladorSimulacion {
     public void reiniciarSimulacion() {
         pausarSimulacion();
 
-        // Reiniciar estado
         tiempoActual = 0;
         numPasos = 0;
 
-        // Reiniciar componentes (podría implementarse de manera más eficiente
-        // con una fábrica para crear nuevas instancias)
         cola = new implementacion.modelo.Cola();
         gestorCajas.inicializarCajas(numCajas);
         estadisticas = new implementacion.modelo.Estadisticas(cola);
@@ -108,17 +102,14 @@ public class ControladorSimulacion implements IControladorSimulacion {
         tiempoActual++;
         numPasos++;
 
-        // 1. Actualizar estado de cajas (liberar las que terminaron)
         gestorCajas.actualizarCajas(tiempoActual);
 
-        // 2. Generar nuevos clientes según probabilidad
         if (generadorClientes.debeGenerarClienteEnEstePaso(tasaLlegada)) {
             ICliente nuevoCliente = generadorClientes.generarNuevoCliente(tiempoActual);
             cola.agregarCliente(nuevoCliente);
             estadisticas.registrarLlegadaCliente(nuevoCliente);
         }
 
-        // 3. Asignar clientes a cajas disponibles
         while (!cola.estaVacia() && gestorCajas.hayCajasDisponibles()) {
             ICaja cajaDisponible = gestorCajas.obtenerCajaDisponible();
             if (cajaDisponible != null) {
@@ -128,13 +119,11 @@ public class ControladorSimulacion implements IControladorSimulacion {
             }
         }
 
-        // 4. Actualizar vista
         visualizador.actualizarVistaSimulacion(cola, gestorCajas.obtenerTodasLasCajas(), estadisticas);
     }
 
     @Override
     public void configurarParametros(int numCajas, int maxClientes, double tasaLlegada) {
-        // Validar parámetros
         if (numCajas <= 0 || maxClientes <= 0 || tasaLlegada <= 0 || tasaLlegada > 1) {
             visualizador.mostrarMensaje("Parámetros inválidos");
             return;
@@ -145,7 +134,6 @@ public class ControladorSimulacion implements IControladorSimulacion {
         this.tasaLlegada = tasaLlegada;
         generadorClientes.configurarTasaLlegada(tasaLlegada);
 
-        // Si ya estaba inicializado, actualizar el número de cajas
         if (enEjecucion) {
             pausarSimulacion();
             gestorCajas.inicializarCajas(numCajas);
