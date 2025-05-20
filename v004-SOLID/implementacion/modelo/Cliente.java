@@ -28,7 +28,7 @@ public class Cliente implements ICliente {
     @Override
     public long getTiempoEspera() {
         if (tiempoInicioAtencion == 0) {
-            return 0; // No ha comenzado la atención
+            return 0; 
         }
         return tiempoInicioAtencion - tiempoLlegada;
     }

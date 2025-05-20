@@ -32,7 +32,6 @@ public class Caja implements ICaja {
         this.clienteActual = cliente;
         this.disponible = false;
 
-        // Simular tiempo de atención (por ejemplo, entre 1 y 5 unidades de tiempo)
         long tiempoAtencion = (long) (Math.random() * 4 + 1);
         cliente.setTiempoInicioAtencion(System.currentTimeMillis());
         cliente.setTiempoAtencion(tiempoAtencion);
@@ -68,7 +67,6 @@ public class Caja implements ICaja {
         return id;
     }
 
-    // Método auxiliar para el GestorCajas
     public long getTiempoFinAtencion() {
         return tiempoFinAtencion;
     }

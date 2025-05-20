@@ -13,8 +13,9 @@ class Productos {
 
 Jornada --> Caja : "Abre"
 Jornada --> Cliente : "Sirve"
-Cliente --* Productos : "Tiene"
+Cliente *-- Productos : "Tiene"
 Cliente --o Cola : "Forma"
 Caja ..> Cola : "Gestiona dependiendo de"
 
 @enduml
+
