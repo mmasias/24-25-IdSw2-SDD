@@ -1,4 +1,8 @@
-package v002;
+package v002.modelo.mapa;
+
+import v002.modelo.entidades.Aspiradora;
+import v002.vista.VistaConsola;
+
 public class ZonaDeRecarga extends Zona {
 
     private VistaConsola vista;
@@ -10,6 +14,7 @@ public class ZonaDeRecarga extends Zona {
 
     @Override
     public void ensuciar() {
+        // No se puede ensuciar una zona de recarga
     }
 
     @Override

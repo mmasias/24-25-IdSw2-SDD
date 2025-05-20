@@ -1,6 +1,15 @@
-package v002;
+package v002.vista;
+
+
 import java.util.ArrayList;
 import java.util.List;
+
+import v002.modelo.entidades.Aspiradora;
+import v002.modelo.entidades.Bateria;
+import v002.modelo.entidades.Gato;
+import v002.modelo.mapa.Habitacion;
+import v002.modelo.mapa.Zona;
+import v002.modelo.mapa.ZonaDeRecarga;
 
 public class VistaConsola {
 

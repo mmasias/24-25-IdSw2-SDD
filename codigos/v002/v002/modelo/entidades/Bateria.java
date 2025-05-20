@@ -1,4 +1,7 @@
-package v002;
+package v002.modelo.entidades;
+
+import v002.vista.VistaConsola;
+
 public class Bateria {
     private int carga;
     private int capacidadMaximaBateria;
