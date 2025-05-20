@@ -45,8 +45,6 @@ public class GestorCajas implements IGestorCajas {
     public void actualizarCajas(long tiempoActual) {
         for (ICaja caja : cajas) {
             if (!caja.estaDisponible()) {
-                // Validamos si ya terminó el tiempo de atención
-                // Asumimos que podemos hacer un cast seguro porque solo manejamos nuestras implementaciones
                 Caja cajaConcreta = (Caja) caja;
                 if (tiempoActual >= cajaConcreta.getTiempoFinAtencion()) {
                     caja.liberarCaja();

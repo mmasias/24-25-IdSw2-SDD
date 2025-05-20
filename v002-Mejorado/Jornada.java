@@ -12,7 +12,6 @@ public class Jornada {
         for(int minuto = 1; minuto <= DURACION_JORNADA; minuto++) {
             System.out.println("\n>> MINUTO " + minuto);
             
-            // Llegada de clientes
             if(Math.random() <= PROB_LLEGADA) {
                 cola.agregar(new Cliente());
                 System.out.println(" - Llegó una persona");
@@ -22,15 +21,12 @@ public class Jornada {
             
             System.out.println("> Personas en cola: " + cola.cantidad());
             
-            // Procesar cajas
             cajas.procesar(cola, stats);
             stats.registrarMinuto(cola);
             
-            // Mostrar estado
             cajas.mostrarEstado();
         }
         
-        // Finalizar
         stats.setClientesPendientes(cola.cantidad());
         stats.mostrarResumen();
     }

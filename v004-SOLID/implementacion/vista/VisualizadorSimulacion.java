@@ -20,21 +20,17 @@ public class VisualizadorSimulacion implements IVisualizador {
     }
 
     private void inicializarInterfaz() {
-        // Crear la ventana principal
         ventana = new JFrame(implementacion.util.Constantes.Interfaz.TITULO_APLICACION);
         ventana.setSize(implementacion.util.Constantes.Interfaz.ANCHO_VENTANA,
                 implementacion.util.Constantes.Interfaz.ALTO_VENTANA);
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // Panel principal con BorderLayout
         JPanel panelPrincipal = new JPanel(new BorderLayout());
 
-        // Panel de estado en la parte superior
         estadoSimulacion = new JLabel("Simulación no iniciada", JLabel.CENTER);
         estadoSimulacion.setFont(new Font("Arial", Font.BOLD, 14));
         panelPrincipal.add(estadoSimulacion, BorderLayout.NORTH);
 
-        // Área de texto para mostrar la simulación
         areaTexto = new JTextArea();
         areaTexto.setEditable(false);
         areaTexto.setFont(new Font("Monospaced", Font.PLAIN, 12));
@@ -49,7 +45,6 @@ public class VisualizadorSimulacion implements IVisualizador {
     public void actualizarVistaSimulacion(ICola cola, List<ICaja> cajas, IEstadisticas estadisticas) {
         StringBuilder sb = new StringBuilder();
 
-        // Mostrar información de cajas
         sb.append("=== ESTADO DE CAJAS ===\n");
         for (ICaja caja : cajas) {
             sb.append(String.format("Caja %d: %s\n",
@@ -58,7 +53,6 @@ public class VisualizadorSimulacion implements IVisualizador {
         }
         sb.append("\n");
 
-        // Mostrar información de cola
         sb.append("=== COLA DE CLIENTES ===\n");
         sb.append(String.format("Total en cola: %d\n", cola.getTamanio()));
         List<ICliente> clientesEnCola = cola.getClientes();
@@ -72,16 +66,13 @@ public class VisualizadorSimulacion implements IVisualizador {
         }
         sb.append("\n");
 
-        // Mostrar estadísticas actuales
         sb.append("=== ESTADÍSTICAS ACTUALES ===\n");
         sb.append(String.format("Clientes atendidos: %d\n", estadisticas.getClientesAtendidos()));
         sb.append(String.format("Tiempo promedio espera: %.2f\n", estadisticas.getTiempoPromedioEspera()));
         sb.append(String.format("Tiempo promedio atención: %.2f\n", estadisticas.getTiempoPromedioAtencion()));
 
-        // Actualizar el área de texto
         areaTexto.setText(sb.toString());
 
-        // Actualizar etiqueta de estado
         estadoSimulacion.setText("Simulación en ejecución - Clientes atendidos: " +
                 estadisticas.getClientesAtendidos());
     }
@@ -100,7 +91,6 @@ public class VisualizadorSimulacion implements IVisualizador {
         areaTexto.setText(sb.toString());
         estadoSimulacion.setText("Simulación finalizada");
 
-        // Mostrar un mensaje emergente con las estadísticas finales
         JOptionPane.showMessageDialog(ventana,
                 "La simulación ha finalizado.\n" +
                         "Total clientes atendidos: " + estadisticas.getClientesAtendidos() + "\n" +
