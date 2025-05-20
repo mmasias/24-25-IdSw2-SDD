@@ -1,6 +1,6 @@
-@startuml diagramaClasesModular
+@startuml
 
-class Cliente { 
+class Cliente {
 }
 
 class Caja {
@@ -16,8 +16,10 @@ class GestorCajas {
 }
 
 class Jornada {
+
 }
 
+' Relaciones con tipo específico
 Caja --> Cliente : usa
 Cola *-- Cliente : contiene
 GestorCajas *-- Caja : compone
