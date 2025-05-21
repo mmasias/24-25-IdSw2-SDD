@@ -9,21 +9,8 @@ public class Mundo {
         Aspiradora aspiradora = new Aspiradora(bateria, vista);
         Gato gato = new Gato(habitacion, aspiradora, vista);
 
-        habitacion.getZona(5, 5).ensuciar();
-        habitacion.getZona(10, 3).ensuciar();
-        habitacion.getZona(10, 3).ensuciar();
-        habitacion.getZona(15, 7).ensuciar();
-        habitacion.getZona(15, 6).ensuciar();
-        habitacion.getZona(15, 7).ensuciar();
-        habitacion.getZona(24, 8).ensuciar();
-        habitacion.getZona(20, 7).ensuciar();
-        habitacion.getZona(10, 3).ensuciar();
-        habitacion.getZona(15, 2).ensuciar();
-        habitacion.getZona(15, 1).ensuciar();
-        habitacion.getZona(12, 9).ensuciar();
 
         Scanner scanner = new Scanner(System.in);
-        String input;
 
         for (int i = 0; i < 5000; i++) {
             vista.mostrarPaso(i + 1);
