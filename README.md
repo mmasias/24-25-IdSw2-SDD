@@ -1,6 +1,6 @@
 # 🏢 PyAscensores 
 
-## 🚀 Objetivo
+## 🎯 Objetivo
 [🔗 Explicación](https://github.com/celiabecerril/24-25-IdSw2-SDD/blob/MVC/documentos/Objetivo.md)
 
 ## 🌐 Modelo de Dominio
