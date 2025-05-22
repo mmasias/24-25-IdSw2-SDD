@@ -5,18 +5,21 @@ import Modelo.Estadisticas;
 import Modelo.Cliente;
 import Util.GeneradorClientes;
 import Vista.VisualizadorSimulacion;
+import Vista.EstadisticasVista;
 
 public class ControladorSimulacion {
     private final Cola cola;
     private final GestorCajas gestorCajas;
     private final Estadisticas estadisticas;
     private final VisualizadorSimulacion visualizador;
+    private final EstadisticasVista estadisticasVista;
     
-    public ControladorSimulacion(Cola cola, GestorCajas gestorCajas, Estadisticas estadisticas, VisualizadorSimulacion visualizador) {
+    public ControladorSimulacion(Cola cola, GestorCajas gestorCajas, Estadisticas estadisticas, VisualizadorSimulacion visualizador, EstadisticasVista estadisticasVista) {
         this.cola = cola;
         this.gestorCajas = gestorCajas;
         this.estadisticas = estadisticas;
         this.visualizador = visualizador;
+        this.estadisticasVista = estadisticasVista;
     }
     
     public void iniciarSimulacion(int duracionJornada) {
@@ -38,6 +41,6 @@ public class ControladorSimulacion {
         }
         
         estadisticas.setClientesPendientes(cola.cantidad());
-        estadisticas.mostrarResumen();
+        estadisticasVista.mostrarResumen(estadisticas);
     }
 }
