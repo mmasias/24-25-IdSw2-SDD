@@ -1,95 +1,83 @@
-# 🏪 Proyecto de Simulación de Cajas y Colas
+# Simulación de Gestión de Colas y Cajas
 
-Este proyecto simula el funcionamiento de un sistema de gestión de colas y cajas en un entorno comercial, registrando estadísticas clave sobre el flujo de clientes y artículos vendidos.  
-Trata de la mejora de un código antiguo lineal a un código orientado a objetos.
-
----
-
-## 📋 [Enunciado](/documentos/enunciado.md)
-
-Este documento presenta el enunciado original que define los requisitos y objetivos del sistema de simulación de cajas y colas.
-
-Se establecen las condiciones iniciales, las reglas de funcionamiento y las estadísticas que deben registrarse durante la simulación.
-
-#### Contenidos
-
-- Objetivo del sistema
-- Reglas de atención y flujo de clientes
-- Métricas a registrar
+Este repositorio alberga un sistema de simulación para la gestión de colas y cajas en un entorno comercial. El objetivo es evaluar métricas clave del flujo de clientes y artículos vendidos, partiendo de una implementación lineal y evolucionando hacia un diseño basado en principios de programación orientada a objetos (POO), modularidad y patrones de diseño.
 
 ---
 
-## 🛫 [Diseño](/documentos/diseño.md)
+## 📋 Tabla de Contenidos
 
-En este apartado se describe la estructura y el diseño del sistema mejorado de simulación de cajas y colas.  
-Se detallan los principales componentes, sus responsabilidades, y cómo interactúan entre sí.
-
-El diseño busca ofrecer una solución modular, flexible y preparada para futuras extensiones, mejorando así la mantenibilidad respecto al enfoque inicial basado en programación lineal.
-
-#### Contenidos
-
-- Diagrama de clases
-- Descripción de clases principales
-- Interacción entre objetos
-- Justificación de decisiones de diseño
+1. [Enunciado del Proyecto](#enunciado-del-proyecto)
+2. [Diseño General](#diseño-general)
+3. [Versiones del Desarrollo](#versiones-del-desarrollo)
+   - [Versión 1: Implementación Lineal](#versión-1-implementación-lineal)
+   - [Versión 2: Enfoque Orientado a Objetos](#versión-2-enfoque-orientado-a-objetos)
+   - [Versión 3: Arquitectura MVC Modular](#versión-3-arquitectura-mvc-modular)
+   - [Versión 4: Principios SOLID](#versión-4-principios-solid)
+4. [Modelo del Dominio](#modelo-del-dominio)
 
 ---
 
+## Enunciado del Proyecto
 
+El documento de enunciado define los requisitos y objetivos del sistema de simulación. Incluye:
 
-## 🖥️ [Versión Original](/proyecto/proyectoInicial/RetoEv2.java)
+- **Objetivo:** Analizar el comportamiento de un sistema de cajas y colas.
+- **Condiciones iniciales:** Parámetros de llegada de clientes y distribución de artículos.
+- **Reglas de atención:** Lógica de asignación de clientes a cajas.
+- **Métricas a registrar:** Tiempo de espera, longitud de cola, uso de cajas, artículos procesados.
 
-Este apartado contiene la versión original del proyecto, desarrollada utilizando programación lineal.
-
-Sirve como base para analizar mejoras y transformarlo posteriormente a un enfoque orientado a objetos.
-
-#### Contenidos
-
-- Código fuente original | [RetoOriginal](https://github.com/0xJVR/24-25-IdSw2-SDD/tree/main/v001-Inicial) |
-- Limitaciones detectadas
-- Puntos de mejora identificados
+> 📄 [Acceder al enunciado completo](documentos/enunciado.md)
 
 ---
 
-## 🛠️ [Versión 2](/proyecto/proyectoMejorado/)
+## Diseño General
 
-Aquí se presenta la versión mejorada del proyecto, implementada utilizando principios de programación orientada a objetos.
+Descripción de la arquitectura y componentes del sistema:
 
-El código está organizado en clases bien definidas para mejorar la modularidad, la legibilidad y la capacidad de mantenimiento del sistema.
+1. **Diagrama de clases:** Estructura de entidades y relaciones.
+2. **Clases principales:** Responsabilidades y métodos clave.
+3. **Interacción entre objetos:** Flujo de datos y eventos.
+4. **Justificación de diseño:** Motivación de las decisiones para garantizar flexibilidad y escalabilidad.
 
-#### Contenidos
-
-- Código fuente orientado a objetos | [RetoMejora](https://github.com/0xJVR/24-25-IdSw2-SDD/tree/main/v002-Mejorado) |
-- Mejoras aplicadas respecto a la versión original
-- Principios de diseño seguidos
+> 📄 [Ver detalles del diseño](documentos/diseño.md)
 
 ---
 
-## 🚀 [Versión 3 - Diseño Modular](/documentos/diseñoModular.md)
+## Versiones del Desarrollo
 
-Versión mejorada del projecto, aplicando un diseño modular que sigue el patrón MVC.
+### Versión 1: Implementación Lineal
 
-### Contenidos
-- | [RetoModular](http://github.com/0xJVR/24-25-IdSw2-SDD/tree/main/v003-Modular) |
+- Enfoque inicial con programación lineal.
+- Código monolítico en Java.
+- **Repositorio:** [RetoOriginal](https://github.com/0xJVR/24-25-IdSw2-SDD/tree/main/v001-Inicial)
+- Limitaciones: difícil mantenimiento y extensibilidad.
+
+### Versión 2: Enfoque Orientado a Objetos
+
+- Refactorización a POO: clases bien definidas y encapsulación.
+- Mejora de modularidad y legibilidad.
+- **Repositorio:** [RetoMejora](https://github.com/0xJVR/24-25-IdSw2-SDD/tree/main/v002-Mejorado)
+
+### Versión 3: Arquitectura MVC Modular
+
+- Aplicación del patrón Modelo-Vista-Controlador.
+- Separación clara de responsabilidades.
+- **Repositorio:** [RetoModular](https://github.com/0xJVR/24-25-IdSw2-SDD/tree/main/v003-Modular)
+
+### Versión 4: Principios SOLID
+
+- Integración de los cinco principios SOLID.
+- Código altamente desacoplado y orientado a la extensión.
+- **Repositorio:** [SOLID](https://github.com/0xJVR/24-25-IdSw2-SDD/tree/main/v004-SOLID)
+
 ---
 
-## 🖥️ [Versión 4 - SOLID](/V004-solid)
+## Modelo del Dominio
 
-Siguiente versión del proyecto, aplicando SOLID.
+El modelo del dominio define las entidades y sus relaciones fundamentales:
 
-### Contenidos
-- | [SOLID](http://github.com/0xJVR/24-25-IdSw2-SDD/tree/main/v004-SOLID) |
----
+- **Entidades principales:** Cliente, Caja, Artículo, Cola.
+- **Atributos:** Identificador, tiempos de llegada/servicio, número de artículos, etc.
+- **Relaciones:** Asociación entre clientes y cajas, colas de espera.
 
-## 📝 [Modelo del dominio](/documentos/modeloDominio.md)
-
-Este documento describe el modelo del dominio utilizado para estructurar el sistema de simulación.
-
-Se identifican las principales entidades, atributos y relaciones que intervienen en la dinámica de colas y cajas.
-
-
-#### Contenidos
-
-- Entidades principales | [RetoSOLID](https://github.com/0xJVR/24-25-IdSw2-SDD/tree/main/v004-SOLID) |
-- Relaciones entre objetos
-- Breve descripción de cada componente
+> 📄 [Explorar el modelo completo](documentos/modeloDominio.md)
