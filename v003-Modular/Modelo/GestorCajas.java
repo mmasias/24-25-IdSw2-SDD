@@ -20,11 +20,11 @@ public class GestorCajas {
         }
     }
     
-    public void mostrarEstado() {
-        StringBuilder sb = new StringBuilder();
+    public String[] getEstadosCajas() {
+        String[] estados = new String[cajas.length];
         for (int i = 0; i < cajas.length; i++) {
-            sb.append("Caja").append(i + 1).append(cajas[i].getEstado()).append(" | ");
+            estados[i] = cajas[i].getEstado();
         }
-        System.out.println(sb.toString());
+        return estados;
     }
 }
