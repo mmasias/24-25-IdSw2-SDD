@@ -2,7 +2,7 @@ package Vista;
 
 import Modelo.Caja;
 
-public class CajaVista {
+public class VisualizadorCaja {
     public String getEstadoCaja(int numero, Caja caja) {
         if (caja.tieneCliente()) {
             return "Caja" + numero + "[" + caja.getTiempoRestante() + "]";

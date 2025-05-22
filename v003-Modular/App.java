@@ -2,7 +2,7 @@ import Modelo.Cola;
 import Modelo.GestorCajas;
 import Modelo.Estadisticas;
 import Vista.VisualizadorSimulacion;
-import Vista.EstadisticasVista;
+import Vista.VisualizadorEstadisticas;
 import Controlador.ControladorSimulacion;
 
 public class App {
@@ -10,9 +10,9 @@ public class App {
         Cola cola = new Cola();
         GestorCajas gestorCajas = new GestorCajas(4);  
         Estadisticas estadisticas = new Estadisticas();
-        VisualizadorSimulacion visualizador = new VisualizadorSimulacion();
-        EstadisticasVista estadisticasVista = new EstadisticasVista();
-        ControladorSimulacion controlador = new ControladorSimulacion(cola, gestorCajas, estadisticas, visualizador, estadisticasVista);
+        VisualizadorSimulacion visualizadorSimulacion = new VisualizadorSimulacion();
+        VisualizadorEstadisticas visualizadorEstadisticas = new VisualizadorEstadisticas();
+        ControladorSimulacion controlador = new ControladorSimulacion(cola, gestorCajas, estadisticas, visualizadorSimulacion, visualizadorEstadisticas);
         
         controlador.iniciarSimulacion(720);
     }

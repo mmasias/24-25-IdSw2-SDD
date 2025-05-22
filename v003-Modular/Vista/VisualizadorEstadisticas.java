@@ -1,7 +1,7 @@
 package Vista;
 import Modelo.Estadisticas;
 
-public class EstadisticasVista {
+public class VisualizadorEstadisticas {
     public void mostrarResumen(Estadisticas estadisticas) {
         System.out.println("\nRESUMEN");
         System.out.println("============================================================");
