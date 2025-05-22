@@ -1,14 +1,15 @@
 package Modelo;
+
 public class GestorCajas {
     private final Caja[] cajas;
-    
+
     public GestorCajas(int cantidad) {
         cajas = new Caja[cantidad];
         for (int i = 0; i < cantidad; i++) {
             cajas[i] = new Caja();
         }
     }
-    
+
     public void procesar(Cola cola, Estadisticas stats) {
         for (Caja caja : cajas) {
             if (caja.estaLibre() && !cola.estaVacia()) {
@@ -19,12 +20,8 @@ public class GestorCajas {
             caja.procesarMinuto();
         }
     }
-    
-    public String[] getEstadosCajas() {
-        String[] estados = new String[cajas.length];
-        for (int i = 0; i < cajas.length; i++) {
-            estados[i] = cajas[i].getEstado();
-        }
-        return estados;
+
+    public Caja[] getCajas() {
+        return cajas;
     }
 }

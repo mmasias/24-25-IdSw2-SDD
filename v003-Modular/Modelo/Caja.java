@@ -21,7 +21,11 @@ public class Caja {
         }
     }
     
-    public String getEstado() {
-        return clienteActual != null ? "[" + tiempoRestante + "]" : "[0]";
+    public boolean tieneCliente() {
+        return clienteActual != null;
     }
+    
+    public int getTiempoRestante() {
+        return clienteActual != null ? tiempoRestante : 0;
+    }    
 }
