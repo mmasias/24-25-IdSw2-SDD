@@ -8,7 +8,7 @@ import java.util.List;
 public class GestorCajas implements IGestorCajas {
 
     private List<ICaja> cajas;
-    private int porcentajeRapidas = 25; // Porcentaje de cajas rápidas (puedes modificarlo si quieres)
+    private int porcentajeRapidas = 25; 
 
     public GestorCajas() {
         this.cajas = new ArrayList<>();

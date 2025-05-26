@@ -8,5 +8,5 @@ public interface ICliente {
     long getTiempoAtencion();
     void setTiempoAtencion(long tiempoAtencion);
     int getCantidadItems();
-    void setCantidadItems(int cantidad); // <--- Añade esta línea
+    void setCantidadItems(int cantidad); 
 }

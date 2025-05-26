@@ -102,21 +102,21 @@ public class ControladorSimulacion implements IControladorSimulacion {
         tiempoActual++;
         numPasos++;
 
-        // ✅ Actualizar estado de todas las cajas (procesan 1 producto por paso)
+        
         for (ICaja caja : gestorCajas.obtenerTodasLasCajas()) {
             if (caja instanceof implementacion.modelo.Caja) {
                 ((implementacion.modelo.Caja) caja).actualizarEstado(tiempoActual);
             }
         }
 
-        // Generar cliente con cierta probabilidad
+        
         if (generadorClientes.debeGenerarClienteEnEstePaso(tasaLlegada)) {
             ICliente nuevoCliente = generadorClientes.generarNuevoCliente(tiempoActual);
             cola.agregarCliente(nuevoCliente);
             estadisticas.registrarLlegadaCliente(nuevoCliente);
         }
 
-        // Intentar asignar clientes a cajas disponibles
+        
         while (!cola.estaVacia() && gestorCajas.hayCajasDisponibles()) {
             ICliente clienteAAtender = cola.siguienteCliente();
             ICaja cajaDisponible = gestorCajas.obtenerCajaDisponible(clienteAAtender);

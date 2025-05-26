@@ -20,7 +20,7 @@ public class GeneradorClientes implements IGeneradorClientes {
     @Override
     public ICliente generarNuevoCliente(long tiempoActual) {
         contadorClientes++;
-        int cantidadItems = 1 + random.nextInt(50); // entre 1 y 50 productos
+        int cantidadItems = 1 + random.nextInt(50);
         return new Cliente(contadorClientes, tiempoActual, cantidadItems);
     }
 

@@ -36,7 +36,7 @@ public class Caja implements ICaja {
         if (!disponible && clienteActual != null) {
             int items = clienteActual.getCantidadItems();
             if (items > 0) {
-                clienteActual.setCantidadItems(items - 1);  // Descuenta 1 producto por paso
+                clienteActual.setCantidadItems(items - 1);  
             }
 
             if (clienteActual.getCantidadItems() == 0) {
