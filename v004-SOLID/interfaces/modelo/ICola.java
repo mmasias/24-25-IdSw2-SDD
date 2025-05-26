@@ -8,4 +8,5 @@ public interface ICola {
     boolean estaVacia();
     int getTamanio();
     List<ICliente> getClientes();
+    void agregarClienteAlInicio(ICliente clienteAAtender);
 }

@@ -5,14 +5,16 @@ import interfaces.modelo.ICliente;
 public class Cliente implements ICliente {
     private int id;
     private long tiempoLlegada;
-    private long tiempoInicioAtencion;
+    private long tiempoEspera;
     private long tiempoAtencion;
-    private boolean atendido;
+    private int cantidadItems;
 
-    public Cliente(int id, long tiempoLlegada) {
+    public Cliente(int id, long tiempoLlegada, int cantidadItems) {
         this.id = id;
         this.tiempoLlegada = tiempoLlegada;
-        this.atendido = false;
+        this.cantidadItems = cantidadItems;
+        this.tiempoEspera = 0;
+        this.tiempoAtencion = 0;
     }
 
     @Override
@@ -27,10 +29,12 @@ public class Cliente implements ICliente {
 
     @Override
     public long getTiempoEspera() {
-        if (tiempoInicioAtencion == 0) {
-            return 0; 
-        }
-        return tiempoInicioAtencion - tiempoLlegada;
+        return tiempoEspera;
+    }
+
+    @Override
+    public void setTiempoEspera(long tiempoEspera) {
+        this.tiempoEspera = tiempoEspera;
     }
 
     @Override
@@ -41,16 +45,20 @@ public class Cliente implements ICliente {
     @Override
     public void setTiempoAtencion(long tiempoAtencion) {
         this.tiempoAtencion = tiempoAtencion;
-        this.atendido = true;
     }
 
     @Override
-    public void setTiempoInicioAtencion(long tiempoInicioAtencion) {
-        this.tiempoInicioAtencion = tiempoInicioAtencion;
+    public int getCantidadItems() {
+        return cantidadItems;
     }
 
     @Override
-    public boolean estaAtendido() {
-        return atendido;
+    public void setCantidadItems(int cantidad) {
+        this.cantidadItems = cantidad;
+    }
+
+    @Override
+    public String toString() {
+        return "Cliente " + id + " (" + cantidadItems + " productos)";
     }
 }

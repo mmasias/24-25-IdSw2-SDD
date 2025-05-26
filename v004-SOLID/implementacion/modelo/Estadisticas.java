@@ -66,4 +66,11 @@ public class Estadisticas implements IEstadisticas {
     public int getClientesEnCola() {
         return cola.getTamanio();
     }
+    public double getTiempo() {
+        long tiempoTotal = 0;
+        for (ICliente cliente : clientesAtendidos) {
+            tiempoTotal += cliente.getTiempoEspera() + cliente.getTiempoAtencion();
+        }
+        return (double) tiempoTotal / 1000; // Convertir a segundos
+    }
 }

@@ -39,4 +39,10 @@ public class Cola implements ICola {
     public List<ICliente> getClientes() {
         return new ArrayList<>(clientesEnCola);
     }
+
+    public void agregarClienteAlInicio(ICliente cliente) {
+        LinkedList<ICliente> temp = new LinkedList<>(clientesEnCola);
+        temp.addFirst(cliente);
+        clientesEnCola = temp;
+    }
 }

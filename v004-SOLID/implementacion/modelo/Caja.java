@@ -9,7 +9,6 @@ public class Caja implements ICaja {
     private ICliente clienteActual;
     private int clientesAtendidos;
     private long tiempoTotalAtencion;
-    private long tiempoFinAtencion;
 
     public Caja(int id) {
         this.id = id;
@@ -31,12 +30,19 @@ public class Caja implements ICaja {
 
         this.clienteActual = cliente;
         this.disponible = false;
+    }
 
-        long tiempoAtencion = (long) (Math.random() * 4 + 1);
-        cliente.setTiempoInicioAtencion(System.currentTimeMillis());
-        cliente.setTiempoAtencion(tiempoAtencion);
+    public void actualizarEstado(long tiempoActual) {
+        if (!disponible && clienteActual != null) {
+            int items = clienteActual.getCantidadItems();
+            if (items > 0) {
+                clienteActual.setCantidadItems(items - 1);  // Descuenta 1 producto por paso
+            }
 
-        this.tiempoFinAtencion = System.currentTimeMillis() + tiempoAtencion;
+            if (clienteActual.getCantidadItems() == 0) {
+                liberarCaja();
+            }
+        }
     }
 
     @Override
@@ -56,9 +62,7 @@ public class Caja implements ICaja {
 
     @Override
     public double getTiempoPromedioAtencion() {
-        if (clientesAtendidos == 0) {
-            return 0;
-        }
+        if (clientesAtendidos == 0) return 0;
         return (double) tiempoTotalAtencion / clientesAtendidos;
     }
 
@@ -67,7 +71,7 @@ public class Caja implements ICaja {
         return id;
     }
 
-    public long getTiempoFinAtencion() {
-        return tiempoFinAtencion;
+    public ICliente getClienteActual() {
+        return clienteActual;
     }
 }
