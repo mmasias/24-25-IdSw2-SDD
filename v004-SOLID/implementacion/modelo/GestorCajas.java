@@ -1,39 +1,30 @@
 package implementacion.modelo;
 
-import interfaces.modelo.ICaja;
-import interfaces.modelo.IGestorCajas;
+import interfaces.modelo.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class GestorCajas implements IGestorCajas {
+
     private List<ICaja> cajas;
+    private int porcentajeRapidas = 25; 
 
     public GestorCajas() {
         this.cajas = new ArrayList<>();
     }
 
     @Override
-    public void inicializarCajas(int numeroCajas) {
+    public void inicializarCajas(int numCajas) {
         cajas.clear();
-        for (int i = 0; i < numeroCajas; i++) {
-            cajas.add(new Caja(i + 1));
+        int numRapidas = (int) Math.ceil(numCajas * (porcentajeRapidas / 100.0));
+        int id = 1;
+        for (int i = 0; i < numRapidas; i++) {
+            cajas.add(new CajaRapida(id++));
         }
-    }
-
-    @Override
-    public ICaja obtenerCajaDisponible() {
-        for (ICaja caja : cajas) {
-            if (caja.estaDisponible()) {
-                return caja;
-            }
+        for (int i = numRapidas; i < numCajas; i++) {
+            cajas.add(new Caja(id++));
         }
-        return null;
-    }
-
-    @Override
-    public List<ICaja> obtenerTodasLasCajas() {
-        return new ArrayList<>(cajas);
     }
 
     @Override
@@ -42,14 +33,28 @@ public class GestorCajas implements IGestorCajas {
     }
 
     @Override
-    public void actualizarCajas(long tiempoActual) {
+    public ICaja obtenerCajaDisponible(ICliente cliente) {
         for (ICaja caja : cajas) {
-            if (!caja.estaDisponible()) {
-                Caja cajaConcreta = (Caja) caja;
-                if (tiempoActual >= cajaConcreta.getTiempoFinAtencion()) {
-                    caja.liberarCaja();
+            if (caja.estaDisponible()) {
+                if (caja instanceof CajaRapida) {
+                    if (((CajaRapida) caja).puedeAtender(cliente)) {
+                        return caja;
+                    }
+                } else {
+                    return caja;
                 }
             }
         }
+        return null;
+    }
+
+    @Override
+    public List<ICaja> obtenerTodasLasCajas() {
+        return cajas;
+    }
+
+    @Override
+    public void actualizarCajas(long tiempoActual) {
+        // Ya no necesario aquí: las cajas se actualizan en ControladorSimulacion.
     }
 }

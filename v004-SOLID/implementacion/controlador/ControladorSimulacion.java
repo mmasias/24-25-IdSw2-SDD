@@ -102,20 +102,32 @@ public class ControladorSimulacion implements IControladorSimulacion {
         tiempoActual++;
         numPasos++;
 
-        gestorCajas.actualizarCajas(tiempoActual);
+        
+        for (ICaja caja : gestorCajas.obtenerTodasLasCajas()) {
+            if (caja instanceof implementacion.modelo.Caja) {
+                ((implementacion.modelo.Caja) caja).actualizarEstado(tiempoActual);
+            }
+        }
 
+        
         if (generadorClientes.debeGenerarClienteEnEstePaso(tasaLlegada)) {
             ICliente nuevoCliente = generadorClientes.generarNuevoCliente(tiempoActual);
             cola.agregarCliente(nuevoCliente);
             estadisticas.registrarLlegadaCliente(nuevoCliente);
         }
 
+        
         while (!cola.estaVacia() && gestorCajas.hayCajasDisponibles()) {
-            ICaja cajaDisponible = gestorCajas.obtenerCajaDisponible();
+            ICliente clienteAAtender = cola.siguienteCliente();
+            ICaja cajaDisponible = gestorCajas.obtenerCajaDisponible(clienteAAtender);
+
             if (cajaDisponible != null) {
-                ICliente clienteAAtender = cola.siguienteCliente();
                 cajaDisponible.atenderCliente(clienteAAtender);
+                clienteAAtender.setTiempoAtencion(clienteAAtender.getCantidadItems());
                 estadisticas.registrarClienteAtendido(clienteAAtender, cajaDisponible);
+            } else {
+                cola.agregarClienteAlInicio(clienteAAtender);
+                break;
             }
         }
 
