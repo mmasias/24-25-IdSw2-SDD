@@ -1,14 +1,21 @@
-package JuegoVampiro2.core;
+package JuegoVampiro3.core;
 
-import JuegoVampiro2.auth.GestorUsuarios;
-import JuegoVampiro2.ui.VistaConsola;
-import JuegoVampiro2.ui.CredencialesUsuario;
+import JuegoVampiro3.auth.GestorUsuarios;
+import JuegoVampiro3.ui.VistaConsola;
+import JuegoVampiro3.ui.CredencialesUsuario;
+import JuegoVampiro3.core.interfaces.*;
 
-public class JuegoVampiros {
+/**
+ * Controlador principal del juego.
+ * Principio SRP: Responsabilidad unica - orquestar el flujo del juego.
+ * Principio DiP: Depende de abstracciones (IGestorUsuarios, IVistaJuego).
+ * Principio OCP: Abierto para extension - puede extenderse para nuevos tipos de juego.
+ */
+public class JuegoVampiros implements IControladorJuego {
 
-    private static final String VERSION = "1.0 Modular";
-    private GestorUsuarios gestorUsuarios;
-    private VistaConsola vista;
+    private static final String VERSION = "1.0 SOLID";
+    private IGestorUsuarios gestorUsuarios;
+    private IVistaJuego vista;
     private Batalla batallaActual = null;
     private String usuarioActual = null;
     private boolean salir = false;
@@ -18,27 +25,36 @@ public class JuegoVampiros {
         this.vista = new VistaConsola();
     }
 
+    // Constructor para inyección de dependencias (principio DIP)
+    public JuegoVampiros(IGestorUsuarios gestorUsuarios, IVistaJuego vista) {
+        this.gestorUsuarios = gestorUsuarios;
+        this.vista = vista;
+    }
+
+    @Override
     public void iniciar() {
         vista.mostrarTitulo();
 
         while (!salir) {
             if (usuarioActual == null) {
-                mostrarMenuInicialYProcesar();
+                procesarMenuInicial();
             } else {
-                mostrarMenuJuegoYProcesar();
+                procesarMenuJuego();
             }
         }
         vista.mostrarMensaje("¡Gracias por jugar!");
-        vista.cerrarScanner();
+        vista.cerrarRecursos();
     }
 
-    private void mostrarMenuInicialYProcesar() {
+    @Override
+    public void procesarMenuInicial() {
         vista.mostrarMenuInicial();
         int opcion = vista.leerOpcion();
         procesarOpcionInicial(opcion);
     }
 
-    private void mostrarMenuJuegoYProcesar() {
+    @Override
+    public void procesarMenuJuego() {
         vista.mostrarMenuJuego(usuarioActual);
         int opcion = vista.leerOpcion();
         procesarOpcionJuego(opcion);
@@ -96,7 +112,7 @@ public class JuegoVampiros {
 
     private void registrarUsuario() {
         CredencialesUsuario credenciales = vista.pedirCredenciales("Registrar Usuario");
-        GestorUsuarios.ResultadoRegistro resultado = gestorUsuarios.registrarUsuario(credenciales.getUsuario(), credenciales.getPassword());
+        IGestorUsuarios.ResultadoRegistro resultado = gestorUsuarios.registrarUsuario(credenciales.getUsuario(), credenciales.getPassword());
 
         switch (resultado) {
             case EXITO:
@@ -114,8 +130,8 @@ public class JuegoVampiros {
         }
     }
 
-
-    private void crearNuevaPartida() {
+    @Override
+    public void crearNuevaPartida() {
         vista.mostrarMensaje("Creando nueva partida...");
         Guerrero heroe = new Guerrero(150);
         Vampiro vampiro = new Vampiro(60);
@@ -123,14 +139,15 @@ public class JuegoVampiros {
         vista.mostrarMensaje("¡Nueva partida creada! Selecciona 'Continuar partida' para empezar a jugar.");
     }
 
-    private void continuarPartida() {
+    @Override
+    public void continuarPartida() {
         if (batallaActual == null) {
             vista.mostrarMensaje("No hay ninguna partida creada. Crea una nueva partida primero.");
             return;
         }
         vista.mostrarMensaje("Continuando partida...");
         batallaActual.iniciarBatalla();
-        batallaActual = null;
+        batallaActual = null; // Limpiar después de la batalla
     }
 
     private void guardarPartida() {
