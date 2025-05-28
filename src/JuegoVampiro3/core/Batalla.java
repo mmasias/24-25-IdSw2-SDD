@@ -1,16 +1,22 @@
-package JuegoVampiro2.core;
+package JuegoVampiro3.core;
 
-// Eliminar import java.util.Scanner;
-import JuegoVampiro2.ui.VistaConsola;
+import JuegoVampiro3.core.interfaces.IVistaJuego;
+import JuegoVampiro3.core.interfaces.IPersonaje;
+import JuegoVampiro3.core.interfaces.ILuchador;
 
+/**
+ * Clase responsable de gestionar la lógica de combate entre personajes.
+ * Principio SRP: Responsabilidad única - gestión de la lógica de batalla.
+ * Principio DIP: Depende de abstracciones (IVistaJuego, IPersonaje, ILuchador).
+ * Principio OCP: Abierta para extensión - nuevos tipos de batalla pueden heredar.
+ */
 public class Batalla {
-    private Guerrero heroe;
-    private Vampiro vampiro;
+    private ILuchador heroe;
+    private IPersonaje vampiro;
     private int turno;
-    private VistaConsola vista; // Añadir dependencia a la vista
+    private IVistaJuego vista;
 
-    // Modificar constructor para recibir la vista
-    public Batalla(Guerrero heroe, Vampiro vampiro, VistaConsola vista) {
+    public Batalla(ILuchador heroe, IPersonaje vampiro, IVistaJuego vista) {
         this.heroe = heroe;
         this.vampiro = vampiro;
         this.turno = 1;
@@ -18,7 +24,6 @@ public class Batalla {
     }
 
     public void iniciarBatalla() {
-        // Usar la vista para mostrar mensajes
         vista.mostrarMensaje("¡Comienza la batalla entre " + heroe.getNombre() + " y " + vampiro.getNombre() + "!");
         vista.mostrarMensaje(heroe.getNombre() + " inicia con " + heroe.getEnergia() + " puntos de energía.");
         vista.mostrarMensaje(vampiro.getNombre() + " inicia con " + vampiro.getEnergia() + " puntos de energía.");
@@ -27,7 +32,7 @@ public class Batalla {
         // Bucle principal del juego
         while (heroe.estaVivo() && vampiro.estaVivo()) {
             vista.mostrarMensaje("\n=== TURNO " + turno + " ===");
-            vista.mostrarEstadoBatalla(heroe, vampiro); // Usar método de la vista
+            vista.mostrarEstadoBatalla(heroe, vampiro);
             
             // Turno del héroe
             vista.mostrarMensaje("\n--- Turno de " + heroe.getNombre() + " ---");
@@ -47,7 +52,7 @@ public class Batalla {
         }
         
         // Mostrar resultado final
-        determinarYMostrarResultadoFinal(); // Método refactorizado
+        determinarYMostrarResultadoFinal();
     }
 
     private void realizarTurnoHeroe() {
@@ -58,47 +63,58 @@ public class Batalla {
              return;
         }
 
+        // Cast seguro para acceder a funcionalidad específica del Guerrero
+        Guerrero guerrero = (Guerrero) heroe;
+
         // Avanzar turno de la poción si está activa
-        if (heroe.tienePocionActiva()) {
-            boolean pocionCompletada = heroe.avanzarTurnoPocion();
+        if (guerrero.tienePocionActiva()) {
+            boolean pocionCompletada = guerrero.avanzarTurnoPocion();
             if (pocionCompletada) {
                 vista.mostrarMensaje("¡La poción ha hecho efecto! " + heroe.getNombre() + " ha recuperado toda su energía.");
             } else {
                  vista.mostrarMensaje(heroe.getNombre() + " está bajo el efecto de la poción. Turnos restantes: " + 
-                                   heroe.getPocion().getTurnosRestantes()); // Necesita getPocion() en Guerrero
+                                   guerrero.getPocion().getTurnosRestantes());
             }
             return; // No puede hacer nada más durante el efecto de la poción
         }
         
         // Elegir acción vía VistaConsola
         int accionElegida = vista.pedirAccionGuerrero();
-        heroe.setAccionActual(accionElegida); // Necesita un método para guardar la acción elegida
+        guerrero.setAccionActual(accionElegida);
 
         // Procesar acción
-        if (heroe.quiereAtacar()) { // Método nuevo en Guerrero
-            int indiceArma = vista.pedirSeleccionArma(heroe.getArmas());
-            Ataque ataqueElegido = heroe.seleccionarAtaque(indiceArma); // Modificar para recibir índice
-            
-            if (ataqueElegido != null) {
-                vista.mostrarMensaje(heroe.getNombre() + " ataca con " + ((Arma)ataqueElegido).getNombre());
-                
-                if (ataqueElegido.esExitoso()) {
-                    int daño = ataqueElegido.getDaño();
-                    vampiro.recibirDaño(daño);
-                    vista.mostrarMensaje("¡Ataque exitoso! " + vampiro.getNombre() + " pierde " + daño +
-                                      " puntos de energía.");
-                } else {
-                    vista.mostrarMensaje("¡El ataque ha fallado!");
-                }
-            }
-        } else if (heroe.quiereDefenderse()) { // Método nuevo en Guerrero
-            heroe.defender();
-            vista.mostrarMensaje(heroe.getNombre() + " se prepara para defenderse del próximo ataque.");
-        } else if (heroe.quiereBeberPocion()) { // Método nuevo en Guerrero
-            heroe.beberPocion();
-             vista.mostrarMensaje(heroe.getNombre() + " está bebiendo una poción. Tardará 3 turnos en hacer efecto.");
+        procesarAccionGuerrero(guerrero);
+        guerrero.resetAccionActual();
+    }
+
+    private void procesarAccionGuerrero(Guerrero guerrero) {
+        if (guerrero.quiereAtacar()) {
+            procesarAtaqueGuerrero(guerrero);
+        } else if (guerrero.quiereDefenderse()) {
+            guerrero.defender();
+            vista.mostrarMensaje(guerrero.getNombre() + " se prepara para defenderse del próximo ataque.");
+        } else if (guerrero.quiereBeberPocion()) {
+            guerrero.beberPocion();
+            vista.mostrarMensaje(guerrero.getNombre() + " está bebiendo una poción. Tardará 3 turnos en hacer efecto.");
         }
-        heroe.resetAccionActual(); // Resetear acción para el siguiente turno
+    }
+
+    private void procesarAtaqueGuerrero(Guerrero guerrero) {
+        int indiceArma = vista.pedirSeleccionArma(guerrero.getArmas());
+        Ataque ataqueElegido = guerrero.seleccionarAtaque(indiceArma);
+        
+        if (ataqueElegido != null) {
+            vista.mostrarMensaje(guerrero.getNombre() + " ataca con " + ((Arma)ataqueElegido).getNombre());
+            
+            if (ataqueElegido.esExitoso()) {
+                int daño = ataqueElegido.getDaño();
+                vampiro.recibirDaño(daño);
+                vista.mostrarMensaje("¡Ataque exitoso! " + vampiro.getNombre() + " pierde " + daño +
+                                  " puntos de energía.");
+            } else {
+                vista.mostrarMensaje("¡El ataque ha fallado!");
+            }
+        }
     }
 
     private void realizarTurnoVampiro() {
@@ -115,43 +131,45 @@ public class Batalla {
         Ataque ataqueElegido = vampiro.seleccionarAtaque();
         
         if (ataqueElegido != null) {
-            // Mostrar qué ataque usa el vampiro
-            vista.mostrarMensaje(vampiro.getNombre() + " usa " + ataqueElegido.getNombre() + ".");
+            procesarAtaqueVampiro(ataqueElegido);
+        }
+        
+        // Reiniciar defensa del héroe si es un Guerrero
+        if (heroe instanceof Guerrero) {
+            ((Guerrero) heroe).finalizarDefensa();
+        }
+    }
 
-            if (ataqueElegido.esExitoso()) {
-                int daño = ataqueElegido.getDaño();
-                
-                // Si el héroe está defendiendo, intentar reducir el daño
-                if (heroe.estaDefendiendo()) {
+    private void procesarAtaqueVampiro(Ataque ataqueElegido) {
+        vista.mostrarMensaje(vampiro.getNombre() + " usa " + ataqueElegido.getNombre() + ".");
+
+        if (ataqueElegido.esExitoso()) {
+            int daño = ataqueElegido.getDaño();
+            
+            // Si el héroe está defendiendo, intentar reducir el daño
+            if (heroe instanceof Guerrero) {
+                Guerrero guerrero = (Guerrero) heroe;
+                if (guerrero.estaDefendiendo()) {
                      int dañoOriginal = daño;
-                     daño = heroe.reducirDañoRecibido(daño);
+                     daño = guerrero.reducirDañoRecibido(daño);
                      if (daño < dañoOriginal) {
                          vista.mostrarMensaje("¡Defensa exitosa! Daño reducido.");
                      } else {
                          vista.mostrarMensaje("¡La defensa ha fallado!");
                      }
                 }
-                
-                heroe.recibirDaño(daño);
-                vista.mostrarMensaje("¡Ataque exitoso! " + heroe.getNombre() + " pierde " + daño +
-                                  " puntos de energía.");
-            } else {
-                vista.mostrarMensaje("¡El ataque ha fallado!");
             }
+            
+            heroe.recibirDaño(daño);
+            vista.mostrarMensaje("¡Ataque exitoso! " + heroe.getNombre() + " pierde " + daño +
+                              " puntos de energía.");
+        } else {
+            vista.mostrarMensaje("¡El ataque ha fallado!");
         }
-        
-        // Reiniciar defensa del héroe
-        heroe.finalizarDefensa();
     }
 
-    // Eliminar método mostrarEstado()
-    /* 
-    private void mostrarEstado() { ... }
-    */
-
-    // Cambiado para usar VistaConsola
     private void determinarYMostrarResultadoFinal() {
-        vista.mostrarEstadoBatalla(heroe, vampiro); // Mostrar estado final
+        vista.mostrarEstadoBatalla(heroe, vampiro);
         String mensajeFinal;
         if (!heroe.estaVivo() && !vampiro.estaVivo()) {
             mensajeFinal = "¡La batalla ha terminado en empate! Ambos combatientes han caído.";
@@ -162,9 +180,4 @@ public class Batalla {
         }
          vista.mostrarResultadoFinal(mensajeFinal);
     }
-
-    // Eliminar método main()
-    /*
-    public static void main(String[] args) { ... }
-    */
 } 
