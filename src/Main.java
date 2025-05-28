@@ -98,20 +98,35 @@ public class Main {
         consoleView.mostrarDineroUsuario(usuario.getEfectivo(), usuario.getTarjetaMonedero().getSaldo(), usuario.getTarjetaBancaria().getSaldo());
         Caja cajaSeleccionada = maquinaController.obtenerMaquinas().get("Maquina-1"); // Ejemplo: mostrar la primera máquina
         consoleView.mostrarContenidoCaja(cajaSeleccionada.obtenerMonedas(), cajaSeleccionada.obtenerBilletes(), cajaSeleccionada.calcularDineroTotal());
-
-        String maquinaSeleccionada = menuView.solicitarMaquina();
+    
+        // Mostrar menú de máquinas disponibles
+        String[] maquinas = maquinaController.obtenerMaquinas().keySet().toArray(new String[0]);
+        int opcionMaquina = menuView.mostrarMenuOpciones("Seleccione una máquina:", maquinas);
+        String maquinaSeleccionada = maquinas[opcionMaquina - 1];
+    
+        // Validar máquina seleccionada
         if (!maquinaController.validarMaquina(maquinaSeleccionada)) {
             consoleView.mostrarError("Máquina no válida.");
             return;
         }
-
-        String productoSeleccionado = menuView.solicitarProducto();
+    
+        // Mostrar menú de productos disponibles
+        String[] productos = maquinaController.obtenerProductos().keySet().toArray(new String[0]);
+        int opcionProducto = menuView.mostrarMenuOpciones("Seleccione un producto:", productos);
+        String productoSeleccionado = productos[opcionProducto - 1];
+    
+        // Validar producto seleccionado
         if (!maquinaController.validarProducto(productoSeleccionado)) {
             consoleView.mostrarError("Producto no válido.");
             return;
         }
-
-        String metodoPago = menuView.solicitarMetodoPago();
+    
+        // Mostrar menú de métodos de pago disponibles
+        String[] metodosPago = {"Efectivo", "Tarjeta Monedero", "Tarjeta Bancaria"};
+        int opcionMetodoPago = menuView.mostrarMenuOpciones("Seleccione un método de pago:", metodosPago);
+        String metodoPago = metodosPago[opcionMetodoPago - 1];
+    
+        // Procesar compra
         try {
             maquinaController.procesarCompra(maquinaSeleccionada, productoSeleccionado, metodoPago, usuario);
             consoleView.mostrarMensaje("Compra realizada con éxito.");

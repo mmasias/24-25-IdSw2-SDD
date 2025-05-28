@@ -1,5 +1,7 @@
 package src.views;
 
+import java.util.Scanner;
+
 import src.utils.ScannerUtils;
 
 public class MenuView {
@@ -13,6 +15,17 @@ public class MenuView {
         System.out.println("3. Realizar una compra");
         System.out.println("4. Salir");
         return ScannerUtils.leerEntero("Seleccione una opción: ");
+    }
+
+    public int mostrarMenuOpciones(String titulo, String[] opciones) {
+        System.out.println(titulo);
+        for (int i = 0; i < opciones.length; i++) {
+            System.out.println((i + 1) + ". " + opciones[i]);
+        }
+        System.out.print("Seleccione una opción: ");
+        System.out.println("\n========================================");
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextInt();
     }
 
     public String solicitarMaquina() {
