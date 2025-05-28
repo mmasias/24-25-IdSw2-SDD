@@ -3,6 +3,7 @@ package src;
 import src.controllers.MaquinaController;
 import src.controllers.PagoController;
 import src.models.Caja;
+import src.models.Efectivo;
 import src.models.Usuario;
 import src.repositories.CajaRepository;
 import src.repositories.ProductoRepository;
@@ -63,8 +64,15 @@ public class Main {
 
     private static void inicializarDatos(CajaRepository cajaRepository, ProductoRepository productoRepository) {
         // Inicializar cajas
-        cajaRepository.agregarEfectivo(new Caja("Maquina-1"));
-        cajaRepository.agregarEfectivo(new Caja("Maquina-2"));
+        cajaRepository.agregarEfectivo(new Efectivo(0.1, Efectivo.Tipo.MONEDA));
+        cajaRepository.agregarEfectivo(new Efectivo(0.2, Efectivo.Tipo.MONEDA));
+        cajaRepository.agregarEfectivo(new Efectivo(0.5, Efectivo.Tipo.MONEDA));
+        cajaRepository.agregarEfectivo(new Efectivo(1.0, Efectivo.Tipo.MONEDA));
+        cajaRepository.agregarEfectivo(new Efectivo(2.0, Efectivo.Tipo.MONEDA));
+        cajaRepository.agregarEfectivo(new Efectivo(5.0, Efectivo.Tipo.BILLETE));
+        cajaRepository.agregarEfectivo(new Efectivo(10.0, Efectivo.Tipo.BILLETE));
+        cajaRepository.agregarEfectivo(new Efectivo(20.0, Efectivo.Tipo.BILLETE));
+
 
         // Inicializar productos
         productoRepository.agregarProducto("Coca-Cola", 1.5);
