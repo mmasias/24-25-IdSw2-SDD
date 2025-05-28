@@ -1,18 +1,27 @@
-package JuegoVampiro2.core;
+package JuegoVampiro3.core;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Clase que representa al vampiro enemigo.
+ * Principio SRP: Responsabilidad única - gestión del estado y comportamiento del vampiro.
+ * Principio LSP: Implementación coherente de IPersonaje.
+ */
 public class Vampiro extends Personaje {
     private List<Mordida> ataques;
     private static final int LIMITE_DESMAYO = 20;
+    private Random random;
 
     public Vampiro(int energia) {
         super(energia, LIMITE_DESMAYO);
         this.ataques = new ArrayList<>();
-        
-        // Inicializar los ataques según el enunciado
+        this.random = new Random();
+        inicializarAtaques();
+    }
+
+    private void inicializarAtaques() {
         ataques.add(new Mordida("Mordida leve", 5, 90));
         ataques.add(new Mordida("Mordida moderada", 10, 60));
         ataques.add(new Mordida("Mordida fuerte", 20, 40));
@@ -24,7 +33,7 @@ public class Vampiro extends Personaje {
     }
 
     public List<Mordida> getAtaques() {
-        return ataques;
+        return new ArrayList<>(ataques); // Defensive copy
     }
 
     @Override
@@ -33,20 +42,12 @@ public class Vampiro extends Personaje {
             return null;
         }
 
-        Random random = new Random();
         int indice = random.nextInt(ataques.size());
-        Mordida ataqueElegido = ataques.get(indice);
-        
-        return ataqueElegido;
+        return ataques.get(indice);
     }
 
     @Override
-    public Ataque seleccionarAtaque(int indice) {
-       return seleccionarAtaque();
-    }
-
-     @Override
     public void pasarTurno() {
         super.pasarTurno();
-} 
+    }
 }
