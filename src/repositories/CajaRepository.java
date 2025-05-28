@@ -9,11 +9,20 @@ import java.util.Map;
 public class CajaRepository {
     private Map<Double, Integer> monedasTotales;
     private Map<Double, Integer> billetesTotales;
-    private Map<String, Caja> caja;
+    private Map<String, Caja> cajas;
 
     public CajaRepository() {
         this.monedasTotales = new HashMap<>();
         this.billetesTotales = new HashMap<>();
+        this.cajas = new HashMap<>();
+    }
+
+    public void agregarCaja(String idMaquina, Caja caja) {
+        cajas.put(idMaquina, caja);
+    }
+
+    public Map<String, Caja> obtenerCajas() {
+        return cajas;
     }
 
     public void agregarEfectivo(Efectivo efectivo) {
@@ -33,10 +42,6 @@ public class CajaRepository {
 
     public Map<Double, Integer> obtenerBilletes() {
         return billetesTotales;
-    }
-
-    public Map<String, Caja> obtenerCajas() {
-        return caja;
     }
 
 

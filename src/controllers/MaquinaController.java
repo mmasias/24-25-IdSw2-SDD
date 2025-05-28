@@ -36,16 +36,16 @@ public class MaquinaController {
     public void procesarCompra(String maquinaSeleccionada, String productoSeleccionado, String metodoPago, Usuario usuario) {
         Caja caja = maquinas.get(maquinaSeleccionada);
         double precioProducto = productos.get(productoSeleccionado);
-
+    
         switch (metodoPago.toUpperCase()) {
             case "EFECTIVO":
-                pagoService.procesarPagoEfectivo(usuario, caja, precioProducto);
+                pagoService.procesarPagoEfectivo(usuario, caja, precioProducto, productoSeleccionado);
                 break;
             case "MONEDERO":
-                pagoService.procesarPagoTarjeta(usuario, "MONEDERO", precioProducto);
+                pagoService.procesarPagoTarjeta(usuario, "MONEDERO", precioProducto, productoSeleccionado);
                 break;
             case "BANCARIA":
-                pagoService.procesarPagoTarjeta(usuario, "BANCARIA", precioProducto);
+                pagoService.procesarPagoTarjeta(usuario, "BANCARIA", precioProducto, productoSeleccionado);
                 break;
             default:
                 throw new IllegalArgumentException("Método de pago inválido.");

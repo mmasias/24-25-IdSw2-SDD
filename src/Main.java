@@ -8,7 +8,6 @@ import src.models.Usuario;
 import src.repositories.CajaRepository;
 import src.repositories.ProductoRepository;
 import src.services.PagoService;
-import src.utils.ScannerUtils;
 import src.views.ConsoleView;
 import src.views.MenuView;
 
@@ -64,15 +63,14 @@ public class Main {
 
     private static void inicializarDatos(CajaRepository cajaRepository, ProductoRepository productoRepository) {
         // Inicializar cajas
-        cajaRepository.agregarEfectivo(new Efectivo(0.1, Efectivo.Tipo.MONEDA));
-        cajaRepository.agregarEfectivo(new Efectivo(0.2, Efectivo.Tipo.MONEDA));
-        cajaRepository.agregarEfectivo(new Efectivo(0.5, Efectivo.Tipo.MONEDA));
-        cajaRepository.agregarEfectivo(new Efectivo(1.0, Efectivo.Tipo.MONEDA));
-        cajaRepository.agregarEfectivo(new Efectivo(2.0, Efectivo.Tipo.MONEDA));
-        cajaRepository.agregarEfectivo(new Efectivo(5.0, Efectivo.Tipo.BILLETE));
-        cajaRepository.agregarEfectivo(new Efectivo(10.0, Efectivo.Tipo.BILLETE));
-        cajaRepository.agregarEfectivo(new Efectivo(20.0, Efectivo.Tipo.BILLETE));
-
+        Caja maquina1 = new Caja("Maquina-1");
+        Caja maquina2 = new Caja("Maquina-2");
+    
+        inicializarEfectivo(maquina1);
+        inicializarEfectivo(maquina2);
+    
+        cajaRepository.agregarCaja("Maquina-1", maquina1);
+        cajaRepository.agregarCaja("Maquina-2", maquina2);;
 
         // Inicializar productos
         productoRepository.agregarProducto("Coca-Cola", 1.5);
@@ -81,7 +79,26 @@ public class Main {
         productoRepository.agregarProducto("Chocolate", 2.0);
     }
 
+    private static void inicializarEfectivo(Caja caja) {
+        // Inicializar monedas
+        caja.actualizarCaja(new Efectivo(0.05, Efectivo.Tipo.MONEDA), 50);
+        caja.actualizarCaja(new Efectivo(0.10, Efectivo.Tipo.MONEDA), 50);
+        caja.actualizarCaja(new Efectivo(0.20, Efectivo.Tipo.MONEDA), 50);
+        caja.actualizarCaja(new Efectivo(0.50, Efectivo.Tipo.MONEDA), 50);
+        caja.actualizarCaja(new Efectivo(1.0, Efectivo.Tipo.MONEDA), 50);
+        caja.actualizarCaja(new Efectivo(2.0, Efectivo.Tipo.MONEDA), 50);
+    
+        // Inicializar billetes
+        caja.actualizarCaja(new Efectivo(5.0, Efectivo.Tipo.BILLETE), 20);
+        caja.actualizarCaja(new Efectivo(10.0, Efectivo.Tipo.BILLETE), 20);
+        caja.actualizarCaja(new Efectivo(20.0, Efectivo.Tipo.BILLETE), 10);
+    }
+
     private static void realizarCompra(MaquinaController maquinaController, PagoController pagoController, Usuario usuario, ConsoleView consoleView, MenuView menuView) {
+        consoleView.mostrarDineroUsuario(usuario.getEfectivo(), usuario.getTarjetaMonedero().getSaldo(), usuario.getTarjetaBancaria().getSaldo());
+        Caja cajaSeleccionada = maquinaController.obtenerMaquinas().get("Maquina-1"); // Ejemplo: mostrar la primera máquina
+        consoleView.mostrarContenidoCaja(cajaSeleccionada.obtenerMonedas(), cajaSeleccionada.obtenerBilletes(), cajaSeleccionada.calcularDineroTotal());
+
         String maquinaSeleccionada = menuView.solicitarMaquina();
         if (!maquinaController.validarMaquina(maquinaSeleccionada)) {
             consoleView.mostrarError("Máquina no válida.");

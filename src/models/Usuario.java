@@ -12,8 +12,20 @@ public class Usuario {
 
     public Usuario() {
         this.efectivo = new HashMap<>();
+        inicializarEfectivo();
         this.tarjetaMonedero = new Tarjeta(Tarjeta.Tipo.MONEDERO, 50.0);
         this.tarjetaBancaria = new Tarjeta(Tarjeta.Tipo.BANCARIA, 100.0);
+    }
+
+    private void inicializarEfectivo() {
+        efectivo.put(0.05, 10); 
+        efectivo.put(0.10, 10); 
+        efectivo.put(0.20, 10); 
+        efectivo.put(0.50, 10); 
+        efectivo.put(1.0, 10);  
+        efectivo.put(2.0, 5);   
+        efectivo.put(5.0, 2);  
+        efectivo.put(10.0, 1);  
     }
 
     public Map<Double, Integer> getEfectivo() {
@@ -45,7 +57,14 @@ public class Usuario {
         tarjetaBancaria.descontarSaldo(monto);
     }
     public double ingresarEfectivo() {
-    return ScannerUtils.leerDouble("Ingrese una denominación de efectivo: ");
+        while (true) {
+            double denominacion = ScannerUtils.leerDouble("Ingrese una denominación de efectivo: ");
+            if (efectivo.containsKey(denominacion) && efectivo.get(denominacion) > 0) {
+                return denominacion;
+            } else {
+                System.out.println("Denominación no válida o insuficiente.");
+            }
+        }
     }
     public void actualizarEfectivoConCambio(Map<Double, Integer> efectivoUsado, Map<Double, Integer> cambioEntregado) {
         // Restar el efectivo usado

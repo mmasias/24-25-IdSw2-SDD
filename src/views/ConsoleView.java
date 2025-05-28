@@ -38,4 +38,15 @@ public class ConsoleView {
             System.out.println("Denominación: " + denominacion + " - Cantidad: " + cantidad));
         System.out.println("Dinero total en la caja: €" + dineroTotal);
     }
+
+    public void mostrarDineroUsuario(Map<Double, Integer> efectivo, double saldoMonedero, double saldoBancario) {
+        System.out.println("\n========================================");
+        System.out.println("       Dinero del usuario");
+        System.out.println("========================================");
+        System.out.println("Efectivo:");
+        efectivo.forEach((denominacion, cantidad) ->
+            System.out.println("Denominación: " + denominacion + " - Cantidad: " + cantidad));
+        System.out.println("Saldo en tarjeta monedero: €" + saldoMonedero);
+        System.out.println("Saldo en tarjeta bancaria: €" + saldoBancario);
+    }
 }
