@@ -1,5 +1,6 @@
 package src.repositories;
 
+import src.models.Caja;
 import src.models.Efectivo;
 
 import java.util.HashMap;
@@ -8,6 +9,7 @@ import java.util.Map;
 public class CajaRepository {
     private Map<Double, Integer> monedasTotales;
     private Map<Double, Integer> billetesTotales;
+    private Map<String, Caja> caja;
 
     public CajaRepository() {
         this.monedasTotales = new HashMap<>();
@@ -32,6 +34,11 @@ public class CajaRepository {
     public Map<Double, Integer> obtenerBilletes() {
         return billetesTotales;
     }
+
+    public Map<String, Caja> obtenerCajas() {
+        return caja;
+    }
+
 
     public void actualizarEfectivo(double denominacion, int cantidad, Efectivo.Tipo tipo) {
         if (tipo == Efectivo.Tipo.MONEDA) {
