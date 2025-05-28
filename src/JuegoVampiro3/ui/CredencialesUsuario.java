@@ -1,4 +1,9 @@
-package JuegoVampiro2.ui;
+package JuegoVampiro3.ui;
+
+/**
+ * Clase de datos para encapsular credenciales de usuario.
+ * Principio SRP: Responsabilidad única - representar credenciales.
+ */
 
 public class CredencialesUsuario {
     private final String usuario;

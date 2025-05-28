@@ -1,10 +1,18 @@
-package JuegoVampiro2.ui;
+package JuegoVampiro3.ui;
+
 import java.util.Scanner;
-import JuegoVampiro2.core.*; 
+import JuegoVampiro3.core.*;
+import JuegoVampiro3.core.interfaces.IVistaJuego;
+import JuegoVampiro3.core.interfaces.IPersonaje;
 import java.util.List; 
 
+/**
+ * Implementación de consola para la vista del juego.
+ * Principio SRP: Responsabilidad única - gestión de la interfaz de usuario por consola.
+ * Principio DIP: Implementa la abstracción IVistaJuego.
+ */
 
-public class VistaConsola {
+public class VistaConsola implements IVistaJuego {
 
     private Scanner scanner;
 
@@ -12,17 +20,19 @@ public class VistaConsola {
         this.scanner = new Scanner(System.in);
     }
 
+    @Override
     public void mostrarMensaje(String mensaje) {
         System.out.println(mensaje);
     }
 
+    @Override
     public void mostrarTitulo() {
         System.out.println("================================");
-        System.out.println("  JUEGO DE VAMPIROS v1.0 Modular"); 
+        System.out.println("  JUEGO DE VAMPIROS v1.0 SOLID"); 
         System.out.println("================================");
     }
 
-    
+    @Override
     public void mostrarMenuInicial() {
         System.out.println("\n--- Menú Principal ---");
         System.out.println("1. Iniciar sesión");
@@ -30,7 +40,7 @@ public class VistaConsola {
         System.out.println("3. Salir");
     }
 
-    
+    @Override
     public int leerOpcion() {
         int opcion = -1;
         while (opcion == -1) {
@@ -45,7 +55,7 @@ public class VistaConsola {
         return opcion;
     }
 
-    
+    @Override
     public void mostrarMenuJuego(String usuario) {
         System.out.println("\n--- Menú de Juego (Usuario: " + usuario + ") ---");
         System.out.println("1. Crear nueva partida");
@@ -54,7 +64,7 @@ public class VistaConsola {
         System.out.println("4. Cerrar sesión");
     }
 
-    
+    @Override
     public CredencialesUsuario pedirCredenciales(String titulo) {
         System.out.println("\n--- " + titulo + " ---");
         System.out.print("Usuario: ");
@@ -64,7 +74,7 @@ public class VistaConsola {
         return new CredencialesUsuario(usuario, password);
     }
 
-    
+    @Override
     public void mostrarInformacionJuego() {
         System.out.println("\n--- Información del Juego ---");
         System.out.println("En este juego, controlarás a un héroe que debe enfrentarse a un vampiro.");
@@ -74,16 +84,18 @@ public class VistaConsola {
         System.out.println("\nCrea una nueva partida para comenzar a jugar.");
     }
 
-    
-    public void mostrarEstadoBatalla(Guerrero heroe, Vampiro vampiro) {
-         System.out.println(heroe.getNombre() + ": " + heroe.getEnergia() + "/" + heroe.getEnergiaMaxima() + " energía" +
+    @Override
+    public void mostrarEstadoBatalla(IPersonaje heroe, IPersonaje vampiro) {
+        Guerrero guerreroHeroe = (Guerrero) heroe;
+        
+        System.out.println(heroe.getNombre() + ": " + heroe.getEnergia() + "/" + heroe.getEnergiaMaxima() + " energía" +
                          (heroe.estaDesmayado() ? " (Desmayado)" : "") +
-                         (heroe.tienePocionActiva() ? " (Bebiendo poción)" : ""));
+                         (guerreroHeroe.tienePocionActiva() ? " (Bebiendo poción)" : ""));
         System.out.println(vampiro.getNombre() + ": " + vampiro.getEnergia() + "/" + vampiro.getEnergiaMaxima() + " energía" +
                          (vampiro.estaDesmayado() ? " (Desmayado)" : ""));
     }
 
-    
+    @Override
     public int pedirAccionGuerrero() {
         int opcion = -1;
         while (opcion < 1 || opcion > 3) {
@@ -99,7 +111,7 @@ public class VistaConsola {
         return opcion;
     }
 
-    
+    @Override
     public int pedirSeleccionArma(List<Arma> armas) {
         int opcion = -1;
         while (opcion < 1 || opcion > armas.size()) {
@@ -115,13 +127,14 @@ public class VistaConsola {
         return opcion -1; 
     }
 
-    
+    @Override
     public void mostrarResultadoFinal(String mensaje) {
         System.out.println("\n=== FIN DE LA BATALLA ===");
         System.out.println(mensaje);
     }
 
-    public void cerrarScanner() {
+    @Override
+    public void cerrarRecursos() {
         scanner.close();
     }
 } 
