@@ -39,7 +39,7 @@ public class MaquinaController {
 
         switch (metodoPago.toUpperCase()) {
             case "EFECTIVO":
-                pagoService.procesarPagoEfectivo(usuario, precioProducto);
+                pagoService.procesarPagoEfectivo(usuario, caja, precioProducto);
                 break;
             case "MONEDERO":
                 pagoService.procesarPagoTarjeta(usuario, "MONEDERO", precioProducto);
