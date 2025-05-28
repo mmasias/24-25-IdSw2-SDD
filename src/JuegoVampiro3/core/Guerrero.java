@@ -1,9 +1,15 @@
-package JuegoVampiro2.core;
+package JuegoVampiro3.core;
 
+import JuegoVampiro3.core.interfaces.ILuchador;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Guerrero extends Personaje {
+/**
+ * Clase que representa al guerrero jugador.
+ * Principio SRP: Responsabilidad única - gestión del estado y comportamiento del guerrero.
+ * Principio LSP: Implementación coherente de ILuchador.
+ */
+public class Guerrero extends Personaje implements ILuchador {
     private List<Arma> armas;
     private Pocion pocion;
     private boolean defendiendo;
@@ -15,7 +21,10 @@ public class Guerrero extends Personaje {
         this.armas = new ArrayList<>();
         this.pocion = new Pocion(this.getEnergiaMaxima()); 
         this.defendiendo = false;
-        
+        inicializarArmas();
+    }
+
+    private void inicializarArmas() {
         armas.add(new Arma("Espada", 7, 50));
         armas.add(new Arma("Hacha", 15, 25));
         armas.add(new Arma("Martillo", 30, 12));
@@ -26,14 +35,33 @@ public class Guerrero extends Personaje {
         return "Héroe";
     }
 
+    @Override
+    public Ataque seleccionarAtaque() {
+        // Para el comportamiento automático, selecciona la primera arma disponible
+        return seleccionarAtaque(0);
+    }
+
+    @Override
+    public Ataque seleccionarAtaque(int indiceArma) {
+        if (!puedeAtacar() || indiceArma < 0 || indiceArma >= armas.size()) {
+            return null;
+        }
+        return armas.get(indiceArma);
+    }
+
+    @Override
+    public boolean puedeAtacar() {
+        return !estaDesmayado() && !tienePocionActiva();
+    }
+
+    // Getters para acceso controlado
     public List<Arma> getArmas() {
-        return armas;
+        return new ArrayList<>(armas); // Defensive copy
     }
 
     public boolean estaDefendiendo() {
         return defendiendo;
     }
-
 
     public boolean tienePocionActiva() {
         return pocion.EstaEnUso();
@@ -43,8 +71,11 @@ public class Guerrero extends Personaje {
         return pocion;
     }
 
+    // Métodos de acción
     public void beberPocion() {
-        pocion.beber();
+        if (!tienePocionActiva() && !estaDesmayado()) {
+            pocion.beber();
+        }
     }
 
     public boolean avanzarTurnoPocion() {
@@ -56,7 +87,9 @@ public class Guerrero extends Personaje {
     }
 
     public void defender() {
-        this.defendiendo = true;
+        if (!estaDesmayado() && !tienePocionActiva()) {
+            this.defendiendo = true;
+        }
     }
 
     public void finalizarDefensa() {
@@ -64,30 +97,13 @@ public class Guerrero extends Personaje {
     }
 
     public int reducirDañoRecibido(int daño) {
-        if (defendiendo) {
-            if (Math.random() < 0.8) {
-                int dañoReducido = Math.max(0, daño - 5);
-                return dañoReducido;
-            } else {
-            }
+        if (defendiendo && Math.random() < 0.8) {
+            return Math.max(0, daño - 5);
         }
         return daño;
     }
 
-    @Override
-    public Ataque seleccionarAtaque(int indiceArma) {
-        if (estaDesmayado() || tienePocionActiva() || indiceArma < 0 || indiceArma >= armas.size()) {
-            return null;
-        }
-        return armas.get(indiceArma);
-    }
-    
-
-    @Override
-    public Ataque seleccionarAtaque() {
-         throw new UnsupportedOperationException("Usar seleccionarAtaque(int indiceArma) para el jugador.");
-    }
-
+    // Gestión de acciones del jugador
     public void setAccionActual(int accion) {
         if (!estaDesmayado() && !tienePocionActiva()) {
             this.accionActual = accion;
