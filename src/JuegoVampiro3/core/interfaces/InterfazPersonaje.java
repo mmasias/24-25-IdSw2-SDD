@@ -2,7 +2,7 @@ package JuegoVampiro3.core.interfaces;
 
 import JuegoVampiro3.core.Ataque;
 
-public interface Personaje {
+public interface InterfazPersonaje {
     String getNombre();
     int getEnergia();
     int getEnergiaMaxima();
