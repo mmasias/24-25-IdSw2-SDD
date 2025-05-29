@@ -8,11 +8,9 @@ public class JuegoVampiros {
     private static boolean sesionIniciada = false;
     private static Batalla batallaActual = null;
     private static String usuarioActual = null;
-    // Mapa para almacenar usuarios y contraseñas
     private static Map<String, String> usuarios = new HashMap<>();
     
     static {
-        // Añadir el usuario predeterminado
         usuarios.put("admin", "admin");
     }
     
@@ -106,7 +104,6 @@ public class JuegoVampiros {
         System.out.print("Contraseña: ");
         String password = scanner.nextLine();
         
-        // Verificar si el usuario existe y la contraseña es correcta
         if (usuarios.containsKey(usuario) && usuarios.get(usuario).equals(password)) {
             sesionIniciada = true;
             usuarioActual = usuario;
@@ -122,7 +119,6 @@ public class JuegoVampiros {
         System.out.print("Nuevo usuario: ");
         String usuario = scanner.nextLine();
         
-        // Verificar si el usuario ya existe
         if (usuarios.containsKey(usuario)) {
             System.out.println("Error: El usuario ya existe. Intenta con otro nombre de usuario.");
             return;
@@ -131,11 +127,9 @@ public class JuegoVampiros {
         System.out.print("Nueva contraseña: ");
         String password = scanner.nextLine();
         
-        // Guardar el nuevo usuario
         usuarios.put(usuario, password);
         System.out.println("Usuario registrado correctamente.");
-        
-        // Iniciar sesión automáticamente
+
         sesionIniciada = true;
         usuarioActual = usuario;
         System.out.println("Sesión iniciada correctamente. ¡Bienvenido, " + usuario + "!");
@@ -154,11 +148,9 @@ public class JuegoVampiros {
     private static void crearNuevaPartida() {
         System.out.println("\nCreando nueva partida...");
         
-        // Crear personajes
         Guerrero heroe = new Guerrero(150);
         Vampiro vampiro = new Vampiro(60);
         
-        // Crear batalla
         batallaActual = new Batalla(heroe, vampiro);
         
         System.out.println("¡Nueva partida creada! Selecciona 'Continuar partida' para empezar a jugar.");
@@ -173,7 +165,6 @@ public class JuegoVampiros {
         System.out.println("\nContinuando partida...");
         batallaActual.iniciarBatalla();
         
-        // Después de terminar la partida, la partida actual se elimina
         batallaActual = null;
     }
     
@@ -185,7 +176,6 @@ public class JuegoVampiros {
         
         System.out.println("\nGuardando partida...");
         System.out.println("Partida guardada correctamente.");
-        // En un sistema real, guardaríamos el estado del juego
     }
     
     private static void cerrarSesion() {

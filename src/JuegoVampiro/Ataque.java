@@ -16,9 +16,7 @@ public class Ataque {
     }
 
     public boolean esExitoso() {
-        // Generamos un número aleatorio entre 0 y 1
         double random = Math.random();
-        // Si el número es menor que el porcentaje de éxito, el ataque es exitoso
         return random < (porcentajeExito / 100.0);
     }
 } 

@@ -14,8 +14,6 @@ public class Arma extends Ataque {
 
     @Override
     public String toString() {
-        // Para mostrar en la lista de armas en VistaConsola
         return nombre + " (Daño: " + getDaño() + ", Éxito: " + super.probabilidadExito + "%)"; 
-        // Acceder a probabilidadExito directamente o hacerla protected/añadir getter en Ataque
     }
 } 

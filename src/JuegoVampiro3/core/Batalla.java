@@ -4,12 +4,6 @@ import JuegoVampiro3.core.interfaces.IVistaJuego;
 import JuegoVampiro3.core.interfaces.IPersonaje;
 import JuegoVampiro3.core.interfaces.ILuchador;
 
-/**
- * Clase responsable de gestionar la lógica de combate entre personajes.
- * Principio SRP: Responsabilidad única - gestión de la lógica de batalla.
- * Principio DIP: Depende de abstracciones (IVistaJuego, IPersonaje, ILuchador).
- * Principio OCP: Abierta para extensión - nuevos tipos de batalla pueden heredar.
- */
 public class Batalla {
     private ILuchador heroe;
     private IPersonaje vampiro;
@@ -29,44 +23,35 @@ public class Batalla {
         vista.mostrarMensaje(vampiro.getNombre() + " inicia con " + vampiro.getEnergia() + " puntos de energía.");
         vista.mostrarMensaje("-------------------------------------------------------");
 
-        // Bucle principal del juego
         while (heroe.estaVivo() && vampiro.estaVivo()) {
             vista.mostrarMensaje("\n=== TURNO " + turno + " ===");
             vista.mostrarEstadoBatalla(heroe, vampiro);
             
-            // Turno del héroe
             vista.mostrarMensaje("\n--- Turno de " + heroe.getNombre() + " ---");
             realizarTurnoHeroe();
-            
-            // Verificar si el vampiro ha muerto
+
             if (!vampiro.estaVivo()) {
                 break;
             }
-            
-            // Turno del vampiro
+
             vista.mostrarMensaje("\n--- Turno de " + vampiro.getNombre() + " ---");
             realizarTurnoVampiro();
-            
-            // Incrementar turno
+
             turno++;
         }
-        
-        // Mostrar resultado final
+
         determinarYMostrarResultadoFinal();
     }
 
     private void realizarTurnoHeroe() {
-        // Efectos de estado
         heroe.pasarTurno();
         if (heroe.estaDesmayado()) {
              vista.mostrarMensaje(heroe.getNombre() + " está desmayado y recupera 2 puntos de energía.");
              return;
         }
 
-        // Cast seguro para acceder a funcionalidad específica del Guerrero
         Guerrero guerrero = (Guerrero) heroe;
 
-        // Avanzar turno de la poción si está activa
         if (guerrero.tienePocionActiva()) {
             boolean pocionCompletada = guerrero.avanzarTurnoPocion();
             if (pocionCompletada) {
@@ -75,14 +60,12 @@ public class Batalla {
                  vista.mostrarMensaje(heroe.getNombre() + " está bajo el efecto de la poción. Turnos restantes: " + 
                                    guerrero.getPocion().getTurnosRestantes());
             }
-            return; // No puede hacer nada más durante el efecto de la poción
+            return;
         }
-        
-        // Elegir acción vía VistaConsola
+
         int accionElegida = vista.pedirAccionGuerrero();
         guerrero.setAccionActual(accionElegida);
 
-        // Procesar acción
         procesarAccionGuerrero(guerrero);
         guerrero.resetAccionActual();
     }
@@ -118,23 +101,20 @@ public class Batalla {
     }
 
     private void realizarTurnoVampiro() {
-        // Efectos de estado
         vampiro.pasarTurno();
         
         if (vampiro.estaDesmayado()) {
              vista.mostrarMensaje(vampiro.getNombre() + " está desmayado y recupera 2 puntos de energía.");
-            return; // No puede hacer nada si está desmayado
+            return;
         }
         
-        // Atacar
         vista.mostrarMensaje(vampiro.getNombre() + " prepara su ataque...");
         Ataque ataqueElegido = vampiro.seleccionarAtaque();
         
         if (ataqueElegido != null) {
             procesarAtaqueVampiro(ataqueElegido);
         }
-        
-        // Reiniciar defensa del héroe si es un Guerrero
+
         if (heroe instanceof Guerrero) {
             ((Guerrero) heroe).finalizarDefensa();
         }
@@ -145,8 +125,7 @@ public class Batalla {
 
         if (ataqueElegido.esExitoso()) {
             int daño = ataqueElegido.getDaño();
-            
-            // Si el héroe está defendiendo, intentar reducir el daño
+
             if (heroe instanceof Guerrero) {
                 Guerrero guerrero = (Guerrero) heroe;
                 if (guerrero.estaDefendiendo()) {

@@ -4,12 +4,6 @@ import JuegoVampiro3.core.interfaces.IGestorUsuarios;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Implementación concreta del gestor de usuarios.
- * Principio SRP: Responsabilidad única - gestión de usuarios.
- * Principio DIP: Implementa la abstracción IGestorUsuarios.
- */
-
 public class GestorUsuarios implements IGestorUsuarios {
 
     private Map<String, String> usuarios = new HashMap<>();

@@ -29,46 +29,36 @@ public class Batalla {
         System.out.println(vampiro.getNombre() + " inicia con " + vampiro.getEnergia() + " puntos de energía.");
         System.out.println("-------------------------------------------------------");
 
-        // Bucle principal del juego
         while (heroe.estaVivo() && vampiro.estaVivo()) {
             System.out.println("\n=== TURNO " + turno + " ===");
             mostrarEstado();
             
-            // Turno del héroe
             System.out.println("\n--- Turno de " + heroe.getNombre() + " ---");
             realizarTurnoHeroe();
             
-            // Verificar si el vampiro ha muerto
             if (!vampiro.estaVivo()) {
                 break;
             }
-            
-            // Turno del vampiro
+
             System.out.println("\n--- Turno de " + vampiro.getNombre() + " ---");
             realizarTurnoVampiro();
-            
-            // Incrementar turno
+
             turno++;
         }
         
-        // Mostrar resultado final
         mostrarResultadoFinal();
     }
 
     private void realizarTurnoHeroe() {
-        // Efectos de estado
         heroe.pasarTurno();
-        
-        // Avanzar turno de la poción si está activa
+
         if (heroe.tienePocionActiva()) {
             heroe.avanzarTurnoPocion();
-            return; // No puede hacer nada más durante el efecto de la poción
+            return; 
         }
         
-        // Elegir acción
         heroe.elegirAccion();
         
-        // Si eligió atacar
         if (!heroe.estaDefendiendo() && !heroe.tienePocionActiva() && !heroe.estaDesmayado()) {
             Ataque ataqueElegido = heroe.seleccionarAtaque();
             
@@ -88,21 +78,18 @@ public class Batalla {
     }
 
     private void realizarTurnoVampiro() {
-        // Efectos de estado
         vampiro.pasarTurno();
         
         if (vampiro.estaDesmayado()) {
-            return; // No puede hacer nada si está desmayado
+            return; 
         }
         
-        // Atacar
         Ataque ataqueElegido = vampiro.seleccionarAtaque();
         
         if (ataqueElegido != null) {
             if (ataqueElegido.esExitoso()) {
                 int daño = ataqueElegido.getDaño();
                 
-                // Si el héroe está defendiendo, intentar reducir el daño
                 if (heroe.estaDefendiendo()) {
                     daño = heroe.reducirDañoRecibido(daño);
                 }
@@ -115,7 +102,6 @@ public class Batalla {
             }
         }
         
-        // Reiniciar defensa del héroe
         heroe.finalizarDefensa();
     }
 
@@ -145,15 +131,12 @@ public class Batalla {
         boolean jugarDeNuevo = true;
         
         while (jugarDeNuevo) {
-            // Crear personajes
             Guerrero heroe = new Guerrero(150);
             Vampiro vampiro = new Vampiro(60);
             
-            // Crear y comenzar la batalla
             Batalla batalla = new Batalla(heroe, vampiro);
             batalla.iniciarBatalla();
             
-            // Preguntar si quiere jugar de nuevo
             System.out.println("\n¿Quieres jugar de nuevo? (s/n): ");
             String respuesta = scanner.nextLine().trim().toLowerCase();
             jugarDeNuevo = respuesta.equals("s") || respuesta.equals("si");

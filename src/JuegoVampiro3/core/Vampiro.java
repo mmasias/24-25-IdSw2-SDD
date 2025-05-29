@@ -4,11 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-/**
- * Clase que representa al vampiro enemigo.
- * Principio SRP: Responsabilidad única - gestión del estado y comportamiento del vampiro.
- * Principio LSP: Implementación coherente de IPersonaje.
- */
 public class Vampiro extends Personaje {
     private List<Mordida> ataques;
     private static final int LIMITE_DESMAYO = 20;
@@ -33,7 +28,7 @@ public class Vampiro extends Personaje {
     }
 
     public List<Mordida> getAtaques() {
-        return new ArrayList<>(ataques); // Defensive copy
+        return new ArrayList<>(ataques);
     }
 
     @Override

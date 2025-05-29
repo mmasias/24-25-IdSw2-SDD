@@ -23,7 +23,7 @@ public class Pocion {
 
     public void beber() {
         this.enUso = true;
-        this.turnosRestantes = 3; // La poción tarda 3 turnos en hacer efecto
+        this.turnosRestantes = 3;
     }
 
     public boolean avanzarTurno() {
@@ -31,10 +31,10 @@ public class Pocion {
             turnosRestantes--;
             if (turnosRestantes <= 0) {
                 enUso = false;
-                return true; // La poción ha hecho efecto
+                return true;
             }
         }
-        return false; // La poción aún no ha hecho efecto
+        return false;
     }
 
     public void resetear() {

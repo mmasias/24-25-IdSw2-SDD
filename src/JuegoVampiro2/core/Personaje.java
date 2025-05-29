@@ -43,8 +43,7 @@ public abstract class Personaje {
         if (energia > energiaMaxima) {
             energia = energiaMaxima;
         }
-        
-        // Si recupera suficiente energía, ya no estará desmayado
+
         if (desmayado && energia > limiteDesmayo) {
             desmayado = false;
         }
@@ -57,7 +56,7 @@ public abstract class Personaje {
 
     public void pasarTurno() {
         if (desmayado) {
-            recuperarEnergia(2); // Recupera 2 puntos por turno si está desmayado
+            recuperarEnergia(2);
         }
     }
 

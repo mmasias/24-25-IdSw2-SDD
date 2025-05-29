@@ -33,10 +33,10 @@ public class Pocion {
             turnosRestantes--;
             if (turnosRestantes <= 0) {
                 enUso = false;
-                return true; // Efecto completado
+                return true;
             }
         }
-        return false; // Aún no completado o no en uso
+        return false;
     }
 
     public void resetear() {

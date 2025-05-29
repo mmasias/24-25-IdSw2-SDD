@@ -4,11 +4,6 @@ import JuegoVampiro3.core.interfaces.ILuchador;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Clase que representa al guerrero jugador.
- * Principio SRP: Responsabilidad única - gestión del estado y comportamiento del guerrero.
- * Principio LSP: Implementación coherente de ILuchador.
- */
 public class Guerrero extends Personaje implements ILuchador {
     private List<Arma> armas;
     private Pocion pocion;
@@ -37,7 +32,6 @@ public class Guerrero extends Personaje implements ILuchador {
 
     @Override
     public Ataque seleccionarAtaque() {
-        // Para el comportamiento automático, selecciona la primera arma disponible
         return seleccionarAtaque(0);
     }
 
@@ -54,9 +48,8 @@ public class Guerrero extends Personaje implements ILuchador {
         return !estaDesmayado() && !tienePocionActiva();
     }
 
-    // Getters para acceso controlado
     public List<Arma> getArmas() {
-        return new ArrayList<>(armas); // Defensive copy
+        return new ArrayList<>(armas);
     }
 
     public boolean estaDefendiendo() {
@@ -71,7 +64,6 @@ public class Guerrero extends Personaje implements ILuchador {
         return pocion;
     }
 
-    // Métodos de acción
     public void beberPocion() {
         if (!tienePocionActiva() && !estaDesmayado()) {
             pocion.beber();
@@ -103,7 +95,6 @@ public class Guerrero extends Personaje implements ILuchador {
         return daño;
     }
 
-    // Gestión de acciones del jugador
     public void setAccionActual(int accion) {
         if (!estaDesmayado() && !tienePocionActiva()) {
             this.accionActual = accion;

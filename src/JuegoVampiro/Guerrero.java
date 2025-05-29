@@ -11,10 +11,9 @@ public class Guerrero extends Personaje {
     public Guerrero(int energia) {
         super(energia, LIMITE_DESMAYO);
         this.armas = new ArrayList<>();
-        this.pocion = new Pocion(energia); // Poción que recupera toda la energía
+        this.pocion = new Pocion(energia);
         this.defendiendo = false;
         
-        // Inicializar las armas según el enunciado
         armas.add(new Arma("Espada", 7, 50));
         armas.add(new Arma("Hacha", 15, 25));
         armas.add(new Arma("Martillo", 30, 12));
@@ -66,7 +65,6 @@ public class Guerrero extends Personaje {
 
     public int reducirDañoRecibido(int daño) {
         if (defendiendo) {
-            // 80% de probabilidad de defensa exitosa
             if (Math.random() < 0.8) {
                 int dañoReducido = Math.max(0, daño - 5);
                 System.out.println("¡Defensa exitosa! Daño reducido en 5 puntos.");
@@ -81,7 +79,7 @@ public class Guerrero extends Personaje {
     @Override
     public Ataque seleccionarAtaque() {
         if (estaDesmayado() || tienePocionActiva()) {
-            return null; // No puede atacar si está desmayado o bebiendo poción
+            return null;
         }
         
         Scanner scanner = new Scanner(System.in);
@@ -145,7 +143,6 @@ public class Guerrero extends Personaje {
         
         switch (opcion) {
             case 1:
-                // La selección del arma se maneja en seleccionarAtaque()
                 break;
             case 2:
                 defender();

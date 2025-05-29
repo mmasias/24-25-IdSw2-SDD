@@ -1,9 +1,5 @@
 package JuegoVampiro3.core;
 
-/**
- * Clase que representa un arma del guerrero.
- * Principio SRP: Responsabilidad única - representar un arma específica.
- */
 public class Arma extends Ataque {
     private String nombre;
 
@@ -19,7 +15,6 @@ public class Arma extends Ataque {
 
     @Override
     public String toString() {
-        // Para mostrar en la lista de armas en VistaConsola
         return nombre + " (Daño: " + getDaño() + ", Éxito: " + getProbabilidadExito() + "%)"; 
     }
 } 

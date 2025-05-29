@@ -5,12 +5,6 @@ import JuegoVampiro3.ui.VistaConsola;
 import JuegoVampiro3.ui.CredencialesUsuario;
 import JuegoVampiro3.core.interfaces.*;
 
-/**
- * Controlador principal del juego.
- * Principio SRP: Responsabilidad unica - orquestar el flujo del juego.
- * Principio DiP: Depende de abstracciones (IGestorUsuarios, IVistaJuego).
- * Principio OCP: Abierto para extension - puede extenderse para nuevos tipos de juego.
- */
 public class JuegoVampiros implements IControladorJuego {
 
     private static final String VERSION = "1.0 SOLID";
@@ -25,7 +19,6 @@ public class JuegoVampiros implements IControladorJuego {
         this.vista = new VistaConsola();
     }
 
-    // Constructor para inyección de dependencias (principio DIP)
     public JuegoVampiros(IGestorUsuarios gestorUsuarios, IVistaJuego vista) {
         this.gestorUsuarios = gestorUsuarios;
         this.vista = vista;
@@ -147,7 +140,7 @@ public class JuegoVampiros implements IControladorJuego {
         }
         vista.mostrarMensaje("Continuando partida...");
         batallaActual.iniciarBatalla();
-        batallaActual = null; // Limpiar después de la batalla
+        batallaActual = null;
     }
 
     private void guardarPartida() {

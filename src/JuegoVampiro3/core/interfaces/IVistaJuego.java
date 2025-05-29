@@ -4,10 +4,6 @@ import JuegoVampiro3.core.Arma;
 import JuegoVampiro3.ui.CredencialesUsuario;
 import java.util.List;
 
-/**
- * Interfaz para la vista del juego.
- * Principio DIP: Permite que las clases de alto nivel dependan de abstracción.
- */
 public interface IVistaJuego {
     void mostrarMensaje(String mensaje);
     void mostrarTitulo();

@@ -6,12 +6,6 @@ import JuegoVampiro3.core.interfaces.IVistaJuego;
 import JuegoVampiro3.core.interfaces.IPersonaje;
 import java.util.List; 
 
-/**
- * Implementación de consola para la vista del juego.
- * Principio SRP: Responsabilidad única - gestión de la interfaz de usuario por consola.
- * Principio DIP: Implementa la abstracción IVistaJuego.
- */
-
 public class VistaConsola implements IVistaJuego {
 
     private Scanner scanner;

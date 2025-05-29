@@ -10,7 +10,6 @@ public class Vampiro extends Personaje {
         super(energia, LIMITE_DESMAYO);
         this.ataques = new ArrayList<>();
         
-        // Inicializar los ataques según el enunciado
         ataques.add(new Mordida("Mordisco Rápido", 5, 90));
         ataques.add(new Mordida("Mordisco Profundo", 10, 60));
         ataques.add(new Mordida("Mordisco Letal", 20, 40));
@@ -28,10 +27,9 @@ public class Vampiro extends Personaje {
     @Override
     public Ataque seleccionarAtaque() {
         if (estaDesmayado()) {
-            return null; // No puede atacar si está desmayado
+            return null;
         }
         
-        // El vampiro elige un ataque aleatoriamente
         Random random = new Random();
         int indice = random.nextInt(ataques.size());
         Mordida ataqueElegido = ataques.get(indice);

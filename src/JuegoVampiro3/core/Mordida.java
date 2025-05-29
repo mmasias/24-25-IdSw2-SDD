@@ -1,9 +1,5 @@
 package JuegoVampiro3.core;
 
-/**
- * Clase que representa un ataque de mordida del vampiro.
- * Principio SRP: Responsabilidad única - representar un tipo específico de ataque.
- */
 public class Mordida extends Ataque {
     private String nombre;
 

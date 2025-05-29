@@ -1,9 +1,5 @@
 package JuegoVampiro3.core;
 
-/**
- * Clase que representa una poción curativa.
- * Principio SRP: Responsabilidad única - gestión del estado de una poción.
- */
 public class Pocion {
     private int turnosParaEfecto;
     private boolean enUso;
@@ -37,10 +33,10 @@ public class Pocion {
             turnosRestantes--;
             if (turnosRestantes <= 0) {
                 enUso = false;
-                return true; // Efecto completado
+                return true;
             }
         }
-        return false; // Aún no completado o no en uso
+        return false;
     }
 
     public void resetear() {

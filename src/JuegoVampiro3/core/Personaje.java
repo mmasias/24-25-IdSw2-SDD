@@ -2,11 +2,6 @@ package JuegoVampiro3.core;
 
 import JuegoVampiro3.core.interfaces.IPersonaje;
 
-/**
- * Clase base abstracta para personajes del juego.
- * Principio SRP: Responsabilidad única - gestión del estado base de un personaje.
- * Principio LSP: Comportamiento coherente para todas las subclases.
- */
 public abstract class Personaje implements IPersonaje {
     private int energia;
     private int energiaMaxima;
@@ -42,7 +37,7 @@ public abstract class Personaje implements IPersonaje {
 
     @Override
     public void recibirDaño(int daño) {
-        if (daño < 0) return; // No permitir daño negativo
+        if (daño < 0) return;
         
         energia -= daño;
         if (energia <= 0) {
@@ -54,14 +49,13 @@ public abstract class Personaje implements IPersonaje {
 
     @Override
     public void recuperarEnergia(int cantidad) {
-        if (cantidad < 0) return; // No permitir recuperación negativa
+        if (cantidad < 0) return;
         
         energia += cantidad;
         if (energia > energiaMaxima) {
             energia = energiaMaxima;
         }
-        
-        // Si recupera suficiente energía, ya no estará desmayado
+
         if (desmayado && energia > limiteDesmayo) {
             desmayado = false;
         }
@@ -75,18 +69,16 @@ public abstract class Personaje implements IPersonaje {
     @Override
     public void pasarTurno() {
         if (desmayado) {
-            recuperarEnergia(2); // Recupera 2 puntos por turno si está desmayado
+            recuperarEnergia(2);
         }
     }
 
-    // Métodos abstractos que deben implementar las subclases
     @Override
     public abstract String getNombre();
     
     @Override
     public abstract Ataque seleccionarAtaque();
 
-    // Método protegido para subclases
     protected int getLimiteDesmayo() {
         return limiteDesmayo;
     }

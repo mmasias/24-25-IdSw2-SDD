@@ -12,7 +12,6 @@ public class Vampiro extends Personaje {
         super(energia, LIMITE_DESMAYO);
         this.ataques = new ArrayList<>();
         
-        // Inicializar los ataques según el enunciado
         ataques.add(new Mordida("Mordida leve", 5, 90));
         ataques.add(new Mordida("Mordida moderada", 10, 60));
         ataques.add(new Mordida("Mordida fuerte", 20, 40));
