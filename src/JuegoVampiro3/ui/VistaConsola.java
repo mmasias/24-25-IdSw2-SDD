@@ -2,11 +2,11 @@ package JuegoVampiro3.ui;
 
 import java.util.Scanner;
 import JuegoVampiro3.core.*;
-import JuegoVampiro3.core.interfaces.IVistaJuego;
-import JuegoVampiro3.core.interfaces.IPersonaje;
+import JuegoVampiro3.core.interfaces.InterfazVistaJuego;
+import JuegoVampiro3.core.interfaces.InterfazPersonaje;
 import java.util.List; 
 
-public class VistaConsola implements IVistaJuego {
+public class VistaConsola implements InterfazVistaJuego {
 
     private Scanner scanner;
 
@@ -79,7 +79,7 @@ public class VistaConsola implements IVistaJuego {
     }
 
     @Override
-    public void mostrarEstadoBatalla(IPersonaje heroe, IPersonaje vampiro) {
+    public void mostrarEstadoBatalla(InterfazPersonaje heroe, InterfazPersonaje vampiro) {
         Guerrero guerreroHeroe = (Guerrero) heroe;
         
         System.out.println(heroe.getNombre() + ": " + heroe.getEnergia() + "/" + heroe.getEnergiaMaxima() + " energía" +
