@@ -5,9 +5,22 @@
 
 </div>
 
-<div align=center>
-Diseño
+# Diseño
 
-|||
-|--|--|
-|![](/documentos/modeloDeDominio/diagramaDeClases/diagramaDeClasesRelaciones.svg)|[Enlace a la implementación]( https://github.com/TheMoys/24-25-IdSw2-SDD/tree/44a3c74ee79099a7b0965e6543794fe594f2e841/src)|
+## Diagrama de clases
+
+![](/documentos/modeloDeDominio/diagramaDeClases/diagramaDeClasesRelaciones.svg)
+
+## Diagrama de objetos
+
+![](/documentos/modeloDeDominio/diagramaDeObjetos/diagramaDeObjetos.svg)
+
+## Diagrama de estados
+
+### Diagrama de compra
+
+![](/documentos/modeloDeDominio/diagramaDeEstados/diagramaDeEstadosCompra.svg)
+
+### Diagrama de abastecer
+
+![](/documentos/modeloDeDominio/diagramaDeEstados/diagramaDeEstadosAbastecer.svg)
