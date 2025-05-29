@@ -1,10 +1,10 @@
 package JuegoVampiro3.auth;
 
-import JuegoVampiro3.core.interfaces.IGestorUsuarios;
+import JuegoVampiro3.core.interfaces.InterfazGestorUsuarios;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GestorUsuarios implements IGestorUsuarios {
+public class GestorUsuarios implements InterfazGestorUsuarios {
 
     private Map<String, String> usuarios = new HashMap<>();
 
@@ -18,12 +18,12 @@ public class GestorUsuarios implements IGestorUsuarios {
     }
 
     @Override
-    public IGestorUsuarios.ResultadoRegistro registrarUsuario(String usuario, String password) {
+    public InterfazGestorUsuarios.ResultadoRegistro registrarUsuario(String usuario, String password) {
         if (usuarios.containsKey(usuario)) {
-            return IGestorUsuarios.ResultadoRegistro.USUARIO_YA_EXISTE;
+            return InterfazGestorUsuarios.ResultadoRegistro.USUARIO_YA_EXISTE;
         }
         
         usuarios.put(usuario, password);
-        return IGestorUsuarios.ResultadoRegistro.EXITO;
+        return InterfazGestorUsuarios.ResultadoRegistro.EXITO;
     }
 } 
