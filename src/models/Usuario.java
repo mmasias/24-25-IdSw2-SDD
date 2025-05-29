@@ -1,0 +1,82 @@
+package src.models;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import src.utils.ScannerUtils;
+
+public class Usuario {
+    private Map<Double, Integer> efectivo;
+    private Tarjeta tarjetaMonedero;
+    private Tarjeta tarjetaBancaria;
+
+    public Usuario() {
+        this.efectivo = new HashMap<>();
+        inicializarEfectivo();
+        this.tarjetaMonedero = new Tarjeta(Tarjeta.Tipo.MONEDERO, 50.0);
+        this.tarjetaBancaria = new Tarjeta(Tarjeta.Tipo.BANCARIA, 100.0);
+    }
+
+    private void inicializarEfectivo() {
+        efectivo.put(0.05, 10); 
+        efectivo.put(0.10, 10); 
+        efectivo.put(0.20, 10); 
+        efectivo.put(0.50, 10); 
+        efectivo.put(1.0, 10);  
+        efectivo.put(2.0, 5);   
+        efectivo.put(5.0, 2);  
+        efectivo.put(10.0, 1);  
+    }
+
+    public Map<Double, Integer> getEfectivo() {
+        return efectivo;
+    }
+
+    public Tarjeta getTarjetaMonedero() {
+        return tarjetaMonedero;
+    }
+
+    public Tarjeta getTarjetaBancaria() {
+        return tarjetaBancaria;
+    }
+
+    public void mostrarSaldos() {
+        System.out.println("Saldo en tarjeta monedero: €" + tarjetaMonedero.getSaldo());
+        System.out.println("Saldo en tarjeta bancaria: €" + tarjetaBancaria.getSaldo());
+    }
+
+    public void agregarEfectivo(double denominacion, int cantidad) {
+        efectivo.put(denominacion, efectivo.getOrDefault(denominacion, 0) + cantidad);
+    }
+
+    public void descontarSaldoMonedero(double monto) {
+        tarjetaMonedero.descontarSaldo(monto);
+    }
+
+    public void descontarSaldoBancario(double monto) {
+        tarjetaBancaria.descontarSaldo(monto);
+    }
+    public double ingresarEfectivo() {
+        while (true) {
+            double denominacion = ScannerUtils.leerDouble("Ingrese una denominación de efectivo: ");
+            if (efectivo.containsKey(denominacion) && efectivo.get(denominacion) > 0) {
+                return denominacion;
+            } else {
+                System.out.println("Denominación no válida o insuficiente.");
+            }
+        }
+    }
+    public void actualizarEfectivoConCambio(Map<Double, Integer> efectivoUsado, Map<Double, Integer> cambioEntregado) {
+        for (Map.Entry<Double, Integer> entrada : efectivoUsado.entrySet()) {
+            double denominacion = entrada.getKey();
+            int cantidad = entrada.getValue();
+            efectivo.put(denominacion, efectivo.getOrDefault(denominacion, 0) - cantidad);
+        }
+    
+        for (Map.Entry<Double, Integer> entrada : cambioEntregado.entrySet()) {
+            double denominacion = entrada.getKey();
+            int cantidad = entrada.getValue();
+            efectivo.put(denominacion, efectivo.getOrDefault(denominacion, 0) + cantidad);
+        }
+    }
+}
