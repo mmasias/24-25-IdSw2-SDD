@@ -39,7 +39,7 @@ Optimiza la asignación de mesas, gestiona tiempos de preparación y coordina la
 
 - 🔄 **Diagrama de Estados**: [Diagrama de Estados](/ModeloDeDominio/imagenes/DiagramaDeEstados.svg)
 - 🖼️ **Diagrama de Clases**: [Diagrama de Clases](/ModeloDeDominio/imagenes/DiagramaDeClases.svg)
-- 🖼️ **Diagrama de Clases DM**: [Diagrama de Clases V002](/ModeloDeDominio/imagenes/DiagramaDeClasesDM.svg)
+- 🖼️ **Diagrama de Clases DM**: [Diagrama de Clases DM](/ModeloDeDominio/imagenes/DiagramaDeClasesDM.svg)
 - 🖼️ **Diagrama de Clases DOO**: [Diagrama de Clases DOO](/ModeloDeDominio/imagenes/DiagramaDeClasesDOO.svg)
 - 🧩 **Diagrama de Objetos**: [Diagrama de Objetos](/ModeloDeDominio/imagenes/DiagramaDeObjetos.svg)
 
