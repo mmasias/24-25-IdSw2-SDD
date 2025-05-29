@@ -1,6 +1,6 @@
 package JuegoVampiro3.core.interfaces;
 
-public interface IGestorUsuarios {
+public interface GestorUsuarios {
     
     enum ResultadoRegistro {
         EXITO,
