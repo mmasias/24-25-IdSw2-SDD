@@ -36,7 +36,6 @@ public class PagoService {
                 System.out.println("Cambio entregado: " + cambioEntregado);
             } catch (IllegalArgumentException e) {
                 System.out.println("Error: " + e.getMessage());
-                // Revertir el efectivo usado
                 for (Map.Entry<Double, Integer> entrada : efectivoUsado.entrySet()) {
                     usuario.getEfectivo().put(entrada.getKey(), usuario.getEfectivo().getOrDefault(entrada.getKey(), 0) + entrada.getValue());
                 }

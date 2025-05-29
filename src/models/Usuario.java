@@ -67,14 +67,12 @@ public class Usuario {
         }
     }
     public void actualizarEfectivoConCambio(Map<Double, Integer> efectivoUsado, Map<Double, Integer> cambioEntregado) {
-        // Restar el efectivo usado
         for (Map.Entry<Double, Integer> entrada : efectivoUsado.entrySet()) {
             double denominacion = entrada.getKey();
             int cantidad = entrada.getValue();
             efectivo.put(denominacion, efectivo.getOrDefault(denominacion, 0) - cantidad);
         }
     
-        // Agregar el cambio entregado
         for (Map.Entry<Double, Integer> entrada : cambioEntregado.entrySet()) {
             double denominacion = entrada.getKey();
             int cantidad = entrada.getValue();

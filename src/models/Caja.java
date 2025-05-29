@@ -46,7 +46,6 @@ public class Caja {
         Map<Double, Integer> cambioEntregado = new HashMap<>();
         BigDecimal restante = BigDecimal.valueOf(cambio);
     
-        // Intentar devolver cambio con monedas primero
         for (Map.Entry<Double, Integer> entrada : monedasTotales.entrySet()) {
             BigDecimal denominacion = BigDecimal.valueOf(entrada.getKey());
             int cantidad = entrada.getValue();
@@ -58,7 +57,6 @@ public class Caja {
             }
         }
     
-        // Intentar devolver cambio con billetes si aún queda restante
         for (Map.Entry<Double, Integer> entrada : billetesTotales.entrySet()) {
             BigDecimal denominacion = BigDecimal.valueOf(entrada.getKey());
             int cantidad = entrada.getValue();
@@ -74,7 +72,6 @@ public class Caja {
             throw new IllegalArgumentException("Saldo insuficiente en caja para dar cambio.");
         }
     
-        // Actualizar la caja con el cambio entregado
         for (Map.Entry<Double, Integer> entrada : cambioEntregado.entrySet()) {
             double denominacion = entrada.getKey();
             int cantidad = entrada.getValue();
