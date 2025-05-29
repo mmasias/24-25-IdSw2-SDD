@@ -1,0 +1,72 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
+left to right direction
+
+' Paquete de clases de implementación
+package "implementacion.modelo" {
+    class Restaurante {
+        +agregarMesa(m: Mesa)
+        +registrarReserva(r: Reserva): boolean
+        +agregarPedido(p: Pedido)
+        +obtenerMesaPorNumero(n: int): Mesa
+        +getMesas(): List<Mesa>
+        +getReservas(): List<Reserva>
+        +getPedidos(): List<Pedido>
+    }
+
+    class Mesa {
+        +getNumero(): int
+        +getCapacidad(): int
+        +getEstado(): EstadoMesa
+        +cambiarEstado(e: EstadoMesa)
+        +ocupar()
+        +liberar()
+    }
+
+    class Reserva {
+        +getCliente(): String
+        +getFecha(): Date
+        +getNumeroComensales(): int
+        +getPreferencias(): String
+        +getMesaAsignada(): Mesa
+        +asignarMesa(m: Mesa)
+    }
+
+    class Pedido {
+        +getMesa(): Mesa
+        +getPlatos(): List<Plato>
+        +agregarPlato(p: Plato)
+    }
+
+    class Plato {
+        +getNombre(): String
+        +getPrecio(): double
+        +getTiempoPreparacion(): int
+    }
+}
+
+' Paquete de interfaces, agrupadas horizontalmente
+package "interfaces.modelo" {
+    interface IRestaurante
+    interface IMesa
+    interface IReserva
+    interface IPedido
+    interface IPlato
+}
+
+' Relaciones entre clases
+Restaurante ..> Mesa : usa
+Restaurante ..> Reserva : usa
+Restaurante ..> Pedido : usa
+Reserva ..> Mesa : usa
+Pedido ..> Mesa : usa
+Pedido ..> Plato : usa
+
+' Implementaciones de interfaces (dotted line inheritance)
+Restaurante ..|> IRestaurante
+Mesa ..|> IMesa
+Reserva ..|> IReserva
+Pedido ..|> IPedido
+Plato ..|> IPlato
+@enduml
