@@ -1,0 +1,38 @@
+@startuml
+
+' Clases
+abstract class Personaje
+class Ataque
+class Arma
+class Mordida
+class Guerrero
+class Vampiro
+class Pocion
+class Batalla
+class JuegoVampiros
+
+' Relaciones de herencia
+Personaje <|-- Guerrero
+Personaje <|-- Vampiro
+Ataque <|-- Arma
+Ataque <|-- Mordida
+
+' Relaciones de composición y agregación
+Guerrero *-- Pocion
+Guerrero o-- Arma
+Vampiro o-- Mordida
+Batalla *-- Guerrero
+Batalla *-- Vampiro
+
+' Relaciones de dependencia
+JuegoVampiros ..> Batalla
+JuegoVampiros ..> Guerrero
+JuegoVampiros ..> Vampiro
+Batalla ..> Ataque
+Batalla ..> Arma
+Guerrero ..> Ataque
+Vampiro ..> Ataque
+
+
+
+@enduml
