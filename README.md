@@ -40,6 +40,7 @@ Optimiza la asignación de mesas, gestiona tiempos de preparación y coordina la
 - 🔄 **Diagrama de Estados**: [Diagrama de Estados](/ModeloDeDominio/imagenes/DiagramaDeEstados.svg)
 - 🖼️ **Diagrama de Clases**: [Diagrama de Clases](/ModeloDeDominio/imagenes/DiagramaDeClases.svg)
 - 🖼️ **Diagrama de Clases V002**: [Diagrama de Clases V002](/ModeloDeDominio/imagenes/DiagramaDeClasesV002.svg)
+- 🖼️ **Diagrama de Clases DOO**: [Diagrama de Clases DOO](/ModeloDeDominio/imagenes/DiagramaDeClasesDOO.svg)
 - 🧩 **Diagrama de Objetos**: [Diagrama de Objetos](/ModeloDeDominio/imagenes/DiagramaDeObjetos.svg)
 
 ---
@@ -49,8 +50,10 @@ Optimiza la asignación de mesas, gestiona tiempos de preparación y coordina la
 - **Código Fuente Versión 1 D**: [Ver código de la versión 1 D](/src-v001/src/)
 - **Código Fuente Versión 2 DM**: [Ver código de la versión 2 DM](/src-v002/)
 - **Código Fuente Versión 3 DOO**: [Ver código de la versión 3 DOO](/src-v003/)
+- **Código Fuente Versión 4 DOO MEJORADO**: [Ver código de la versión 4 DOO MEJORADO](/src-v004/)
 - **README del Proyecto Diseño Modular (Versión 2)**: [Ver README de la versión 2 Diseño Modular](/src-v002/README.md) y [Ver diseño modular](/documentos/diseñoModular.md)
 - **README del Proyecto Diseño Orientado a Objetos (Versión 3)**: [Ver README de la versión 3 Diseño Orientado a Objetos](/src-v003/readme.md)
+- **README del Proyecto Diseño Orientado a Objetos Mejorado (Versión 4)**: [Ver README de la versión 3 Diseño Orientado a Objetos Mejorado](/src-v004/readme.md)
 
 ---
 
