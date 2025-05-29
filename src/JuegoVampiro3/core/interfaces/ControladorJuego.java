@@ -1,6 +1,6 @@
 package JuegoVampiro3.core.interfaces;
 
-public interface IControladorJuego {
+public interface ControladorJuego {
     void iniciar();
     void procesarMenuInicial();
     void procesarMenuJuego();
