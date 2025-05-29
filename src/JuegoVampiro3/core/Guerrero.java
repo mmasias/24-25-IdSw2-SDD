@@ -1,10 +1,10 @@
 package JuegoVampiro3.core;
 
-import JuegoVampiro3.core.interfaces.ILuchador;
+import JuegoVampiro3.core.interfaces.InterfazLuchador;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Guerrero extends Personaje implements ILuchador {
+public class Guerrero extends Personaje implements InterfazLuchador {
     private List<Arma> armas;
     private Pocion pocion;
     private boolean defendiendo;
