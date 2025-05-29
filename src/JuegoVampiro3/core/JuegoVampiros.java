@@ -5,11 +5,11 @@ import JuegoVampiro3.ui.VistaConsola;
 import JuegoVampiro3.ui.CredencialesUsuario;
 import JuegoVampiro3.core.interfaces.*;
 
-public class JuegoVampiros implements IControladorJuego {
+public class JuegoVampiros implements InterfazControladorJuego {
 
     private static final String VERSION = "1.0 SOLID";
-    private IGestorUsuarios gestorUsuarios;
-    private IVistaJuego vista;
+    private InterfazGestorUsuarios gestorUsuarios;
+    private InterfazVistaJuego vista;
     private Batalla batallaActual = null;
     private String usuarioActual = null;
     private boolean salir = false;
@@ -19,7 +19,7 @@ public class JuegoVampiros implements IControladorJuego {
         this.vista = new VistaConsola();
     }
 
-    public JuegoVampiros(IGestorUsuarios gestorUsuarios, IVistaJuego vista) {
+    public JuegoVampiros(InterfazGestorUsuarios gestorUsuarios, InterfazVistaJuego vista) {
         this.gestorUsuarios = gestorUsuarios;
         this.vista = vista;
     }
@@ -105,7 +105,7 @@ public class JuegoVampiros implements IControladorJuego {
 
     private void registrarUsuario() {
         CredencialesUsuario credenciales = vista.pedirCredenciales("Registrar Usuario");
-        IGestorUsuarios.ResultadoRegistro resultado = gestorUsuarios.registrarUsuario(credenciales.getUsuario(), credenciales.getPassword());
+        InterfazGestorUsuarios.ResultadoRegistro resultado = gestorUsuarios.registrarUsuario(credenciales.getUsuario(), credenciales.getPassword());
 
         switch (resultado) {
             case EXITO:
