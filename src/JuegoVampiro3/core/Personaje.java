@@ -1,8 +1,8 @@
 package JuegoVampiro3.core;
 
-import JuegoVampiro3.core.interfaces.IPersonaje;
+import JuegoVampiro3.core.interfaces.InterfazPersonaje;
 
-public abstract class Personaje implements IPersonaje {
+public abstract class Personaje implements InterfazPersonaje {
     private int energia;
     private int energiaMaxima;
     private boolean desmayado;
