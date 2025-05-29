@@ -1,6 +1,12 @@
 # Diseño modular - Juego de Vampiros
 
-## 1. **Descripción del Proyecto**
+<div align=center>
+
+[![Diagrama de Clases](/images/modelosUML/Entrega2/Iteracion2/Diagrama_Entrega2.svg)](/images/modelosUML/Entrega2/Iteracion2/diagrama.puml)
+
+</div>
+
+# 1. **Descripción del Proyecto**
 
 El Juego de Vampiros es un proyecto que implementa un sistema de combate por turnos donde el jugador controla a un Guerrero que debe enfrentarse a un Vampiro en una batalla estratégica. El sistema aprovechanda conceptos como herencia, polimorfismo y encapsulamiento.
 
@@ -43,9 +49,10 @@ El diseño modular sigue un patrón de dependencia de capas donde:
 - La capa ui utiliza las entidades de core para mostrar información del juego
 - La clase JuegoVampiros actúa como orquestador, coordinando las tres capas
 
-[![Diagrama de Clases](/images/modelosUML/Entrega2/Diagrama_Entrega2.svg)](/images/modelosUML/Entrega2/diagrama.puml)
 
-## 2. **Cambios Realizados**
+# 2. **Cambios Realizados**
+
+## · Cambios respecto a la entrega1
 
 ### 1. División en subcarpetas.
 Para separar las responsabilidades, hemos dividido el código en auth, para la gestión de usuarios, core, para la lógica del juego, y ui, para la interfaz del usuario.
@@ -60,3 +67,8 @@ Para separar las responsabilidades, hemos dividido el código en auth, para la g
   3. **`Guerrero`:** Se eliminó la lectura directa mediante `Scanner` y la impresión en consola. La selección de acciones ahora es llebada acabo por `Batalla` mediante el uso de `VistaConsola`. Tambien se añadieron los métodos `setAccionActual` y `quiereAtacar`entre otros para gestionar el estado de la acción elegida.
   4. **`Personaje`:** Se eliminaron las impresiones directas en consola como son los mensajes del desmayo y la recuperacion recayendo estos en `Batalla`.
   5. **`Vampiro`, `Ataque`, `Arma`, `Mordida`, `Pocion`:** Se movieron al paquete `core` y se actualizaron sus declaraciones de paquete y se elimina el codigo relacionado a la UI y se añaden métodos nuevos o modifican los ya presentes para encajar con la estructura presente
+
+  ## · Cambios post revisión del 29/05
+
+  - Actualizacion del diagrama .puml
+  

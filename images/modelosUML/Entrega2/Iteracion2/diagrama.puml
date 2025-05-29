@@ -1,0 +1,47 @@
+@startuml
+package JuegoVampiro2.auth {
+    class GestorUsuarios
+}
+
+package JuegoVampiro2.core {
+    abstract class Personaje
+    abstract class Ataque
+    class Arma
+    class Mordida
+    class Pocion
+    class Guerrero
+    class Vampiro
+    class Batalla
+    class JuegoVampiros
+}
+
+package JuegoVampiro2.ui {
+    class CredencialesUsuario
+    class VistaConsola
+}
+
+' Relaciones de herencia
+Ataque <|-- Arma
+Ataque <|-- Mordida
+Personaje <|-- Guerrero
+Personaje <|-- Vampiro
+
+' Relaciones principales existentes
+JuegoVampiros --> GestorUsuarios
+JuegoVampiros --> VistaConsola
+JuegoVampiros --> Batalla
+Batalla --> Guerrero
+Batalla --> Vampiro
+Batalla --> VistaConsola
+Guerrero --> Arma
+Guerrero --> Pocion
+Vampiro --> Mordida
+
+' Relaciones faltantes identificadas
+JuegoVampiros --> CredencialesUsuario
+VistaConsola --> CredencialesUsuario
+VistaConsola --> Guerrero
+VistaConsola --> Vampiro
+VistaConsola --> Arma
+GestorUsuarios --> CredencialesUsuario
+@enduml
