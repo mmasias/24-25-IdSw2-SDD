@@ -10,4 +10,4 @@ Diseño
 
 |||
 |--|--|
-|![](/documentos/modeloDeDominio/diagramaDeClases/diagramaDeClasesRelaciones.svg)|[Enlace a la implementación]( https://github.com/TheMoys/24-25-IdSw2-SDD/tree/44a3c74ee79099a7b0965e6543794fe594f2e841/src)|
+|![](/documentos/modeloDeDominio/diagramaDeClases/diagramaDeClasesDiseño.svg)|[Enlace a la implementación]( https://github.com/TheMoys/24-25-IdSw2-SDD/tree/44a3c74ee79099a7b0965e6543794fe594f2e841/src)|

@@ -1,0 +1,33 @@
+@startuml
+class Caja
+class Celda
+class ControladorPago
+class Efectivo
+class EfectivoAceptado
+class Empleado
+class Main
+class Maquina
+class PagoEfectivo
+class PagoTarjeta
+class Producto
+class Tarjeta
+class Usuario
+
+Caja -u-* Maquina
+Caja o-- Efectivo
+Celda -u-* Maquina
+Celda o-- Producto
+Celda .r. Empleado
+ControladorPago --> PagoEfectivo
+ControladorPago --> PagoTarjeta
+Efectivo -u-o Usuario 
+Efectivo <.. PagoEfectivo
+Efectivo --> EfectivoAceptado  
+Main --> ControladorPago
+Main --> Maquina
+Main --> Producto
+Main --> Usuario
+Maquina -l- Usuario
+PagoTarjeta ..> Tarjeta
+Tarjeta -r-o Usuario
+@enduml
