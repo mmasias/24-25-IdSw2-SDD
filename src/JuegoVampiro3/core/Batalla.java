@@ -1,16 +1,16 @@
 package JuegoVampiro3.core;
 
-import JuegoVampiro3.core.interfaces.IVistaJuego;
-import JuegoVampiro3.core.interfaces.IPersonaje;
-import JuegoVampiro3.core.interfaces.ILuchador;
+import JuegoVampiro3.core.interfaces.InterfazVistaJuego;
+import JuegoVampiro3.core.interfaces.InterfazPersonaje;
+import JuegoVampiro3.core.interfaces.InterfazLuchador;
 
 public class Batalla {
-    private ILuchador heroe;
-    private IPersonaje vampiro;
+    private InterfazLuchador heroe;
+    private InterfazPersonaje vampiro;
     private int turno;
-    private IVistaJuego vista;
+    private InterfazVistaJuego vista;
 
-    public Batalla(ILuchador heroe, IPersonaje vampiro, IVistaJuego vista) {
+    public Batalla(InterfazLuchador heroe, InterfazPersonaje vampiro, InterfazVistaJuego vista) {
         this.heroe = heroe;
         this.vampiro = vampiro;
         this.turno = 1;
