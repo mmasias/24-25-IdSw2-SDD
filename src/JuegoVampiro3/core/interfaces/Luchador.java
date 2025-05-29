@@ -2,7 +2,7 @@ package JuegoVampiro3.core.interfaces;
 
 import JuegoVampiro3.core.Ataque;
 
-public interface ILuchador extends IPersonaje {
+public interface Luchador extends Personaje {
     Ataque seleccionarAtaque(int indice);
     boolean puedeAtacar();
 } 
