@@ -2,7 +2,7 @@
 
 | Diagrama de Clases |
 |--------------------|
-|![Diagrama](/ModeloDeDominio/imagenes/DiagramaDeClasesV002.svg)|
+|![Diagrama](/ModeloDeDominio/imagenes/DiagramaDeClasesDM.svg)|
 
 - El sistema `Restaurante` está organizado en paquetes siguiendo el patrón MVC y una capa de utilidades para funciones comunes.
 
