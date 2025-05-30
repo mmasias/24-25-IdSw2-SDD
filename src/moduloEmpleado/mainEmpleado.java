@@ -4,8 +4,8 @@ import src.moduloCaja.Caja;
 import src.moduloEmpleado.controlador.ControladorEmpleado;
 import src.moduloEmpleado.modelo.Empleado;
 import src.moduloEmpleado.vista.VistaEmpleado;
-import src.moduloInventario.Celda;
-import src.moduloInventario.Producto;
+import src.moduloInventario.modelo.Celda;
+import src.moduloInventario.modelo.Producto;
 
 public class mainEmpleado {
     public static void main(String[] args) {

@@ -3,8 +3,8 @@ package src.moduloEmpleado.controlador;
 import src.moduloCaja.Caja;
 import src.moduloEmpleado.modelo.Empleado;
 import src.moduloEmpleado.vista.VistaEmpleado;
-import src.moduloInventario.Celda;
-import src.moduloInventario.Producto;
+import src.moduloInventario.modelo.Celda;
+import src.moduloInventario.modelo.Producto;
 
 public class ControladorEmpleado {
     private Empleado empleado;
