@@ -1,0 +1,24 @@
+@startuml
+' Diagrama de Estados: Ascensor
+hide empty description
+skinparam stateFontSize 12
+
+[*] --> Esperando : sin llamadas ni pasajeros
+
+Esperando --> Cargando : personas esperando en planta actual
+Esperando --> Moviéndose : tiene llamadas o pasajeros
+
+Cargando --> Cargando : sigue recogiendo
+Cargando --> Moviéndose : puertas cerradas
+
+Moviéndose --> Moviéndose : continúa hacia destino
+Moviéndose --> Descargando : llega a planta destino
+
+Descargando --> Descargando : personas bajan
+Descargando --> Cargando : recoge más personas
+Descargando --> Esperando : sin tareas
+
+Esperando --> Apagado : universidad cerrada y vacía
+Apagado --> [*]
+
+@enduml

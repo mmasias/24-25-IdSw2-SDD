@@ -1,0 +1,37 @@
+@startuml
+' =========================
+' Diagrama de Objetos
+' =========================
+hide empty members
+hide circle
+skinparam objectFontSize 12
+
+object Planta_Menos3 {
+  numero = -3
+  esperando = [Persona_Alice]
+  enPlanta = []
+}
+object Persona_Alice {
+  plantaDestino = 0
+  tiempoEstancia = 0
+  salirDefinitivo = false
+  haSalido = false
+}
+object Llamada_Alice {
+  origen = -3
+  destino = 0
+  persona = Persona_Alice
+}
+object Ascensor_A1 {
+  id = "A1"
+  plantaActual = -3
+  personas = []
+  llamadas = [Llamada_Alice]
+  totalTransportadas = 0
+}
+
+Planta_Menos3 --> Persona_Alice : esperando
+Persona_Alice --> Llamada_Alice : genera
+Llamada_Alice --> Ascensor_A1 : asignada a
+
+@enduml
