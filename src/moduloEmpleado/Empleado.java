@@ -1,8 +1,8 @@
 package src.moduloEmpleado;
 
 import src.moduloCaja.Caja;
-import src.moduloInventario.Celda;
-import src.moduloInventario.Producto;
+import src.moduloInventario.modelo.Celda;
+import src.moduloInventario.modelo.Producto;
 
 public class Empleado {
     private String nombre;

@@ -1,4 +1,4 @@
-package src.moduloInventario;
+package src.moduloInventario.modelo;
 
 public class Producto {
     private String nombre;

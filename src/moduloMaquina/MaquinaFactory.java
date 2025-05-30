@@ -1,8 +1,8 @@
 package src.moduloMaquina;
 
-import src.moduloInventario.Celda;
-import src.moduloInventario.Producto;
 import src.moduloCaja.Caja;
+import src.moduloInventario.modelo.Celda;
+import src.moduloInventario.modelo.Producto;
 
 import java.util.ArrayList;
 import java.util.List;
