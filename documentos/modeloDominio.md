@@ -6,35 +6,44 @@ Este repositorio contiene el diagrama de clases para la simulación de un sistem
 
 ### Clases
 
-![](/modelosUML/diagramaClases.svg)
+![](/modelosUML/svg/diagramaClases.svg)
+[Ver archivo .puml](/modelosUML/diagramaClases.puml)
 
 ### Clases V2
 
-![](/modelosUML/diagramaClasesV2.svg)
+![](/modelosUML/svg/diagramaClasesV2.svg)
+[Ver archivo .puml](/modelosUML/diagramaClasesV2.puml)
 
 ### Clases Modular
 
-![](/modelosUML/diagramaClasesModular.svg)
+![](/modelosUML/svg/diagramaClasesModular.svg)
+[Ver archivo .puml](/modelosUML/diagramaClasesModular.puml)
 
 ### Clases SOLID
 
-![](/modelosUML/diagramaClasesSOLID.svg)
+![](/modelosUML/svg/diagramaClasesSOLID.svg)
+[Ver archivo .puml](/modelosUML/diagramaClasesSOLID.puml)
 
 ### Objetos
 
-![](/modelosUML/diagramaObjetos.svg)
+![](/modelosUML/svg/diagramaObjetos.svg)
+[Ver archivo .puml](/modelosUML/diagramaObjetos.puml)
 
 ### Estados Jornada
 
-![](/modelosUML/diagramaEstadosJornada.svg)
+![](/modelosUML/svg/diagramaEstadosJornada.svg)
+[Ver archivo .puml](/modelosUML/diagramaEstadosJornada.puml)
 
 ### Estados Caja
 
-![](/modelosUML/diagramaEstadosCaja.svg)
+![](/modelosUML/svg/diagramaEstadosCaja.svg)
+[Ver archivo .puml](/modelosUML/diagramaEstadosCaja.puml)
 
 ### Estados Cliente
 
-![](/modelosUML/diagramaEstadosCliente.svg)
+![](/modelosUML/svg/diagramaEstadosCliente.svg)
+[Ver archivo .puml](/modelosUML/diagramaEstadosCliente.puml)
+
 
 
 ## Descripción de Clases
