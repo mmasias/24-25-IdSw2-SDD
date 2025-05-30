@@ -46,11 +46,11 @@ public class Mundo {
 
     private void generarLlegadaSiProcede() {
         if (random.nextDouble() < PROBABILIDAD_INGRESO) {
-            Persona persona = new Persona();
+            Persona persona = new Persona(); // La persona se autogenera su destino
             Planta plantaIngreso = universidad.getPlantas().get(Universidad.INGRESO);
             plantaIngreso.personaEsperaAscensor(persona);
             universidad.getControlAscensor().procesarLlamada(
-                new Llamada(Universidad.INGRESO, persona.getPlantaDestino(), persona));
+                    new Llamada(Universidad.INGRESO, persona.getPlantaDestino(), persona));
             universidad.incrementarTotalPersonasIngresadas();
         }
     }
