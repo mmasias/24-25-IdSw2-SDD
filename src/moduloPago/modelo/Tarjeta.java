@@ -1,4 +1,4 @@
-package src.moduloPago;
+package src.moduloPago.modelo;
 
 public class Tarjeta implements Pago {
     private String numero;
