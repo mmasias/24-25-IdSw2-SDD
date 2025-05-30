@@ -2,8 +2,8 @@ package src.moduloMaquina;
 
 import src.moduloInventario.Celda;
 import src.moduloCaja.Caja;
+import src.moduloEmpleado.modelo.Empleado;
 import src.moduloUsuario.Usuario;
-import src.moduloEmpleado.Empleado;
 import src.moduloInventario.Producto;
 import java.util.List;
 import java.util.Scanner;
