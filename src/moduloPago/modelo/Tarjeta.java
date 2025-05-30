@@ -27,4 +27,11 @@ public class Tarjeta implements Pago {
     public void recargar(double monto) {
         this.saldoDisponible += monto;
     }
+
+    public String getNumero() {
+        return numero;
+    }
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
 }

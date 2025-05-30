@@ -1,4 +1,4 @@
-package src.moduloUsuario;
+package src.moduloUsuario.modelo;
 
 import src.moduloPago.modelo.Efectivo;
 import src.moduloPago.modelo.Tarjeta;

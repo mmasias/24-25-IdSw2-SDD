@@ -2,7 +2,7 @@ package src.moduloMaquina;
 
 import src.moduloCaja.modelo.Caja;
 import src.moduloEmpleado.modelo.Empleado;
-import src.moduloUsuario.Usuario;
+import src.moduloUsuario.modelo.Usuario;
 import src.moduloInventario.modelo.Celda;
 import src.moduloInventario.modelo.Producto;
 

@@ -2,10 +2,10 @@ package src;
 
 import src.moduloCaja.modelo.Caja;
 import src.moduloMaquina.Maquina;
-import src.moduloUsuario.Usuario;
-import src.moduloMaquina.MaquinaFactory;
 import src.moduloPago.modelo.Efectivo;
 import src.moduloPago.modelo.Tarjeta;
+import src.moduloUsuario.modelo.Usuario;
+import src.moduloMaquina.MaquinaFactory;
 
 import java.util.List;
 import java.util.Scanner;
