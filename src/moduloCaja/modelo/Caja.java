@@ -34,18 +34,16 @@ public class Caja {
     }
 
     public boolean entregarCambio(double monto) {
-        if (monto < 0) {
-            System.out.println("Error: El monto de cambio no puede ser negativo.");
-            return false;
-        }
-        if (this.total >= monto) {
-            this.total -= monto;
-            return true;
-        } else {
-            System.out.println("Error: Fondos insuficientes en la caja para entregar cambio.");
-            return false;
-        }
+    if (monto < 0) {
+        return false;
     }
+    if (this.total >= monto) {
+        this.total -= monto;
+        return true;
+    } else {
+        return false;
+    }
+}
 
     public void retirarPago(double monto) {
         if (this.total >= monto) {
