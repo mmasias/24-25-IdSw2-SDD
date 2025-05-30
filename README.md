@@ -7,4 +7,4 @@
 [🔗 Acceso al Modelo de Dominio](https://github.com/celiabecerril/24-25-IdSw2-SDD/tree/MVC)
 
 ## 💻 Código
-[🔗 Acceso al código](https://github.com/celiabecerril/24-25-IdSw2-SDD/tree/MVC/pyAscensores)
+[🔗 Acceso al código](https://github.com/celiabecerril/24-25-IdSw2-SDD/tree/main/pyAscensores)
