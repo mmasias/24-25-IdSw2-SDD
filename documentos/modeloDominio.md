@@ -1,3 +1,5 @@
+<div align="center">
+
 # Diagrama de Clases
 
 Este repositorio contiene el diagrama de clases para la simulación de un sistema de gestión de cajas y colas.
@@ -7,41 +9,49 @@ Este repositorio contiene el diagrama de clases para la simulación de un sistem
 ### Clases
 
 ![](/modelosUML/svg/diagramaClases.svg)
+
 [Ver archivo .puml](/modelosUML/diagramaClases.puml)
 
 ### Clases V2
 
 ![](/modelosUML/svg/diagramaClasesV2.svg)
+
 [Ver archivo .puml](/modelosUML/diagramaClasesV2.puml)
 
 ### Clases Modular
 
 ![](/modelosUML/svg/diagramaClasesModular.svg)
+
 [Ver archivo .puml](/modelosUML/diagramaClasesModular.puml)
 
 ### Clases SOLID
 
 ![](/modelosUML/svg/diagramaClasesSOLID.svg)
+
 [Ver archivo .puml](/modelosUML/diagramaClasesSOLID.puml)
 
 ### Objetos
 
 ![](/modelosUML/svg/diagramaObjetos.svg)
+
 [Ver archivo .puml](/modelosUML/diagramaObjetos.puml)
 
 ### Estados Jornada
 
 ![](/modelosUML/svg/diagramaEstadosJornada.svg)
+
 [Ver archivo .puml](/modelosUML/diagramaEstadosJornada.puml)
 
 ### Estados Caja
 
 ![](/modelosUML/svg/diagramaEstadosCaja.svg)
+
 [Ver archivo .puml](/modelosUML/diagramaEstadosCaja.puml)
 
 ### Estados Cliente
 
 ![](/modelosUML/svg/diagramaEstadosCliente.svg)
+
 [Ver archivo .puml](/modelosUML/diagramaEstadosCliente.puml)
 
 
@@ -55,3 +65,5 @@ Este repositorio contiene el diagrama de clases para la simulación de un sistem
 - **GestorCajas**: Gestiona el estado de las cajas.
 - **Cliente**: Representa a los clientes en la simulación.
 - **Item**: Representa los artículos que compra un cliente.
+
+</div>
