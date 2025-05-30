@@ -1,98 +1,119 @@
-public class RetoEv2 {
-
-    static int cola = 0;
-    static int caja1 = 0, caja2 = 0, caja3 = 0, caja4 = 0;
-    static int atencion = 0;
-    static int productos = 0;
-    static int MinutosSinCola = 0;
-
+class Tema001 {
     public static void main(String[] args) {
-        int mundo = 12 * 60;
 
-        for (int minuto = 1; minuto <= mundo; minuto++) {
-            System.out.println(">> MINUTO " + minuto);
+        imprimirTitulo("Primitivos");
 
-            llegadaPersona();
-            mostrarCola();
-            atenderCajas();
-            actualizarCajas();
-        }
+        imprimirSubtitulo("Enteros");
 
-        resumenFinal();
+        int precio = 12;
+        int otroPrecio = precio;
+        System.out.println(precio == otroPrecio);
+
+        otroPrecio = 24;
+        System.out.println(precio == otroPrecio);
+
+        otroPrecio = 12;
+        System.out.println(precio == otroPrecio);
+
+        imprimirSubtitulo("Char");
+
+        char unChar = 'a';
+        char otroChar = unChar;
+        char tercerChar = 'a';
+
+        System.out.println(unChar + " - " + otroChar + " - " + tercerChar);
+        System.out.println(unChar == otroChar);
+        System.out.println(unChar == tercerChar);
+
+        imprimirTitulo("String");
+
+        String cadenaTexto = "Una cadena";
+        String otraCadena = cadenaTexto;
+        String terceraCadena = new String("Una cadena");
+
+        System.out.println(cadenaTexto + " - " + otraCadena + " - " + terceraCadena);
+        System.out.println(cadenaTexto == otraCadena);
+        System.out.println(cadenaTexto == terceraCadena);
+
+        System.out.println(verHashCode(cadenaTexto) + " - " + verHashCode(otraCadena) + " - " + verHashCode(terceraCadena));        
+
+        cadenaTexto = "XYZ";
+        System.out.println(cadenaTexto + " - " + otraCadena + " - " + terceraCadena);
+
+        terceraCadena = "ABC";
+        System.out.println(cadenaTexto + " - " + otraCadena + " - " + terceraCadena);
+
+        imprimirTitulo("Arrays");
+
+        int[] array1 = {1, 2, 3};
+        int[] array2 = array1;
+        int[] array3 = new int[]{1, 2, 3};
+
+        System.out.println(array1 + " - " + array2 + " - " + array3);        
+
+        System.out.println("Los arrays tienen el mismo contenido: " + java.util.Arrays.equals(array1, array3));
+        System.out.println("Los arrays son el mismo objeto: " + (array1 == array2));
+        System.out.println("Los arrays son diferentes objetos: " + (array1 == array3));
+
+        array2[0] = 100;
+        System.out.println("Primer elemento de arr1: " + array1[0]);
+
+        imprimirTitulo("Objetos Personalizados");
+
+        Persona persona1 = new Persona("Alicia");
+        Persona persona2 = persona1;
+        Persona persona3 = new Persona("Alicia");
+
+        System.out.println(persona1 + " - " + persona2 + " - " + persona3);        
+        System.out.println("Los nombres son iguales: " + persona1.getNombre().equals(persona3.getNombre()));
+        System.out.println("Los objetos son el mismo objeto: " + (persona1 == persona2));
+        System.out.println("Los objetos son diferentes objetos: " + (persona1 != persona3));
+
+        persona2.setNombre("Bob");
+        System.out.println("Nombre de Persona1: " + persona1.getNombre());
     }
 
-    public static void llegadaPersona() {
-        double probabilidadLlegada = Math.random();
-        if (probabilidadLlegada <= 0.4) {
-            System.out.println("- Llegó una persona");
-            cola++;
-        } else {
-            System.out.println("- No llegó nadie");
-        }
+    static void imprimirLinea() {
+        System.out.println("=".repeat(40));
     }
 
-    public static void mostrarCola() {
-        System.out.println("> Personas en cola: " + cola);
+    static void imprimirLinea(int longitud) {
+        System.out.println("-".repeat(longitud));
     }
 
-    public static void atenderCajas() {
-        if (caja1 <= 0 && cola > 0) {
-            cola--;
-            caja1 = generarProductos();
-            atencion++;
-            System.out.println("Pasa una persona a la caja 1 llevando " + caja1 + " productos");
-        } else if (caja2 <= 0 && cola > 0) {
-            cola--;
-            caja2 = generarProductos();
-            atencion++;
-            System.out.println("Pasa una persona a la caja 2 llevando " + caja2 + " productos");
-        } else if (caja3 <= 0 && cola > 0) {
-            cola--;
-            caja3 = generarProductos();
-            atencion++;
-            System.out.println("Pasa una persona a la caja 3 llevando " + caja3 + " productos");
-        } else if (caja4 <= 0 && cola > 0) {
-            cola--;
-            caja4 = generarProductos();
-            atencion++;
-            System.out.println("Pasa una persona a la caja 4 llevando " + caja4 + " productos");
-        }
-
-        if (cola <= 0) {
-            MinutosSinCola++;
-        }
+    static void imprimirTitulo(String texto) {
+        imprimirLinea();
+        System.out.println(texto.toUpperCase());
+        imprimirLinea(texto.length());
     }
 
-    public static void actualizarCajas() {
-        if (caja1 > 0) {
-            caja1--;
-            productos++;
-            System.out.println("> La caja 1 atiende un item, le quedan " + caja1 + " productos");
-        }
-        if (caja2 > 0) {
-            caja2--;
-            productos++;
-            System.out.println("> La caja 2 atiende un item, le quedan " + caja2 + " productos");
-        }
-        if (caja3 > 0) {
-            caja3--;
-            productos++;
-            System.out.println("> La caja 3 atiende un item, le quedan " + caja3 + " productos");
-        }
-        if (caja4 > 0) {
-            caja4--;
-            productos++;
-            System.out.println("> La caja 4 atiende un item, le quedan " + caja4 + " productos");
-        }
+    static void imprimirSubtitulo(String texto) {
+        imprimirLinea(0);
+        System.out.println(texto);
+        imprimirLinea(texto.length());        
     }
 
-    public static int generarProductos() {
-        return (int) (Math.random() * 11) + 5;
+    static int verHashCode(String unaCadena){
+        return System.identityHashCode(unaCadena);
+    }
+ 
+    
+
+    
+}
+
+class Persona {
+    private String nombre;
+
+    public Persona(String nombre) {
+        this.nombre = nombre;
     }
 
-    public static void resumenFinal() {
-        System.out.println("Minutos totales sin cola: " + MinutosSinCola);
-        System.out.println("Al final del día se vendieron un total de " + productos + " productos");
-        System.out.println("Personas atendidas durante la mundo: " + atencion);
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 }
