@@ -1,10 +1,10 @@
 package src.moduloMaquina;
 
 import src.moduloCaja.Caja;
-import src.moduloEmpleado.Empleado;
+import src.moduloEmpleado.modelo.Empleado;
+import src.moduloUsuario.modelo.Usuario;
 import src.moduloInventario.modelo.Celda;
 import src.moduloInventario.modelo.Producto;
-import src.moduloUsuario.modelo.Usuario;
 
 import java.util.List;
 import java.util.Scanner;
@@ -33,9 +33,9 @@ public class Maquina {
         System.out.println("=== Dinero actual del usuario ===");
         System.out.println("Saldo efectivo usuario: $" + usuario.getEfectivo().getMontoDisponible());
         System.out.println("Saldo tarjeta usuario: $" + usuario.getTarjeta().getSaldoDisponible());
-        System.out.println("Dinero en caja de la máquina: $" + caja.getTotal());
-        usuario.getEfectivo().mostrarDesglose();
+        usuario.getEfectivo().mostrarDesgloseUsuario();
         System.out.println("==================================");
+        System.out.println("Dinero en caja de la máquina: $" + caja.getTotal());
 
         System.out.println("\nProductos disponibles:");
         mostrarProductos();
