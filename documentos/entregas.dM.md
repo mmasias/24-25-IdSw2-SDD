@@ -5,5 +5,5 @@
 
 |||
 |--|--|
-|![](/documentos/modeloDeDominio/diagramaDeClases/diagramaClasesModular.svg)|[Enlace a la implementación]( https://github.com/TheMoys/24-25-IdSw2-SDD/tree/44a3c74ee79099a7b0965e6543794fe594f2e841/src)|
+|![](/documentos/modeloDeDominio/diagramaDeClases/diagramaClasesModular.svg)|[Enlace a la implementación](https://github.com/TheMoys/24-25-IdSw2-SDD/tree/93771cbfc4d8be3784a02195312c44eae8fa3a8f/src)|
 
