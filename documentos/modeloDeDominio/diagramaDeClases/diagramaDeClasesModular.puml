@@ -1,6 +1,8 @@
 @startuml
 package "moduloMaquina" {
   class Maquina
+  class MaquinaFactory 
+  
 }
 
 package "moduloInventario" {
@@ -26,7 +28,7 @@ package "moduloEmpleado" {
   class Empleado
 }
 
-Maquina o-- "1..*" Celda : contiene
+Maquina o-- Celda : contiene
 Maquina o-- Caja
 Maquina --> Usuario
 Maquina ..> Pago
@@ -41,4 +43,8 @@ Empleado ..> Celda : cargar productos
 
 Tarjeta ..|> Pago
 Efectivo ..|> Pago
+
+MaquinaFactory --> Maquina : crea
+MaquinaFactory --> Celda : crea
+MaquinaFactory --> Producto : crea
 @enduml

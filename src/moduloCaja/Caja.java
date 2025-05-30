@@ -19,7 +19,7 @@ public class Caja {
         if (this.total >= monto) {
             this.total -= monto;
         } else {
-            this.total = 0; // O lanza una excepción si prefieres
+            this.total = 0; 
         }
     }
 
@@ -51,7 +51,7 @@ public boolean entregarCambio(double monto) {
         if (this.total >= monto) {
             this.total -= monto;
         } else {
-            this.total = 0; // O lanza una excepción si prefieres
+            this.total = 0; 
         }
     }
 }

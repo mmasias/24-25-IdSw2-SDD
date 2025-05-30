@@ -8,7 +8,7 @@ import src.moduloCaja.Caja;
 public class Efectivo implements Pago {
     private double montoDisponible;
     private Caja caja;
-    private Map<Double, Integer> denominaciones; // Mapa para el desglose de efectivo
+    private Map<Double, Integer> denominaciones; 
 
     public Efectivo(double montoDisponible, Caja caja) {
         this.montoDisponible = montoDisponible;
@@ -20,7 +20,6 @@ public class Efectivo implements Pago {
     public boolean pagar(double monto) {
         if (montoDisponible >= monto) {
             montoDisponible -= monto;
-            // No sumar a la caja aquí, se debe hacer en la lógica de la máquina solo el precio real
             return true;
         }
         return false;
@@ -40,7 +39,6 @@ public class Efectivo implements Pago {
         }
     }
 
-    // Métodos auxiliares para manejar denominaciones si lo necesitas
     public void agregarDenominacion(double denominacion, int cantidad) {
         denominaciones.put(denominacion, denominaciones.getOrDefault(denominacion, 0) + cantidad);
     }

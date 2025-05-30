@@ -1,39 +1,49 @@
 package src;
 
 import src.moduloMaquina.Maquina;
-import src.moduloInventario.Celda;
-import src.moduloInventario.Producto;
 import src.moduloCaja.Caja;
 import src.moduloPago.Efectivo;
 import src.moduloPago.Tarjeta;
 import src.moduloUsuario.Usuario;
+import src.moduloMaquina.MaquinaFactory;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class App {
-     public static void main(String[] args) {
-        Producto coca = new Producto("Coca-Cola", 1.50);
-        Producto papas = new Producto("Papas Fritas", 1.00);
-        Producto agua = new Producto("Agua", 1.00);
+    public static void main(String[] args) {
 
-        Celda celda1 = new Celda(coca, 5);
-        Celda celda2 = new Celda(papas, 3);
-        Celda celda3 = new Celda(agua, 7);
-
-        List<Celda> celdas = new ArrayList<>();
-        celdas.add(celda1);
-        celdas.add(celda2);
-        celdas.add(celda3);
-
-        Caja caja = new Caja(10.0);
-
-        Efectivo efectivo = new Efectivo(5.0, caja);
-        Tarjeta tarjeta = new Tarjeta("123456789", "Juan Perez", 10.0);
+        Caja caja1 = new Caja(20.0);
+        Caja caja2 = new Caja(15.0);
+        Efectivo efectivo = new Efectivo(10.0, caja1);
+        Tarjeta tarjeta = new Tarjeta("123456789", "Juan Perez", 20.0);
         Usuario usuario = new Usuario(efectivo, tarjeta);
 
-        Maquina maquina = new Maquina(celdas, caja);
+        List<Maquina> maquinas = MaquinaFactory.crearMaquinas(caja1, caja2);
 
-        maquina.iniciarInterfazUsuario(usuario);
+        Scanner scanner = new Scanner(System.in);
+        boolean continuar = true;
+        while (continuar) {
+            System.out.println("=== Máquinas disponibles ===");
+            for (int i = 0; i < maquinas.size(); i++) {
+                System.out.println("Máquina " + i + ":");
+                maquinas.get(i).mostrarProductos();
+            }
+            System.out.println("============================");
+
+            System.out.print("Seleccione el número de la máquina (0 o 1, o -1 para salir): ");
+            int numMaquina = scanner.nextInt();
+            if (numMaquina == -1) {
+                continuar = false;
+                break;
+            }
+            if (numMaquina < 0 || numMaquina >= maquinas.size()) {
+                System.out.println("Selección inválida.");
+                continue;
+            }
+
+            maquinas.get(numMaquina).iniciarInterfazUsuario(usuario);
+        }
+        scanner.close();
     }
 }
