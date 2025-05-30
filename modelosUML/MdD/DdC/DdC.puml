@@ -1,0 +1,75 @@
+@startuml
+hide empty members
+hide circle
+skinparam classAttributeIconSize 0
+
+package modelo {
+  class Universidad {
+
+  }
+
+  class Planta {
+
+  }
+
+  class Persona {
+
+  }
+
+  class Llamada {
+
+  }
+
+  class Ascensor {
+
+  }
+
+  class Tiempo {}
+}
+
+package controlador {
+  class ControlAscensor {
+
+  }
+
+  class Mundo {
+
+  }
+}
+
+package vista {
+  class ConsolaVista {}
+  class LineaVista {}
+  class RepresentadorPlanta {}
+}
+
+class Main
+
+' Relaciones principales
+modelo.Universidad "1" *-- "*" modelo.Planta
+modelo.Universidad "1" *-- "*" modelo.Ascensor
+modelo.Universidad "1" o-- "1" controlador.ControlAscensor
+modelo.Universidad "1" o-- "1" modelo.Tiempo
+
+modelo.Planta "1" *-- "*" modelo.Persona : contiene
+modelo.Ascensor "*" *-- "*" modelo.Persona : pasajeros
+modelo.Ascensor "*" *-- "*" modelo.Llamada : llamadas
+modelo.Persona "1" --> "0..1" modelo.Llamada : genera
+modelo.Ascensor "1" ..> modelo.Planta : usa
+
+' Dependencias de flujo y vista
+controlador.Mundo ..> modelo.Universidad
+controlador.Mundo ..> modelo.Tiempo
+controlador.Mundo ..> vista.ConsolaVista
+
+vista.ConsolaVista ....> modelo.Planta
+vista.ConsolaVista ....> modelo.Ascensor
+vista.ConsolaVista ....> modelo.Tiempo
+
+vista.LineaVista ......> modelo.Planta
+vista.LineaVista ......> modelo.Ascensor
+
+vista.RepresentadorPlanta ..> modelo.Planta
+
+Main ..> controlador.Mundo
+@enduml

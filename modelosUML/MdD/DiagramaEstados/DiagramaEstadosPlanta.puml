@@ -1,0 +1,20 @@
+@startuml
+' Diagrama de Estados: Planta
+hide empty description
+skinparam stateFontSize 12
+
+[*] --> Recibiendo
+
+Recibiendo --> EntradaDirecta : persona llega con destino == planta
+Recibiendo --> GenerandoLlamada : persona llega con destino != planta
+
+EntradaDirecta --> EnPlanta : entra directamente sin llamar ascensor
+
+GenerandoLlamada --> EsperandoAscensor : llamada procesada
+EsperandoAscensor --> Entrando : ascensor llega y recoge personas
+Entrando --> [*]
+
+EnPlanta --> TiempoCumplido : tiempo de estancia llega a 0
+TiempoCumplido --> EsperandoAscensor : desea salir, espera ascensor
+
+@enduml

@@ -1,0 +1,21 @@
+@startuml
+' =========================
+' Diagrama de Estados (Persona)
+' =========================
+hide empty description
+skinparam stateFontSize 12
+
+[*] --> ReciénLlegada : se instancia
+ReciénLlegada --> EsperandoAscensor : si plantaDestino != planta actual
+ReciénLlegada --> EnPlanta : si plantaDestino = planta actual
+
+EsperandoAscensor --> EnAscensor : recogida por ascensor
+EnAscensor --> EnPlanta : llegada a destino
+
+EnPlanta --> EsperandoAscensor : tiempo agotado y quiere salir
+EsperandoAscensor --> EnAscensor : recogida para salir
+EnAscensor --> Planta0 : llega a planta 0 para salida
+Planta0 --> FueraUniversidad : ha salido
+FueraUniversidad --> [*]
+
+@enduml
