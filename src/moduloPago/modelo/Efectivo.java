@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 
 public class Efectivo implements Pago {
+    private Double cantidad;
     private double montoDisponible;
     private Map<Double, Integer> denominacionesUsuario; 
     private Map<Double, Integer> denominacionesCaja; 
@@ -62,5 +63,13 @@ public class Efectivo implements Pago {
 
     public void agregarDenominacionCaja(double denominacion, int cantidad) {
         denominacionesCaja.put(denominacion, denominacionesCaja.getOrDefault(denominacion, 0) + cantidad);
+    }
+
+    public double getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(double cantidad) {
+        this.cantidad = cantidad;
     }
 }
