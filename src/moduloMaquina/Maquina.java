@@ -1,8 +1,8 @@
 package src.moduloMaquina;
 
 import src.moduloCaja.Caja;
+import src.moduloEmpleado.modelo.Empleado;
 import src.moduloUsuario.Usuario;
-import src.moduloEmpleado.Empleado;
 import src.moduloInventario.modelo.Celda;
 import src.moduloInventario.modelo.Producto;
 
