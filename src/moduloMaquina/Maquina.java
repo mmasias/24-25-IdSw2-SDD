@@ -1,10 +1,10 @@
 package src.moduloMaquina;
 
 import src.moduloCaja.Caja;
-import src.moduloUsuario.Usuario;
 import src.moduloEmpleado.Empleado;
 import src.moduloInventario.modelo.Celda;
 import src.moduloInventario.modelo.Producto;
+import src.moduloUsuario.modelo.Usuario;
 
 import java.util.List;
 import java.util.Scanner;

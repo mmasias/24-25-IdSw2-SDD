@@ -6,14 +6,16 @@ import java.util.HashMap;
 import src.moduloCaja.Caja;
 
 public class Efectivo implements Pago {
+    private double cantidad;
     private double montoDisponible;
     private Caja caja;
     private Map<Double, Integer> denominaciones; 
 
-    public Efectivo(double montoDisponible, Caja caja) {
+    public Efectivo(double montoDisponible, Caja caja, double cantidad) {
         this.montoDisponible = montoDisponible;
         this.caja = caja;
         this.denominaciones = new HashMap<>();
+        this.cantidad = cantidad;
     }
 
     @Override
@@ -50,5 +52,12 @@ public class Efectivo implements Pago {
                 denominaciones.put(denominacion, actual - cantidad);
             }
         }
+    }
+    public double getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(double cantidad) {
+        this.cantidad = cantidad;
     }
 }
