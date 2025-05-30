@@ -32,9 +32,9 @@ public class Maquina {
         System.out.println("=== Dinero actual del usuario ===");
         System.out.println("Saldo efectivo usuario: $" + usuario.getEfectivo().getMontoDisponible());
         System.out.println("Saldo tarjeta usuario: $" + usuario.getTarjeta().getSaldoDisponible());
-        System.out.println("Dinero en caja de la máquina: $" + caja.getTotal());
-        usuario.getEfectivo().mostrarDesglose();
+        usuario.getEfectivo().mostrarDesgloseUsuario();
         System.out.println("==================================");
+        System.out.println("Dinero en caja de la máquina: $" + caja.getTotal());
 
         System.out.println("\nProductos disponibles:");
         mostrarProductos();
