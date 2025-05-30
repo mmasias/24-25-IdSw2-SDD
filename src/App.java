@@ -1,7 +1,7 @@
 package src;
 
+import src.moduloCaja.modelo.Caja;
 import src.moduloMaquina.Maquina;
-import src.moduloCaja.Caja;
 import src.moduloPago.modelo.Efectivo;
 import src.moduloPago.modelo.Tarjeta;
 import src.moduloUsuario.modelo.Usuario;
