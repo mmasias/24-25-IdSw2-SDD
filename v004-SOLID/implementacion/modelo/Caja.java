@@ -34,12 +34,12 @@ public class Caja implements ICaja {
 
     public void actualizarEstado(long tiempoActual) {
         if (!disponible && clienteActual != null) {
-            int items = clienteActual.getCantidadItems();
-            if (items > 0) {
-                clienteActual.setCantidadItems(items - 1);  
+            int productos = clienteActual.getCantidadProductos();
+            if (productos > 0) {
+                clienteActual.setCantidadProductos(productos - 1);  
             }
 
-            if (clienteActual.getCantidadItems() == 0) {
+            if (clienteActual.getCantidadProductos() == 0) {
                 liberarCaja();
             }
         }

@@ -4,7 +4,7 @@ import interfaces.modelo.ICliente;
 
 public class CajaRapida extends Caja {
 
-    private static final int MAX_ITEMS_PERMITIDOS = 10;
+    private static final int MAX_PRODUCTOS_PERMITIDOS = 10;
 
     public CajaRapida(int id) {
         super(id);
@@ -12,13 +12,13 @@ public class CajaRapida extends Caja {
 
     @Override
     public void atenderCliente(ICliente cliente) {
-        if (cliente.getCantidadItems() > MAX_ITEMS_PERMITIDOS) {
-            throw new IllegalArgumentException("Caja rápida solo permite hasta " + MAX_ITEMS_PERMITIDOS + " productos");
+        if (cliente.getCantidadProductos() > MAX_PRODUCTOS_PERMITIDOS) {
+            throw new IllegalArgumentException("Caja rápida solo permite hasta " + MAX_PRODUCTOS_PERMITIDOS + " productos");
         }
         super.atenderCliente(cliente);
     }
 
     public boolean puedeAtender(ICliente cliente) {
-        return cliente.getCantidadItems() <= MAX_ITEMS_PERMITIDOS;
+        return cliente.getCantidadProductos() <= MAX_PRODUCTOS_PERMITIDOS;
     }
 }

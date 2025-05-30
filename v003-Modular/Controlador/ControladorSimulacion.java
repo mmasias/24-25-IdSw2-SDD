@@ -29,7 +29,7 @@ public class ControladorSimulacion {
             if (Math.random() <= GeneradorClientes.PROB_LLEGADA) {
                 Cliente nuevoCliente = GeneradorClientes.generarCliente();
                 cola.agregar(nuevoCliente);
-                System.out.println("+ Cliente llega (" + nuevoCliente.getItems() + " items)");
+                System.out.println("+ Cliente llega (" + nuevoCliente.getProductos() + " items)");
             } else {
                 System.out.println("· No llega nadie");
             }

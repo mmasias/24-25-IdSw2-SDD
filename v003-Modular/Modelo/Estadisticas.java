@@ -3,7 +3,7 @@ package Modelo;
 public class Estadisticas {
     private int minutosColaVacia;
     private int clientesAtendidos;
-    private int itemsVendidos;
+    private int productosVendidos;
     private int clientesPendientes;
 
     public void registrarMinuto(Cola cola) {
@@ -11,9 +11,9 @@ public class Estadisticas {
             minutosColaVacia++;
     }
 
-    public void clienteAtendido(int items) {
+    public void clienteAtendido(int productos) {
         clientesAtendidos++;
-        itemsVendidos += items;
+        productosVendidos += productos;
     }
 
     public void setClientesPendientes(int cantidad) {
@@ -28,8 +28,8 @@ public class Estadisticas {
         return clientesAtendidos;
     }
 
-    public int getItemsVendidos() {
-        return itemsVendidos;
+    public int getproductosVendidos() {
+        return productosVendidos;
     }
 
     public int getClientesPendientes() {

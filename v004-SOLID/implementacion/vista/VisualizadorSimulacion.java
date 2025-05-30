@@ -56,7 +56,7 @@ public class VisualizadorSimulacion implements IVisualizador {
             if (!caja.estaDisponible() && caja instanceof Caja) {
                 var cliente = ((Caja) caja).getClienteActual();
                 if (cliente != null) {
-                    clienteStr = String.format(" - Cliente %d (%d productos)", cliente.getId(), cliente.getCantidadItems());
+                    clienteStr = String.format(" - Cliente %d (%d productos)", cliente.getId(), cliente.getCantidadProductos());
                 }
             }
 
@@ -74,7 +74,7 @@ public class VisualizadorSimulacion implements IVisualizador {
         for (int i = 0; i < Math.min(10, clientesEnCola.size()); i++) {
             ICliente cliente = clientesEnCola.get(i);
             sb.append(String.format("Cliente %d - Llegada: %d - %d productos\n",
-                    cliente.getId(), cliente.getTiempoLlegada(), cliente.getCantidadItems()));
+                    cliente.getId(), cliente.getTiempoLlegada(), cliente.getCantidadProductos()));
         }
         if (clientesEnCola.size() > 10) {
             sb.append("... y " + (clientesEnCola.size() - 10) + " más\n");
