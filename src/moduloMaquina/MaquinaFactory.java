@@ -1,6 +1,6 @@
 package src.moduloMaquina;
 
-import src.moduloCaja.Caja;
+import src.moduloCaja.modelo.Caja;
 import src.moduloInventario.modelo.Celda;
 import src.moduloInventario.modelo.Producto;
 

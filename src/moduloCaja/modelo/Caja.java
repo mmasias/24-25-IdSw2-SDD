@@ -1,4 +1,4 @@
-package src.moduloCaja;
+package src.moduloCaja.modelo;
 
 public class Caja {
     private double total;

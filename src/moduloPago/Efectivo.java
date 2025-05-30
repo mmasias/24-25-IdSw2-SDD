@@ -1,9 +1,10 @@
 package src.moduloPago;
 
 import java.util.Map;
-import java.util.HashMap;
 
-import src.moduloCaja.Caja;
+import src.moduloCaja.modelo.Caja;
+
+import java.util.HashMap;
 
 public class Efectivo implements Pago {
     private double montoDisponible;

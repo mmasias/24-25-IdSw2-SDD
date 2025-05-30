@@ -1,6 +1,6 @@
 package src.moduloMaquina;
 
-import src.moduloCaja.Caja;
+import src.moduloCaja.modelo.Caja;
 import src.moduloEmpleado.modelo.Empleado;
 import src.moduloUsuario.Usuario;
 import src.moduloInventario.modelo.Celda;
