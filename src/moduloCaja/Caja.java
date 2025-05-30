@@ -34,7 +34,6 @@ public class Caja {
     }
 
 public boolean entregarCambio(double monto) {
-    System.out.println("Intentando entregar cambio: " + monto + " | Total en caja: " + this.total);
     if (monto < 0) {
         System.out.println("Error: El monto de cambio no puede ser negativo.");
         return false;
