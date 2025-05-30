@@ -1,4 +1,4 @@
-package src.moduloCaja;
+package src.moduloCaja.modelo;
 
 public class Caja {
     private double total;
@@ -19,7 +19,7 @@ public class Caja {
         if (this.total >= monto) {
             this.total -= monto;
         } else {
-            this.total = 0; 
+            this.total = 0;
         }
     }
 
@@ -33,16 +33,14 @@ public class Caja {
         return total;
     }
 
-public boolean entregarCambio(double monto) {
+    public boolean entregarCambio(double monto) {
     if (monto < 0) {
-        System.out.println("Error: El monto de cambio no puede ser negativo.");
         return false;
     }
     if (this.total >= monto) {
         this.total -= monto;
         return true;
     } else {
-        System.out.println("Error: Fondos insuficientes en la caja para entregar cambio.");
         return false;
     }
 }
@@ -51,7 +49,7 @@ public boolean entregarCambio(double monto) {
         if (this.total >= monto) {
             this.total -= monto;
         } else {
-            this.total = 0; 
+            this.total = 0;
         }
     }
 }

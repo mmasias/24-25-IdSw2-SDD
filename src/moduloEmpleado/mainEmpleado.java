@@ -1,6 +1,6 @@
 package src.moduloEmpleado;
 
-import src.moduloCaja.Caja;
+import src.moduloCaja.modelo.Caja;
 import src.moduloEmpleado.controlador.ControladorEmpleado;
 import src.moduloEmpleado.modelo.Empleado;
 import src.moduloEmpleado.vista.VistaEmpleado;

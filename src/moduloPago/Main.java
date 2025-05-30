@@ -1,6 +1,6 @@
 package src.moduloPago;
 
-import src.moduloCaja.Caja;
+import src.moduloCaja.modelo.Caja;
 import src.moduloPago.modelo.Efectivo;
 import src.moduloPago.modelo.Tarjeta;
 import src.moduloPago.vista.VistaPago;
