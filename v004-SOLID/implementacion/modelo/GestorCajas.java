@@ -14,6 +14,13 @@ public class GestorCajas implements IGestorCajas {
         this.porcentajeRapidas = implementacion.util.Constantes.Config.PORCENTAJE_CAJAS_RAPIDAS;
     }
 
+    public GestorCajas(int porcentajeRapidas) {
+        if (porcentajeRapidas < 0 || porcentajeRapidas > 100) {
+            throw new IllegalArgumentException("El porcentaje debe estar entre 0 y 100");
+        }
+        this.porcentajeRapidas = porcentajeRapidas;
+    }
+
     @Override
     public void inicializarCajas(int numCajas) {
         cajas.clear();

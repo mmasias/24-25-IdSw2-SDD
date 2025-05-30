@@ -9,12 +9,16 @@ import java.util.Random;
 public class GeneradorClientes implements IGeneradorClientes {
     private int contadorClientes;
     private double tasaLlegada;
-    private Random random;
+    private final Random random;
 
     public GeneradorClientes() {
+        this(new Random());
+    }
+
+    public GeneradorClientes(Random random) {
         this.contadorClientes = 0;
-        this.tasaLlegada = Constantes.Simulacion.TASA_LLEGADA_DEFAULT;
-        this.random = new Random();
+        this.tasaLlegada      = Constantes.Simulacion.TASA_LLEGADA_DEFAULT;
+        this.random           = random;
     }
 
     @Override

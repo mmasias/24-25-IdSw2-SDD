@@ -7,8 +7,9 @@ import interfaces.util.IGeneradorClientes;
 import interfaces.vista.IVisualizador;
 
 import javax.swing.SwingUtilities;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class ControladorSimulacion implements IControladorSimulacion {
     private ICola cola;
@@ -17,13 +18,14 @@ public class ControladorSimulacion implements IControladorSimulacion {
     private IGeneradorClientes generadorClientes;
     private IVisualizador visualizador;
 
-    private Timer timer;
+    private ScheduledExecutorService scheduler;
     private boolean enEjecucion;
+
     private long tiempoActual;
     private int numPasos;
     private final int maxPasos;
     private int numCajas;
-    private int maxClientes;
+    private int maxClientesEnCola;
     private double tasaLlegada;
 
     public ControladorSimulacion(
@@ -32,18 +34,19 @@ public class ControladorSimulacion implements IControladorSimulacion {
         IEstadisticas estadisticas,
         IGeneradorClientes generadorClientes,
         IVisualizador visualizador) {
+
       this.cola              = cola;
       this.gestorCajas       = gestorCajas;
       this.estadisticas      = estadisticas;
       this.generadorClientes = generadorClientes;
       this.visualizador      = visualizador;
-
+ 
       this.enEjecucion       = false;
       this.tiempoActual      = 0;
       this.numPasos          = 0;
       this.maxPasos          = implementacion.util.Constantes.Simulacion.MAX_PASOS_SIMULACION;
       this.numCajas          = implementacion.util.Constantes.Config.NUM_CAJAS_DEFAULT;
-      this.maxClientes       = implementacion.util.Constantes.Config.MAX_CLIENTES_DEFAULT;
+      this.maxClientesEnCola = implementacion.util.Constantes.Config.MAX_CLIENTES_DEFAULT;
       this.tasaLlegada       = implementacion.util.Constantes.Simulacion.TASA_LLEGADA_DEFAULT;
     }
 
@@ -52,36 +55,44 @@ public class ControladorSimulacion implements IControladorSimulacion {
       if (enEjecucion) return;
       gestorCajas.inicializarCajas(numCajas);
       enEjecucion = true;
-      timer = new Timer();
-      timer.scheduleAtFixedRate(new TimerTask() {
-        @Override public void run() { ejecutarPaso(); }
-      }, 0, implementacion.util.Constantes.Simulacion.TIEMPO_PASO_DEFAULT);
+
+      scheduler = Executors.newSingleThreadScheduledExecutor();
+      scheduler.scheduleAtFixedRate(this::ejecutarPaso,
+          0,
+          implementacion.util.Constantes.Simulacion.TIEMPO_PASO_DEFAULT,
+          TimeUnit.MILLISECONDS);
     }
 
     @Override
     public void pausarSimulacion() {
       if (!enEjecucion) return;
       enEjecucion = false;
-      timer.cancel();
-      timer = null;
+      if (scheduler != null) {
+        scheduler.shutdownNow();
+        scheduler = null;
+      }
     }
 
     @Override
     public void reiniciarSimulacion() {
       pausarSimulacion();
-      tiempoActual = 0;
-      numPasos     = 0;
-      cola         = ModeloFactory.crearCola();
+      tiempoActual        = 0;
+      numPasos            = 0;
+      cola                = ModeloFactory.crearCola();
       gestorCajas.inicializarCajas(numCajas);
-      estadisticas = ModeloFactory.crearEstadisticas(cola);
-      SwingUtilities.invokeLater(() -> visualizador.mostrarMensaje("Simulación reiniciada"));
+      estadisticas        = ModeloFactory.crearEstadisticas(cola);
+      SwingUtilities.invokeLater(() ->
+        visualizador.mostrarMensaje("Simulación reiniciada")
+      );
     }
 
     @Override
     public void ejecutarPaso() {
       if (numPasos >= maxPasos) {
         pausarSimulacion();
-        SwingUtilities.invokeLater(() -> visualizador.mostrarEstadisticasFinales(estadisticas));
+        SwingUtilities.invokeLater(() ->
+          visualizador.mostrarEstadisticasFinales(estadisticas)
+        );
         return;
       }
       tiempoActual++;
@@ -92,9 +103,11 @@ public class ControladorSimulacion implements IControladorSimulacion {
       }
 
       if (generadorClientes.debeGenerarClienteEnEstePaso(tasaLlegada)) {
-        ICliente nuevo = generadorClientes.generarNuevoCliente(tiempoActual);
-        cola.agregarCliente(nuevo);
-        estadisticas.registrarLlegadaCliente(nuevo);
+        if (cola.getTamanio() < maxClientesEnCola) {
+          ICliente nuevo = generadorClientes.generarNuevoCliente(tiempoActual);
+          cola.agregarCliente(nuevo);
+          estadisticas.registrarLlegadaCliente(nuevo);
+        }
       }
 
       while (!cola.estaVacia() && gestorCajas.hayCajasDisponibles()) {
@@ -112,19 +125,25 @@ public class ControladorSimulacion implements IControladorSimulacion {
       }
 
       SwingUtilities.invokeLater(() ->
-        visualizador.actualizarVistaSimulacion(cola, gestorCajas.obtenerTodasLasCajas(), estadisticas)
+        visualizador.actualizarVistaSimulacion(
+          cola,
+          gestorCajas.obtenerTodasLasCajas(),
+          estadisticas
+        )
       );
     }
 
     @Override
     public void configurarParametros(int numCajas, int maxClientes, double tasaLlegada) {
-      if (numCajas<=0 || maxClientes<=0 || tasaLlegada<=0 || tasaLlegada>1) {
-        SwingUtilities.invokeLater(() -> visualizador.mostrarMensaje("Parámetros inválidos"));
+      if (numCajas <= 0 || maxClientes <= 0 || tasaLlegada <= 0 || tasaLlegada > 1) {
+        SwingUtilities.invokeLater(() ->
+          visualizador.mostrarMensaje("Parámetros inválidos")
+        );
         return;
       }
-      this.numCajas    = numCajas;
-      this.maxClientes = maxClientes;
-      this.tasaLlegada = tasaLlegada;
+      this.numCajas          = numCajas;
+      this.maxClientesEnCola = maxClientes;
+      this.tasaLlegada       = tasaLlegada;
       generadorClientes.configurarTasaLlegada(tasaLlegada);
       if (enEjecucion) {
         pausarSimulacion();
