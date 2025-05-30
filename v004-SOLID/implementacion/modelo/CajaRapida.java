@@ -13,12 +13,18 @@ public class CajaRapida extends Caja {
     @Override
     public void atenderCliente(ICliente cliente) {
         if (cliente.getCantidadProductos() > MAX_PRODUCTOS_PERMITIDOS) {
-            throw new IllegalArgumentException("Caja rápida solo permite hasta " + MAX_PRODUCTOS_PERMITIDOS + " productos");
+            throw new IllegalArgumentException(
+                "Caja rápida solo permite hasta " + MAX_PRODUCTOS_PERMITIDOS + " productos");
         }
         super.atenderCliente(cliente);
     }
 
     public boolean puedeAtender(ICliente cliente) {
         return cliente.getCantidadProductos() <= MAX_PRODUCTOS_PERMITIDOS;
+    }
+
+    @Override
+    public boolean esRapida() {
+        return true;
     }
 }

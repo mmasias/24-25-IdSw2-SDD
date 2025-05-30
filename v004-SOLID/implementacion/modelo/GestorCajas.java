@@ -7,17 +7,24 @@ import java.util.List;
 
 public class GestorCajas implements IGestorCajas {
 
-    private List<ICaja> cajas;
-    private int porcentajeRapidas = 25; 
+    private final List<ICaja> cajas = new ArrayList<>();
+    private final int porcentajeRapidas;
 
     public GestorCajas() {
-        this.cajas = new ArrayList<>();
+        this.porcentajeRapidas = implementacion.util.Constantes.Config.PORCENTAJE_CAJAS_RAPIDAS;
+    }
+
+    public GestorCajas(int porcentajeRapidas) {
+        if (porcentajeRapidas < 0 || porcentajeRapidas > 100) {
+            throw new IllegalArgumentException("El porcentaje debe estar entre 0 y 100");
+        }
+        this.porcentajeRapidas = porcentajeRapidas;
     }
 
     @Override
     public void inicializarCajas(int numCajas) {
         cajas.clear();
-        int numRapidas = (int) Math.ceil(numCajas * (porcentajeRapidas / 100.0));
+        int numRapidas = (int) Math.ceil(numCajas * porcentajeRapidas / 100.0);
         int id = 1;
         for (int i = 0; i < numRapidas; i++) {
             cajas.add(new CajaRapida(id++));
@@ -36,7 +43,8 @@ public class GestorCajas implements IGestorCajas {
     public ICaja obtenerCajaDisponible(ICliente cliente) {
         for (ICaja caja : cajas) {
             if (caja.estaDisponible()) {
-                if (caja instanceof CajaRapida) {
+                if (caja.esRapida()) {
+                    // Solo elegir si puede atender
                     if (((CajaRapida) caja).puedeAtender(cliente)) {
                         return caja;
                     }
@@ -55,6 +63,5 @@ public class GestorCajas implements IGestorCajas {
 
     @Override
     public void actualizarCajas(long tiempoActual) {
-        // Ya no necesario aquí: las cajas se actualizan en ControladorSimulacion.
     }
 }

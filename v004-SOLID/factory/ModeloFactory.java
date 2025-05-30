@@ -32,6 +32,10 @@ public class ModeloFactory {
         return new GestorCajas();
     }
 
+    public static IGestorCajas crearGestorCajas(int porcentajeRapidas) {
+        return new GestorCajas(porcentajeRapidas);
+    }
+
     public static IEstadisticas crearEstadisticas(ICola cola) {
         return new Estadisticas(cola);
     }
