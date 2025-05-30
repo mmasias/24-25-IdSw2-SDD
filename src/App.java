@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class App {
-    public static void main(String[] args) {
+     public static void main(String[] args) {
         Producto coca = new Producto("Coca-Cola", 1.50);
         Producto papas = new Producto("Papas Fritas", 1.00);
         Producto agua = new Producto("Agua", 1.00);
@@ -34,12 +34,6 @@ public class App {
 
         Maquina maquina = new Maquina(celdas, caja);
 
-        maquina.mostrarProductos();
-
-        System.out.println("\nIntentando comprar producto con efectivo:");
-        maquina.procesarCompra(0, usuario, usuario.getEfectivo());
-
-        System.out.println("\nIntentando comprar otro producto con tarjeta:");
-        maquina.procesarCompra(1, usuario, usuario.getTarjeta());
+        maquina.iniciarInterfazUsuario(usuario);
     }
 }

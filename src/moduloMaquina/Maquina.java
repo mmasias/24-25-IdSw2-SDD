@@ -5,6 +5,7 @@ import src.moduloCaja.Caja;
 import src.moduloPago.Pago;
 import src.moduloUsuario.Usuario;
 import java.util.List;
+import java.util.Scanner;
 
 public class Maquina {
     private List<Celda> celdas;
@@ -18,41 +19,98 @@ public class Maquina {
     public void mostrarProductos() {
         for (int i = 0; i < celdas.size(); i++) {
             Celda celda = celdas.get(i);
-            System.out.println("[" + i + "] " + celda.getProducto().getNombre() + " - Precio: $" + celda.getProducto().getPrecio() + " - Cantidad: " + celda.getCantidad());
+            System.out.println("[" + i + "] " + celda.getProducto().getNombre() + " - Precio: $"
+                    + celda.getProducto().getPrecio() + " - Cantidad: " + celda.getCantidad());
         }
     }
 
-    public boolean procesarCompra(int indiceCelda, Usuario usuario, Pago metodoPago) {
-        if (indiceCelda < 0 || indiceCelda >= celdas.size()) {
-            System.out.println("Selección inválida.");
-            return false;
+    public void iniciarInterfazUsuario(Usuario usuario) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("=== Dinero inicial del usuario ===");
+        usuario.getEfectivo().mostrarDesglose();
+        System.out.println("==================================");
+
+        boolean continuar = true;
+
+        while (continuar) {
+            // Mostrar saldos antes de cada compra
+            System.out.println("\n--- Estado actual ---");
+            System.out.println("Saldo efectivo usuario: $" + usuario.getEfectivo().getMontoDisponible());
+            System.out.println("Saldo tarjeta usuario: $" + usuario.getTarjeta().getSaldoDisponible());
+            System.out.println("Dinero en caja de la máquina: $" + caja.getTotal());
+            System.out.println("---------------------");
+
+            System.out.println("\nProductos disponibles:");
+            mostrarProductos();
+
+            System.out.print("Seleccione el número del producto que desea comprar (o -1 para salir): ");
+            int indice = scanner.nextInt();
+            if (indice == -1) {
+                continuar = false;
+                break;
+            }
+            if (indice < 0 || indice >= celdas.size()) {
+                System.out.println("Selección inválida.");
+                continue;
+            }
+
+            Celda celdaSeleccionada = celdas.get(indice);
+            if (celdaSeleccionada.getCantidad() <= 0) {
+                System.out.println("Producto agotado.");
+                continue;
+            }
+
+            System.out.println("Seleccione método de pago: 1) Efectivo  2) Tarjeta");
+            int metodo = scanner.nextInt();
+
+            boolean compraExitosa = false;
+            if (metodo == 1) {
+                double precio = celdaSeleccionada.getProducto().getPrecio();
+                System.out.println("Precio: $" + precio);
+                System.out.print("Ingrese el monto entregado: ");
+                double entregado = scanner.nextDouble();
+                if (entregado < precio) {
+                    System.out.println("Monto insuficiente.");
+                } else if (usuario.getEfectivo().getMontoDisponible() < entregado) {
+                    System.out.println("No tienes suficiente efectivo.");
+                } else {
+                    double cambio = entregado - precio;
+                    // Verifica si la caja tiene suficiente cambio ANTES de aceptar el pago
+                    if (cambio > caja.getTotal()) {
+                        System.out.println("La máquina no tiene suficiente cambio. Operación cancelada.");
+                        continue;
+                    }
+                    usuario.getEfectivo().pagar(entregado);
+                    caja.recibirPago(entregado);
+                    if (cambio > 0) {
+                        caja.entregarCambio(cambio);
+                        System.out.println("Compra exitosa. Cambio devuelto: $" + cambio);
+                    } else {
+                        System.out.println("Compra exitosa. No hay cambio.");
+                    }
+                    celdaSeleccionada.disminuirCantidad();
+                    compraExitosa = true;
+                }
+            } else if (metodo == 2) {
+                double precio = celdaSeleccionada.getProducto().getPrecio();
+                boolean pagado = usuario.getTarjeta().pagar(precio);
+                if (pagado) {
+                    celdaSeleccionada.disminuirCantidad();
+                    System.out.println("Compra exitosa con tarjeta.");
+                    compraExitosa = true;
+                } else {
+                    System.out.println("Saldo insuficiente en la tarjeta.");
+                }
+            } else {
+                System.out.println("Método de pago inválido.");
+            }
+
+            if (compraExitosa) {
+                System.out.println("Producto restante: " + celdaSeleccionada.getCantidad());
+            }
         }
 
-        Celda celda = celdas.get(indiceCelda);
-
-        if (celda.getCantidad() <= 0) {
-            System.out.println("Producto agotado.");
-            return false;
-        }
-
-        double precio = celda.getProducto().getPrecio();
-
-        boolean pagoExitoso = metodoPago.pagar(precio);
-        if (pagoExitoso) {
-            celda.disminuirCantidad();
-            System.out.println("Compra exitosa: " + celda.getProducto().getNombre());
-            return true;
-        } else {
-            System.out.println("Pago fallido.");
-            return false;
-        }
-    }
-
-    public Caja getCaja() {
-        return caja;
-    }
-
-    public List<Celda> getCeldas() {
-        return celdas;
+        System.out.println("¡Gracias por usar la máquina expendedora!");
+        scanner.close();
     }
 }
