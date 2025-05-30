@@ -7,4 +7,10 @@ public interface ICaja {
     int getClientesAtendidos();
     double getTiempoPromedioAtencion();
     int getId();
+
+    void actualizar(long tiempoActual);
+
+    ICliente getClienteActual();
+
+    boolean esRapida();
 }

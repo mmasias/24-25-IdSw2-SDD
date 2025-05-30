@@ -4,7 +4,7 @@ import interfaces.modelo.ICaja;
 import interfaces.modelo.ICliente;
 
 public class Caja implements ICaja {
-    private int id;
+    private final int id;
     private boolean disponible;
     private ICliente clienteActual;
     private int clientesAtendidos;
@@ -27,18 +27,17 @@ public class Caja implements ICaja {
         if (!disponible) {
             throw new IllegalStateException("La caja no está disponible");
         }
-
         this.clienteActual = cliente;
         this.disponible = false;
     }
 
-    public void actualizarEstado(long tiempoActual) {
+    @Override
+    public void actualizar(long tiempoActual) {
         if (!disponible && clienteActual != null) {
-            int productos = clienteActual.getCantidadProductos();
-            if (productos > 0) {
-                clienteActual.setCantidadProductos(productos - 1);  
+            int productosRestantes = clienteActual.getCantidadProductos();
+            if (productosRestantes > 0) {
+                clienteActual.setCantidadProductos(productosRestantes - 1);
             }
-
             if (clienteActual.getCantidadProductos() == 0) {
                 liberarCaja();
             }
@@ -62,8 +61,7 @@ public class Caja implements ICaja {
 
     @Override
     public double getTiempoPromedioAtencion() {
-        if (clientesAtendidos == 0) return 0;
-        return (double) tiempoTotalAtencion / clientesAtendidos;
+        return clientesAtendidos == 0 ? 0 : (double) tiempoTotalAtencion / clientesAtendidos;
     }
 
     @Override
@@ -71,7 +69,13 @@ public class Caja implements ICaja {
         return id;
     }
 
+    @Override
     public ICliente getClienteActual() {
         return clienteActual;
+    }
+
+    @Override
+    public boolean esRapida() {
+        return false;
     }
 }
