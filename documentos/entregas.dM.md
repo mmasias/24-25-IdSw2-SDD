@@ -3,4 +3,7 @@
 
 # Diseño modular
 
-- Proyecto evolucionado/refactorizado siguiendo además las directrices de lo visto en el apartado de diseño modular.
+|||
+|--|--|
+|![](/documentos/modeloDeDominio/diagramaDeClases/diagramaClasesModular.svg)|[Enlace a la implementación]( https://github.com/TheMoys/24-25-IdSw2-SDD/tree/44a3c74ee79099a7b0965e6543794fe594f2e841/src)|
+
