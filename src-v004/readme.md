@@ -1,4 +1,4 @@
-# 🧠 V004 - Mejora del Diseño SOLID con Fábricas y Modularidad Avanzada
+# 🧠 V004 - Mejora del Diseño SOLID
 
 ## ✅ Objetivos del Refactor
 
