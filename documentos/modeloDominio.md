@@ -4,15 +4,38 @@ Este repositorio contiene el diagrama de clases para la simulación de un sistem
 
 ## Diagramas
 
-![](/images/modelosUML/diagramaClases.svg)
+### Clases
 
-![](/images/modelosUML/diagramaOnjetos.svg)
+![](/modelosUML/diagramaClases.svg)
 
-![](/images/modelosUML/diagramaEstadosJornada.svg)
+### Clases V2
 
-![](/images/modelosUML/diagramaEstadosCaja.svg)
+![](/modelosUML/diagramaClasesV2.svg)
 
-![](/images/modelosUML/diagramaEstadosCliente.svg)
+### Clases Modular
+
+![](/modelosUML/diagramaClasesModular.svg)
+
+### Clases SOLID
+
+![](/modelosUML/diagramaClasesSOLID.svg)
+
+### Objetos
+
+![](/modelosUML/diagramaObjetos.svg)
+
+### Estados Jornada
+
+![](/modelosUML/diagramaEstadosJornada.svg)
+
+### Estados Caja
+
+![](/modelosUML/diagramaEstadosCaja.svg)
+
+### Estados Cliente
+
+![](/modelosUML/diagramaEstadosCliente.svg)
+
 
 ## Descripción de Clases
 
