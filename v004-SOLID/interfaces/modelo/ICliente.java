@@ -7,6 +7,6 @@ public interface ICliente {
     void setTiempoEspera(long tiempoEspera);
     long getTiempoAtencion();
     void setTiempoAtencion(long tiempoAtencion);
-    int getCantidadItems();
-    void setCantidadItems(int cantidad); 
+    int getCantidadProductos();
+    void setCantidadProductos(int cantidad); 
 }

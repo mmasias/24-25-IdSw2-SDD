@@ -7,12 +7,12 @@ public class Cliente implements ICliente {
     private long tiempoLlegada;
     private long tiempoEspera;
     private long tiempoAtencion;
-    private int cantidadItems;
+    private int cantidadProductos;
 
-    public Cliente(int id, long tiempoLlegada, int cantidadItems) {
+    public Cliente(int id, long tiempoLlegada, int cantidadProductos) {
         this.id = id;
         this.tiempoLlegada = tiempoLlegada;
-        this.cantidadItems = cantidadItems;
+        this.cantidadProductos = cantidadProductos;
         this.tiempoEspera = 0;
         this.tiempoAtencion = 0;
     }
@@ -48,17 +48,17 @@ public class Cliente implements ICliente {
     }
 
     @Override
-    public int getCantidadItems() {
-        return cantidadItems;
+    public int getCantidadProductos() {
+        return cantidadProductos;
     }
 
     @Override
-    public void setCantidadItems(int cantidad) {
-        this.cantidadItems = cantidad;
+    public void setCantidadProductos(int cantidad) {
+        this.cantidadProductos = cantidad;
     }
 
     @Override
     public String toString() {
-        return "Cliente " + id + " (" + cantidadItems + " productos)";
+        return "Cliente " + id + " (" + cantidadProductos + " productos)";
     }
 }

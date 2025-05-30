@@ -123,7 +123,7 @@ public class ControladorSimulacion implements IControladorSimulacion {
 
             if (cajaDisponible != null) {
                 cajaDisponible.atenderCliente(clienteAAtender);
-                clienteAAtender.setTiempoAtencion(clienteAAtender.getCantidadItems());
+                clienteAAtender.setTiempoAtencion(clienteAAtender.getCantidadProductos());
                 estadisticas.registrarClienteAtendido(clienteAAtender, cajaDisponible);
             } else {
                 cola.agregarClienteAlInicio(clienteAAtender);

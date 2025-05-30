@@ -9,7 +9,7 @@ public class Caja {
     
     public void asignarCliente(Cliente cliente) {
         this.clienteActual = cliente;
-        this.tiempoRestante = cliente.getItems();
+        this.tiempoRestante = cliente.getProductos();
     }
     
     public void procesarMinuto() {

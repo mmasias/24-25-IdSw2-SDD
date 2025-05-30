@@ -10,9 +10,9 @@ class Estadisticas {
         if(cola.estaVacia()) minutosColaVacia++;
     }
     
-    public void clienteAtendido(int items) {
+    public void clienteAtendido(int productos) {
         clientesAtendidos++;
-        productosVendidos += items;
+        productosVendidos += productos;
     }
     
     public void setClientesPendientes(int cantidad) {

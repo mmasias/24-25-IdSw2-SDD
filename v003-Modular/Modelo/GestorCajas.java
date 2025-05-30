@@ -15,7 +15,7 @@ public class GestorCajas {
             if (caja.estaLibre() && !cola.estaVacia()) {
                 Cliente cliente = cola.siguiente();
                 caja.asignarCliente(cliente);
-                stats.clienteAtendido(cliente.getItems());
+                stats.clienteAtendido(cliente.getProductos());
             }
             caja.procesarMinuto();
         }
