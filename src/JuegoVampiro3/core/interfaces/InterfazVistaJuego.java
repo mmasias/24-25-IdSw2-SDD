@@ -10,7 +10,7 @@ public interface InterfazVistaJuego {
     void mostrarMenuInicial();
     void mostrarMenuJuego(String usuario);
     void mostrarInformacionJuego();
-    void mostrarEstadoBatalla(IPersonaje heroe, IPersonaje vampiro);
+    void mostrarEstadoBatalla(InterfazLuchador heroe, InterfazPersonaje vampiro);
     void mostrarResultadoFinal(String mensaje);
     
     int leerOpcion();

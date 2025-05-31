@@ -1,9 +1,12 @@
-package JuegoVampiro3.core;
+package JuegoVampiro3;
 
 import JuegoVampiro3.auth.GestorUsuarios;
 import JuegoVampiro3.ui.VistaConsola;
 import JuegoVampiro3.ui.CredencialesUsuario;
 import JuegoVampiro3.core.interfaces.*;
+import JuegoVampiro3.core.Batalla;
+import JuegoVampiro3.core.Guerrero;
+import JuegoVampiro3.core.Vampiro;
 
 public class JuegoVampiros implements InterfazControladorJuego {
 

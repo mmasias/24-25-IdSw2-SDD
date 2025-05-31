@@ -4,6 +4,7 @@ import java.util.Scanner;
 import JuegoVampiro3.core.*;
 import JuegoVampiro3.core.interfaces.InterfazVistaJuego;
 import JuegoVampiro3.core.interfaces.InterfazPersonaje;
+import JuegoVampiro3.core.interfaces.InterfazLuchador;
 import java.util.List; 
 
 public class VistaConsola implements InterfazVistaJuego {
@@ -79,7 +80,7 @@ public class VistaConsola implements InterfazVistaJuego {
     }
 
     @Override
-    public void mostrarEstadoBatalla(InterfazPersonaje heroe, InterfazPersonaje vampiro) {
+    public void mostrarEstadoBatalla(InterfazLuchador heroe, InterfazPersonaje vampiro) {
         Guerrero guerreroHeroe = (Guerrero) heroe;
         
         System.out.println(heroe.getNombre() + ": " + heroe.getEnergia() + "/" + heroe.getEnergiaMaxima() + " energía" +
