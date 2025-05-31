@@ -1,3 +1,45 @@
 @startuml
-TODO
-@enduml 
+
+ class JuegoVampiros
+
+' Paquete core
+package core {
+    abstract class Personaje
+    class Guerrero
+    class Vampiro
+
+    Personaje <|-- Guerrero
+    Personaje <|-- Vampiro
+
+    abstract class Ataque
+    class Arma
+    class Mordida
+    class Pocion
+
+    Ataque <|-- Arma
+    Ataque <|-- Mordida
+
+    Personaje o-- Ataque : posee
+    Guerrero ..> Pocion : usa
+
+    class Batalla
+    Batalla o-- Guerrero
+    Batalla o-- Vampiro
+
+}
+
+package auth {
+    class GestorUsuarios
+
+}
+
+package ui {
+    class VistaConsola
+    class CredencialesUsuario
+    VistaConsola --> Personaje
+}
+
+    JuegoVampiros *-- VistaConsola
+    JuegoVampiros *-- GestorUsuarios
+    JuegoVampiros *-- core
+@enduml
