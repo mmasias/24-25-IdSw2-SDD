@@ -4,6 +4,11 @@
 
 El Juego de Vampiros v3.0 representa una evolución significativa desde la versión modular v2.0, transformando el diseño hacia una **arquitectura completamente basada en principios SOLID**. El sistema implementa un combate por turnos entre un Héroe y un Vampiro, donde el diseño orientado a objetos no solo separa responsabilidades, sino que aplica de manera ejemplar todos los principios SOLID para crear un código mantenible, extensible y testeable.
 
+
+### Diagrama de Clases
+[![Diagrama de Clases](/images/modelosUML/Entrega3/DiagramaEntrega3.svg)](/images/modelosUML/Entrega3/diagrama.puml)
+
+
 ### Arquitectura SOLID
 
 La versión 3.0 introduce una **arquitectura basada en contratos (interfaces)** que implementa los cinco principios SOLID:
@@ -66,4 +71,5 @@ La versión 3.0 introduce una **arquitectura basada en contratos (interfaces)** 
 - Arreglados todos los errores de compilación
 - Movido JuegoVampiro.java un directorio arriba
 - Reorganizacion de archivos
-- Añadido diagrama .puml 
+- Añadido diagrama .puml
+- Eliminado comentarios
