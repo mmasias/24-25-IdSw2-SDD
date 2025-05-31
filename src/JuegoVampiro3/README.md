@@ -59,3 +59,9 @@ La versión 3.0 introduce una **arquitectura basada en contratos (interfaces)** 
 | **Extensibilidad** | Limitada | Alta | ✅ **OCP aplicado** |
 | **Violaciones LSP** | 1 | 0 | ✅ **Polimorfismo limpio** |
 | **Testabilidad** | Difícil | Excelente | ✅ **Mocks inyectables** |
+
+## Cambios post revisión 29/05
+
+- Cambiados los nombres de las clases interfaces
+- Arreglados todos los errores de compilación
+- Movido JuegoVampiro.java un directorio arriba
