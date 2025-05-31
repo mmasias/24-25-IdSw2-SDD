@@ -71,4 +71,5 @@ Para separar las responsabilidades, hemos dividido el código en auth, para la g
   ## · Cambios post revisión del 29/05
 
   - Actualizacion del diagrama .puml
-  
+  - Arreglados pequeños fallos en el codigo
+  - Borrados todos los comentarios del codigo

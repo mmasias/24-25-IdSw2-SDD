@@ -65,3 +65,5 @@ La versión 3.0 introduce una **arquitectura basada en contratos (interfaces)** 
 - Cambiados los nombres de las clases interfaces
 - Arreglados todos los errores de compilación
 - Movido JuegoVampiro.java un directorio arriba
+- Reorganizacion de archivos
+- Añadido diagrama .puml 
