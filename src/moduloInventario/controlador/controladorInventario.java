@@ -1,7 +1,9 @@
 package src.moduloInventario.controlador;
 
 import src.moduloCaja.controlador.ControladorCaja;
+import src.moduloEmpleado.controlador.ControladorEmpleado;
 import src.moduloInventario.modelo.Celda;
+import src.moduloInventario.modelo.Producto;
 import src.moduloInventario.vista.IVistaInventario;
 import src.moduloPago.vista.VistaPago;
 import src.moduloUsuario.modelo.Usuario;
@@ -13,9 +15,11 @@ import java.util.List;
 public class controladorInventario {
     private List<Celda> celdas;
     private IVistaInventario vista;
+    private ControladorEmpleado controladorEmpleado;
 
-    public controladorInventario(IVistaInventario vista) {
+    public controladorInventario(IVistaInventario vista, ControladorEmpleado controladorEmpleado) {
         this.vista = vista;
+        this.controladorEmpleado = controladorEmpleado;
         this.celdas = new ArrayList<>();
     }
 
@@ -38,6 +42,12 @@ public class controladorInventario {
                 return true;
             } else {
                 vista.mostrarMensaje("Producto agotado.");
+
+                Producto producto = celda.getProducto();
+                if (celda.getCantidad() <= 0) {
+                    int cantidadRecarga = 5;
+                    controladorEmpleado.cargarCelda(celda, producto, cantidadRecarga);
+                }
             }
         } else {
             vista.mostrarMensaje("Celda inválida.");
