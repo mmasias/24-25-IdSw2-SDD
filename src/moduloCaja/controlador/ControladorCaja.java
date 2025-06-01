@@ -51,37 +51,45 @@ public class ControladorCaja {
     }
 
     public Map<Double, Integer> entregarCambio(double montoCambio) {
-    Map<Double, Integer> denominacionesCaja = caja.getDenominaciones();
-    Map<Double, Integer> cambioEntregado = new HashMap<>();
-    int montoRestante = (int) Math.round(montoCambio * 100);
+        Map<Double, Integer> denominacionesCaja = caja.getDenominaciones();
+        Map<Double, Integer> cambioEntregado = new HashMap<>();
+        int montoRestante = (int) Math.round(montoCambio * 100);
 
-    List<Double> denominacionesOrdenadas = new ArrayList<>(denominacionesCaja.keySet());
-    denominacionesOrdenadas.sort(Collections.reverseOrder());
+        List<Double> denominacionesOrdenadas = new ArrayList<>(denominacionesCaja.keySet());
+        denominacionesOrdenadas.sort(Collections.reverseOrder());
 
-    for (double denominacion : denominacionesOrdenadas) {
-        int denominacionCent = (int) Math.round(denominacion * 100);
-        int cantidadDisponible = denominacionesCaja.getOrDefault(denominacion, 0);
-        int cantidadNecesaria = montoRestante / denominacionCent;
+        for (double denominacion : denominacionesOrdenadas) {
+            int denominacionCent = (int) Math.round(denominacion * 100);
+            int cantidadDisponible = denominacionesCaja.getOrDefault(denominacion, 0);
+            int cantidadNecesaria = montoRestante / denominacionCent;
 
-        if (cantidadNecesaria > 0 && cantidadDisponible > 0) {
-            int cantidadUsada = Math.min(cantidadNecesaria, cantidadDisponible);
-            cambioEntregado.put(denominacion, cantidadUsada);
-            montoRestante -= cantidadUsada * denominacionCent;
+            if (cantidadNecesaria > 0 && cantidadDisponible > 0) {
+                int cantidadUsada = Math.min(cantidadNecesaria, cantidadDisponible);
+                cambioEntregado.put(denominacion, cantidadUsada);
+                montoRestante -= cantidadUsada * denominacionCent;
+            }
+
+            if (montoRestante == 0)
+                break;
         }
 
-        if (montoRestante == 0) break;
+        if (montoRestante != 0) {
+            // No se puede entregar el cambio exacto
+            return new HashMap<>();
+        }
+
+        // Descontar las monedas/billetes de la caja
+        for (Map.Entry<Double, Integer> entry : cambioEntregado.entrySet()) {
+            caja.retirarDenominacion(entry.getKey(), entry.getValue());
+        }
+
+        return cambioEntregado;
     }
 
-    if (montoRestante != 0) {
-        // No se puede entregar el cambio exacto
-        return new HashMap<>();
+    public void mostrarDesgloseCaja() {
+        System.out.println("Total disponible: " + caja.getTotal() + "€");
+        System.out.println("Denominaciones disponibles:");
+        caja.getDenominaciones()
+                .forEach((denominacion, cantidad) -> System.out.println(denominacion + "€: " + cantidad + " unidades"));
     }
-
-    // Descontar las monedas/billetes de la caja
-    for (Map.Entry<Double, Integer> entry : cambioEntregado.entrySet()) {
-        caja.retirarDenominacion(entry.getKey(), entry.getValue());
-    }
-
-    return cambioEntregado;
-}
 }

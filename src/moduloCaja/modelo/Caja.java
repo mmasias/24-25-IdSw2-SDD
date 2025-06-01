@@ -75,13 +75,6 @@ public class Caja {
             .sum();
     }
 
-    public void mostrarDesgloseCaja() {
-        System.out.println("Total disponible: " + total + "€");
-        System.out.println("Denominaciones disponibles:");
-        denominaciones.forEach((denominacion, cantidad) -> 
-            System.out.println(denominacion + "€: " + cantidad + " unidades"));
-    }
-
     public void agregarDenominacion(double denominacion, int cantidad) {
         denominaciones.put(denominacion, denominaciones.getOrDefault(denominacion, 0) + cantidad);
         total += denominacion * cantidad; 
