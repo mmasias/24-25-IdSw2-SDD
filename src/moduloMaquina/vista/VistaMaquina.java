@@ -28,7 +28,7 @@ public class VistaMaquina {
     public int seleccionarMaquina(List<Maquina> maquinas) {
         int numeroMaquina = -1;
         boolean esValido = false;
-        while (esValido == false) {
+        while (!esValido) {
             System.out.println("=== Selección de Máquina ===");
             mostrarMaquinas(maquinas);
             System.out.print("Ingrese el número de la máquina que desea seleccionar (0-" + (maquinas.size() - 1) + "): ");
