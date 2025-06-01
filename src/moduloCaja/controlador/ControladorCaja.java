@@ -50,58 +50,38 @@ public class ControladorCaja {
         vista.mostrarMensaje("Se han retirado " + retirado + "€ de la caja.");
     }
 
-    public boolean entregarCambio(double montoCambio) {
-        Map<Double, Integer> denominacionesCaja = caja.getDenominaciones();
-        Map<Double, Integer> cambioEntregado = new HashMap<>();
-        double montoRestante = montoCambio;
-    
-        List<Double> denominacionesOrdenadas = new ArrayList<>(denominacionesCaja.keySet());
-        denominacionesOrdenadas.sort(Collections.reverseOrder());
-    
-        for (double denominacion : denominacionesOrdenadas) {
-            int cantidadDisponible = denominacionesCaja.getOrDefault(denominacion, 0);
-            int cantidadNecesaria = (int) (montoRestante / denominacion);
-    
-            if (cantidadNecesaria > 0 && cantidadDisponible > 0) {
-                int cantidadUsada = Math.min(cantidadNecesaria, cantidadDisponible);
-                cambioEntregado.put(denominacion, cantidadUsada);
-                montoRestante -= cantidadUsada * denominacion;
-            }
-    
-            if (montoRestante <= 0) break;
+    public Map<Double, Integer> entregarCambio(double montoCambio) {
+    Map<Double, Integer> denominacionesCaja = caja.getDenominaciones();
+    Map<Double, Integer> cambioEntregado = new HashMap<>();
+    int montoRestante = (int) Math.round(montoCambio * 100);
+
+    List<Double> denominacionesOrdenadas = new ArrayList<>(denominacionesCaja.keySet());
+    denominacionesOrdenadas.sort(Collections.reverseOrder());
+
+    for (double denominacion : denominacionesOrdenadas) {
+        int denominacionCent = (int) Math.round(denominacion * 100);
+        int cantidadDisponible = denominacionesCaja.getOrDefault(denominacion, 0);
+        int cantidadNecesaria = montoRestante / denominacionCent;
+
+        if (cantidadNecesaria > 0 && cantidadDisponible > 0) {
+            int cantidadUsada = Math.min(cantidadNecesaria, cantidadDisponible);
+            cambioEntregado.put(denominacion, cantidadUsada);
+            montoRestante -= cantidadUsada * denominacionCent;
         }
-    
-        if (montoRestante > 0) {
-            return false;
-        }
-    
-        for (Map.Entry<Double, Integer> entry : cambioEntregado.entrySet()) {
-            double denominacion = entry.getKey();
-            int cantidadUsada = entry.getValue();
-            caja.retirarDenominacion(denominacion, cantidadUsada);
-        }
-    
-        return true;
+
+        if (montoRestante == 0) break;
     }
 
-    public void calcularCambio(double precio, Efectivo efectivoUsuario) {
-    double montoPagado = efectivoUsuario.getMontoDisponible();
-    double cambio = montoPagado - precio;
-
-    if (cambio < 0) {
-        vista.mostrarMensaje("Error: El monto pagado es insuficiente.");
-        return;
+    if (montoRestante != 0) {
+        // No se puede entregar el cambio exacto
+        return new HashMap<>();
     }
 
-    if (!caja.entregarCambio(cambio)) {
-        vista.mostrarMensaje("Error: Fondos insuficientes en la caja para entregar cambio.");
-        return;
+    // Descontar las monedas/billetes de la caja
+    for (Map.Entry<Double, Integer> entry : cambioEntregado.entrySet()) {
+        caja.retirarDenominacion(entry.getKey(), entry.getValue());
     }
 
-    efectivoUsuario.retirarMonto(precio); 
-    efectivoUsuario.agregarMonto(cambio); 
-    vista.mostrarMensaje("Cambio entregado correctamente: " + cambio + "€");
-    }
-
-    
+    return cambioEntregado;
+}
 }
