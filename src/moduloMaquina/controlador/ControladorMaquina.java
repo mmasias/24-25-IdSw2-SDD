@@ -1,6 +1,8 @@
 package src.moduloMaquina.controlador;
 
+import src.moduloMaquina.MaquinaFactory;
 import src.moduloMaquina.modelo.Maquina;
+import src.moduloMaquina.vista.VistaMaquina;
 import src.moduloPago.controlador.ControladorPago;
 import src.moduloPago.modelo.Efectivo;
 import src.moduloPago.vista.VistaPago;
@@ -11,24 +13,29 @@ import src.moduloUsuario.modelo.Usuario;
 import src.moduloUsuario.vista.VistaUsuario;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
 public class ControladorMaquina {
-    private Maquina maquina;
-    private Scanner scanner;
-    private VistaUsuario vistaUsuario;
-    private ControladorPago controladorPago;
-    private ControladorCaja controladorCaja;
-    private controladorInventario controladorInventario;
+    private List<Maquina> maquinas;
+    private Maquina maquinaSeleccionada = null;
+    private VistaMaquina vistaMaquina;
 
-    public ControladorMaquina(Maquina maquina, VistaUsuario vistaUsuario) {
-        this.maquina = maquina;
-        this.scanner = new Scanner(System.in);
-        this.vistaUsuario = vistaUsuario;
-        this.controladorPago = new ControladorPago(null, null, new VistaPago());
-        this.controladorCaja = new ControladorCaja(maquina.getCaja(), new VistaCaja());
-        this.controladorInventario = new controladorInventario(null); // Debes pasar la vista adecuada
+    public ControladorMaquina() {
+        vistaMaquina = new VistaMaquina();
+    }
+
+    public List<Maquina> getMaquinas() {
+        return maquinas;
+    }
+
+    public Maquina getMaquinaSeleccionada() {
+        return maquinaSeleccionada;
+    }
+
+    public void setMaquinaSeleccionada(Maquina maquinaSeleccionada) {
+        this.maquinaSeleccionada = maquinaSeleccionada;
     }
 
     public void mostrarEstadoMaquina() {
@@ -37,6 +44,40 @@ public class ControladorMaquina {
             System.out.println("[" + i + "]: " + maquina.getCeldas().get(i).getProducto().getNombre() +
                     " Precio: €" + maquina.getCeldas().get(i).getProducto().getPrecio() +
                     " (Cantidad: " + maquina.getCeldas().get(i).getCantidad() + ")");
+        }
+    }
+
+    public void iniciarMaquinas() {
+        int numeroDeMaquinas = 2;
+        System.out.println("[INFO] Iniciando máquinas expendedoras...");
+        maquinas = MaquinaFactory.crearMaquinas(numeroDeMaquinas);
+        System.out.println("[INFO] Máquinas expendedoras iniciadas correctamente.");
+    }
+
+    public void mostrarMaquinas() {
+        // Aquí se mostrarían las máquinas disponibles al usuario
+        System.out.println("Mostrando máquinas expendedoras disponibles...");
+        // Lógica para listar las máquinas y sus productos
+        vistaMaquina.mostrarMaquinas(maquinas);
+    }
+
+    public void seleccionarMaquina() {
+        int numeroMaquina = vistaMaquina.seleccionarMaquina(maquinas);
+        maquinaSeleccionada = maquinas.get(numeroMaquina);
+    }
+
+    public void init() {
+
+        boolean esSeleccionado = false; // Esta condición puede ser modificada según la lógica del programa
+        // Método para inicializar el controlador, si es necesario
+        System.out.println("[INFO] Inicializando controlador de máquinas expendedoras...");
+        iniciarMaquinas();
+        while (esSeleccionado == false) {
+            seleccionarMaquina();
+            if (maquinaSeleccionada != null) {
+                System.out.println("[INFO] Dinero de la Máquina seleccionada: " + maquinaSeleccionada.getCaja().getTotal());
+                esSeleccionado = true;
+            }
         }
     }
 }
