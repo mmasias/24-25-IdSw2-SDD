@@ -5,8 +5,7 @@
 
 </div>
 
-<div align=center>
-Diseño
+# Diseño
 
 |||
 |--|--|
