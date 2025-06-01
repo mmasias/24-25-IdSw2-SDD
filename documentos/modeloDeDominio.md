@@ -5,7 +5,7 @@
 
 </div>
 
-# Diseño
+# Modelo de dominio
 
 ## Diagrama de clases
 
