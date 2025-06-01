@@ -53,10 +53,5 @@ public class MaquinaFactory {
         return controladores;
     }
 
-    public static ControladorUsuario crearControladorUsuario() {
-        Efectivo efectivoUsuario = new Efectivo(10.0); 
-        Tarjeta tarjetaUsuario = new Tarjeta("123456789", "Juan Perez", 20.0); 
-        Usuario usuario = new Usuario(efectivoUsuario, tarjetaUsuario);
-        return new ControladorUsuario(usuario, null); 
-    }
+    
 }
