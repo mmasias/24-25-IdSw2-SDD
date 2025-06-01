@@ -3,4 +3,6 @@
 
 # Diseño orientado a objetos
 
-- Proyecto evolucionado/refactorizado siguiendo además las directrices de lo visto en el apartado de diseño orientado a objetos.
+|||
+|--|--|
+|![](/documentos/modeloDeDominio/diagramaDeClases/diagramaDeClasesObjetos.svg)|[Enlace a la implementación](https://github.com/TheMoys/24-25-IdSw2-SDD/tree/93771cbfc4d8be3784a02195312c44eae8fa3a8f/src)|
