@@ -3,19 +3,9 @@ package src.moduloMaquina.controlador;
 import src.moduloMaquina.MaquinaFactory;
 import src.moduloMaquina.modelo.Maquina;
 import src.moduloMaquina.vista.VistaMaquina;
-import src.moduloPago.controlador.ControladorPago;
-import src.moduloPago.modelo.Efectivo;
-import src.moduloPago.vista.VistaPago;
-import src.moduloCaja.controlador.ControladorCaja;
-import src.moduloCaja.vista.VistaCaja;
-import src.moduloInventario.controlador.controladorInventario;
-import src.moduloUsuario.modelo.Usuario;
-import src.moduloUsuario.vista.VistaUsuario;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+
 
 public class ControladorMaquina {
     private List<Maquina> maquinas;
