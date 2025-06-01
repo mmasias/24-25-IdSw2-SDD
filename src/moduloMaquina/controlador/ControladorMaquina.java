@@ -30,7 +30,7 @@ public class ControladorMaquina {
 
     public void iniciarMaquinas() {
         System.out.println("[INFO] Iniciando máquinas expendedoras...");
-        maquinas = MaquinaFactory.crearMaquinas(2);
+        maquinas = MaquinaFactory.crearMaquinas(numeroDeMaquinas);
         System.out.println("[INFO] Máquinas expendedoras iniciadas correctamente.");
     }
 
