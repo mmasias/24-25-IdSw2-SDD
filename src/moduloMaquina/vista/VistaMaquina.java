@@ -3,7 +3,7 @@ package src.moduloMaquina.vista;
 import java.util.List;
 import java.util.Scanner;
 
-import src.moduloInventario.Celda;
+import src.moduloInventario.modelo.Celda;
 import src.moduloMaquina.modelo.Maquina;
 
 public class VistaMaquina {
