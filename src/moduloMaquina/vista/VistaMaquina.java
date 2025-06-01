@@ -8,12 +8,18 @@ import src.moduloMaquina.modelo.Maquina;
 
 public class VistaMaquina {
 
-    Scanner scanner;
+    private Scanner scanner;
 
     public VistaMaquina() {
         scanner = new Scanner(System.in);
     }
 
+    public void close() {
+        if (scanner != null) {
+            scanner.close();
+            scanner = null;
+        }
+    }
     public void mostrarMaquinas(List<Maquina> maquinas) {
         if (maquinas == null || maquinas.size() == 0) {
             System.out.println("[INFO] No hay máquinas disponibles.");
