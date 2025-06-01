@@ -9,11 +9,12 @@ public class Efectivo implements Pago {
     private double montoDisponible;
     private Map<Double, Integer> denominacionesUsuario; 
     private Map<Double, Integer> denominacionesCaja; 
+    public static final double[] denominaciones_aceptadas = {20, 10, 5, 2.00, 1.00, 0.50, 0.20, 0.10, 0.05};
 
-    public Efectivo(double montoDisponible) {
-        this.montoDisponible = montoDisponible;
+    public Efectivo(double montoInicial) {
         this.denominacionesUsuario = new HashMap<>();
         this.denominacionesCaja = new HashMap<>();
+        this.montoDisponible = montoInicial;
     }
 
     @Override
@@ -44,9 +45,8 @@ public class Efectivo implements Pago {
     public void mostrarDesgloseUsuario() {
         System.out.println("Desglose de denominaciones del usuario:");
         for (Map.Entry<Double, Integer> entry : denominacionesUsuario.entrySet()) {
-            System.out.println("Denominación $" + entry.getKey() + ": " + entry.getValue() + " unidades");
+            System.out.println("Denominación €" + entry.getKey() + ": " + entry.getValue() + " unidades");
         }
-        System.out.println("------------------------------");
     }
 
     public void mostrarDesgloseCaja() {
@@ -58,7 +58,11 @@ public class Efectivo implements Pago {
     }
 
     public void agregarDenominacionUsuario(double denominacion, int cantidad) {
+        if (!esDenominacionAceptada(denominacion)) {
+            throw new IllegalArgumentException("Denominación no válida: " + denominacion);
+        }
         denominacionesUsuario.put(denominacion, denominacionesUsuario.getOrDefault(denominacion, 0) + cantidad);
+        montoDisponible += denominacion * cantidad;
     }
 
     public void agregarDenominacionCaja(double denominacion, int cantidad) {
@@ -71,5 +75,33 @@ public class Efectivo implements Pago {
 
     public void setCantidad(double cantidad) {
         this.cantidad = cantidad;
+    }
+
+    public void retirarMonto(double monto) {
+        if (monto > 0 && monto <= montoDisponible) {
+            montoDisponible -= monto;
+        } else {
+            throw new IllegalArgumentException("Monto inválido para retirar.");
+        }
+    }
+
+    public void agregarMonto(double monto) {
+        if (monto > 0) {
+            montoDisponible += monto;
+        } else {
+            throw new IllegalArgumentException("Monto inválido para agregar.");
+        }
+    }
+    public boolean esDenominacionAceptada(double denominacion) {
+        for (double aceptada : denominaciones_aceptadas) {
+            if (aceptada == denominacion) {
+                return true;
+            }
+        }
+        return false;
+    }
+    @Override
+    public String toString() {
+        return "Efectivo disponible: " + montoDisponible + "€";
     }
 }

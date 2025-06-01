@@ -15,23 +15,27 @@ public class ControladorPago {
         this.vistaPago = vistaPago;
     }
 
-    public void pagarConEfectivo(double monto) {
+    public boolean pagarConEfectivo(double monto) {
         boolean exito = efectivo.pagar(monto);
-        vistaPago.mostrarMensaje(exito
-            ? "Pago en efectivo exitoso."
-            : "Pago insuficiente con efectivo.");
-        if (exito) {
-            vistaPago.mostrarMontoDisponible(efectivo.getMontoDisponible());
+        if (vistaPago != null) {
+            vistaPago.mostrarMensaje(exito
+                ? "Pago en efectivo exitoso."
+                : "Pago insuficiente con efectivo.");
+            if (exito) {
+                vistaPago.mostrarMontoDisponible(efectivo.getMontoDisponible());
+            }
         }
+        return exito; 
     }
 
-    public void pagarConTarjeta(double monto) {
-        boolean exito = tarjeta.pagar(monto);
-        vistaPago.mostrarMensaje(exito
-            ? "Pago con tarjeta exitoso."
-            : "Pago insuficiente con tarjeta.");
-        if (exito) {
-            vistaPago.mostrarSaldoTarjeta(tarjeta.getSaldoDisponible());
+    public boolean pagarConTarjeta(double monto) {
+        try {
+            tarjeta.retirarSaldo(monto);
+            vistaPago.mostrarMensaje("Pago con tarjeta exitoso.");
+            return true;
+        } catch (IllegalArgumentException e) {
+            vistaPago.mostrarMensaje(e.getMessage());
+            return false;
         }
     }
 
@@ -41,4 +45,6 @@ public class ControladorPago {
             efectivo.getDenominacionesCaja()
         );
     }
+
+    
 }

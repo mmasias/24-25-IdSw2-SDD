@@ -1,64 +1,106 @@
 package src.moduloMaquina.controlador;
 
-import java.util.List;
-
-import src.moduloMaquina.MaquinaFactory;
 import src.moduloMaquina.modelo.Maquina;
-import src.moduloMaquina.vista.VistaMaquina;
+import src.moduloPago.controlador.ControladorPago;
+import src.moduloPago.modelo.Efectivo;
+import src.moduloPago.vista.VistaPago;
+import src.moduloCaja.controlador.ControladorCaja;
+import src.moduloCaja.vista.VistaCaja;
+import src.moduloUsuario.modelo.Usuario;
+import src.moduloUsuario.vista.VistaUsuario;
+
+import java.util.Scanner;
 
 public class ControladorMaquina {
+    private Maquina maquina;
+    private Scanner scanner;
+    private VistaUsuario vistaUsuario; 
 
-    private List<Maquina> maquinas;
-    private Maquina maquinaSeleccionada = null;
-    private VistaMaquina vistaMaquina;
-
-    public ControladorMaquina() {
-        vistaMaquina = new VistaMaquina();
+    public ControladorMaquina(Maquina maquina, VistaUsuario vistaUsuario) {
+        this.maquina = maquina;
+        this.scanner = new Scanner(System.in);
+        this.vistaUsuario = vistaUsuario;
     }
 
-    public List<Maquina> getMaquinas() {
-        return maquinas;
-    }
-
-    public Maquina getMaquinaSeleccionada() {
-        return maquinaSeleccionada;
-    }
-
-    public void setMaquinaSeleccionada(Maquina maquinaSeleccionada) {
-        this.maquinaSeleccionada = maquinaSeleccionada;
-    }
-
-    public void iniciarMaquinas() {
-        int numeroDeMaquinas = 2;
-        System.out.println("[INFO] Iniciando máquinas expendedoras...");
-        maquinas = MaquinaFactory.crearMaquinas(numeroDeMaquinas);
-        System.out.println("[INFO] Máquinas expendedoras iniciadas correctamente.");
-    }
-
-    public void mostrarMaquinas() {
-        // Aquí se mostrarían las máquinas disponibles al usuario
-        System.out.println("Mostrando máquinas expendedoras disponibles...");
-        // Lógica para listar las máquinas y sus productos
-        vistaMaquina.mostrarMaquinas(maquinas);
-    }
-
-    public void seleccionarMaquina() {
-        int numeroMaquina = vistaMaquina.seleccionarMaquina(maquinas);
-        maquinaSeleccionada = maquinas.get(numeroMaquina);
-    }
-
-    public void init() {
-
-        boolean esSeleccionado = false; // Esta condición puede ser modificada según la lógica del programa
-        // Método para inicializar el controlador, si es necesario
-        System.out.println("[INFO] Inicializando controlador de máquinas expendedoras...");
-        iniciarMaquinas();
-        while (esSeleccionado == false) {
-            seleccionarMaquina();
-            if (maquinaSeleccionada != null) {
-                System.out.println("[INFO] Dinero de la Máquina seleccionada: " + maquinaSeleccionada.getCaja().getTotal());
-                esSeleccionado = true;
-            }
+    public void mostrarEstadoMaquina() {
+        System.out.println("=== Inventario de la máquina ===");
+        for (int i = 0; i < maquina.getCeldas().size(); i++) {
+            System.out.println("[" + i + "]: " + maquina.getCeldas().get(i).getProducto().getNombre() +
+                " Precio: €" + maquina.getCeldas().get(i).getProducto().getPrecio() +
+                " (Cantidad: " + maquina.getCeldas().get(i).getCantidad() + ")");
         }
+    }
+
+    public void procesarCompra(Usuario usuario) {
+        
+        System.out.println("=== Información del Usuario ===");
+        vistaUsuario.mostrarUsuario(usuario);
+
+        
+        System.out.println("=== Desglose de la caja ===");
+        maquina.getCaja().mostrarDesgloseCaja();
+
+        System.out.print("Seleccione el número del producto: ");
+        int numProducto = scanner.nextInt();
+        if (numProducto < 0 || numProducto >= maquina.getCeldas().size()) {
+            System.out.println("Selección inválida.");
+            return;
+        }
+
+        double precioProducto = maquina.getCeldas().get(numProducto).getProducto().getPrecio();
+        System.out.print("Seleccione método de pago (1: Efectivo, 2: Tarjeta): ");
+        int metodoPago = scanner.nextInt();
+
+        boolean pagoExitoso = false;
+        if (metodoPago == 1) {
+            System.out.println("=== Seleccione denominaciones para pagar ===");
+            System.out.println("Denominaciones disponibles:");
+            for (double denominacion : Efectivo.denominaciones_aceptadas) {
+                System.out.println("€" + denominacion);
+            }
+            System.out.print("Ingrese denominación para pagar: ");
+            double denominacion = scanner.nextDouble();
+
+            if (!usuario.getEfectivo().esDenominacionAceptada(denominacion)) {
+                System.out.println("Denominación no válida. Intente nuevamente.");
+                return;
+            }
+
+            if (denominacion < precioProducto) {
+                System.out.println("Pago insuficiente. Intente nuevamente.");
+                return;
+            }
+
+            double cambio = denominacion - precioProducto;
+            if (cambio > 0) {
+                ControladorCaja controladorCaja = new ControladorCaja(maquina.getCaja(), new VistaCaja());
+                if (!controladorCaja.entregarCambio(cambio)) {
+                    System.out.println("Fondos insuficientes en la caja para entregar cambio.");
+                    return;
+                }
+                System.out.println("Cambio entregado correctamente: " + cambio + "€");
+                usuario.getEfectivo().agregarMonto(cambio);
+            }
+
+            usuario.getEfectivo().retirarMonto(denominacion);
+            maquina.getCaja().agregarDenominacion(denominacion, 1);
+            System.out.println("Pago aceptado.");
+            pagoExitoso = true;
+        } else if (metodoPago == 2) {
+            ControladorPago controladorPago = new ControladorPago(usuario.getEfectivo(), usuario.getTarjeta(), new VistaPago());
+            controladorPago.pagarConTarjeta(precioProducto);
+            pagoExitoso = usuario.getTarjeta().getSaldoDisponible() >= precioProducto;
+        } else {
+            System.out.println("Método de pago inválido.");
+            return;
+        }
+
+        if (!pagoExitoso) {
+            System.out.println("Pago fallido. Intente nuevamente.");
+            return;
+        }
+
+        maquina.getCeldas().get(numProducto).disminuirCantidad();
+        System.out.println("Producto despachado: " + maquina.getCeldas().get(numProducto).getProducto().getNombre());
     }
 }

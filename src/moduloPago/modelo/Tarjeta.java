@@ -34,4 +34,18 @@ public class Tarjeta implements Pago {
     public void setNumero(String numero) {
         this.numero = numero;
     }
+    public void retirarSaldo(double monto) {
+        if (monto <= 0) {
+            throw new IllegalArgumentException("El monto debe ser mayor que cero.");
+        }
+        if (monto > saldoDisponible) {
+            throw new IllegalArgumentException("Saldo insuficiente en la tarjeta.");
+        }
+        saldoDisponible -= monto;
+    }
+
+    @Override
+    public String toString() {
+        return "Tarjeta [Número: " + numero + ", Titular: " + titular + ", Saldo disponible: " + saldoDisponible + "€]";
+    }
 }

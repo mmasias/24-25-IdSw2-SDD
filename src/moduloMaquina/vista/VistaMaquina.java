@@ -39,7 +39,7 @@ public class VistaMaquina {
             mostrarMaquinas(maquinas);
             System.out.print("Ingrese el número de la máquina que desea seleccionar (0-" + (maquinas.size() - 1) + "): ");
             numeroMaquina = scanner.nextInt();
-            scanner.nextLine(); // Limpiar el buffer del scanner
+            scanner.nextLine(); 
 
             if (numeroMaquina >= 0 && numeroMaquina < maquinas.size()) {
                 esValido = true;

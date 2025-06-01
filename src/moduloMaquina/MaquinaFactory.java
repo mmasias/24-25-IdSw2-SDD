@@ -2,7 +2,13 @@ package src.moduloMaquina;
 
 import src.moduloInventario.modelo.Celda;
 import src.moduloInventario.modelo.Producto;
+import src.moduloMaquina.controlador.ControladorMaquina;
 import src.moduloMaquina.modelo.Maquina;
+import src.moduloPago.modelo.Efectivo;
+import src.moduloPago.modelo.Tarjeta;
+import src.moduloUsuario.controlador.ControladorUsuario;
+import src.moduloUsuario.modelo.Usuario;
+import src.moduloUsuario.vista.VistaUsuario;
 import src.moduloCaja.modelo.Caja;
 
 import java.util.ArrayList;
@@ -35,5 +41,22 @@ public class MaquinaFactory {
             maquinas.add(new Maquina(celdas, caja));
         }
         return maquinas;
+    }
+
+    public static List<ControladorMaquina> crearControladoresMaquinas(int numeroMaquinas) {
+        List<Maquina> maquinas = crearMaquinas(numeroMaquinas);
+        List<ControladorMaquina> controladores = new ArrayList<>();
+        VistaUsuario vistaUsuario = new VistaUsuario(); 
+        for (Maquina maquina : maquinas) {
+            controladores.add(new ControladorMaquina(maquina, vistaUsuario)); 
+        }
+        return controladores;
+    }
+
+    public static ControladorUsuario crearControladorUsuario() {
+        Efectivo efectivoUsuario = new Efectivo(10.0); 
+        Tarjeta tarjetaUsuario = new Tarjeta("123456789", "Juan Perez", 20.0); 
+        Usuario usuario = new Usuario(efectivoUsuario, tarjetaUsuario);
+        return new ControladorUsuario(usuario, null); 
     }
 }
