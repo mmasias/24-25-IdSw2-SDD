@@ -1,0 +1,128 @@
+@startuml
+package "moduloMaquina" {
+    package "modelo" {
+        class Maquina
+    }
+    package "vista" {
+        class VistaMaquina
+    }
+    package "controlador" {
+        class ControladorMaquina
+    }
+    class MaquinaFactory
+}
+
+package "moduloInventario" {
+    package "modelo" {
+        class Celda
+        class Producto
+    }
+    package "vista" {
+        class IVistaInventario
+        class VistaInventario
+    }
+    package "controlador" {
+        class ControladorInventario
+    }
+}
+
+package "moduloCaja" {
+    package "modelo" {
+        class Caja
+    }
+    package "vista" {
+        class VistaCaja
+    }
+    package "controlador" {
+        class ControladorCaja
+    }
+}
+
+package "moduloPago" {
+    package "modelo" {
+        interface Pago
+        class Efectivo
+        class Tarjeta
+    }
+    package "vista" {
+        class VistaPago
+    }
+    package "controlador" {
+        class ControladorPago
+    }
+}
+
+package "moduloUsuario" {
+    package "modelo" {
+        class Usuario
+    }
+    package "vista" {
+        class VistaUsuario
+        class IVistaUsuario
+    }
+    package "controlador" {
+        class ControladorUsuario
+    }
+}
+
+package "moduloEmpleado" {
+    package "modelo" {
+        class Empleado
+    }
+    package "vista" {
+        class VistaEmpleado
+    }
+    package "controlador" {
+        class ControladorEmpleado
+    }
+}
+
+Maquina o-- Celda : contiene
+Maquina o-- Caja
+Maquina --> Usuario
+Maquina ..> Pago
+
+Celda *-- Producto
+Efectivo ..> Caja
+Usuario o-- Tarjeta
+Usuario o-- Efectivo
+
+Empleado .u.> Caja : recargar / vaciar
+Empleado .u.> Celda : cargar productos
+
+Tarjeta .u.|> Pago
+Efectivo .u.|> Pago
+
+MaquinaFactory --> Maquina : crea
+MaquinaFactory --> Celda : crea
+MaquinaFactory --> Producto : crea
+
+ControladorMaquina --> Maquina
+VistaMaquina --> ControladorMaquina
+ControladorMaquina --> VistaMaquina
+
+ControladorInventario --> Celda
+ControladorInventario --> Producto
+VistaInventario --> ControladorInventario
+ControladorInventario --> VistaInventario
+VistaInventario ..|> IVistaInventario
+
+ControladorCaja --> Caja
+VistaCaja --> ControladorCaja
+ControladorCaja --> VistaCaja
+
+ControladorPago --> Pago
+ControladorPago --> Efectivo
+ControladorPago --> Tarjeta
+VistaPago --> ControladorPago
+ControladorPago --> VistaPago
+
+ControladorUsuario --> Usuario
+VistaUsuario --> ControladorUsuario
+ControladorUsuario --> VistaUsuario
+VistaUsuario .u.|> IVistaUsuario
+
+ControladorEmpleado --> Empleado
+VistaEmpleado --> ControladorEmpleado
+ControladorEmpleado --> VistaEmpleado
+@enduml
