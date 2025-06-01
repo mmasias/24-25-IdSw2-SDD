@@ -15,4 +15,8 @@ public class VistaUsuario implements IVistaUsuario {
     public void mostrarError(String mensaje) {
         System.err.println("Error: " + mensaje);
     }
+    @Override
+    public void mostrarMensaje(String mensaje) {
+        System.out.println(mensaje);
+    }
 }

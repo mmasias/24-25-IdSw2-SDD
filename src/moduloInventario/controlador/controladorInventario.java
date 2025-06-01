@@ -1,7 +1,11 @@
 package src.moduloInventario.controlador;
 
+import src.moduloCaja.controlador.ControladorCaja;
 import src.moduloInventario.modelo.Celda;
 import src.moduloInventario.vista.IVistaInventario;
+import src.moduloPago.vista.VistaPago;
+import src.moduloUsuario.modelo.Usuario;
+import src.moduloUsuario.vista.IVistaUsuario;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,5 +54,27 @@ public class controladorInventario {
 
     public void mensajePersonalizado(String texto) {
         vista.mostrarMensaje(texto);
+    }
+
+    public void despacharProducto(int numProducto, Usuario usuario, ControladorCaja controladorCaja, VistaPago vistaPago, IVistaUsuario vistaUsuario) {
+        if (numProducto >= 0 && numProducto < celdas.size()) {
+            Celda celda = celdas.get(numProducto);
+            if (celda.getCantidad() > 0) {
+                celda.disminuirCantidad();
+                vistaPago.mostrarMensaje("Producto despachado: " + celda.getProducto().getNombre());
+    
+                // Mostrar estado final de la caja
+                vistaPago.mostrarMensaje("\n=== Estado final de la caja ===");
+                controladorCaja.mostrarDesgloseCaja();
+    
+                // Mostrar estado final del usuario
+                vistaPago.mostrarMensaje("\n=== Estado final del usuario ===");
+                vistaUsuario.mostrarUsuario(usuario);
+            } else {
+                vistaPago.mostrarMensaje("Producto agotado.");
+            }
+        } else {
+            vistaPago.mostrarMensaje("Celda inválida.");
+        }
     }
 }

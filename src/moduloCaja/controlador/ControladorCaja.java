@@ -9,6 +9,7 @@ import java.util.Map;
 import src.moduloCaja.modelo.Caja;
 import src.moduloCaja.vista.VistaCaja;
 import src.moduloPago.modelo.Efectivo;
+import src.moduloUsuario.modelo.Usuario;
 
 public class ControladorCaja {
     private Caja caja;
@@ -92,4 +93,25 @@ public class ControladorCaja {
         caja.getDenominaciones()
                 .forEach((denominacion, cantidad) -> System.out.println(denominacion + "€: " + cantidad + " unidades"));
     }
+
+    public void procesarCambio(double totalIngresado, double precioProducto, Usuario usuario) {
+    double cambio = totalIngresado - precioProducto;
+    if (cambio > 0) {
+        vista.mostrarMensaje("Devolviendo cambio: €" + cambio);
+        Map<Double, Integer> cambioEntregado = entregarCambio(cambio);
+
+        if (!cambioEntregado.isEmpty()) {
+            vista.mostrarMensaje("Desglose del cambio:");
+            for (Map.Entry<Double, Integer> entry : cambioEntregado.entrySet()) {
+                vista.mostrarMensaje(entry.getKey() + "€: " + entry.getValue() + " unidades");
+                usuario.getEfectivo().agregarDenominacionUsuario(entry.getKey(), entry.getValue());
+            }
+
+            // Agregar el cambio al monto disponible del usuario
+            usuario.getEfectivo().agregarMonto(cambio);
+        } else {
+            vista.mostrarMensaje("No se pudo entregar el cambio exacto. Por favor, contacte al administrador.");
+        }
+    }
+}
 }

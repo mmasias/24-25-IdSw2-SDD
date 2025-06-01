@@ -3,6 +3,7 @@ package src.moduloUsuario.controlador;
 import java.util.List;
 import java.util.Scanner;
 
+import src.moduloInventario.modelo.Celda;
 import src.moduloMaquina.controlador.ControladorMaquina;
 import src.moduloUsuario.modelo.Usuario;
 import src.moduloUsuario.vista.IVistaUsuario;
@@ -59,5 +60,15 @@ public class ControladorUsuario {
             System.out.println("Selección inválida.");
         }
         return true;
+    }
+
+    public int seleccionarProducto(List<Celda> celdas) {
+        vista.mostrarMensaje("Seleccione el número del producto: ");
+        int numProducto = scanner.nextInt();
+        if (numProducto < 0 || numProducto >= celdas.size()) {
+            vista.mostrarMensaje("Selección inválida.");
+            return -1;
+        }
+        return numProducto;
     }
 }
