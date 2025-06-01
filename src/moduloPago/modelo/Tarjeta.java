@@ -1,4 +1,4 @@
-package src.moduloPago;
+package src.moduloPago.modelo;
 
 public class Tarjeta implements Pago {
     private String numero;
@@ -26,5 +26,12 @@ public class Tarjeta implements Pago {
 
     public void recargar(double monto) {
         this.saldoDisponible += monto;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+    public void setNumero(String numero) {
+        this.numero = numero;
     }
 }

@@ -1,10 +1,10 @@
 package src;
 
+import src.moduloCaja.modelo.Caja;
 import src.moduloMaquina.Maquina;
-import src.moduloCaja.Caja;
-import src.moduloPago.Efectivo;
-import src.moduloPago.Tarjeta;
-import src.moduloUsuario.Usuario;
+import src.moduloPago.modelo.Efectivo;
+import src.moduloPago.modelo.Tarjeta;
+import src.moduloUsuario.modelo.Usuario;
 import src.moduloMaquina.MaquinaFactory;
 
 import java.util.List;
@@ -15,7 +15,7 @@ public class App {
 
         Caja caja1 = new Caja(20.0);
         Caja caja2 = new Caja(15.0);
-        Efectivo efectivo = new Efectivo(10.0, caja1);
+        Efectivo efectivo = new Efectivo(10.0);
         Tarjeta tarjeta = new Tarjeta("123456789", "Juan Perez", 20.0);
         Usuario usuario = new Usuario(efectivo, tarjeta);
 

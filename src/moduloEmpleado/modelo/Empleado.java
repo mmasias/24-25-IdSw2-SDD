@@ -1,8 +1,8 @@
-package src.moduloEmpleado;
+package src.moduloEmpleado.modelo;
 
-import src.moduloCaja.Caja;
-import src.moduloInventario.Celda;
-import src.moduloInventario.Producto;
+import src.moduloCaja.modelo.Caja;
+import src.moduloInventario.modelo.Celda;
+import src.moduloInventario.modelo.Producto;
 
 public class Empleado {
     private String nombre;
@@ -13,18 +13,15 @@ public class Empleado {
 
     public void recargarCaja(Caja caja, double monto) {
         caja.agregarFondos(monto);
-        System.out.println("Caja recargada con: $" + monto);
     }
 
-    public void vaciarCaja(Caja caja) {
-        double retirado = caja.retirarTodo();
-        System.out.println("Caja vaciada. Total retirado: $" + retirado);
+    public double vaciarCaja(Caja caja) {
+        return caja.retirarTodo();
     }
 
     public void cargarCelda(Celda celda, Producto producto, int cantidad) {
         celda.setProducto(producto);
         celda.setCantidad(cantidad);
-        System.out.println("Celda cargada con " + cantidad + " unidades de " + producto.getNombre());
     }
 
     public String getNombre() {

@@ -1,7 +1,7 @@
-package src.moduloUsuario;
+package src.moduloUsuario.modelo;
 
-import src.moduloPago.Efectivo;
-import src.moduloPago.Tarjeta;
+import src.moduloPago.modelo.Efectivo;
+import src.moduloPago.modelo.Tarjeta;
 
 public class Usuario {
     private Efectivo efectivo;
