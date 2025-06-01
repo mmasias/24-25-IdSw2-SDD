@@ -2,13 +2,15 @@ package src.moduloMaquina;
 
 import src.moduloInventario.Celda;
 import src.moduloInventario.Producto;
+import src.moduloMaquina.modelo.Maquina;
 import src.moduloCaja.Caja;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MaquinaFactory {
-    public static List<Maquina> crearMaquinas(Caja caja1, Caja caja2) {
+    public static List<Maquina> crearMaquinas(int numeroMaquinas) {
+
         Producto[] productos = {
             new Producto("Coca-Cola", 1.50),
             new Producto("Papas Fritas", 1.00),
@@ -22,18 +24,16 @@ public class MaquinaFactory {
             new Producto("Té", 1.60)
         };
 
-        List<Celda> celdas1 = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            celdas1.add(new Celda(productos[i], 5));
-        }
-        List<Celda> celdas2 = new ArrayList<>();
-        for (int i = 5; i < 10; i++) {
-            celdas2.add(new Celda(productos[i], 5));
-        }
-
         List<Maquina> maquinas = new ArrayList<>();
-        maquinas.add(new Maquina(celdas1, caja1));
-        maquinas.add(new Maquina(celdas2, caja2));
+        for (int i = 0; i < numeroMaquinas; i++) {
+            Caja caja = new Caja(50);
+            List<Celda> celdas = new ArrayList<>();
+            for (int j = 0; j < 10; j++) {
+                Producto producto = productos[j % productos.length];
+                celdas.add(new Celda(producto, 5));
+            }
+            maquinas.add(new Maquina(celdas, caja));
+        }
         return maquinas;
     }
 }
