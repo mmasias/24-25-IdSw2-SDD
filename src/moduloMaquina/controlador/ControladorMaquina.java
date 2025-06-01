@@ -38,8 +38,7 @@ public class ControladorMaquina {
         // Aquí se mostrarían las máquinas disponibles al usuario
         System.out.println("Mostrando máquinas expendedoras disponibles...");
         // Lógica para listar las máquinas y sus productos
-        VistaMaquina vista = new VistaMaquina();
-        vista.mostrarMaquinas(maquinas);
+        vistaMaquina.mostrarMaquinas(maquinas);
     }
 
     public void seleccionarMaquina() {
