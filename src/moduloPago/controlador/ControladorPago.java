@@ -40,9 +40,8 @@ public class ControladorPago {
     }
 
     public void mostrarDesgloseEfectivo() {
-        vistaPago.mostrarDesgloseDoble(
-            efectivo.getDenominacionesUsuario(),
-            efectivo.getDenominacionesCaja()
+        vistaPago.mostrarDesgloseUsuario(
+            efectivo.getDenominacionesUsuario()
         );
     }
 

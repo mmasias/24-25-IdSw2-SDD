@@ -6,18 +6,12 @@ public class VistaPago {
         System.out.println(mensaje);
     }
 
-    public void mostrarDesgloseDoble(Map<Double, Integer> usuario, Map<Double, Integer> caja) {
+    public void mostrarDesgloseUsuario(Map<Double, Integer> usuario) {
         System.out.println(">> Desglose de denominaciones del usuario:");
         for (Map.Entry<Double, Integer> entry : usuario.entrySet()) {
             System.out.println("Denominación $" + entry.getKey() + ": " + entry.getValue() + " unidades");
         }
-
         System.out.println("------------------------------");
-
-        System.out.println(">> Desglose de denominaciones de caja:");
-        for (Map.Entry<Double, Integer> entry : caja.entrySet()) {
-            System.out.println("Denominación $" + entry.getKey() + ": " + entry.getValue() + " unidades");
-        }
     }
 
     public void mostrarMontoDisponible(Double monto) {

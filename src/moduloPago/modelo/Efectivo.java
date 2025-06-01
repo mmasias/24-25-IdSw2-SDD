@@ -8,12 +8,10 @@ public class Efectivo implements Pago {
     private Double cantidad;
     private double montoDisponible;
     private Map<Double, Integer> denominacionesUsuario; 
-    private Map<Double, Integer> denominacionesCaja; 
     public static final double[] denominaciones_aceptadas = {20, 10, 5, 2.00, 1.00, 0.50, 0.20, 0.10, 0.05};
 
     public Efectivo(double montoInicial) {
         this.denominacionesUsuario = new HashMap<>();
-        this.denominacionesCaja = new HashMap<>();
         this.montoDisponible = montoInicial;
     }
 
@@ -38,35 +36,12 @@ public class Efectivo implements Pago {
         return denominacionesUsuario;
     }
 
-    public Map<Double, Integer> getDenominacionesCaja() {
-        return denominacionesCaja;
-    }
-
-    public void mostrarDesgloseUsuario() {
-        System.out.println("Desglose de denominaciones del usuario:");
-        for (Map.Entry<Double, Integer> entry : denominacionesUsuario.entrySet()) {
-            System.out.println("Denominación €" + entry.getKey() + ": " + entry.getValue() + " unidades");
-        }
-    }
-
-    public void mostrarDesgloseCaja() {
-        System.out.println("Desglose de denominaciones de caja:");
-        for (Map.Entry<Double, Integer> entry : denominacionesCaja.entrySet()) {
-            System.out.println("Denominación $" + entry.getKey() + ": " + entry.getValue() + " unidades");
-        }
-        System.out.println("------------------------------");
-    }
-
     public void agregarDenominacionUsuario(double denominacion, int cantidad) {
         if (!esDenominacionAceptada(denominacion)) {
             throw new IllegalArgumentException("Denominación no válida: " + denominacion);
         }
         denominacionesUsuario.put(denominacion, denominacionesUsuario.getOrDefault(denominacion, 0) + cantidad);
         montoDisponible += denominacion * cantidad;
-    }
-
-    public void agregarDenominacionCaja(double denominacion, int cantidad) {
-        denominacionesCaja.put(denominacion, denominacionesCaja.getOrDefault(denominacion, 0) + cantidad);
     }
 
     public double getCantidad() {
