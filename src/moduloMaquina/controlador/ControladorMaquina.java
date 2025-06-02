@@ -10,6 +10,7 @@ import java.util.List;
 public class ControladorMaquina {
     private List<Maquina> maquinas;
     private Maquina maquinaSeleccionada = null;
+    private int numeroMaquinaSeleccionada = 0;
     private VistaMaquina vistaMaquina;
 
     public ControladorMaquina() {
@@ -24,8 +25,18 @@ public class ControladorMaquina {
         return maquinaSeleccionada;
     }
 
+    public void actualizarMaquina(Maquina maquina) {
+        
+        maquinas.set(numeroMaquinaSeleccionada, maquina);
+        maquinaSeleccionada = maquina;
+    }
+
     public void setMaquinaSeleccionada(Maquina maquinaSeleccionada) {
         this.maquinaSeleccionada = maquinaSeleccionada;
+    }
+
+    public int getNumeroMaquinaSeleccionada() {
+        return numeroMaquinaSeleccionada;
     }
 
     public void mostrarEstadoMaquina() {
@@ -53,6 +64,7 @@ public class ControladorMaquina {
 
     public void seleccionarMaquina() {
         int numeroMaquina = vistaMaquina.seleccionarMaquina(maquinas);
+        numeroMaquinaSeleccionada = vistaMaquina.getNumeroMaquinaSeleccionada();
         maquinaSeleccionada = maquinas.get(numeroMaquina);
     }
 

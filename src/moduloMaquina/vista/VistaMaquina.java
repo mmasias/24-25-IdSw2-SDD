@@ -10,16 +10,28 @@ public class VistaMaquina {
 
     private Scanner scanner;
 
+    private int numeroMaquinaSeleccionada = 0;
+
     public VistaMaquina() {
         scanner = new Scanner(System.in);
     }
 
+    public void open() {
+        if (scanner == null) {
+            scanner = new Scanner(System.in);
+        }
+    }
+
     public void close() {
         if (scanner != null) {
-            scanner.close();
             scanner = null;
         }
     }
+
+    public int getNumeroMaquinaSeleccionada() {
+        return numeroMaquinaSeleccionada;
+    }
+
     public void mostrarMaquinas(List<Maquina> maquinas) {
         if (maquinas == null || maquinas.size() == 0) {
             System.out.println("[INFO] No hay máquinas disponibles.");
@@ -32,25 +44,25 @@ public class VistaMaquina {
     }
 
     public int seleccionarMaquina(List<Maquina> maquinas) {
-        int numeroMaquina = -1;
+        open();
         boolean esValido = false;
         while (!esValido) {
             System.out.println("=== Selección de Máquina ===");
             mostrarMaquinas(maquinas);
             System.out.print("Ingrese el número de la máquina que desea seleccionar (0-" + (maquinas.size() - 1) + "): ");
-            numeroMaquina = scanner.nextInt();
+            numeroMaquinaSeleccionada = scanner.nextInt();
             scanner.nextLine(); 
 
-            if (numeroMaquina >= 0 && numeroMaquina < maquinas.size()) {
+            if (numeroMaquinaSeleccionada >= 0 && numeroMaquinaSeleccionada < maquinas.size()) {
                 esValido = true;
-                mostrarProductos(maquinas.get(numeroMaquina));
-                return numeroMaquina;
+                mostrarProductos(maquinas.get(numeroMaquinaSeleccionada));
+                return numeroMaquinaSeleccionada;
             } else {
                 System.out.println("Número de máquina inválido. Intente nuevamente.");
             }
         }
-
-        return numeroMaquina;
+        close();
+        return numeroMaquinaSeleccionada;
     }
 
     public void mostrarProductos(Maquina maquina) {

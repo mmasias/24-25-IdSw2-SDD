@@ -5,22 +5,21 @@ import src.moduloEmpleado.controlador.ControladorEmpleado;
 import src.moduloInventario.modelo.Celda;
 import src.moduloInventario.modelo.Producto;
 import src.moduloInventario.vista.IVistaInventario;
+import src.moduloInventario.vista.vistaInventario;
 import src.moduloPago.vista.VistaPago;
 import src.moduloUsuario.modelo.Usuario;
 import src.moduloUsuario.vista.IVistaUsuario;
-
-import java.util.ArrayList;
 import java.util.List;
 
-public class controladorInventario {
+public class ControladorInventario {
     private List<Celda> celdas;
     private IVistaInventario vista;
     private ControladorEmpleado controladorEmpleado;
 
-    public controladorInventario(IVistaInventario vista, ControladorEmpleado controladorEmpleado) {
-        this.vista = vista;
+    public ControladorInventario(ControladorEmpleado controladorEmpleado, List<Celda> celdas) {
+        this.vista = new vistaInventario();
         this.controladorEmpleado = controladorEmpleado;
-        this.celdas = new ArrayList<>();
+        this.celdas = celdas;
     }
 
     public void agregarCelda(Celda celda) {

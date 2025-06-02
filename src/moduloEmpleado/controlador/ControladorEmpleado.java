@@ -10,9 +10,9 @@ public class ControladorEmpleado {
     private Empleado empleado;
     private VistaEmpleado vista;
 
-    public ControladorEmpleado(Empleado empleado, VistaEmpleado vista) {
+    public ControladorEmpleado(Empleado empleado) {
         this.empleado = empleado;
-        this.vista = vista;
+        this.vista = new VistaEmpleado();
     }
 
     public void recargarCaja(Caja caja, double monto) {

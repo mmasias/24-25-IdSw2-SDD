@@ -15,9 +15,9 @@ public class ControladorCaja {
     private Caja caja;
     private VistaCaja vista;
 
-    public ControladorCaja(Caja caja, VistaCaja vista) {
+    public ControladorCaja(Caja caja) {
         this.caja = caja;
-        this.vista = vista;
+        this.vista = new VistaCaja();
     }
 
     public void agregarFondos(double monto) {

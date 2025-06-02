@@ -2,33 +2,38 @@ package src.moduloPago.controlador;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
-import java.util.ResourceBundle.Control;
-
 import src.moduloCaja.controlador.ControladorCaja;
-import src.moduloInventario.controlador.controladorInventario;
+import src.moduloInventario.controlador.ControladorInventario;
 import src.moduloInventario.modelo.Celda;
-import src.moduloPago.modelo.Efectivo;
-import src.moduloPago.modelo.Tarjeta;
+import src.moduloMaquina.modelo.Maquina;
 import src.moduloPago.vista.VistaPago;
 import src.moduloUsuario.controlador.ControladorUsuario;
 import src.moduloUsuario.modelo.Usuario;
 
 public class ControladorPago {
-    private Efectivo efectivo;
-    private Tarjeta tarjeta;
     private VistaPago vistaPago;
+    private Maquina maquina;
+    private Usuario usuario;
+    private ControladorUsuario controladorUsuario;
 
-    public ControladorPago(Efectivo efectivo, Tarjeta tarjeta, VistaPago vistaPago) {
-        this.efectivo = efectivo;
-        this.tarjeta = tarjeta;
-        this.vistaPago = vistaPago;
+    public ControladorPago(Maquina maquina, ControladorUsuario controladorUsuario) {
+        this.vistaPago = new VistaPago();
+        this.maquina = maquina;
+        this.usuario = controladorUsuario.getUsuario();
+        this.controladorUsuario = controladorUsuario;
     }
 
-    public boolean pagarConEfectivo(Usuario usuario, double precioProducto, Scanner scanner,
-            ControladorCaja controladorCaja) {
+    public Maquina getMaquina() {
+        return maquina;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public boolean pagarConEfectivo(double precioProducto, ControladorCaja controladorCaja) {
         // Permitir al usuario ingresar denominaciones
-        double totalIngresado = ingresarDenominaciones(usuario, precioProducto, scanner);
+        double totalIngresado = ingresarDenominaciones(precioProducto);
 
         if (totalIngresado < precioProducto) {
             vistaPago.mostrarMensaje("Fondos insuficientes para realizar la compra.");
@@ -75,7 +80,7 @@ public class ControladorPago {
 
     public boolean pagarConTarjeta(double monto) {
         try {
-            tarjeta.retirarSaldo(monto);
+            usuario.getTarjeta().retirarSaldo(monto);
             vistaPago.mostrarMensaje("Pago con tarjeta exitoso.");
             return true;
         } catch (IllegalArgumentException e) {
@@ -85,11 +90,10 @@ public class ControladorPago {
     }
 
     public void mostrarDesgloseEfectivo() {
-        vistaPago.mostrarDesgloseUsuario(
-                efectivo.getDenominacionesUsuario());
+        vistaPago.mostrarDesgloseUsuario(usuario.getEfectivo().getDenominacionesUsuario());
     }
 
-    public double ingresarDenominaciones(Usuario usuario, double precioProducto, Scanner scanner) {
+    public double ingresarDenominaciones(double precioProducto) {
         vistaPago.mostrarMensaje(
                 "Ingrese las denominaciones con las que va a pagar. Ingrese 0 como denominación para terminar:");
         double totalIngresado = 0;
@@ -97,7 +101,7 @@ public class ControladorPago {
 
         while (!suficiente) {
             vistaPago.mostrarMensaje("Denominación (€): ");
-            double denominacion = scanner.nextDouble();
+            double denominacion = vistaPago.getScanner().nextDouble();
             if (denominacion == 0) {
                 break;
             }
@@ -106,7 +110,7 @@ public class ControladorPago {
                 continue;
             }
             vistaPago.mostrarMensaje("Cantidad: ");
-            int cantidad = scanner.nextInt();
+            int cantidad = vistaPago.getScanner().nextInt();
             if (cantidad <= 0) {
                 vistaPago.mostrarMensaje("Cantidad inválida. Intente de nuevo.");
                 continue;
@@ -126,10 +130,9 @@ public class ControladorPago {
         return totalIngresado;
     }
 
-    public boolean realizarPago(int metodoPago, Usuario usuario, double precioProducto, Scanner scanner,
-            ControladorCaja controladorCaja) {
+    public boolean realizarPago(int metodoPago, double precioProducto, ControladorCaja controladorCaja) {
         if (metodoPago == 1) {
-            return pagarConEfectivo(usuario, precioProducto, scanner, controladorCaja);
+            return pagarConEfectivo(precioProducto, controladorCaja);
         } else if (metodoPago == 2) {
             return pagarConTarjeta(precioProducto);
         } else {
@@ -138,20 +141,10 @@ public class ControladorPago {
         }
     }
 
-    public int seleccionarMetodoPago(Scanner scanner) {
-        vistaPago.mostrarMensaje("Seleccione método de pago (1: Efectivo, 2: Tarjeta): ");
-        int metodoPago = scanner.nextInt();
-        if (metodoPago != 1 && metodoPago != 2) {
-            vistaPago.mostrarMensaje("Método de pago inválido.");
-            return -1;
-        }
-        return metodoPago;
-    }
-
-    public void procesarCompra(Usuario usuario, Scanner scanner, ControladorCaja controladorCaja,
-            ControladorUsuario controladorUsuario, controladorInventario controladorInventario) {
+    public void procesarCompra(ControladorCaja controladorCaja, ControladorInventario controladorInventario) {
+        
         // Seleccionar producto
-        int numProducto = seleccionarProducto(controladorUsuario, controladorInventario, scanner);
+        int numProducto = seleccionarProducto(controladorUsuario);
         if (numProducto == -1) {
             vistaPago.mostrarMensaje("Selección de producto cancelada.");
             return;
@@ -160,37 +153,34 @@ public class ControladorPago {
         double precioProducto = obtenerPrecioProducto(controladorInventario, numProducto);
 
         // Seleccionar método de pago
-        int metodoPago = seleccionarMetodoPago(scanner);
+        int metodoPago = vistaPago.seleccionarMetodoPago();
         if (metodoPago == -1) {
             vistaPago.mostrarMensaje("Selección de método de pago cancelada.");
             return;
         }
 
         // Realizar pago según el método seleccionado
-        boolean pagoExitoso = realizarPago(metodoPago, usuario, precioProducto, scanner, controladorCaja);
+        boolean pagoExitoso = realizarPago(metodoPago, precioProducto, controladorCaja);
         if (!pagoExitoso) {
             vistaPago.mostrarMensaje("Pago fallido. Intente nuevamente.");
             return;
         }
 
         // Despachar producto
-        despacharProducto(controladorInventario, numProducto, usuario, controladorCaja);
+        despacharProducto(controladorInventario, numProducto, controladorCaja);
     }
 
-    private int seleccionarProducto(ControladorUsuario controladorUsuario, controladorInventario controladorInventario,
-            Scanner scanner) {
-        List<Celda> celdas = controladorInventario.getCeldas();
+    private int seleccionarProducto(ControladorUsuario controladorUsuario) {
+        List<Celda> celdas = maquina.getCeldas();
         return controladorUsuario.seleccionarProducto(celdas);
     }
 
-    private double obtenerPrecioProducto(controladorInventario controladorInventario, int numProducto) {
+    private double obtenerPrecioProducto(ControladorInventario controladorInventario, int numProducto) {
         Celda celda = controladorInventario.getCelda(numProducto);
         return celda.getProducto().getPrecio();
     }
 
-    private void despacharProducto(controladorInventario controladorInventario, int numProducto, Usuario usuario,
-            ControladorCaja controladorCaja) {
-        controladorInventario.despacharProducto(numProducto, usuario, controladorCaja, vistaPago,
-                controladorUsuario.getVista());
+    private void despacharProducto(ControladorInventario controladorInventario, int numProducto,ControladorCaja controladorCaja) {
+        controladorInventario.despacharProducto(numProducto, usuario, controladorCaja, vistaPago, controladorUsuario.getVistaUsuario());
     }
 }

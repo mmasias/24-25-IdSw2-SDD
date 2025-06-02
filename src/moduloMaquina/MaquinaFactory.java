@@ -41,17 +41,5 @@ public class MaquinaFactory {
             maquinas.add(new Maquina(celdas, caja));
         }
         return maquinas;
-    }
-
-    public static List<ControladorMaquina> crearControladoresMaquinas(int numeroMaquinas) {
-        List<Maquina> maquinas = crearMaquinas(numeroMaquinas);
-        List<ControladorMaquina> controladores = new ArrayList<>();
-        VistaUsuario vistaUsuario = new VistaUsuario(); 
-        for (Maquina maquina : maquinas) {
-            controladores.add(new ControladorMaquina(maquina, vistaUsuario)); 
-        }
-        return controladores;
-    }
-
-    
+    }    
 }
