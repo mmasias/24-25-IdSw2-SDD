@@ -1,0 +1,25 @@
+@startuml diagramaDeClasesRelaciones
+hide empty members
+hide circles
+
+class Maquina
+class Pago
+class Efectivo
+class Tarjeta
+class Usuario
+class Productos
+class Celdas
+class Empleado
+class Caja
+
+Maquina *-- Celdas
+Maquina *-r- Caja
+Caja o-- Efectivo  
+Celdas o-- Productos
+Usuario -U-> Celdas : selecciona 
+Usuario --> Pago : efectua 
+Empleado .U..> Maquina : abastece
+Pago -r-> Efectivo : maneja
+Pago -d-> Tarjeta : maneja
+
+@enduml

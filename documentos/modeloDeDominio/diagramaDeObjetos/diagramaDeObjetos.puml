@@ -1,0 +1,70 @@
+@startuml diagramaDeObjetos
+hide empty members
+hide circle
+abstract "Maquina:Maquina1"{
+    id: 1
+    Ubicacion: Cafetería
+    Estado: "activo"
+}
+
+class "Celdas:Celda12"{
+    id: 12
+    id_maquina : 1
+    Capacidad: 10
+    Precio: 1.95
+    Cantidad: 9
+    id_producto: 3
+}
+
+class "Productos:Producto1"{
+    id: 3
+    Nombre: Kinder Bueno
+    Fecha_expiración: 12/11/2025
+}
+
+
+class "Usuario:Usuario1"{
+    id: 1
+    Nombre: "Diego"
+    CantidadTarjeta: 10
+    CantidadMonedero: 10
+    CantidadEfectivo: 10
+}
+
+
+class "Pago:Pago1"{
+    id: 1
+    Monto: 1.95
+    saldo: 2.00
+    Estado: "Pago Exitoso"
+}
+
+class "Empleado:Empleado1"{
+   id: 1
+   Nombre: "Carlos"
+
+}
+
+class "Caja:CajaMaquina1"{
+    id: 1
+    MonedasTotales: []
+    BilletesTotales: []
+}
+
+class "Efectivo:EfectivoDiego"{
+    Denominacion: 1.00
+    Tipo: "Moneda"
+}
+
+
+
+"Maquina:Maquina1" --> "Celdas:Celda12" : tiene
+"Celdas:Celda12" --> "Productos:Producto1" : contiene
+"Usuario:Usuario1" -U-> "Celdas:Celda12" : selecciona
+"Usuario:Usuario1" --> "Pago:Pago1" : efectua
+"Empleado:Empleado1" -U-> "Maquina:Maquina1" : abastece
+"Pago:Pago1" -R-> "Efectivo:EfectivoDiego" : maneja
+"Maquina:Maquina1" --> "Caja:CajaMaquina1" : contiene
+"Caja:CajaMaquina1" --> "Efectivo:EfectivoDiego" : contiene
+
+@enduml

@@ -1,0 +1,50 @@
+@startuml
+package "moduloMaquina" {
+  class Maquina
+  class MaquinaFactory 
+  
+}
+
+package "moduloInventario" {
+  class Celda
+  class Producto
+}
+
+package "moduloCaja" {
+  class Caja
+}
+
+package "moduloPago" {
+  interface Pago
+  class Efectivo
+  class Tarjeta
+}
+
+package "moduloUsuario" {
+  class Usuario
+}
+
+package "moduloEmpleado" {
+  class Empleado
+}
+
+Maquina o-- Celda : contiene
+Maquina o-- Caja
+Maquina --> Usuario
+Maquina ..> Pago
+
+Celda *-- Producto
+Efectivo ..> Caja
+Usuario o-- Tarjeta
+Usuario o-- Efectivo
+
+Empleado ..> Caja : recargar / vaciar
+Empleado ..> Celda : cargar productos
+
+Tarjeta ..|> Pago
+Efectivo ..|> Pago
+
+MaquinaFactory --> Maquina : crea
+MaquinaFactory --> Celda : crea
+MaquinaFactory --> Producto : crea
+@enduml

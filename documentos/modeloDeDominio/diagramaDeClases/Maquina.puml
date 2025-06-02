@@ -1,0 +1,9 @@
+@startuml
+
+class Maquina {
+    - saldo: float
+    - inventario: Map<String, Integer>
+    - precios: Map<String, Float>
+}
+
+@enduml
