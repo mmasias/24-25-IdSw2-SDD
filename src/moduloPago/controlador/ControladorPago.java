@@ -22,7 +22,7 @@ public class ControladorPago {
         this.maquina = maquina;
         this.usuario = controladorUsuario.getUsuario();
         this.controladorUsuario = controladorUsuario;
-        this.controladorInventario = controladorInventario
+        this.controladorInventario = controladorInventario;
     }
 
     public Maquina getMaquina() {
@@ -149,7 +149,7 @@ public class ControladorPago {
             return;
         }
     
-        double precioProducto = obtenerPrecioProducto(controladorInventario, numProducto);
+        double precioProducto = obtenerPrecioProducto( numProducto);
     
         int metodoPago = vistaPago.seleccionarMetodoPago();
         if (metodoPago == -1) {
@@ -163,7 +163,7 @@ public class ControladorPago {
             return;
         }
     
-        despacharProducto(controladorInventario, numProducto, controladorCaja);
+        despacharProducto(numProducto, controladorCaja);
     
         vistaPago.mostrarMensaje("\n=== Estado final de la caja ===");
         controladorCaja.mostrarDesgloseCaja();
@@ -185,6 +185,6 @@ public class ControladorPago {
     }
 
     private void despacharProducto( int numProducto,ControladorCaja controladorCaja) {
-        controladorInventario.despacharProducto(numProducto, usuario, controladorCaja, vistaPago, controladorUsuario.getVistaUsuario());
+        controladorInventario.despacharProducto(numProducto, controladorCaja, vistaPago);
     }
 }

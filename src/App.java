@@ -21,7 +21,7 @@ public class App {
         Usuario usuario = UsuarioFactory.crearUsuario();
         ControladorUsuario controladorUsuario = new ControladorUsuario(usuario);
         ControladorMaquina controladorMaquina = new ControladorMaquina();
-
+        controladorMaquina.iniciarMaquinas();
         boolean continuar = true;
         ControladorCaja controladorCaja = null;
         while (continuar) {

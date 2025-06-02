@@ -68,7 +68,6 @@ public class ControladorMaquina {
     public void init() {
 
         boolean esSeleccionado = false; 
-        iniciarMaquinas();
         while (esSeleccionado == false) {
             seleccionarMaquina();
             if (maquinaSeleccionada != null) {

@@ -7,8 +7,6 @@ import src.moduloInventario.modelo.Producto;
 import src.moduloInventario.vista.IVistaInventario;
 import src.moduloInventario.vista.vistaInventario;
 import src.moduloPago.vista.VistaPago;
-import src.moduloUsuario.modelo.Usuario;
-import src.moduloUsuario.vista.IVistaUsuario;
 import java.util.List;
 
 public class ControladorInventario {
@@ -61,15 +59,20 @@ public class ControladorInventario {
         return null;
     }
 
+    public List<Celda> getCeldas() {
+        return celdas;
+    }
+
     public void mensajePersonalizado(String texto) {
         vista.mostrarMensaje(texto);
     }
 
-    public void despacharProducto(int numProducto, Usuario usuario, ControladorCaja controladorCaja, VistaPago vistaPago, IVistaUsuario vistaUsuario) {
+    public void despacharProducto(int numProducto, ControladorCaja controladorCaja, VistaPago vistaPago) {
         if (numProducto >= 0 && numProducto < celdas.size()) {
             Celda celda = celdas.get(numProducto);
             if (celda.getCantidad() > 0) {
                 celda.disminuirCantidad();
+                celdas.set(numProducto, celda);
                 vistaPago.mostrarMensaje("Producto despachado: " + celda.getProducto().getNombre());
             } else {
                 vistaPago.mostrarMensaje("Producto agotado.");
