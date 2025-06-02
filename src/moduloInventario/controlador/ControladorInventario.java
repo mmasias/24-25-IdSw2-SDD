@@ -30,28 +30,6 @@ public class ControladorInventario {
         }
     }
 
-    public boolean disminuirProducto(int indice) {
-        if (indice >= 0 && indice < celdas.size()) {
-            Celda celda = celdas.get(indice);
-            if (celda.getCantidad() > 0) {
-                celda.disminuirCantidad();
-                vista.mostrarMensaje("Producto entregado.");
-                return true;
-            } else {
-                vista.mostrarMensaje("Producto agotado.");
-
-                Producto producto = celda.getProducto();
-                if (celda.getCantidad() <= 0) {
-                    int cantidadRecarga = 5;
-                    controladorEmpleado.cargarCelda(celda, producto, cantidadRecarga);
-                }
-            }
-        } else {
-            vista.mostrarMensaje("Celda inválida.");
-        }
-        return false;
-    }
-
     public Celda getCelda(int indice) {
         if (indice >= 0 && indice < celdas.size()) {
             return celdas.get(indice);
@@ -76,6 +54,11 @@ public class ControladorInventario {
                 vistaPago.mostrarMensaje("Producto despachado: " + celda.getProducto().getNombre());
             } else {
                 vistaPago.mostrarMensaje("Producto agotado.");
+                Producto producto = celda.getProducto();
+                if (celda.getCantidad() <= 0) {
+                    int cantidadRecarga = 5;
+                    controladorEmpleado.cargarCelda(celda, producto, cantidadRecarga);
+                }
             }
         } else {
             vistaPago.mostrarMensaje("Celda inválida.");

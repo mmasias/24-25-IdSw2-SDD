@@ -49,7 +49,7 @@ public class ControladorEmpleado {
             return;
         }
         empleado.cargarCelda(celda, producto, cantidad);
-        vista.mostrarMensaje("Celda cargada correctamente.");
+        vista.mostrarMensaje("El empleado cargo la celda correctamente.");
     }
 
     public void mostrarNombreEmpleado() {
