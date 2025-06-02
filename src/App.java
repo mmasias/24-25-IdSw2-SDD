@@ -29,12 +29,12 @@ public class App {
             Maquina maquina = controladorMaquina.getMaquinaSeleccionada();
 
             controladorUsuario.mostrarUsuario();
-            ControladorPago controladorPago = new ControladorPago(maquina, controladorUsuario);
             ControladorInventario controladorInventario = new ControladorInventario(controladorEmpleado, maquina.getCeldas());
+            ControladorPago controladorPago = new ControladorPago(maquina, controladorUsuario, controladorInventario);
             if (controladorCaja == null) {
                 controladorCaja = new ControladorCaja(maquina.getCaja());
             }
-            controladorPago.procesarCompra(controladorCaja, controladorInventario);
+            controladorPago.procesarCompra(controladorCaja);
             controladorUsuario.setUsuario(controladorPago.getUsuario());
             controladorMaquina.actualizarMaquina(controladorPago.getMaquina());
         }

@@ -15,12 +15,14 @@ public class ControladorPago {
     private Maquina maquina;
     private Usuario usuario;
     private ControladorUsuario controladorUsuario;
+    private ControladorInventario controladorInventario;
 
-    public ControladorPago(Maquina maquina, ControladorUsuario controladorUsuario) {
+    public ControladorPago(Maquina maquina, ControladorUsuario controladorUsuario, ControladorInventario controladorInventario) {
         this.vistaPago = new VistaPago();
         this.maquina = maquina;
         this.usuario = controladorUsuario.getUsuario();
         this.controladorUsuario = controladorUsuario;
+        this.controladorInventario = controladorInventario
     }
 
     public Maquina getMaquina() {
@@ -29,6 +31,10 @@ public class ControladorPago {
 
     public Usuario getUsuario() {
         return usuario;
+    }
+
+    public ControladorInventario getControladorInventario(){
+        return controladorInventario;
     }
 
     public boolean pagarConEfectivo(double precioProducto, ControladorCaja controladorCaja) {
@@ -136,7 +142,7 @@ public class ControladorPago {
         }
     }
 
-    public void procesarCompra(ControladorCaja controladorCaja, ControladorInventario controladorInventario) {
+    public void procesarCompra(ControladorCaja controladorCaja) {
         int numProducto = seleccionarProducto(controladorUsuario);
         if (numProducto == -1) {
             vistaPago.mostrarMensaje("Selección de producto cancelada.");
@@ -164,6 +170,8 @@ public class ControladorPago {
     
         vistaPago.mostrarMensaje("\n=== Estado final del usuario ===");
         controladorUsuario.mostrarUsuario();
+
+        maquina.setCeldas(controladorInventario.getCeldas());
     }
 
     private int seleccionarProducto(ControladorUsuario controladorUsuario) {
@@ -171,12 +179,12 @@ public class ControladorPago {
         return controladorUsuario.seleccionarProducto(celdas);
     }
 
-    private double obtenerPrecioProducto(ControladorInventario controladorInventario, int numProducto) {
+    private double obtenerPrecioProducto(int numProducto) {
         Celda celda = controladorInventario.getCelda(numProducto);
         return celda.getProducto().getPrecio();
     }
 
-    private void despacharProducto(ControladorInventario controladorInventario, int numProducto,ControladorCaja controladorCaja) {
+    private void despacharProducto( int numProducto,ControladorCaja controladorCaja) {
         controladorInventario.despacharProducto(numProducto, usuario, controladorCaja, vistaPago, controladorUsuario.getVistaUsuario());
     }
 }

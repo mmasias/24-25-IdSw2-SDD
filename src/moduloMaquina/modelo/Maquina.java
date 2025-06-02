@@ -21,4 +21,8 @@ public class Maquina {
     public Caja getCaja() {
         return caja;
     }
+
+    public void setCeldas(List<Celda> celdas){
+        this.celdas = celdas;
+    }
 }
