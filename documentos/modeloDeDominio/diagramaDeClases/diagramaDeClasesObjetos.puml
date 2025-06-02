@@ -63,6 +63,7 @@ package "moduloUsuario" {
     package "controlador" {
         class ControladorUsuario
     }
+    class UsuarioFactory
 }
 
 package "moduloEmpleado" {
@@ -75,54 +76,47 @@ package "moduloEmpleado" {
     package "controlador" {
         class ControladorEmpleado
     }
+    class EmpleadoFactory
 }
 
 Maquina o-- Celda : contiene
-Maquina o-- Caja
-Maquina --> Usuario
-Maquina ..> Pago
-
-Celda *-- Producto
-Efectivo ..> Caja
+Maquina o-- Caja : contiene
+Celda *-- Producto : contiene
 Usuario o-- Tarjeta
 Usuario o-- Efectivo
 
-Empleado .u.> Caja : recargar / vaciar
-Empleado .u.> Celda : cargar productos
-
-Tarjeta .u.|> Pago
 Efectivo .u.|> Pago
+Tarjeta .u.|> Pago
+VistaInventario .u.|> IVistaInventario
+VistaUsuario .u.|> IVistaUsuario
 
 MaquinaFactory --> Maquina : crea
-MaquinaFactory --> Celda : crea
-MaquinaFactory --> Producto : crea
+UsuarioFactory --> Usuario : crea
+EmpleadoFactory --> Empleado : crea
 
 ControladorMaquina --> Maquina
-VistaMaquina --> ControladorMaquina
 ControladorMaquina --> VistaMaquina
 
 ControladorInventario --> Celda
 ControladorInventario --> Producto
-VistaInventario --> ControladorInventario
-ControladorInventario --> VistaInventario
-VistaInventario ..|> IVistaInventario
+ControladorInventario --> IVistaInventario
 
 ControladorCaja --> Caja
-VistaCaja --> ControladorCaja
 ControladorCaja --> VistaCaja
 
-ControladorPago --> Pago
-ControladorPago --> Efectivo
-ControladorPago --> Tarjeta
-VistaPago --> ControladorPago
 ControladorPago --> VistaPago
 
 ControladorUsuario --> Usuario
-VistaUsuario --> ControladorUsuario
-ControladorUsuario --> VistaUsuario
-VistaUsuario .u.|> IVistaUsuario
+ControladorUsuario --> IVistaUsuario
 
 ControladorEmpleado --> Empleado
-VistaEmpleado --> ControladorEmpleado
 ControladorEmpleado --> VistaEmpleado
+
+ControladorPago --> ControladorUsuario
+ControladorPago --> ControladorInventario
+ControladorPago -u-> ControladorCaja
+ControladorInventario --> ControladorEmpleado
+ControladorMaquina --> ControladorInventario
+ControladorMaquina ---> ControladorCaja
+
 @enduml
