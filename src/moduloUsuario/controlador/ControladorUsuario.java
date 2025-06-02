@@ -37,11 +37,12 @@ public class ControladorUsuario {
         return usuario;
     }
 
+    public void mostrarUsuario() {
+        vista.mostrarUsuario(usuario);
+    }
+
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
-        if (vista != null) {
-            vista.mostrarUsuario(usuario);
-        }
     }
 
     public IVistaUsuario getVistaUsuario() {

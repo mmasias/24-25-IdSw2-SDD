@@ -32,45 +32,30 @@ public class ControladorPago {
     }
 
     public boolean pagarConEfectivo(double precioProducto, ControladorCaja controladorCaja) {
-        // Permitir al usuario ingresar denominaciones
         double totalIngresado = ingresarDenominaciones(precioProducto);
 
         if (totalIngresado < precioProducto) {
             vistaPago.mostrarMensaje("Fondos insuficientes para realizar la compra.");
+            usuario.getEfectivo().getDenominacionesUsuario().clear();
             return false;
         }
 
-        // Mostrar desglose del efectivo antes del pago
-        vistaPago.mostrarMensaje("=== Estado del efectivo antes del pago ===");
-        mostrarDesgloseEfectivo();
+        vistaPago.mostrarMensaje("Total ingresado: €" + totalIngresado);
 
-        // Retirar el monto a pagar del efectivo del usuario
         try {
-            usuario.getEfectivo().retirarMonto(precioProducto);
-
-            // Transferir las denominaciones a la caja
             for (Map.Entry<Double, Integer> entry : usuario.getEfectivo().getDenominacionesUsuario().entrySet()) {
                 double denominacion = entry.getKey();
                 int cantidad = entry.getValue();
                 if (cantidad > 0) {
-                    double monto = denominacion * cantidad;
-                    controladorCaja.agregarFondos(monto); // Usar agregarFondos con el monto calculado
+                    usuario.getEfectivo().retirarDenominacionUsuario(denominacion, cantidad);
+                    controladorCaja.agregarDenominacion(denominacion, cantidad);
                 }
             }
 
-            // Limpiar las denominaciones del usuario después de pagarlas
-            usuario.getEfectivo().getDenominacionesUsuario().clear();
+            vistaPago.mostrarMensaje("Fondos agregados a la caja correctamente.");
 
-            // Agregar los fondos a la caja
-            controladorCaja.agregarFondos(precioProducto);
-
-            // Procesar cambio si es necesario
             controladorCaja.procesarCambio(totalIngresado, precioProducto, usuario);
-
-            // Mostrar desglose actualizado después de la transacción
-            vistaPago.mostrarMensaje("\n=== Estado del efectivo después del pago ===");
-            mostrarDesgloseEfectivo();
-
+            usuario.getEfectivo().getDenominacionesUsuario().clear();
             return true;
         } catch (IllegalArgumentException e) {
             vistaPago.mostrarMensaje("Error al procesar el pago: " + e.getMessage());
@@ -89,19 +74,22 @@ public class ControladorPago {
         }
     }
 
-    public void mostrarDesgloseEfectivo() {
-        vistaPago.mostrarDesgloseUsuario(usuario.getEfectivo().getDenominacionesUsuario());
-    }
-
     public double ingresarDenominaciones(double precioProducto) {
         vistaPago.mostrarMensaje(
                 "Ingrese las denominaciones con las que va a pagar. Ingrese 0 como denominación para terminar:");
         double totalIngresado = 0;
         boolean suficiente = false;
-
+    
         while (!suficiente) {
             vistaPago.mostrarMensaje("Denominación (€): ");
-            double denominacion = vistaPago.getScanner().nextDouble();
+            String inputDenominacion = vistaPago.getScanner().nextLine().trim().replace(",", ".");
+            double denominacion;
+            try {
+                denominacion = Double.parseDouble(inputDenominacion);
+            } catch (NumberFormatException e) {
+                vistaPago.mostrarMensaje("Por favor, ingrese un valor numérico válido.");
+                continue;
+            }
             if (denominacion == 0) {
                 break;
             }
@@ -110,7 +98,14 @@ public class ControladorPago {
                 continue;
             }
             vistaPago.mostrarMensaje("Cantidad: ");
-            int cantidad = vistaPago.getScanner().nextInt();
+            String inputCantidad = vistaPago.getScanner().nextLine().trim();
+            int cantidad;
+            try {
+                cantidad = Integer.parseInt(inputCantidad);
+            } catch (NumberFormatException e) {
+                vistaPago.mostrarMensaje("Por favor, ingrese una cantidad válida.");
+                continue;
+            }
             if (cantidad <= 0) {
                 vistaPago.mostrarMensaje("Cantidad inválida. Intente de nuevo.");
                 continue;
@@ -142,32 +137,33 @@ public class ControladorPago {
     }
 
     public void procesarCompra(ControladorCaja controladorCaja, ControladorInventario controladorInventario) {
-        
-        // Seleccionar producto
         int numProducto = seleccionarProducto(controladorUsuario);
         if (numProducto == -1) {
             vistaPago.mostrarMensaje("Selección de producto cancelada.");
             return;
         }
-
+    
         double precioProducto = obtenerPrecioProducto(controladorInventario, numProducto);
-
-        // Seleccionar método de pago
+    
         int metodoPago = vistaPago.seleccionarMetodoPago();
         if (metodoPago == -1) {
             vistaPago.mostrarMensaje("Selección de método de pago cancelada.");
             return;
         }
-
-        // Realizar pago según el método seleccionado
+    
         boolean pagoExitoso = realizarPago(metodoPago, precioProducto, controladorCaja);
         if (!pagoExitoso) {
             vistaPago.mostrarMensaje("Pago fallido. Intente nuevamente.");
             return;
         }
-
-        // Despachar producto
+    
         despacharProducto(controladorInventario, numProducto, controladorCaja);
+    
+        vistaPago.mostrarMensaje("\n=== Estado final de la caja ===");
+        controladorCaja.mostrarDesgloseCaja();
+    
+        vistaPago.mostrarMensaje("\n=== Estado final del usuario ===");
+        controladorUsuario.mostrarUsuario();
     }
 
     private int seleccionarProducto(ControladorUsuario controladorUsuario) {

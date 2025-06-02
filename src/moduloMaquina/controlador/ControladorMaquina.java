@@ -50,15 +50,12 @@ public class ControladorMaquina {
 
     public void iniciarMaquinas() {
         int numeroDeMaquinas = 2;
-        System.out.println("[INFO] Iniciando máquinas expendedoras...");
         maquinas = MaquinaFactory.crearMaquinas(numeroDeMaquinas);
         System.out.println("[INFO] Máquinas expendedoras iniciadas correctamente.");
     }
 
     public void mostrarMaquinas() {
-        // Aquí se mostrarían las máquinas disponibles al usuario
         System.out.println("Mostrando máquinas expendedoras disponibles...");
-        // Lógica para listar las máquinas y sus productos
         vistaMaquina.mostrarMaquinas(maquinas);
     }
 
@@ -70,9 +67,7 @@ public class ControladorMaquina {
 
     public void init() {
 
-        boolean esSeleccionado = false; // Esta condición puede ser modificada según la lógica del programa
-        // Método para inicializar el controlador, si es necesario
-        System.out.println("[INFO] Inicializando controlador de máquinas expendedoras...");
+        boolean esSeleccionado = false; 
         iniciarMaquinas();
         while (esSeleccionado == false) {
             seleccionarMaquina();

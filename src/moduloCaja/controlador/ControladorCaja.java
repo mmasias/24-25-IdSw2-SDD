@@ -8,7 +8,6 @@ import java.util.Map;
 
 import src.moduloCaja.modelo.Caja;
 import src.moduloCaja.vista.VistaCaja;
-import src.moduloPago.modelo.Efectivo;
 import src.moduloUsuario.modelo.Usuario;
 
 public class ControladorCaja {
@@ -75,11 +74,9 @@ public class ControladorCaja {
         }
 
         if (montoRestante != 0) {
-            // No se puede entregar el cambio exacto
             return new HashMap<>();
         }
 
-        // Descontar las monedas/billetes de la caja
         for (Map.Entry<Double, Integer> entry : cambioEntregado.entrySet()) {
             caja.retirarDenominacion(entry.getKey(), entry.getValue());
         }
@@ -95,23 +92,26 @@ public class ControladorCaja {
     }
 
     public void procesarCambio(double totalIngresado, double precioProducto, Usuario usuario) {
-    double cambio = totalIngresado - precioProducto;
-    if (cambio > 0) {
-        vista.mostrarMensaje("Devolviendo cambio: €" + cambio);
-        Map<Double, Integer> cambioEntregado = entregarCambio(cambio);
+        double cambio = totalIngresado - precioProducto;
+        if (cambio > 0) {
+            vista.mostrarMensaje("Devolviendo cambio: €" + cambio);
+            Map<Double, Integer> cambioEntregado = entregarCambio(cambio);
 
-        if (!cambioEntregado.isEmpty()) {
-            vista.mostrarMensaje("Desglose del cambio:");
-            for (Map.Entry<Double, Integer> entry : cambioEntregado.entrySet()) {
-                vista.mostrarMensaje(entry.getKey() + "€: " + entry.getValue() + " unidades");
-                usuario.getEfectivo().agregarDenominacionUsuario(entry.getKey(), entry.getValue());
+            if (!cambioEntregado.isEmpty()) {
+                vista.mostrarMensaje("Desglose del cambio:");
+                for (Map.Entry<Double, Integer> entry : cambioEntregado.entrySet()) {
+                    vista.mostrarMensaje(entry.getKey() + "€: " + entry.getValue() + " unidades");
+                    usuario.getEfectivo().agregarDenominacionUsuario(entry.getKey(), entry.getValue());
+                }
+
+                usuario.getEfectivo().agregarMonto(cambio);
+            } else {
+                vista.mostrarMensaje("No se pudo entregar el cambio exacto. Por favor, contacte al administrador.");
             }
-
-            // Agregar el cambio al monto disponible del usuario
-            usuario.getEfectivo().agregarMonto(cambio);
-        } else {
-            vista.mostrarMensaje("No se pudo entregar el cambio exacto. Por favor, contacte al administrador.");
         }
     }
-}
+    
+    public void agregarDenominacion(double denominacion, int cantidad) {
+        caja.agregarDenominacion(denominacion, cantidad);
+    }
 }

@@ -41,7 +41,17 @@ public class Efectivo implements Pago {
             throw new IllegalArgumentException("Denominación no válida: " + denominacion);
         }
         denominacionesUsuario.put(denominacion, denominacionesUsuario.getOrDefault(denominacion, 0) + cantidad);
-        montoDisponible += denominacion * cantidad;
+
+    }
+
+    public void retirarDenominacionUsuario(double denominacion, int cantidad) {
+        Map<Double, Integer> denominaciones = getDenominacionesUsuario();
+        int actual = denominaciones.getOrDefault(denominacion, 0);
+        if (cantidad > actual) {
+            throw new IllegalArgumentException("No tienes suficientes monedas/billetes de " + denominacion + "€.");
+        }
+        denominaciones.put(denominacion, actual - cantidad);
+        montoDisponible -= denominacion * cantidad; 
     }
 
     public double getCantidad() {

@@ -71,14 +71,6 @@ public class ControladorInventario {
             if (celda.getCantidad() > 0) {
                 celda.disminuirCantidad();
                 vistaPago.mostrarMensaje("Producto despachado: " + celda.getProducto().getNombre());
-    
-                // Mostrar estado final de la caja
-                vistaPago.mostrarMensaje("\n=== Estado final de la caja ===");
-                controladorCaja.mostrarDesgloseCaja();
-    
-                // Mostrar estado final del usuario
-                vistaPago.mostrarMensaje("\n=== Estado final del usuario ===");
-                vistaUsuario.mostrarUsuario(usuario);
             } else {
                 vistaPago.mostrarMensaje("Producto agotado.");
             }

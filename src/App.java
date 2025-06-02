@@ -14,45 +14,28 @@ import src.moduloUsuario.modelo.Usuario;
 
 public class App {
 
-    // private void mostrarInformacionInicial(Usuario usuario) {
-    // System.out.println("=== Información del Usuario ===");
-    // vistaUsuario.mostrarUsuario(usuario);
-
-    // System.out.println("=== Desglose de la caja ===");
-    // controladorCaja.mostrarDesgloseCaja();
-    // }
-
     public static void main(String[] args) {
-        // Modulo Empleado
         Empleado empleado = EmpleadoFactory.crearEmpleado();
         ControladorEmpleado controladorEmpleado = new ControladorEmpleado(empleado);
 
-        // Modulo usuario
         Usuario usuario = UsuarioFactory.crearUsuario();
         ControladorUsuario controladorUsuario = new ControladorUsuario(usuario);
-
-        // Modulo maquina
         ControladorMaquina controladorMaquina = new ControladorMaquina();
 
         boolean continuar = true;
+        ControladorCaja controladorCaja = null;
         while (continuar) {
             controladorMaquina.init();
             Maquina maquina = controladorMaquina.getMaquinaSeleccionada();
 
-            // Modulo Pago
-
+            controladorUsuario.mostrarUsuario();
             ControladorPago controladorPago = new ControladorPago(maquina, controladorUsuario);
-
-            ControladorCaja controladorCaja = new ControladorCaja(maquina.getCaja());
-
-            // Modulo Inventario
-
-            ControladorInventario controladorInventario = new ControladorInventario(controladorEmpleado,
-                    maquina.getCeldas());
-
+            ControladorInventario controladorInventario = new ControladorInventario(controladorEmpleado, maquina.getCeldas());
+            if (controladorCaja == null) {
+                controladorCaja = new ControladorCaja(maquina.getCaja());
+            }
             controladorPago.procesarCompra(controladorCaja, controladorInventario);
-
-            controladorUsuario.setUsuario(usuario);
+            controladorUsuario.setUsuario(controladorPago.getUsuario());
             controladorMaquina.actualizarMaquina(controladorPago.getMaquina());
         }
     }
